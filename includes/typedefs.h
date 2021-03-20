@@ -6,12 +6,34 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 11:52:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/20 15:38:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
+
+typedef enum	e_token_type {
+	START,
+	WORD,
+	IO_NUMBER,
+	GREAT,
+	ANDGREAT,
+	DGREAT,
+	ANDDGREAT,
+	LESS,
+	DLESS,
+	GREATAND,
+	LESSAND,
+	GREATANDDASH,
+	LESSANDDASH,
+	PIPE,
+	OROR,
+	ANDAND,
+	SEMI,
+	AMPERSAND,
+	NEWLINE
+}				t_token_type;
 
 typedef enum	e_cmd_type
 {
@@ -34,55 +56,40 @@ typedef struct	s_command
 }				t_command;
 
 /*
+**
+** - right_fd:
+**  if type == GREATAND || type == LESSAND
+** 	 switch(str_is_number(right_fd)):
+**    TRUE => right_fd is an io_number
+**    FALSE => right_fd is a filename
+**  else if type == DLESS
+**   right_fd is an io_number
+**  else
+**   right_fd is a filename
+*/
+typedef struct	s_redirection
+{
+	t_token_type	type;
+	int				left_fd;
+	char			*righ_fd;
+}				t_redirection;
+
+/*
 ** t_vector *args [char *]
 ** t_vector *redirections [t_redirection]
 */
 typedef struct	s_simple_command
 {
-	t_vector *args;
-	t_vector *redirections;
+	t_vector	*args;
+	t_vector	*redirections;
 }				t_simple_command;
 
-typedef enum	e_redirection_type {
-	START,
-	WORD,
-	IO_NUMBER,
-	GREAT,
-	ANDGREAT,
-	DGREAT,
-	ANDDGREAT,
-	LESS,
-	DLESS,
-	GREATAND,
-	LESSAND,
-	GREATANDDASH,
-	LESSANDDASH,
-	PIPE,
-	OROR,
-	ANDAND,
-	SEMI,
-	AMPERSAND,
-	NEWLINE
-}				t_redirection_type;
-
 /*
-** right_fd: switch(str_is_number(right_fd)):
-**  TRUE => right_fd is an io_number
-**  FALSE => right_fd is a filename
-*/
-typedef struct	s_redirection
-{
-	t_redirection_type	type;
-	int					left_fd;
-	char				*righ_fd;
-}				t_redirection;
-
-/*
-** t_vector *commands [t_command]
+** t_vector *commands [t_simple_command]
 */
 typedef struct	s_pipe_sequence
 {
-	t_vector *commands;
+	t_vector	*commands;
 }				t_pipe_sequence;
 
 /*
@@ -90,7 +97,8 @@ typedef struct	s_pipe_sequence
 */
 typedef struct	s_logic_sequence
 {
-	t_vector *commands;
+	t_vector	*commands;
+	t_vector	*logic_ops;
 }				t_logic_sequence;
 
 #endif
