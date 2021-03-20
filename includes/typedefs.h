@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 15:24:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/20 15:38:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,16 @@ typedef struct	s_command
 }				t_command;
 
 /*
-** right_fd: switch(str_is_number(right_fd)):
-**  TRUE => right_fd is an io_number
-**  FALSE => right_fd is a filename
+**
+** - right_fd:
+**  if type == GREATAND || type == LESSAND
+** 	 switch(str_is_number(right_fd)):
+**    TRUE => right_fd is an io_number
+**    FALSE => right_fd is a filename
+**  else if type == DLESS
+**   right_fd is an io_number
+**  else
+**   right_fd is a filename
 */
 typedef struct	s_redirection
 {
@@ -78,7 +85,7 @@ typedef struct	s_simple_command
 }				t_simple_command;
 
 /*
-** t_vector *commands [t_command]
+** t_vector *commands [t_simple_command]
 */
 typedef struct	s_pipe_sequence
 {
