@@ -16,5 +16,14 @@
 # include "libft.h"
 # include "typedefs.h"
 # include "src/errors/errors.h"
+# include <stdbool.h>
+
+/*
+**		Builtins
+*/
+
+int			jhin(char **cmd);
+int			check_is_not(int ret, int is_not);
+int			ft_test(char **cmd);
 
 #endif
