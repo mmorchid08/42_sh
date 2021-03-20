@@ -25,5 +25,6 @@
 int			jhin(char **cmd);
 int			check_is_not(int ret, int is_not);
 int			ft_test(char **cmd);
+int			ft_echo(char **cmd);
 
 #endif
