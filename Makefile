@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/20 08:29:30 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/20 13:28:59 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,6 @@ clean:
 
 fclean: clean
 	@make fclean -C libft/
-	@make fclean -C readline/
 	@if [ -f $(NAME) ]; then \
 		echo "$(RED)program$(RESET) $(NAME): $(RED)REMOVED!$(RESET)"; \
 		rm -f $(NAME); \
