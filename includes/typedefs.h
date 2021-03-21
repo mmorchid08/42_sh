@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 15:38:28 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/20 17:10:50 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef enum	e_cmd_type
 	LOGIC_SEQ
 }				t_cmd_type;
 
+typedef struct	s_token
+{
+	t_token_type	type;
+	char			*data;
+}				t_token;
+
 /*
 ** void *command = switch(type):
 ** 	type = SIMPLE_CMD ==> t_simple_command
@@ -56,7 +62,6 @@ typedef struct	s_command
 }				t_command;
 
 /*
-**
 ** - right_fd:
 **  if type == GREATAND || type == LESSAND
 ** 	 switch(str_is_number(right_fd)):
