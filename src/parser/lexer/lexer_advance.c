@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   lexer_advance.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 17:10:34 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/21 19:02:29 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/21 19:02:38 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "internals.h"
 
-# include "forty_two_sh.h"
-
-#endif
+void	lexer_advance(t_lexer *lex, size_t by)
+{
+	lex->i += by;
+	lex->c = lex->line[lex->i];
+}

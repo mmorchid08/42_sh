@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   lexer_skip_whitespaces.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 17:10:34 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/21 19:12:19 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/21 19:13:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "internals.h"
 
-# include "forty_two_sh.h"
-
-#endif
+void	lexer_skip_whitespaces(t_lexer *lex)
+{
+	while (ft_isspace(lex->c))
+		lexer_advance(lex->c, 1);
+}
