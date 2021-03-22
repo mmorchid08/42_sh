@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:32:57 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/21 11:42:01 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:41:22 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		lexer_is_operator(char c, int quote)
 		c == ';' || c == '&' || c == '|' || c == '<' || c == '>'));
 }
 
-int		is_word(char c, int quote)
+int		lexer_is_word(char c, int quote)
 {
 	return (
 		!lexer_is_space(c, quote) &&
