@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:55:47 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:34:27 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 19:20:21 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_string	*string_new(void)
 void		string_free(t_string *str)
 {
 	free(str->data);
+	str->data = NULL;
 	free(str);
 }
 
