@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 17:10:34 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 10:30:36 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define LEXER_H
 
 # include "forty_two_sh.h"
+
+t_vector	*lexer(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 16:20:28 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/21 16:26:38 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 11:01:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static t_token_type	which_great_operator(t_lexer *lex)
 
 static t_token_type	which_less_operator(t_lexer *lex)
 {
-	if (ft_strnequ(lex->line + lex->i, ">&-", 3))
+	if (ft_strnequ(lex->line + lex->i, "<&-", 3))
 		return (LESSANDDASH);
-	else if (ft_strnequ(lex->line + lex->i, ">&", 2))
+	else if (ft_strnequ(lex->line + lex->i, "<&", 2))
 		return (LESSAND);
-	else if (ft_strnequ(lex->line + lex->i, ">>", 2))
+	else if (ft_strnequ(lex->line + lex->i, "<<", 2))
 		return (DLESS);
 	return (LESS);
 }
@@ -56,6 +56,7 @@ void				lexer_handle_operator(t_lexer *lex)
 {
 	t_token_type token_type;
 
+	token_type = 0;
 	if (lex->c == ';')
 		token_type = SEMI;
 	else if (lex->c == '|')
@@ -64,7 +65,8 @@ void				lexer_handle_operator(t_lexer *lex)
 		token_type = which_and_operator(lex);
 	else if (lex->c == '>')
 		token_type = which_great_operator(lex);
-	else if (lex->c == '>')
+	else if (lex->c == '<')
 		token_type = which_less_operator(lex);
-	lexer_push_token(lex, WORD);
+	lexer_advance(lex, lexer_operator_len(token_type));
+	lexer_push_token(lex, token_type);
 }

@@ -6,16 +6,15 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 13:37:49 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 13:39:36 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 10:30:09 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "forty_two_sh.h"
+# include "lexer/lexer.h"
 
 t_vector	*parser(char *line);
 
 #endif
-
