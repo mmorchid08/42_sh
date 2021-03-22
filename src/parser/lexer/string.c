@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:55:47 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/21 10:27:40 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:34:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		string_push(t_string *str, char c)
 	++(str->length);
 }
 
-void		string_get_data(t_string *str)
+char		*string_get_data(t_string *str)
 {
 	char *data;
 

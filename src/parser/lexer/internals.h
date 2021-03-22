@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:14:47 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/21 19:13:45 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:36:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_lexer
 
 t_string		*string_new(void);
 void			string_push(t_string *str, char c);
+char			*string_get_data(t_string *str);
 char			lexer_quote_type(char c);
 int				lexer_is_space(char c, int quote);
 int				lexer_is_number(char c, int quote);
