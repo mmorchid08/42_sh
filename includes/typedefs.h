@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 18:35:37 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/03/26 15:22:45 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,36 +102,31 @@ typedef struct	s_logic_sequence
 	t_vector	*logic_ops;
 }				t_logic_sequence;
 
-typedef enum	e_job_state
+typedef enum	e_run_state
 {
 	UNDEFINED,
 	RUNNING,
 	STOPPED,
-	KILLED,
-	TERMINATED,
-}				t_job_state;
-
-typedef enum	e_proc_state
-{
-	UNDEFINED,
-	RUNNING,
-	STOPPED,
-	TERMINATED
-}				t_proc_state;
+	COMPLETED
+}				t_run_state;
 
 typedef struct	s_job
 {
-	int				exit_status;
 	t_bool			is_background;
 	pid_t			pgid;
-	t_job_state		state;
+	t_run_state		state;
+	int				running_count;
+	int				stopped_count;
+	int				completed_count;
 	t_vector		*processes;
+	t_bool			is_state_changed;
+	pid_t			ret_pid; // TODO give it better name 
 }				t_job;
 
 typedef struct	s_process
 {
-	t_proc_state	state;
-	int				exit_status;
+	t_run_state		state;
+	int				wait_status;
 	pid_t			pid;
 }				t_process;
 
