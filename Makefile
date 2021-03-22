@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/20 13:28:59 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/22 09:39:59 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,67 +24,53 @@ CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 CC = gcc
 
 # 42sh																		   #
-INCLUDES = -I. -Iincludes -Ilibft
-42sh_INC = includes/forty_two_sh.h includes/typedefs.h src/errors/errors.h 
-42sh = main.o 
+INCLUDES =	-Iincludes
+
+42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
+			src/errors/errors.h src/parser/parser.h src/parser/internals.h \
+			src/parser/lexer/lexer.h src/parser/lexer/internals.h
+
+42sh = 	delete_functions.o main.o \
+		\
+		errors/errors.o \
+		\
+		parser/lexer/lexer.o parser/lexer/lexer_advance.o \
+		parser/lexer/lexer_handle_io_number.o parser/lexer/string.o \
+		parser/lexer/lexer_handle_operator.o parser/lexer/lexer_handle_word.o \
+		parser/lexer/lexer_print_tokens.o parser/lexer/lexer_push_token.o \
+		parser/lexer/lexer_skip_whitespaces.o parser/lexer/util.o \
+		parser/parser.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 
 # objects directory
 OBJS_DIR = objs
 
-# Colors
-BLACK	= \033[30m
-RED		= \033[31m
-GREEN	= \033[32m
-YELLOW	= \033[93m
-BLUE	= \033[34m
-MAGENTA	= \033[35m
-CYAN	= \033[36m
-WHITE	= \033[37m
-RESET	= \033[0m
-
 # **************************************************************************** #
 #	rules																	   #
 # **************************************************************************** #
+
 all: $(NAME)
 
 $(NAME): $(42sh_OBJS) $(LIBFT)
-	@$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT)
-	@echo "$(GREEN)program$(RESET) $(NAME): $(GREEN)UPDATED!$(RESET)";
+	$(CC) -v -o $(NAME) $(42sh_OBJS) $(LIBFT)
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
 
 force:
-
-$(42sh_OBJS): $(OBJS_DIR)/%.o : src/%.c $(42sh_INC) | $(OBJS_DIR)
+$(OBJS_DIR)/%.o : src/%.c $(42sh_INC)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ -I src/
-	@echo "$(YELLOW)OBJ$(RESET) $<: $(YELLOW)UPDATED!$(RESET)";
-
-$(OBJS_DIR):
-	@if [ ! -d $(OBJS_DIR) ]; then \
-		echo "$(CYAN)DIR$(RESET) $(OBJS_DIR)/: $(CYAN)CREATED!$(RESET)"; \
-		mkdir $(OBJS_DIR); \
-	fi;
+	$(CC) $(CFLAGS) $(MACROS) -c $< -o $@
 
 clean:
-	@make clean -C libft/
-	@if [ -d $(OBJS_DIR) ]; then \
-		echo "$(RED)OBJ$(RESET) 42sh objs: $(RED)REMOVED!$(RESET)"; \
-		rm -rf $(OBJS_DIR); \
-	fi;
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@make fclean -C libft/
-	@if [ -f $(NAME) ]; then \
-		echo "$(RED)program$(RESET) $(NAME): $(RED)REMOVED!$(RESET)"; \
-		rm -f $(NAME); \
-	fi;
+	rm -f $(NAME)
 
 re:
-	@make fclean
-	@make all
+	make fclean
+	make all
 
 .PHONY: all clean fclean re libft force
