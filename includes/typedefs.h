@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 16:15:24 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:35:37 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,38 @@ typedef struct	s_logic_sequence
 	t_vector	*commands;
 	t_vector	*logic_ops;
 }				t_logic_sequence;
+
+typedef enum	e_job_state
+{
+	UNDEFINED,
+	RUNNING,
+	STOPPED,
+	KILLED,
+	TERMINATED,
+}				t_job_state;
+
+typedef enum	e_proc_state
+{
+	UNDEFINED,
+	RUNNING,
+	STOPPED,
+	TERMINATED
+}				t_proc_state;
+
+typedef struct	s_job
+{
+	int				exit_status;
+	t_bool			is_background;
+	pid_t			pgid;
+	t_job_state		state;
+	t_vector		*processes;
+}				t_job;
+
+typedef struct	s_process
+{
+	t_proc_state	state;
+	int				exit_status;
+	pid_t			pid;
+}				t_process;
 
 #endif
