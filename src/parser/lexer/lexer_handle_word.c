@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/21 19:01:10 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:35:55 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void	update_quoting(t_lexer *lex)
 	if (lex->backslash)
 		lex->backslash = FALSE;
 	else
-		lex->backslash == lex->c == BACK_SLASH && lex->quote != SINGLE_QUOTE;
+		lex->backslash = lex->c == BACK_SLASH && lex->quote != SINGLE_QUOTE;
 }
 
 void		lexer_handle_word(t_lexer *lex)
 {
 	while (lex->c && lexer_is_word(lex->c, lex->quote))
 	{
-		update_quote_type(lex);
+		update_quoting(lex);
 		string_push(lex->word, lex->c);
 		lexer_advance(lex, 1);
 	}
