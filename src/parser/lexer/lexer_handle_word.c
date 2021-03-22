@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 10:57:15 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 19:29:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,48 @@ static void	update_quoting(t_lexer *lex)
 		lex->backslash = lex->c == BACK_SLASH && lex->quote != SINGLE_QUOTE;
 }
 
+static t_bool	lexer_is_command_name(t_vector *tokens_list)
+{
+	t_token last_token;
+
+	if (tokens_list->length == 0)
+		return (TRUE);
+	last_token = ((t_token*)tokens_list->array)[tokens_list->length - 1];
+	return (last_token.type == SEMI || last_token.type == AMPERSAND ||
+		last_token.type == PIPE || last_token.type == OROR ||
+		last_token.type == ANDAND);
+}
+
+static char	*temp_alias_get(char *word)
+{
+	if (ft_strequ(word, "ll"))
+		return (ft_strdup("ls -l -a -F"));
+	if (ft_strequ(word, "a"))
+		return (ft_strdup("b"));
+	if (ft_strequ(word, "cc"))
+		return (ft_strdup("gcc && ./a.out && echo HI | cat -e; ll"));
+	return (word);
+}
+
 void		lexer_handle_word(t_lexer *lex)
 {
+	char		*alias_subtitue;
+	t_vector	*tmp_tokens;
+
 	while (lex->c && lexer_is_word(lex->c, lex->quote | lex->backslash))
 	{
 		update_quoting(lex);
 		string_push(lex->word, lex->c);
 		lexer_advance(lex, 1);
 	}
-	lexer_push_token(lex, WORD);
+	if (lexer_is_command_name(lex->tokens_list) && lex->enable_alias_subtitution)
+	{
+		string_push(lex->word, '\0');
+		alias_subtitue = temp_alias_get(lex->word->data);
+		tmp_tokens = lexer(alias_subtitue, FALSE);
+		vector_insert_all(lex->tokens_list, tmp_tokens, lex->tokens_list->length);
+		lex->word->length = 0;
+	}
+	else
+		lexer_push_token(lex, WORD);
 }
