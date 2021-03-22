@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:14:47 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:36:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 10:26:59 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void			lexer_handle_word(t_lexer *lex);
 void			lexer_push_token(t_lexer *lex, t_token_type token_type);
 void			lexer_advance(t_lexer *lex, size_t by);
 void			lexer_skip_whitespaces(t_lexer *lex);
+void			lexer_print_tokens(t_vector *tokens_vec);
 
 #endif
