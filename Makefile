@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/22 09:39:59 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/22 11:00:59 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = libft/libft.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
-CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES) -g
 CC = gcc
 
 # 42sh																		   #
@@ -39,6 +39,7 @@ INCLUDES =	-Iincludes
 		parser/lexer/lexer_handle_operator.o parser/lexer/lexer_handle_word.o \
 		parser/lexer/lexer_print_tokens.o parser/lexer/lexer_push_token.o \
 		parser/lexer/lexer_skip_whitespaces.o parser/lexer/util.o \
+		parser/lexer/lexer_operator_len.o \
 		parser/parser.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
@@ -53,7 +54,7 @@ OBJS_DIR = objs
 all: $(NAME)
 
 $(NAME): $(42sh_OBJS) $(LIBFT)
-	$(CC) -v -o $(NAME) $(42sh_OBJS) $(LIBFT)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT)
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
@@ -70,7 +71,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re:
-	make fclean
-	make all
+	@make fclean
+	@make all
 
 .PHONY: all clean fclean re libft force
