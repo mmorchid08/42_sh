@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/21 19:39:56 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:34:08 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_lexer		*lexer_init(char *line)
 	lex->c = lex->line[lex->i];
 	lex->quote = 0;
 	lex->backslash = FALSE;
+	return (lex);
 }
 
 t_vector	*lexer(char *line)
@@ -43,4 +44,5 @@ t_vector	*lexer(char *line)
 			lexer_handle_operator(lex);
 		lexer_skip_whitespaces(lex);
 	}
+	return (lex->tokens_list);
 }
