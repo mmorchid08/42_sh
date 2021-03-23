@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 19:29:57 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/23 07:47:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,31 @@ static char	*temp_alias_get(char *word)
 	return (word);
 }
 
-void		lexer_handle_word(t_lexer *lex)
+void		lexer_handle_alias(t_lexer *lex)
 {
 	char		*alias_subtitue;
 	t_vector	*tmp_tokens;
 
+	string_push(lex->word, '\0');
+	alias_subtitue = temp_alias_get(lex->word->data);
+	tmp_tokens = lexer(alias_subtitue, FALSE);
+	ft_strdel(&alias_subtitue);
+	vector_insert_all(lex->tokens_list, tmp_tokens, lex->tokens_list->length);
+	tmp_tokens->free_element = free;
+	vector_free(tmp_tokens);
+	lex->word->length = 0;
+}
+
+void		lexer_handle_word(t_lexer *lex)
+{
 	while (lex->c && lexer_is_word(lex->c, lex->quote | lex->backslash))
 	{
 		update_quoting(lex);
 		string_push(lex->word, lex->c);
 		lexer_advance(lex, 1);
 	}
-	if (lexer_is_command_name(lex->tokens_list) && lex->enable_alias_subtitution)
-	{
-		string_push(lex->word, '\0');
-		alias_subtitue = temp_alias_get(lex->word->data);
-		tmp_tokens = lexer(alias_subtitue, FALSE);
-		vector_insert_all(lex->tokens_list, tmp_tokens, lex->tokens_list->length);
-		lex->word->length = 0;
-	}
+	if (lexer_is_command_name(lex->tokens_list) && lex->enable_alias_subtitution == TRUE)
+		lexer_handle_alias(lex);
 	else
 		lexer_push_token(lex, WORD);
 }
