@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 17:10:50 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:20:03 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef enum	e_token_type {
 	START,
 	WORD,
+	ASSIGNMENT,
 	IO_NUMBER,
 	GREAT,
 	ANDGREAT,
@@ -35,6 +36,12 @@ typedef enum	e_token_type {
 	NEWLINE
 }				t_token_type;
 
+typedef struct	s_var
+{
+	char *key;
+	char *value;
+}				t_var;
+
 typedef enum	e_cmd_type
 {
 	SIMPLE_CMD,
@@ -45,7 +52,7 @@ typedef enum	e_cmd_type
 typedef struct	s_token
 {
 	t_token_type	type;
-	char			*data;
+	void			*data;
 }				t_token;
 
 /*
