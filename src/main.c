@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 10:32:35 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/23 16:36:49 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)envp;
 	if (ac == 2)
-		(void)parser(av[1]);
+		(void)parse_cmd_line(av[1]);
 	else
 		ft_printf(2, "error");
 	return (0);

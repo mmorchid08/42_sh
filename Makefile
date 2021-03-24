@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/22 11:00:59 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/24 17:05:10 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ INCLUDES =	-Iincludes
 
 42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
 			src/errors/errors.h src/parser/parser.h src/parser/internals.h \
-			src/parser/lexer/lexer.h src/parser/lexer/internals.h
+			src/parser/lexer/lexer.h src/parser/lexer/internals.h \
+			src/parser/parse_simple_command/parse_simple_command.h
 
 42sh = 	delete_functions.o main.o \
 		\
@@ -39,8 +40,13 @@ INCLUDES =	-Iincludes
 		parser/lexer/lexer_handle_operator.o parser/lexer/lexer_handle_word.o \
 		parser/lexer/lexer_print_tokens.o parser/lexer/lexer_push_token.o \
 		parser/lexer/lexer_skip_whitespaces.o parser/lexer/util.o \
-		parser/lexer/lexer_operator_len.o \
-		parser/parser.o
+		parser/lexer/lexer_operator_len.o parser/lexer/lexer_add_newline_token.o\
+		parser/parse_cmd_line.o parser/parser.c
+		parser/parse_simple_command/parse_argument.c \
+		parser/parse_simple_command/parse_assignment.c \
+		parser/parse_simple_command/parse_redirection.c \
+		parser/parse_simple_command/parse_simple_command.c \
+		parser/parse_simple_command/simple_advance.c \
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parse_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 13:37:49 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 17:00:08 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/24 16:55:25 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/24 16:55:42 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "internals.h"
 
-# include "lexer/lexer.h"
-# include "parse_simple_command/parse_simple_command.h"
+void	parse_argument(t_simple *sim)
+{
+	char *arg;
 
-t_vector	*parse_cmd_line(char *line);
-
-#endif
+	arg = (char*)sim->current_token.data;
+	vector_push(sim->cmd->args, &arg);
+}

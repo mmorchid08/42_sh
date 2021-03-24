@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 13:37:49 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 17:00:08 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/24 16:58:37 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef INTERNALS_H
+# define INTERNALS_H
 
-# include "lexer/lexer.h"
-# include "parse_simple_command/parse_simple_command.h"
+# include "forty_two_sh.h"
 
-t_vector	*parse_cmd_line(char *line);
+typedef struct	s_simple
+{
+	t_simple_command	*cmd;
+	t_token				*tokens;
+	t_token				current_token;
+	size_t				tokens_len;
+	size_t				tokens_index;
+}				t_simple;
+
+void	simple_advance(t_simple *sim);
+int		parse_redirection(t_simple *sim);
+int		parse_assignment(t_simple *sim);
+int		parse_argument(t_simple *sim);
 
 #endif

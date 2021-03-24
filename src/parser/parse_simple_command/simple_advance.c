@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   simple_advance.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 13:37:49 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 17:00:08 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/24 16:53:48 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/24 16:53:58 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "internals.h"
 
-# include "lexer/lexer.h"
-# include "parse_simple_command/parse_simple_command.h"
-
-t_vector	*parse_cmd_line(char *line);
-
-#endif
+void			simple_advance(t_simple *sim)
+{
+	++(sim->tokens_index);
+	sim->current_token = sim->tokens[sim->tokens_index];
+}
