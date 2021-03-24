@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:33:22 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 16:48:02 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@
 # include "../src/parser/parser.h"
 
 void	del_token(void *element);
+void	del_redirection(void *element);
+void	del_var(void *element);
 
 #endif
