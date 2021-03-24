@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 08:55:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 10:33:17 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 15:05:31 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*g_tokens_to_string[] = {
 	[START] = "START",
 	[WORD] = "WORD",
+	[ASSIGNMENT] = "ASSIGNMENT",
 	[IO_NUMBER] = "IO_NUMBER",
 	[GREAT] = "GREAT",
 	[ANDGREAT] = "ANDGREAT",

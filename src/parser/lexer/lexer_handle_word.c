@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/23 07:47:57 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 16:31:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	update_quoting(t_lexer *lex)
 		lex->backslash = lex->c == BACK_SLASH && lex->quote != SINGLE_QUOTE;
 }
 
-static t_bool	lexer_is_command_name(t_vector *tokens_list)
+static t_bool	lexer_is_command_start(t_vector *tokens_list)
 {
 	t_token last_token;
 
@@ -52,13 +52,18 @@ static char	*temp_alias_get(char *word)
 	return (word);
 }
 
-void		lexer_handle_alias(t_lexer *lex)
+static void	lexer_handle_alias(t_lexer *lex)
 {
 	char		*alias_subtitue;
 	t_vector	*tmp_tokens;
 
 	string_push(lex->word, '\0');
 	alias_subtitue = temp_alias_get(lex->word->data);
+	if (alias_subtitue == lex->word->data)
+	{
+		lexer_push_token(lex, WORD);
+		return ;
+	}
 	tmp_tokens = lexer(alias_subtitue, FALSE);
 	ft_strdel(&alias_subtitue);
 	vector_insert_all(lex->tokens_list, tmp_tokens, lex->tokens_list->length);
@@ -69,14 +74,26 @@ void		lexer_handle_alias(t_lexer *lex)
 
 void		lexer_handle_word(t_lexer *lex)
 {
-	while (lex->c && lexer_is_word(lex->c, lex->quote | lex->backslash))
+	t_token_type	token_type;
+	size_t			eqaul_index;
+
+	token_type = WORD;
+	while (lex->c && lexer_is_word(lex->c, lex->quote || lex->backslash))
 	{
-		update_quoting(lex);
 		string_push(lex->word, lex->c);
+		if (lex->i > 0 && lex->c == '=' && !lex->quote && !lex->backslash)
+		{
+			token_type = ASSIGNMENT;
+			eqaul_index = lex->i;
+		}
+		update_quoting(lex);
 		lexer_advance(lex, 1);
 	}
-	if (lexer_is_command_name(lex->tokens_list) && lex->enable_alias_subtitution == TRUE)
+	if (token_type == WORD && lexer_is_command_start(lex->tokens_list) &&
+			lex->enable_alias_subtitution == TRUE)
 		lexer_handle_alias(lex);
+	else if (token_type == ASSIGNMENT)
+		lexer_push_token_assign(lex, eqaul_index);
 	else
 		lexer_push_token(lex, WORD);
 }
