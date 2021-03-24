@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 15:20:03 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 16:46:41 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct	s_simple_command
 {
 	t_vector	*args;
 	t_vector	*redirections;
+	t_vector	*assignments;
 }				t_simple_command;
 
 /*
