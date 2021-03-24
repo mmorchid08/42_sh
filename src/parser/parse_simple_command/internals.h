@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 16:58:37 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 18:55:40 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_simple
 
 void	simple_advance(t_simple *sim);
 int		parse_redirection(t_simple *sim);
-int		parse_assignment(t_simple *sim);
-int		parse_argument(t_simple *sim);
+void	parse_assignment(t_simple *sim);
+void	parse_argument(t_simple *sim);
 
 #endif
