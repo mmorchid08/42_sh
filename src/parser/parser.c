@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 17:37:04 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/24 19:03:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,9 @@ static t_parser *parser_init(t_vector *tokens)
 
 static void	parser_clean(t_parser **parser)
 {
-	// vector_free((*parser)->cmd_tokens);
 	ft_bzero(*parser, sizeof(t_parser));
 	ft_memdel((void**)parser);
 }
-
-// static int	simple_command_is_not_first_token(t_token_type type)
-// {
-// 	return (type == SEMI || type == AMPERSAND || type == PIPE ||
-// 		type == OROR || type == ANDAND);
-// }
 
 void		parser_advance(t_parser *parser)
 {
