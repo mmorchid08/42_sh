@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 18:55:40 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/25 19:32:25 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef struct	s_simple
 	size_t				tokens_len;
 	size_t				tokens_index;
 }				t_simple;
+
+typedef	struct	s_delimiter
+{
+	char	*str;
+	t_bool	is_quoted;
+}				t_delimiter;
 
 void	simple_advance(t_simple *sim);
 int		parse_redirection(t_simple *sim);
