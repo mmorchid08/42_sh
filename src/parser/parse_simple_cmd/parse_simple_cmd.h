@@ -6,13 +6,13 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:56 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 10:58:16 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:14:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_SIMPLE_CMD_H
 # define PARSE_SIMPLE_CMD_H
 
-t_vector	*parse_simple_cmd(t_vector *tokens_vec);
+t_simple_command	*parse_simple_cmd(t_vector *tokens_vec);
 
 #endif

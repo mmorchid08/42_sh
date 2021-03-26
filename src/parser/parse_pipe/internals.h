@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 08:37:27 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:18:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INTERNALS_H
 
 # include "forty_two_sh.h"
+# include "../parse_simple_cmd/parse_simple_cmd.h"
 
 typedef struct	s_parse_pipe
 {

@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/26 11:09:18 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/26 17:24:13 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@
 NAME = parser.a
 
 # compilation variables
-INCLUDE_DIRS = -I. -Ilexer/ -Iparse_simple_command/ -Iparse_pipe/ \
+INCLUDE_DIRS = -I. -Ilexer/ -Iparse_simple_cmd/ -Iparse_pipe/ \
 	-Iparse_and_or/ $(42sh_include_dirs)
 CFLAGS = -Wall -Wextra -Werror $(INCLUDE_DIRS)
 CC = gcc
@@ -26,7 +26,7 @@ CC = gcc
 # 42sh																		   #
 HEADERS = parser.h internals.h lexer/lexer.h lexer/internals.h \
 	parse_simple_cmd/parse_simple_cmd.h parse_simple_cmd/internals.h \
-	parse_pipe/parse_pipe.h parse_pipe/internals.h \
+	parse_pipe.o /parse_pipe.h parse_pipe/internals.h \
 	parse_and_or/parse_and_or.h parse_and_or/internals.h $(42sh_headers)
 
 PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
@@ -37,7 +37,8 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	parse_cmd_line.o parser.o  parse_simple_cmd/parse_argument.o \
 	parse_simple_cmd/parse_assignment.o parse_simple_cmd/parse_redirection.o \
 	parse_simple_cmd/parse_here_document.o parse_simple_cmd/parse_simple_cmd.o \
-	parse_simple_cmd/simple_advance.o
+	parse_simple_cmd/simple_advance.o parse_pipe/parse_pipe.o \
+	parse_and_or/parse_and_or.o
 
 OBJS = $(addprefix $(OBJS_DIR)/, ${PARSER})
 
@@ -53,7 +54,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-$(OBJS_DIR)/%.o : %.c $(HEADERS)
+$(OBJS): $(OBJS_DIR)/%.o :%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 

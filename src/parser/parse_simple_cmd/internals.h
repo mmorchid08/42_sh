@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 11:01:51 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 15:32:54 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INTERNALS_H
 
 # include "forty_two_sh.h"
+# include "../internals.h"
 
 typedef struct	s_simple
 {

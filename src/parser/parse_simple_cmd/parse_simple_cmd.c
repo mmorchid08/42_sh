@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 18:02:06 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 11:07:43 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:14:34 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			simple_free_all(t_simple *sim)
 t_simple_command	*parse_simple_cmd(t_vector *tokens_vec)
 {
 	t_simple			*sim;
-	t_simple_command	*command;
+	t_simple_command	*simple_cmd;
 
 	sim = simple_init(tokens_vec);
 	while (sim->tokens_index < sim->tokens_len)
@@ -60,7 +60,7 @@ t_simple_command	*parse_simple_cmd(t_vector *tokens_vec)
 			parse_argument(sim);
 		simple_advance(sim);
 	}
-	command = sim->cmd;
+	simple_cmd = sim->cmd;
 	free(sim);
-	return (command);
+	return (simple_cmd);
 }

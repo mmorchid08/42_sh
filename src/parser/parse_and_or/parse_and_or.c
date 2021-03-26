@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 09:35:48 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 17:16:17 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_parse_and_or	*and_or_init(t_vector *tokens_vec)
 	and_or->tokens_len = tokens_vec->length;
 	and_or->tokens_index = 0;
 	and_or->current_token = and_or->tokens[and_or->tokens_index];
+	return (and_or);
 }
 
 void					and_or_advance(t_parse_and_or *and_or)
@@ -42,9 +43,9 @@ int						and_or_push_command(t_parse_and_or *and_or)
 	cmd->type = and_or->cmd_type;
 	cmd->is_background_job = FALSE;
 	if (cmd->type == SIMPLE_CMD)
-		cmd->command = parse_simple_command(and_or->cmd_tokens);
+		cmd->command = parse_simple_cmd(and_or->cmd_tokens);
 	else if (cmd->type == PIPE_SEQ)
-		cmd->command = parse_pipe_sequence(and_or->cmd_tokens);
+		cmd->command = parse_pipe(and_or->cmd_tokens);
 	if (cmd->command == NULL)
 		return (EXIT_FAILURE);
 	vector_push(and_or->logic_cmd->commands, cmd);
@@ -76,10 +77,12 @@ t_logic_sequence		*parse_and_or(t_vector *tokens_vec)
 		else
 		{
 			if (and_or->current_token.type == PIPE)
-				and_or->cmd_type == PIPE_SEQ;
+				and_or->cmd_type = PIPE_SEQ;
 			vector_push(and_or->cmd_tokens, &(and_or->current_token));
 		}
 	}
 	if (and_or_push_command(and_or) == EXIT_FAILURE)
 		return (NULL);
+	logic_cmd = and_or->logic_cmd;
+	return (logic_cmd);
 }

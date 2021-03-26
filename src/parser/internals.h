@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 13:39:53 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 11:00:31 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 15:32:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ typedef struct	s_parser
 	size_t		tokens_len;
 	t_cmd_type	cmd_type;
 }				t_parser;
+
+t_vector	*parser(t_vector *tokens);
 
 #endif
