@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/24 17:05:10 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/26 11:11:51 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,36 +17,21 @@
 # name
 NAME = 42sh
 LIBFT = libft/libft.a
+PARSER = src/parser/parser.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES) -g
 CC = gcc
+PARSER_ENV=42sh_headers=../../includes/forty_two_sh.h 42sh_include_dirs=-I../../includes/
 
 # 42sh																		   #
 INCLUDES =	-Iincludes
 
 42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
-			src/errors/errors.h src/parser/parser.h src/parser/internals.h \
-			src/parser/lexer/lexer.h src/parser/lexer/internals.h \
-			src/parser/parse_simple_command/parse_simple_command.h
+			src/errors/errors.h
 
-42sh = 	delete_functions.o main.o \
-		\
-		errors/errors.o \
-		\
-		parser/lexer/lexer.o parser/lexer/lexer_advance.o \
-		parser/lexer/lexer_handle_io_number.o parser/lexer/string.o \
-		parser/lexer/lexer_handle_operator.o parser/lexer/lexer_handle_word.o \
-		parser/lexer/lexer_print_tokens.o parser/lexer/lexer_push_token.o \
-		parser/lexer/lexer_skip_whitespaces.o parser/lexer/util.o \
-		parser/lexer/lexer_operator_len.o parser/lexer/lexer_add_newline_token.o\
-		parser/parse_cmd_line.o parser/parser.c
-		parser/parse_simple_command/parse_argument.c \
-		parser/parse_simple_command/parse_assignment.c \
-		parser/parse_simple_command/parse_redirection.c \
-		parser/parse_simple_command/parse_simple_command.c \
-		parser/parse_simple_command/simple_advance.c \
+42sh = 	delete_functions.o main.o errors/errors.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 
@@ -59,21 +44,27 @@ OBJS_DIR = objs
 
 all: $(NAME)
 
-$(NAME): $(42sh_OBJS) $(LIBFT)
-	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT)
+$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER)
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
 
+$(PARSER): force
+	@env $(PARSER_ENV) make -C src/parser/
+
 force:
+
 $(OBJS_DIR)/%.o : src/%.c $(42sh_INC)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(MACROS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS_DIR)
 
 fclean: clean
+	make fclean -C libft/
+	make fclean -C src/parser/
 	rm -f $(NAME)
 
 re:
