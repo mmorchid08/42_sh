@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/26 11:07:55 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/26 11:09:18 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 # **************************************************************************** #
 
 # name
-NAME = 42sh_parser.a
+NAME = parser.a
 
 # compilation variables
 INCLUDE_DIRS = -I. -Ilexer/ -Iparse_simple_command/ -Iparse_pipe/ \
