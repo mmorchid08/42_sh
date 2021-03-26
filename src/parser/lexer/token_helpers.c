@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:56:32 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 16:57:22 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 09:20:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-t_bool	is_redirection_op(t_token_type type)
+t_bool	lexer_is_redirection(t_token_type type)
 {
 	return (type == IO_NUMBER ||
 		type == GREAT ||
@@ -27,7 +27,11 @@ t_bool	is_redirection_op(t_token_type type)
 		type == LESSANDDASH);
 }
 
-t_bool	is_separator(t_token_type type)
+t_bool	lexer_is_separator(t_token_type type)
 {
-	return (type == SEMI || type == SEMI || type == NEWLINE);
+	return (type == SEMI || type == AMPERSAND || type == NEWLINE);
+}
+t_bool	lexer_is_and_or(t_token_type type)
+{
+	return (type == ANDAND || type == OROR);
 }
