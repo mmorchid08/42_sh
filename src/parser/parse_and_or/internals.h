@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/25 15:37:59 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/26 08:38:12 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/26 10:09:38 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 # include "forty_two_sh.h"
 
-typedef struct	s_parse_pipe
+typedef struct	s_parse_and_or
 {
-	t_pipe_sequence		*cmd;
-	t_simple_command	*simple_cmd;
-	t_vector			*simple_cmd_tokens;
+	t_logic_sequence	*logic_cmd;
+	t_vector			*cmd_tokens;
 	t_token				*tokens;
 	t_token				current_token;
 	size_t				tokens_index;
 	size_t				tokens_len;
-}				t_parse_pipe;
+	t_cmd_type			cmd_type;
+}				t_parse_and_or;
 
 #endif

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 10:51:23 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/26 08:37:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef INTERNALS_H
+# define INTERNALS_H
 
-extern char	*g_tokens_to_string[];
+# include "forty_two_sh.h"
 
-t_vector	*lexer(char *line, t_bool enable_alias_subtitution);
-void		lexer_print_tokens(t_vector *tokens_vec);
-void		lexer_add_newline_token(t_vector *tokens);
-t_bool		lexer_is_redirection(t_token_type type);
-t_bool		lexer_is_separator(t_token_type type);
-t_bool		lexer_is_and_or(t_token_type type);
+typedef struct	s_parse_pipe
+{
+	t_pipe_sequence		*pipe_cmd;
+	t_vector			*simple_cmd_tokens;
+	t_token				*tokens;
+	t_token				current_token;
+	size_t				tokens_index;
+	size_t				tokens_len;
+}				t_parse_pipe;
 
 #endif

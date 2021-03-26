@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_simple_command.c                             :+:      :+:    :+:   */
+/*   parse_simple_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 18:02:06 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 17:43:23 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 11:07:43 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static t_simple	*simple_init(t_vector *tokens_vec)
 {
 	t_simple *sim;
 
-	sim->cmd = (t_simple*)ft_malloc(sizeof(t_simple));
+	sim = (t_simple*)ft_malloc(sizeof(t_simple));
+	sim->cmd = (t_simple_command*)ft_malloc(sizeof(t_simple_command));
 	sim->cmd->args = vector_init(sizeof(char*), free);
 	sim->cmd->redirections = vector_init(sizeof(t_redirection), del_redirection);
 	sim->cmd->assignments = vector_init(sizeof(t_var), del_var);
@@ -27,7 +28,7 @@ static t_simple	*simple_init(t_vector *tokens_vec)
 	return (sim);
 }
 
-void		simple_free_all(t_simple *sim)
+void			simple_free_all(t_simple *sim)
 {
 	vector_free(sim->cmd->args);
 	vector_free(sim->cmd->redirections);
@@ -35,10 +36,9 @@ void		simple_free_all(t_simple *sim)
 	free(sim->cmd);
 	ft_bzero(sim, sizeof(t_simple));
 	free(sim);
-	return (NULL);
 }
 
-int			parse_simple_command(t_vector *tokens_vec)
+t_simple_command	*parse_simple_cmd(t_vector *tokens_vec)
 {
 	t_simple			*sim;
 	t_simple_command	*command;
@@ -46,12 +46,14 @@ int			parse_simple_command(t_vector *tokens_vec)
 	sim = simple_init(tokens_vec);
 	while (sim->tokens_index < sim->tokens_len)
 	{
-		if (is_redirection_op(sim->current_token.type))
+		if (lexer_is_redirection(sim->current_token.type))
+		{
 			if (parse_redirection(sim) == EXIT_FAILURE)
 			{
 				simple_free_all(sim);
 				return (NULL);
 			}
+		}
 		else if (sim->current_token.type == ASSIGNMENT)
 			parse_assignment(sim);
 		else

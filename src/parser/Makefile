@@ -1,0 +1,70 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
+#    Updated: 2021/03/26 11:07:55 by ylagtab          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# **************************************************************************** #
+#	variables																   #
+# **************************************************************************** #
+
+# name
+NAME = 42sh_parser.a
+
+# compilation variables
+INCLUDE_DIRS = -I. -Ilexer/ -Iparse_simple_command/ -Iparse_pipe/ \
+	-Iparse_and_or/ $(42sh_include_dirs)
+CFLAGS = -Wall -Wextra -Werror $(INCLUDE_DIRS)
+CC = gcc
+
+# 42sh																		   #
+HEADERS = parser.h internals.h lexer/lexer.h lexer/internals.h \
+	parse_simple_cmd/parse_simple_cmd.h parse_simple_cmd/internals.h \
+	parse_pipe/parse_pipe.h parse_pipe/internals.h \
+	parse_and_or/parse_and_or.h parse_and_or/internals.h $(42sh_headers)
+
+PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
+	lexer/string.o lexer/lexer_handle_operator.o lexer/lexer_handle_word.o \
+	lexer/lexer_print_tokens.o lexer/lexer_push_token.o \
+	lexer/lexer_skip_whitespaces.o lexer/util.o lexer/token_helpers.o \
+	lexer/lexer_operator_len.o lexer/lexer_add_newline_token.o \
+	parse_cmd_line.o parser.o  parse_simple_cmd/parse_argument.o \
+	parse_simple_cmd/parse_assignment.o parse_simple_cmd/parse_redirection.o \
+	parse_simple_cmd/parse_here_document.o parse_simple_cmd/parse_simple_cmd.o \
+	parse_simple_cmd/simple_advance.o
+
+OBJS = $(addprefix $(OBJS_DIR)/, ${PARSER})
+
+# objects directory
+OBJS_DIR = objs
+
+# **************************************************************************** #
+#	rules																	   #
+# **************************************************************************** #
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+
+$(OBJS_DIR)/%.o : %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf $(OBJS_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re:
+	@make fclean
+	@make all
+
+.PHONY: all clean fclean re libft force

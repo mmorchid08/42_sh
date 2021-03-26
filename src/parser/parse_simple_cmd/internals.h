@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/25 19:32:25 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 11:01:51 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	simple_advance(t_simple *sim);
 int		parse_redirection(t_simple *sim);
 void	parse_assignment(t_simple *sim);
 void	parse_argument(t_simple *sim);
+int		parse_here_doc(char *delimter_str);
 
 #endif

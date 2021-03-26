@@ -6,17 +6,22 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 16:56:16 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/25 18:20:02 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 11:06:16 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static t_bool		is_quoted(char *str)
+static t_bool		is_quote(char c)
+{
+	return (c == DOUBLE_QUOTE || c == SINGLE_QUOTE || c == BACK_SLASH);
+}
+
+static t_bool		str_is_quoted(char *str)
 {
 	while (*str)
 	{
-		if (quote_type(*str) > 0)
+		if (is_quote(*str) > 0)
 			return (TRUE);
 		++str;
 	}
@@ -29,7 +34,7 @@ static t_delimiter	*get_delimiter(char *str)
 
 	delim = (t_delimiter*)ft_malloc(sizeof(t_delimiter));
 	delim->str = str;
-	delim->is_quoted = is_quoted(delim->str);
+	delim->is_quoted = str_is_quoted(delim->str);
 	// delim->str = remove_quotes_from_word(delim->str);
 	return (delim);
 }
@@ -39,7 +44,7 @@ static int			read_buffer(char **buffer, char *delimiter)
 	char	*line;
 	int		ret;
 
-	buffer = ft_strdup("");
+	*buffer = ft_strdup("");
 	while ((ret = get_next_line(0, &line)) != -1) // != ERROR
 	{
 		// if (ret == INTERRUPTED)

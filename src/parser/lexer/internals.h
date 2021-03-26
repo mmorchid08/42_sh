@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:14:47 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 15:18:45 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/26 10:53:37 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERNALS_H
 # define INTERNALS_H
 
-# include "lexer.h"
+# include "forty_two_sh.h"
 
 typedef struct	s_string
 {
