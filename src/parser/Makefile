@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/26 17:24:13 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/26 17:29:21 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = parser.a
 # compilation variables
 INCLUDE_DIRS = -I. -Ilexer/ -Iparse_simple_cmd/ -Iparse_pipe/ \
 	-Iparse_and_or/ $(42sh_include_dirs)
-CFLAGS = -Wall -Wextra -Werror $(INCLUDE_DIRS)
+CFLAGS = -Wall -Wextra -Werror $(INCLUDE_DIRS) -g
 CC = gcc
 
 # 42sh																		   #

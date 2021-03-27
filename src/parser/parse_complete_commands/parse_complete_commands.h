@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cmd_line.c                                   :+:      :+:    :+:   */
+/*   parse_complete_commands.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 14:48:56 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/27 12:26:54 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/27 12:33:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internals.h"
+#ifndef PARSE_COMPLETE_COMMANDS_H
+# define PARSE_COMPLETE_COMMANDS_H
 
-t_vector	*parse_cmd_line(char *line)
-{
-	t_vector *tokens;
+t_vector	*parse_complete_commands(t_vector *tokens);
 
-	(void)line;
-	tokens = lexer(line, TRUE);
-	lexer_add_newline_token(tokens);
-	lexer_print_tokens(tokens);
-	(void)parser(tokens);
-	// vector_free(tokens);
-
-	return (NULL);
-}
+#endif

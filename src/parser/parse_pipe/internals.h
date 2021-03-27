@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 17:18:23 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/27 12:47:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 typedef struct	s_parse_pipe
 {
-	t_pipe_sequence		*pipe_cmd;
-	t_vector			*simple_cmd_tokens;
-	t_token				*tokens;
-	t_token				current_token;
-	size_t				tokens_index;
-	size_t				tokens_len;
+	t_pipe_sequence	*pipe_cmd;
+	t_vector		*simple_cmd_tokens;
+	t_token			*tokens;
+	t_token			current_token;
+	size_t			tokens_index;
+	size_t			tokens_len;
 }				t_parse_pipe;
 
 #endif

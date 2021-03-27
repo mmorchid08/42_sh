@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 13:37:49 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 15:32:12 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/27 12:31:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "lexer/lexer.h"
 
-t_vector	*parse_cmd_line(char *line);
+t_vector	*parser(char *line);
 
 #endif
