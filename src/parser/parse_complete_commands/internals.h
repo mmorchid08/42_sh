@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:26:41 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/27 12:47:04 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:54:04 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define INTERNALS_H
 
 # include "forty_two_sh.h"
+# include "../parse_simple_cmd/parse_simple_cmd.h"
+# include "../parse_pipe/parse_pipe.h"
+# include "../parse_and_or/parse_and_or.h"
 
-typedef struct	s_parse_commplete
+typedef struct	s_parse_complete
 {
 	t_vector	*commands;
 	t_vector	*cmd_tokens;
@@ -24,6 +27,10 @@ typedef struct	s_parse_commplete
 	size_t		tokens_index;
 	size_t		tokens_len;
 	t_cmd_type	cmd_type;
-}				t_parse_commplete;
+}				t_parse_complete;
+
+int				add_complete_cmd(t_parse_complete *parser);
+void			reset_cmd_tokens(t_parse_complete *parser);
+void			push_cmd_token(t_parse_complete *parser);
 
 #endif

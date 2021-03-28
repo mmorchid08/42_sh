@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/27 12:45:45 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:57:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef	struct	s_delimiter
 	t_bool	is_quoted;
 }				t_delimiter;
 
-void	simple_advance(t_parse_simple *sim);
-int		parse_redirection(t_parse_simple *sim);
-void	parse_assignment(t_parse_simple *sim);
-void	parse_argument(t_parse_simple *sim);
-int		parse_here_doc(char *delimter_str);
+void			simple_advance(t_parse_simple *sim);
+int				parse_redirection(t_parse_simple *sim);
+void			parse_assignment(t_parse_simple *sim);
+void			parse_argument(t_parse_simple *sim);
+int				parse_here_doc(char *delimter_str);
 
 #endif

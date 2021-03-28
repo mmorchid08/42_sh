@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/26 17:29:21 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/28 16:56:20 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,15 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	lexer/lexer_print_tokens.o lexer/lexer_push_token.o \
 	lexer/lexer_skip_whitespaces.o lexer/util.o lexer/token_helpers.o \
 	lexer/lexer_operator_len.o lexer/lexer_add_newline_token.o \
-	parse_cmd_line.o parser.o  parse_simple_cmd/parse_argument.o \
-	parse_simple_cmd/parse_assignment.o parse_simple_cmd/parse_redirection.o \
-	parse_simple_cmd/parse_here_document.o parse_simple_cmd/parse_simple_cmd.o \
-	parse_simple_cmd/simple_advance.o parse_pipe/parse_pipe.o \
-	parse_and_or/parse_and_or.o
+	parser.o \
+	parse_complete_commands/add_complete_cmd.o \
+	parse_complete_commands/cmd_tokens_helpers.o \
+	parse_complete_commands/parse_complete_commands.o \
+	parse_and_or/parse_and_or.o parse_and_or/cmd_tokens_helpers.o \
+	parse_pipe/parse_pipe.o \
+	parse_simple_cmd/parse_argument.o parse_simple_cmd/parse_assignment.o \
+	parse_simple_cmd/parse_redirection.o parse_simple_cmd/simple_advance.o \
+	parse_simple_cmd/parse_simple_cmd.o parse_simple_cmd/parse_here_document.o
 
 OBJS = $(addprefix $(OBJS_DIR)/, ${PARSER})
 

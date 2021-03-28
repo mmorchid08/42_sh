@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:55:25 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 18:55:32 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:57:22 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-void	parse_argument(t_simple *sim)
+void	parse_argument(t_parse_simple *sim)
 {
 	char *arg;
 

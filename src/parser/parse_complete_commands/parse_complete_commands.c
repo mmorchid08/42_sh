@@ -6,17 +6,17 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/27 12:37:35 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:05:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static t_parser	*parser_init(t_vector *tokens)
+static t_parse_complete	*parser_init(t_vector *tokens)
 {
-	t_parser *parser;
+	t_parse_complete *parser;
 
-	parser = (t_parser*)ft_malloc(sizeof(t_parser));
+	parser = (t_parse_complete*)ft_malloc(sizeof(t_parse_complete));
 	parser->commands = vector_init(sizeof(t_command), NULL);
 	parser->cmd_tokens = vector_init(sizeof(t_token), NULL);
 	parser->cmd_type = SIMPLE_CMD;
@@ -27,19 +27,13 @@ static t_parser	*parser_init(t_vector *tokens)
 	return (parser);
 }
 
-void			reset_cmd_tokens(t_parser *parser)
+static void				parser_clean(t_parse_complete **parser)
 {
-	vector_free(parser->cmd_tokens);
-	parser->cmd_tokens = vector_init(sizeof(t_token), NULL);
-}
-
-static void		parser_clean(t_parser **parser)
-{
-	ft_bzero(*parser, sizeof(t_parser));
+	ft_bzero(*parser, sizeof(t_parse_complete));
 	ft_memdel((void**)parser);
 }
 
-void			parser_advance(t_parser *parser)
+void					parser_advance(t_parse_complete *parser)
 {
 	if (parser->tokens_index >= parser->tokens_len - 1)
 		return ;
@@ -47,49 +41,10 @@ void			parser_advance(t_parser *parser)
 	parser->current_token = parser->tokens[parser->tokens_index];
 }
 
-void			set_cmd_type(t_parser *parser)
+t_vector				*parse_complete_commands(t_vector *tokens)
 {
-	t_token_type	token_type;
-
-	token_type = parser->current_token.type;
-	if (parser->cmd_type == LOGIC_SEQ)
-		return ;
-	if (token_type == ANDAND || token_type == OROR)
-		parser->cmd_type = LOGIC_SEQ;
-	if (token_type == PIPE)
-		parser->cmd_type = PIPE_SEQ;
-}
-
-int				add_complete_cmd(t_parser *parser)
-{
-	t_command *cmd;
-
-	cmd = (t_command*)ft_malloc(sizeof(t_command));
-	cmd->type = parser->cmd_type;
-	cmd->is_background_job = parser->current_token.type == AMPERSAND;
-	if (cmd->type == SIMPLE_CMD)
-		cmd->command = parse_simple_cmd(parser->cmd_tokens);
-	else if (cmd->type == PIPE_SEQ)
-		cmd->command = parse_pipe(parser->cmd_tokens);
-	else
-		cmd->command = parse_and_or(parser->cmd_tokens);
-	if (cmd->command == NULL)
-		return (EXIT_FAILURE);
-	vector_push(parser->commands, cmd);
-	parser_reset_cmd_tokens(parser);
-	return (EXIT_SUCCESS);
-}
-
-void		push_cmd_tokens(t_parser *parser)
-{
-	vector_push(parser->cmd_tokens, &(parser->current_token));
-	set_cmd_type(parser);
-}
-
-t_vector	*parse_complete_commands(t_vector *tokens)
-{
-	t_parser	*parser;
-	t_vector	*commands;
+	t_parse_complete	*parser;
+	t_vector			*commands;
 
 	parser = parser_init(tokens);
 	while (parser->tokens_index < parser->tokens_len)
@@ -103,7 +58,7 @@ t_vector	*parse_complete_commands(t_vector *tokens)
 			}
 		}
 		else
-			push_cmd_tokens(parser);
+			push_cmd_token(parser);
 		parser_advance(parser);
 	}
 	commands = parser->commands;

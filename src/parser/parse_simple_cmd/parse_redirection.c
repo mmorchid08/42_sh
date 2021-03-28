@@ -6,13 +6,13 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:52:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/25 18:21:09 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/28 16:57:42 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-int		parse_redirection(t_simple *sim)
+int		parse_redirection(t_parse_simple *sim)
 {
 	t_redirection	redirect;
 	int				here_doc_fd;

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 17:16:17 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/28 12:00:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,8 @@ t_logic_sequence		*parse_and_or(t_vector *tokens_vec)
 			and_or_push_logic_op(and_or);
 		}
 		else
-		{
-			if (and_or->current_token.type == PIPE)
-				and_or->cmd_type = PIPE_SEQ;
-			vector_push(and_or->cmd_tokens, &(and_or->current_token));
-		}
+			push_cmd_token(and_or);
+		and_or_advance(and_or);
 	}
 	if (and_or_push_command(and_or) == EXIT_FAILURE)
 		return (NULL);
