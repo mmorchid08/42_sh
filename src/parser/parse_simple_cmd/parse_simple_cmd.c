@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 18:02:06 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 16:58:49 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 15:31:43 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_parse_simple	*simple_init(t_vector *tokens_vec)
 	s->tokens_len = tokens_vec->length;
 	s->tokens_index = 0;
 	s->current_token = s->tokens[s->tokens_index];
+	s->is_done_assigning = FALSE;
 	return (s);
 }
 
@@ -54,10 +55,8 @@ t_simple_command		*parse_simple_cmd(t_vector *tokens_vec)
 				return (NULL);
 			}
 		}
-		else if (sim->current_token.type == ASSIGNMENT)
-			parse_assignment(sim);
 		else
-			parse_argument(sim);
+			parse_word(sim);
 		simple_advance(sim);
 	}
 	simple_cmd = sim->cmd;

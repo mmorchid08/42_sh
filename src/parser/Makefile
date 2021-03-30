@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/30 16:28:14 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/30 16:29:00 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	parse_simple_cmd/parse_argument.o parse_simple_cmd/parse_assignment.o \
 	parse_simple_cmd/parse_redirection.o parse_simple_cmd/simple_advance.o \
 	parse_simple_cmd/parse_simple_cmd.o parse_simple_cmd/parse_here_document.o \
+	parse_simple_cmd/parse_word.o \
 	print_commands.o
 
 OBJS = $(addprefix $(OBJS_DIR)/, ${PARSER})

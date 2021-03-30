@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 14:14:47 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 10:53:37 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 15:31:37 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_string		*string_new(void);
 void			string_free(t_string *str);
 void			string_push(t_string *str, char c);
 char			*string_get_data(t_string *str);
-char			lexer_quote_type(char c);
 int				lexer_is_space(char c, int quote);
 int				lexer_is_number(char c, int quote);
 int				lexer_is_operator(char c, int quote);

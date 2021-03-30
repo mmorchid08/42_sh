@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_push_token.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:01:45 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 15:17:56 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 13:53:54 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ void	lexer_push_token(t_lexer *lex, t_token_type token_type)
 
 	if (token_type == WORD || token_type == IO_NUMBER)
 		token.data = string_get_data(lex->word);
-	else if (token_type == ASSIGNMENT)
-	{
-
-	}
 	else
 		token.data = NULL;
 	token.type = token_type;

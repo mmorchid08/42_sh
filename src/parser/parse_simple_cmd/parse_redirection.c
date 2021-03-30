@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:52:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 16:57:42 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 16:19:25 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		parse_redirection(t_parse_simple *sim)
 			return (EXIT_FAILURE);
 		redirect.righ_fd = ft_itoa(here_doc_fd);
 	}
-	redirect.righ_fd = sim->current_token.data;
+	else
+		redirect.righ_fd = sim->current_token.data;
 	vector_push(sim->cmd->redirections, &redirect);
 	return (EXIT_SUCCESS);
 }
