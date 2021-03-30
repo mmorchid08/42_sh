@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 12:00:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 17:53:38 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int						and_or_push_command(t_parse_and_or *and_or)
 	if (cmd->command == NULL)
 		return (EXIT_FAILURE);
 	vector_push(and_or->logic_cmd->commands, cmd);
+	and_or->cmd_tokens->length = 0;
+	and_or->cmd_type = SIMPLE_CMD;
 	return (EXIT_SUCCESS);
 }
 
