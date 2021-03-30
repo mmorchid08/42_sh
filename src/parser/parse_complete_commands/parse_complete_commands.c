@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 12:05:45 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 13:25:17 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void				parser_clean(t_parse_complete **parser)
 
 void					parser_advance(t_parse_complete *parser)
 {
-	if (parser->tokens_index >= parser->tokens_len - 1)
+	if (parser->tokens_index > parser->tokens_len - 1)
 		return ;
 	++(parser->tokens_index);
 	parser->current_token = parser->tokens[parser->tokens_index];
