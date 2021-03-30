@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/26 11:11:51 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/30 15:59:32 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 # compilation variables
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES) -g
 CC = gcc
-PARSER_ENV=42sh_headers=../../includes/forty_two_sh.h 42sh_include_dirs=-I../../includes/
+PARSER_ENV=42sh_headers=$(mkfile_dir)/includes/forty_two_sh.h 42sh_include_dirs=-I$(mkfile_dir)includes/
 
 # 42sh																		   #
 INCLUDES =	-Iincludes
@@ -37,6 +37,10 @@ INCLUDES =	-Iincludes
 
 # objects directory
 OBJS_DIR = objs
+
+#
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
 
 # **************************************************************************** #
 #	rules																	   #
