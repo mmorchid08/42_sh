@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:01:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/19 18:03:39 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 23:32:19 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ const char	*g_error_message_string[] = {
 	[ESYNTAX] = "syntax error near unexpected token",\
 	[ETOOMANYPIPES] = "Too many pipes",
 	[EFORK] = "fork error",
+	[EOPENFILE] = "cannot open file",
 	[EUNK] = "An error has occured"
 };
 

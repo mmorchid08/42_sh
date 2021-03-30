@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:55:34 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 08:32:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 17:13:42 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum	t_error
 	EAMBREDIRECT,
 	ESYNTAX,
 	ETOOMANYPIPES,
+	EOPENFILE,
 	EUNK
 }				t_error;
 

@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 15:22:45 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:12:41 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct	s_command
 }				t_command;
 
 /*
-**
 ** - right_fd:
 **  if type == GREATAND || type == LESSAND
 ** 	 switch(str_is_number(right_fd)):
@@ -112,15 +111,20 @@ typedef enum	e_run_state
 
 typedef struct	s_job
 {
-	t_bool			is_background;
-	pid_t			pgid;
-	t_run_state		state;
-	int				running_count;
-	int				stopped_count;
-	int				completed_count;
-	t_vector		*processes;
-	t_bool			is_state_changed;
-	pid_t			ret_pid; // TODO give it better name 
+	u_int32_t	id;
+	t_bool		is_background;
+	pid_t		pgid;
+	t_run_state	state;
+	struct
+	{
+		int		running;
+		int		stopped;
+		int		completed;
+	}			count;
+	t_vector	*processes;
+	t_bool		to_notify;
+	pid_t		ret_pid; // TODO give it better name
+	int			wait_status;
 }				t_job;
 
 typedef struct	s_process

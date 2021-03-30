@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   new_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 23:35:38 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/03/31 13:48:32 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/03/31 13:50:44 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "forty_two_sh.h"
 
-# define todo 
-// FIXME this used to be #include "twenty_one.h"
+t_process	new_process(pid_t pid)
+{
+	t_process	proc;
 
-#endif
+	proc.state = RUNNING;
+	proc.wait_status = 0;
+	proc.pid = pid;
+	return (proc);
+}

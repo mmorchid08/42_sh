@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   add_process_to_job.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 23:35:38 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/03/31 17:54:34 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/03/31 17:56:45 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "forty_two_sh.h"
 
-# define todo 
-// FIXME this used to be #include "twenty_one.h"
+void	add_process_to_job(t_job *job, t_process t_process)
+{
 
-#endif
+}

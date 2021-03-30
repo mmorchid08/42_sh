@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   new_job.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 23:35:38 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/03/30 14:50:46 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/03/31 10:39:17 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "forty_two_sh.h"
 
-# define todo 
-// FIXME this used to be #include "twenty_one.h"
+t_job	*new_job(t_bool is_background)
+{
+	t_job	job;
 
-#endif
+	job.is_background = is_background;
+	job.state = RUNNING;
+	job.processes = vector_init(sizeof(t_process), NULL);
+	// TODO vector_push(job_list, &job) or 	add_job_to_jobs_list(&job)
+	return // TODO address of job in jobs list
+}
