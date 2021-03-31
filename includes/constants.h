@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:21:47 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/21 11:25:13 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/21 11:27:06 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
-# include "forty_two_sh.h"
+# define DOUBLE_QUOTE '"'
+# define SINGLE_QUOTE '\''
+# define BACK_SLASH '\\'
 
 #endif

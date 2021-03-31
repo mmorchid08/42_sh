@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 12:55:19 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/31 10:52:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "forty_two_sh.h"
+#ifndef INTERNALS_H
+# define INTERNALS_H
 
-int			main(int ac, char *av[], char *envp[])
+# include "forty_two_sh.h"
+# include "../parse_simple_cmd/parse_simple_cmd.h"
+
+typedef struct	s_parse_pipe
 {
-	char *cmd;
+	t_pipe_sequence	*pipe_cmd;
+	t_vector		*cmd_tokens;
+	t_token			*tokens;
+	t_token			current_token;
+	size_t			tokens_index;
+	size_t			tokens_len;
+}				t_parse_pipe;
 
-	(void)envp;
-	signal(SIGTSTP, SIG_IGN);
-	if (ac == 3 && ft_strcmp(av[1], "-c") == 0)
-		(void)parser(av[2]);
-	else if (ac == 1)
-	{
-		if (get_next_line(STDIN_FILENO, &cmd) != -1)
-			(void)parser(cmd);
-	}
-	else
-		ft_printf(2, "Error\nusage: ./21sh [-c command]\n");
-	return (0);
-}
+#endif

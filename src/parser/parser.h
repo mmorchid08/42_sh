@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:21:47 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/20 13:37:49 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/31 11:02:41 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#ifndef PARSER_H
+# define PARSER_H
 
-# include "forty_two_sh.h"
+# include "lexer/lexer.h"
+
+t_vector	*parser(char *line);
+char		*get_job_name(t_vector *tokens_vec);
 
 #endif
