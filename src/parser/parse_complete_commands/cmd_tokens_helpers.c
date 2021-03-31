@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 11:42:53 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 11:59:40 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 10:41:39 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void		reset_cmd_tokens(t_parse_complete *parser)
 
 void		push_cmd_token(t_parse_complete *parser)
 {
-	vector_push(parser->cmd_tokens, &(parser->current_token));
+	t_token *token;
+
+	token = token_dup(parser->current_token);
+	vector_push(parser->cmd_tokens, token);
+	free(token);
 	set_cmd_type(parser);
 }

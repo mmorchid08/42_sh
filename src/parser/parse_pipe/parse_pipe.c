@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:01:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/27 12:28:39 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 10:40:37 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_parse_pipe	*parse_pipe_init(t_vector *tokens_vec)
 	ptr = (t_parse_pipe*)ft_malloc(sizeof(t_parse_pipe));
 	ptr->pipe_cmd = (t_pipe_sequence*)ft_malloc(sizeof(t_pipe_sequence));
 	ptr->pipe_cmd->commands = vector_init(sizeof(t_simple_command), free);
-	ptr->simple_cmd_tokens = vector_init(sizeof(t_token), free);
+	ptr->cmd_tokens = vector_init(sizeof(t_token), NULL);
 	ptr->tokens = (t_token*)tokens_vec->array;
 	ptr->tokens_len = tokens_vec->length;
 	ptr->tokens_index = 0;
@@ -37,14 +37,14 @@ static void			parse_pipe_free_all(t_parse_pipe *p_p)
 {
 	vector_free(p_p->pipe_cmd->commands);
 	free(p_p->pipe_cmd);
-	vector_free(p_p->simple_cmd_tokens);
+	vector_free(p_p->cmd_tokens);
 	ft_bzero(p_p, sizeof(t_parse_pipe));
 	free(p_p);
 }
 
 static void			parse_pipe_clean(t_parse_pipe *p_p)
 {
-	vector_free(p_p->simple_cmd_tokens);
+	vector_free(p_p->cmd_tokens);
 	ft_bzero(p_p, sizeof(t_parse_pipe));
 	free(p_p);
 }
@@ -53,15 +53,25 @@ static int			add_simple_command(t_parse_pipe *p_p)
 {
 	t_simple_command *simple_cmd;
 
-	simple_cmd = parse_simple_cmd(p_p->simple_cmd_tokens);
+	simple_cmd = parse_simple_cmd(p_p->cmd_tokens);
 	if (simple_cmd == NULL)
 	{
 		parse_pipe_free_all(p_p);
 		return (EXIT_FAILURE);
 	}
 	vector_push(p_p->pipe_cmd->commands, simple_cmd);
-	p_p->simple_cmd_tokens->length = 0;
+	vector_free(p_p->cmd_tokens);
+	p_p->cmd_tokens = vector_init(sizeof(t_token), NULL);
 	return (EXIT_SUCCESS);
+}
+
+static void				push_cmd_token(t_parse_pipe *p_p)
+{
+	t_token *token;
+
+	token = token_dup(p_p->current_token);
+	vector_push(p_p->cmd_tokens, token);
+	free(token);
 }
 
 t_pipe_sequence		*parse_pipe(t_vector *tokens_vec)
@@ -78,7 +88,7 @@ t_pipe_sequence		*parse_pipe(t_vector *tokens_vec)
 				return (NULL);
 		}
 		else
-			vector_push(p_p->simple_cmd_tokens, &(p_p->current_token));
+			push_cmd_token(p_p);
 		parse_pipe_advance(p_p);
 	}
 	if (add_simple_command(p_p) == EXIT_FAILURE)
