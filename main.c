@@ -1,55 +1,108 @@
 #include "forty_two_sh.h"
-#include "libft.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
-void	free_shit(void *ptr)
+void		free_shit(void *elem)
 {
-	free(ptr);
+	free(elem);
 }
 
-int		main(void)
+t_simple_command	*parse_simple_cmd(char *input)
 {
-	t_vector			*vec;
-	char				**tvc;
-	t_command			*cmd;
-	t_command			*lol;
-	t_command			**tst;
-	t_simple_command	*sm;
-	t_simple_command	**tts;
-	char				*com;
-	char				*arg;
+	t_simple_command	*cmd;
+	char				**str;
 	int					i;
 
-	com = ft_strdup("/bin/ls");
-	arg = ft_strdup("-laF");
-	lol = NULL;
-	sm = (t_simple_command *)ft_malloc(sizeof(t_simple_command));
-	sm->args = vector_init(sizeof(char *), free_shit);
-	sm->redirections = NULL;
-	vector_push(sm->args, &com);
-	vector_push(sm->args, &arg);
+	cmd = (t_simple_command *)ft_malloc(sizeof(t_simple_command));
+	cmd->args = vector_init(sizeof(char *), free);
+	cmd->redirections = NULL;
+	str = ft_strsplit(input, ' ');
+	i = 0;
+	while (str[i])
+		vector_push(cmd->args, &str[i++]);
+	vector_push(cmd->args, (char *[]){NULL});
+	return (cmd);
+}
+
+t_command	*fast_parser(char *input)
+{
+	t_command	*cmd;
+
 	cmd = (t_command *)ft_malloc(sizeof(t_command));
 	cmd->type = SIMPLE_CMD;
-	cmd->is_background_job = 0;
-	cmd->command = &sm;
-	vec = vector_init(sizeof(t_command *), free_shit);
-	vector_push(vec, &cmd);
-	vector_push(vec, &lol);
-	ft_printf(1, "Finished Filling\n");
-	ft_printf(1, "Testing time : \n");
-	tst = (t_command **)vec->array;
-	i = 0;
-	while (tst[i])
+	cmd->is_background_job = false;
+	cmd->command = parse_simple_cmd(input);
+	return (cmd);
+}
+
+int			ft_temperror(char *str)
+{
+	ft_printf(2, "%s", str);
+	return (EXIT_FAILURE);
+}
+
+int		execute_simple_cmd(char **str, char **env)
+{
+	int		pid;
+	int		status;
+
+	if ((pid = fork()) == -1)
+		return (ft_temperror("Could not fork.\n"));
+	else if (pid == 0)
 	{
-		ft_printf(1, "The type of this command is : %d\n", tst[i]->type);
-		ft_printf(1, "Now printing the command and its args : \n");
-		if (tst[i]->type == SIMPLE_CMD)
+		if (execve(str[0], str, env) == -1)
+			return (ft_temperror("Could not execute.\n"));
+		exit(1);
+	}
+	else
+		while (waitpid(pid, &status, 0) > 0)
+			;
+	return (EXIT_SUCCESS);
+}
+
+void		execution_testing(t_vector *vec, char **env)
+{
+	t_command			**tail;
+	t_simple_command	*cc;
+	t_vector			*lol;
+	char				**str;
+	int					i;
+
+	tail = (t_command **)vec->array;
+	i = 0;
+	while (tail[i])
+	{
+		if (tail[i]->type == SIMPLE_CMD)
 		{
-			tts = (t_simple_command **)(tst[i]->command);
-			tvc = (char **)tts[i]->args;
-			int i = 0;
-			while (tvc[i])
-				ft_printf(1, "tvc is : %s\n", tvc[i++]);
+			cc = (t_simple_command *)tail[i]->command;
+			lol = cc->args;
+			str = (char **)lol->array;
+			execute_simple_cmd(str, env);
 		}
 		i++;
+	}
+}
+
+int			main(int ac, char **av, char **env)
+{
+	char		*input;
+	t_vector	*tcmd_vec;		//Vector for t_command *
+
+	input = NULL;
+	(void)ac;
+	(void)av;
+	while (42)
+	{
+		ft_printf(1, "$> ");
+		tcmd_vec = vector_init(sizeof(t_command), free_shit);
+		get_next_line(0, &input);
+		t_command	*pp;
+		t_command	*bg;
+		bg = NULL;
+		pp = fast_parser(input);
+		vector_push(tcmd_vec, &pp);
+		vector_push(tcmd_vec, &bg);
+		if (tcmd_vec)
+			execution_testing(tcmd_vec, env);
 	}
 }
