@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 11:23:29 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 19:02:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ typedef enum	e_token_type {
 
 typedef struct	s_var
 {
-	char *key;
-	char *value;
+	char	*key;
+	char	*value;
+	t_bool	is_exported;
 }				t_var;
 
 typedef enum	e_cmd_type
