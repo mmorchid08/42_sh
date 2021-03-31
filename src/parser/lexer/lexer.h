@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 15:31:26 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 19:31:03 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_bool		lexer_is_redirection(t_token_type type);
 t_bool		lexer_is_separator(t_token_type type);
 t_bool		lexer_is_and_or(t_token_type type);
 char		lexer_quote_type(char c);
+t_token		*token_dup(t_token token);
 
 #endif

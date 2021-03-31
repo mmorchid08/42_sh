@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:56:32 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 09:20:44 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 19:31:46 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,18 @@ t_bool	lexer_is_separator(t_token_type type)
 {
 	return (type == SEMI || type == AMPERSAND || type == NEWLINE);
 }
+
 t_bool	lexer_is_and_or(t_token_type type)
 {
 	return (type == ANDAND || type == OROR);
+}
+
+t_token	*token_dup(t_token token)
+{
+	t_token *new_token;
+
+	new_token = ft_malloc(sizeof(t_token));
+	new_token->type = token.type;
+	new_token->data = ft_strdup(token.data);
+	return (new_token);
 }

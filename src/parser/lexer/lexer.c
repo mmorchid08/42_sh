@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 19:34:44 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/30 19:26:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static t_lexer		*lexer_init(char *line, t_bool enable_alias_subtitution)
+static t_lexer	*lexer_init(char *line, t_bool enable_alias_subtitution)
 {
 	t_lexer	*lex;
 
@@ -28,14 +28,14 @@ static t_lexer		*lexer_init(char *line, t_bool enable_alias_subtitution)
 	return (lex);
 }
 
-static void	lexer_clean(t_lexer **lex)
+static void		lexer_clean(t_lexer **lex)
 {
 	string_free((*lex)->word);
 	ft_bzero(*lex, sizeof(t_lexer));
 	ft_memdel((void**)lex);
 }
 
-t_vector	*lexer(char *line, t_bool enable_alias_subtitution)
+t_vector		*lexer(char *line, t_bool enable_alias_subtitution)
 {
 	t_lexer		*lex;
 	t_vector	*tokens;
