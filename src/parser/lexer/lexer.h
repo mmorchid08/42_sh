@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 19:31:03 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 11:06:56 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 
 extern char	*g_tokens_to_string[];
+extern char	*g_tokens_to_symbol[];
 
 t_vector	*lexer(char *line, t_bool enable_alias_subtitution);
 void		lexer_print_tokens(t_vector *tokens_vec);

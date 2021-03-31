@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 18:02:06 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 15:31:43 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 10:51:50 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_simple_command		*parse_simple_cmd(t_vector *tokens_vec)
 		simple_advance(sim);
 	}
 	simple_cmd = sim->cmd;
+	simple_cmd->job_name = get_job_name(tokens_vec);
 	free(sim);
 	return (simple_cmd);
 }

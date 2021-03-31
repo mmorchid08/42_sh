@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:27:57 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:54:28 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 11:03:58 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	print_simple_cmd(t_simple_command *cmd)
 	size_t			i;
 
 	ft_printf(1, "\n------------------------------------------------");
-	ft_printf(1, "\n- simple_command:");
+	ft_printf(1, "\n- simple_command: %s\n", cmd->job_name);
 	ft_printf(1, "\n-- assignments: ");
 	i = 0;
 	assigns = cmd->assignments->array;
@@ -55,7 +55,7 @@ void	print_pipe_cmd(t_pipe_sequence *cmd)
 	size_t				i;
 
 	ft_printf(1, "\n************************************************");
-	ft_printf(1, "\n* pipe_sequence:");
+	ft_printf(1, "\n* pipe_sequence: %s\n", cmd->job_name);
 	i = 0;
 	simple_commands = cmd->commands->array;
 	while (i < cmd->commands->length)
@@ -72,7 +72,7 @@ void	print_logic_cmd(t_logic_sequence *cmd)
 	size_t			i;
 
 	ft_printf(1, "\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-	ft_printf(1, "\n@ logic_sequence:");
+	ft_printf(1, "\n@ logic_sequence: %s\n", cmd->job_name);
 	i = 0;
 	logic_ops = cmd->logic_ops->array;
 	while (i < cmd->logic_ops->length)

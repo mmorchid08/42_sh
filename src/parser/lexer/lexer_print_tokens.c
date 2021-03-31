@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_print_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 08:55:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 15:05:31 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 11:06:59 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,29 @@ char	*g_tokens_to_string[] = {
 	[ANDAND] = "ANDAND",
 	[SEMI] = "SEMI",
 	[AMPERSAND] = "AMPERSAND",
+	[NEWLINE] = "NEWLINE"
+};
+
+char	*g_tokens_to_symbol[] = {
+	[START] = "START",
+	[WORD] = "WORD",
+	[ASSIGNMENT] = "ASSIGNMENT",
+	[IO_NUMBER] = "IO_NUMBER",
+	[GREAT] = ">",
+	[ANDGREAT] = "&>",
+	[DGREAT] = ">>",
+	[ANDDGREAT] = "&>>",
+	[LESS] = "<",
+	[DLESS] = "<<",
+	[GREATAND] = ">&",
+	[LESSAND] = "<&",
+	[GREATANDDASH] = ">&-",
+	[LESSANDDASH] = "<&-",
+	[PIPE] = "|",
+	[OROR] = "||",
+	[ANDAND] = "&&",
+	[SEMI] = ";",
+	[AMPERSAND] = "&",
 	[NEWLINE] = "NEWLINE"
 };
 

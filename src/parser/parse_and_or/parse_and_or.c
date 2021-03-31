@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:53:38 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 11:01:32 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ t_logic_sequence		*parse_and_or(t_vector *tokens_vec)
 	if (and_or_push_command(and_or) == EXIT_FAILURE)
 		return (NULL);
 	logic_cmd = and_or->logic_cmd;
+	logic_cmd->job_name = get_job_name(tokens_vec);
 	return (logic_cmd);
 }

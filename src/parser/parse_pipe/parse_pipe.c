@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:01:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 10:40:37 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 11:01:18 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_pipe_sequence		*parse_pipe(t_vector *tokens_vec)
 	if (add_simple_command(p_p) == EXIT_FAILURE)
 		return (NULL);
 	pipe_cmd = p_p->pipe_cmd;
+	pipe_cmd->job_name = get_job_name(tokens_vec);
 	parse_pipe_clean(p_p);
 	return (pipe_cmd);
 }

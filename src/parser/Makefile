@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/30 16:29:00 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/31 11:02:27 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	lexer/lexer_print_tokens.o lexer/lexer_push_token.o \
 	lexer/lexer_skip_whitespaces.o lexer/util.o lexer/token_helpers.o \
 	lexer/lexer_operator_len.o lexer/lexer_add_newline_token.o \
-	parser.o \
 	parse_complete_commands/add_complete_cmd.o \
 	parse_complete_commands/cmd_tokens_helpers.o \
 	parse_complete_commands/parse_complete_commands.o \
@@ -44,7 +43,7 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	parse_simple_cmd/parse_redirection.o parse_simple_cmd/simple_advance.o \
 	parse_simple_cmd/parse_simple_cmd.o parse_simple_cmd/parse_here_document.o \
 	parse_simple_cmd/parse_word.o \
-	print_commands.o
+	parser.o get_job_name.o print_commands.o
 
 OBJS = $(addprefix $(OBJS_DIR)/, ${PARSER})
 

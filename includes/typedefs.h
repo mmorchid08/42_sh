@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 16:46:41 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/31 10:45:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct	s_simple_command
 	t_vector	*args;
 	t_vector	*redirections;
 	t_vector	*assignments;
+	char		*job_name;
 }				t_simple_command;
 
 /*
@@ -103,6 +104,7 @@ typedef struct	s_simple_command
 typedef struct	s_pipe_sequence
 {
 	t_vector	*commands;
+	char		*job_name;
 }				t_pipe_sequence;
 
 /*
@@ -112,6 +114,7 @@ typedef struct	s_logic_sequence
 {
 	t_vector	*commands;
 	t_vector	*logic_ops;
+	char		*job_name;
 }				t_logic_sequence;
 
 #endif
