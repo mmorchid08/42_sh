@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:54:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/01 10:46:03 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/02 00:22:10 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_process	new_process(pid_t pid)
 	return (proc);
 }
 
-void	add_process_to_job(t_job *job, pid_t pid)
+void	add_process(t_job *job, pid_t pid)
 {
 	t_process proc;
 
