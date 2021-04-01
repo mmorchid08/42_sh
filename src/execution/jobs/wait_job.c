@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:22:47 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/01 20:26:09 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:13:52 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	wait_job(t_job *job)
 	int		wait_status;
 	int		recent_stop_sig;
 
-	while ((pid = waitpid(-job->pgid, &wait_status, WUNTRACED)) != -1)
+	while (waitpid((pid = -job->pgid), &wait_status, WUNTRACED) != -1)
 	{
 		if (WIFSTOPPED(wait_status))
 			recent_stop_sig = WSTOPSIG(wait_status);

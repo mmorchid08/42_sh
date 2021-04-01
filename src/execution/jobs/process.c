@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_process_to_job.c                               :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:54:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/02 09:44:24 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:05:45 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static t_process	new_process(pid_t pid)
 	return (proc);
 }
 
-void				add_process_to_job(t_job *job, pid_t pid)
+void	add_process_to_job(t_job *job, pid_t pid)
 {
-	t_process proc;
+	t_process	proc;
 
 	if (job->processes->length == 0)
 	{
@@ -40,25 +40,25 @@ void				add_process_to_job(t_job *job, pid_t pid)
 	job->count.running++;
 }
 
-t_process			*get_process_from_job(t_job *job, pid_t pid)
+t_process	*get_process_from_job(t_job *job, pid_t pid)
 {
 	t_process *const	proc_array = job->processes->array;
-	int	i;
+	int					i;
 
 	i = 0;
 	while (i < job->processes->length)
 	{
 		if (pid == proc_array[i].pid)
 			return (proc_array + i);
-		i++;	
+		i++;
 	}
 	return (NULL);
 }
 
-void				remove_process_from_job(t_job *job, pid_t pid)
+void	remove_process_from_job(t_job *job, pid_t pid)
 {
 	t_process *const	proc_array = job->processes->array;
-	int	i;
+	int					i;
 
 	i = 0;
 	while (i < job->processes->length)
@@ -68,6 +68,6 @@ void				remove_process_from_job(t_job *job, pid_t pid)
 			vector_remove(job->processes, i);
 			return ;
 		}
-		i++;	
+		i++;
 	}
 }

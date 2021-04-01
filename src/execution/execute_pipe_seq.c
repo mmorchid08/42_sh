@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/01 10:30:04 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:02:17 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 		{
 			// TODO handle fork error
 			// TODO free job and kill all processes
-			return (-1); 
+			return (-1);
 		}
 		// hmzah parent code 
 		if (is_interactive)

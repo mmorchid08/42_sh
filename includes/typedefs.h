@@ -6,14 +6,14 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 13:12:41 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:51:37 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
 
-typedef enum	e_token_type {
+typedef enum e_token_type {
 	START,
 	WORD,
 	IO_NUMBER,
@@ -35,7 +35,7 @@ typedef enum	e_token_type {
 	NEWLINE
 }				t_token_type;
 
-typedef enum	e_cmd_type
+typedef enum e_cmd_type
 {
 	SIMPLE_CMD,
 	PIPE_SEQ,
@@ -48,7 +48,7 @@ typedef enum	e_cmd_type
 **	type = PIPE_SEQ ==> t_pipe_sequence
 **	type = LOGIC_SEQ ==> t_logic_sequence
 */
-typedef struct	s_command
+typedef struct s_command
 {
 	t_cmd_type	type;
 	t_bool		is_background_job;
@@ -66,7 +66,7 @@ typedef struct	s_command
 **  else
 **   right_fd is a filename
 */
-typedef struct	s_redirection
+typedef struct s_redirection
 {
 	t_token_type	type;
 	int				left_fd;
@@ -77,7 +77,7 @@ typedef struct	s_redirection
 ** t_vector *args [char *]
 ** t_vector *redirections [t_redirection]
 */
-typedef struct	s_simple_command
+typedef struct s_simple_command
 {
 	t_vector	*args;
 	t_vector	*redirections;
@@ -86,7 +86,7 @@ typedef struct	s_simple_command
 /*
 ** t_vector *commands [t_simple_command]
 */
-typedef struct	s_pipe_sequence
+typedef struct s_pipe_sequence
 {
 	t_vector	*commands;
 }				t_pipe_sequence;
@@ -95,13 +95,13 @@ typedef struct	s_pipe_sequence
 ** t_vector *commands [t_command]
 ** t_vector	*logic_ops [t_token_type] 
 */
-typedef struct	s_logic_sequence
+typedef struct s_logic_sequence
 {
 	t_vector	*commands;
 	t_vector	*logic_ops;
 }				t_logic_sequence;
 
-typedef enum	e_run_state
+typedef enum e_run_state
 {
 	UNDEFINED,
 	RUNNING,
@@ -109,13 +109,13 @@ typedef enum	e_run_state
 	COMPLETED
 }				t_run_state;
 
-typedef struct	s_job
+typedef struct s_job
 {
 	u_int32_t	id;
 	t_bool		is_background;
 	pid_t		pgid;
 	t_run_state	state;
-	struct
+	struct		s_count
 	{
 		int		running;
 		int		stopped;
@@ -127,7 +127,7 @@ typedef struct	s_job
 	int			wait_status;
 }				t_job;
 
-typedef struct	s_process
+typedef struct s_process
 {
 	t_run_state		state;
 	int				wait_status;

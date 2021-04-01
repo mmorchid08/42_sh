@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:30:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/02 16:23:48 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/06 18:44:15 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	update_proc_state(t_job *job, t_process *proc, int wait_status)
 	}
 }
 
-void		update_job_state(t_job *job, pid_t pid, int wait_status)
+void	update_job_state(t_job *job, pid_t pid, int wait_status)
 {
 	t_process	*proc;
 	t_run_state	recent_job_state;
@@ -54,24 +54,32 @@ void		update_job_state(t_job *job, pid_t pid, int wait_status)
 	else
 		job->state = COMPLETED;
 	if (recent_job_state != job->state)
+	{
 		job->to_notify = TRUE;
+		update_stopped_jobs(job);	
+	}
 }
 
-void		update_job(t_job *job)
+void	update_job(t_job *job)
 {
 	pid_t	pid;
 	int		wait_status;
 
-	while ((pid = waitpid(-job->pgid, &wait_status,
-			WUNTRACED | WCONTINUED | WNOHANG)))
+	while (1)
+	{
+		pid = waitpid(-job->pgid, &wait_status,
+				WUNTRACED | WCONTINUED | WNOHANG);
+		if (pid <= 0)
+			break ;
 		update_job_state(job, pid, wait_status);
+	}
 }
 
-void		update_all_jobs(void)
+void	update_all_jobs(void)
 {
 	int	i;
 
 	i = 0;
 	while (i < g_job_list->length)
-		update_job(((t_job*)g_job_list->array) + i);
+		update_job(((t_job *)g_job_list->array) + i);
 }
