@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:30:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/02 11:43:29 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:23:48 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,21 @@ void		update_job_state(t_job *job, pid_t pid, int wait_status)
 		job->to_notify = TRUE;
 }
 
-void		update_job()
+void		update_job(t_job *job)
+{
+	pid_t	pid;
+	int		wait_status;
+
+	while ((pid = waitpid(-job->pgid, &wait_status,
+			WUNTRACED | WCONTINUED | WNOHANG)))
+		update_job_state(job, pid, wait_status);
+}
+
+void		update_all_jobs(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < g_job_list->length)
+		update_job(((t_job*)g_job_list->array) + i);
+}

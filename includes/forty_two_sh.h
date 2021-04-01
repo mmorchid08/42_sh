@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/02 11:38:23 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:19:07 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 
 extern int
 g_exit_status;
-int
+extern int
 g_term_fd;
+extern t_vector
+*g_job_list;
+
 
 /*
 ** ================================ jobs =======================================
@@ -28,7 +31,7 @@ g_term_fd;
 t_job		*new_job(t_bool is_background);
 int			wait_job(t_job *job);
 void		add_process_to_job(t_job *job, pid_t pid);
-t_process *get_process_from_job(t_job *job, pid_t pid);
+t_process	*get_process_from_job(t_job *job, pid_t pid);
 void		remove_process_from_job(t_job *job, pid_t pid);
 void		add_to_job_list(t_job *job);
 t_job		*get_job_by_id(uint32_t id);

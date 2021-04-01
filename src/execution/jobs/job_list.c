@@ -6,13 +6,13 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:06:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/02 11:38:01 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:17:49 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-static t_vector *g_job_list;
+t_vector *g_job_list;
 
 static void	free_job(void *job)
 {
