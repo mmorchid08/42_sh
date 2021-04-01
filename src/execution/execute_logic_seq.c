@@ -6,29 +6,71 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:42:48 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/30 16:50:25 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/03/31 23:32:57 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-int	execute_logic_seq_background(t_logic_sequence logic_seq)
+static int	execute_logical_segment(t_command *cmd, t_bool is_background,
+	t_bool is_interactive)
+{
+	int ret;
+
+	if (cmd->type == PIPE_SEQ)
+		ret = execute_pipe_seq((t_pipe_sequence*)cmd->command, is_background,
+			is_interactive);
+	else
+		ret = execute_simple_cmd((t_simple_command*)cmd->command, is_background,
+			is_interactive);
+	return (ret);
+}
+
+
+static int	logic_seq_executor(t_logic_sequence *logic_seq, 
+	t_bool is_background, t_bool is_interactive)
+{
+	int					ret;
+	int 				i;
+	t_command *const	cmds = logic_seq->commands->array;
+	t_token_type *const	ops = logic_seq->logic_ops->array;
+
+	i = 0;
+	ret = execute_logical_segment(&cmds[0], is_background, is_interactive);
+	while (i < logic_seq->logic_ops->length)
+	{
+		if ((ret == 0 && ops[i] == ANDAND)
+			|| (ret != 0 && ops[i] == OROR))
+			ret = execute_logical_segment(&cmds[i + 1], is_background,
+				is_interactive);
+		i++;
+	}
+	return (ret);
+}
+
+static int	execute_logic_seq_background(t_logic_sequence *logic_seq)
 {
 	pid_t	pid;
-	t_job	job;
+	t_job	*job;
 
-	job = new_job(TRUE);
 	pid = fork();
 	if (pid == 0)
-	{
-		logic_seq_executor(logic_seq, TRUE, FALSE);
-	}
+		exit(logic_seq_executor(logic_seq, TRUE, FALSE));
 	else if (pid < 0)
 	{
 		// TODO handle fork error
+		return (-1);// TODO handle fork error
 	}
-	else
-	{
+	job = new_job(TRUE);
+	add_process_to_job(job, pid);
+	job->ret_pid = pid;
+	return (0);
+}
 
-	}
+int			execute_logic_seq(t_logic_sequence *logic_seq, t_bool is_background)
+{
+	if (is_background)
+		return (execute_logic_seq_background(logic_seq));
+	else
+		return (logic_seq_executor(logic_seq, FALSE, TRUE));
 }

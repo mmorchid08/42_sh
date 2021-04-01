@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   forty_two_sh.h                                     :+:      :+:    :+:   */
+/*   lexer_handle_io_number.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 16:48:02 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/21 18:59:40 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/21 19:04:20 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORTY_TWO_SH_H
-# define FORTY_TWO_SH_H
+#include "internals.h"
 
-# include "../libft/libft.h"
-# include "constants.h"
-# include "typedefs.h"
-# include "../src/errors/errors.h"
-# include "../src/parser/parser.h"
-
-void	del_token(void *element);
-void	del_redirection(void *element);
-void	del_var(void *element);
-
-#endif
+void	lexer_handle_io_number(t_lexer *lex)
+{
+	while (lex->c && ft_isdigit(lex->c))
+	{
+		string_push(lex->word, lex->c);
+		lexer_advance(lex, 1);
+	}
+	if (lex->c == '>' || lex->c == '<')
+		lexer_push_token(lex, IO_NUMBER);
+}

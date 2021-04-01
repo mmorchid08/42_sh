@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 16:15:24 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/03/31 10:45:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef enum	e_token_type {
 	START,
 	WORD,
+	ASSIGNMENT,
 	IO_NUMBER,
 	GREAT,
 	ANDGREAT,
@@ -35,12 +36,24 @@ typedef enum	e_token_type {
 	NEWLINE
 }				t_token_type;
 
+typedef struct	s_var
+{
+	char *key;
+	char *value;
+}				t_var;
+
 typedef enum	e_cmd_type
 {
 	SIMPLE_CMD,
 	PIPE_SEQ,
 	LOGIC_SEQ
 }				t_cmd_type;
+
+typedef struct	s_token
+{
+	t_token_type	type;
+	void			*data;
+}				t_token;
 
 /*
 ** void *command = switch(type):
@@ -56,7 +69,6 @@ typedef struct	s_command
 }				t_command;
 
 /*
-**
 ** - right_fd:
 **  if type == GREATAND || type == LESSAND
 ** 	 switch(str_is_number(right_fd)):
@@ -82,6 +94,8 @@ typedef struct	s_simple_command
 {
 	t_vector	*args;
 	t_vector	*redirections;
+	t_vector	*assignments;
+	char		*job_name;
 }				t_simple_command;
 
 /*
@@ -90,16 +104,17 @@ typedef struct	s_simple_command
 typedef struct	s_pipe_sequence
 {
 	t_vector	*commands;
+	char		*job_name;
 }				t_pipe_sequence;
 
 /*
 ** t_vector *commands [t_command]
-** t_vector	*logic_ops [t_token_type] 
 */
 typedef struct	s_logic_sequence
 {
 	t_vector	*commands;
 	t_vector	*logic_ops;
+	char		*job_name;
 }				t_logic_sequence;
 
 #endif

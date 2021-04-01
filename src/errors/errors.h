@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:55:34 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/20 08:32:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:23:04 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
 
-
-typedef enum	t_error 
+typedef enum	e_error
 {
 	EACCES = 1,
-	ENOTFOUND,
+	ENOCMD,
 	ENOENT,
 	ENOTDIR,
 	ENAMETOOLONG,
@@ -28,6 +27,7 @@ typedef enum	t_error
 	EAMBREDIRECT,
 	ESYNTAX,
 	ETOOMANYPIPES,
+	EFORK,
 	EUNK
 }				t_error;
 

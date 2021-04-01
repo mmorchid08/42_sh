@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 12:55:19 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/20 13:39:53 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/30 13:34:24 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "forty_two_sh.h"
+#ifndef INTERNALS_H
+# define INTERNALS_H
 
-int			main(int ac, char *av[], char *envp[])
-{
-	char *cmd;
+# include "forty_two_sh.h"
+# include "lexer/lexer.h"
+# include "parse_simple_cmd/parse_simple_cmd.h"
+# include "parse_pipe/parse_pipe.h"
+# include "parse_and_or/parse_and_or.h"
+# include "parse_complete_commands/parse_complete_commands.h"
 
-	(void)envp;
-	signal(SIGTSTP, SIG_IGN);
-	if (ac == 3 && ft_strcmp(av[1], "-c") == 0)
-		(void)parser(av[2]);
-	else if (ac == 1)
-	{
-		if (get_next_line(STDIN_FILENO, &cmd) != -1)
-			(void)parser(cmd);
-	}
-	else
-		ft_printf(2, "Error\nusage: ./21sh [-c command]\n");
-	return (0);
-}
+void	unexpected_token(t_token_type type);
+void	print_commands(t_vector *commands_vec);
+
+#endif

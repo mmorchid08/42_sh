@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:01:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/19 18:03:39 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/03/22 09:33:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 t_error		g_errno;
 
 const char	*g_error_message_string[] = {
-	[EACES] = "Permission denied",
+	[EACCES] = "Permission denied",
 	[ENOCMD] = "Command not found",
 	[ENOENT] = "No such file or directory",
 	[ENOTDIR] = "Not a directory",
 	[ENAMETOOLONG] = "File name too long",
 	[ENOHOME] = "HOME not set",
-	[ENOOLDPWD]"OLDPWD not set",
+	[ENOOLDPWD]= "OLDPWD not set",
 	[EISDIR] = "is a directory",
 	[EREDIRECT] = "Redirection error",
 	[EAMBREDIRECT] = "ambiguous redirect",

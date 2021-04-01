@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   forty_two_sh.h                                     :+:      :+:    :+:   */
+/*   lexer_add_newline_token.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/24 16:48:02 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/23 16:31:37 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/23 16:52:08 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORTY_TWO_SH_H
-# define FORTY_TWO_SH_H
+#include "internals.h"
 
-# include "../libft/libft.h"
-# include "constants.h"
-# include "typedefs.h"
-# include "../src/errors/errors.h"
-# include "../src/parser/parser.h"
+void	lexer_add_newline_token(t_vector *tokens)
+{
+	t_token last_token;
 
-void	del_token(void *element);
-void	del_redirection(void *element);
-void	del_var(void *element);
-
-#endif
+	last_token = ((t_token*)tokens->array)[tokens->length - 1];
+	if (last_token.type != SEMI && last_token.type != AMPERSAND)
+	{
+		last_token.type = NEWLINE;
+		vector_push(tokens, &last_token);
+	}
+}

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   parse_complete_commands.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:21:47 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/03/27 12:26:54 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/27 12:33:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#ifndef PARSE_COMPLETE_COMMANDS_H
+# define PARSE_COMPLETE_COMMANDS_H
 
-# include "forty_two_sh.h"
+t_vector	*parse_complete_commands(t_vector *tokens);
 
 #endif
