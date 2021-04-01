@@ -6,13 +6,14 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:06:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/02 16:17:49 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/05 16:45:56 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
 t_vector *g_job_list;
+t_vector *g_stopped_jobs;
 
 static void	free_job(void *job)
 {
