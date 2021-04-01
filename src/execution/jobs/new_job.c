@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:50:46 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/01 11:31:46 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/02 08:47:35 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ t_job	*new_job(t_bool is_background)
 	job.state = RUNNING;
 	job.processes = vector_init(sizeof(t_process), NULL);
 	// TODO vector_push(job_list, &job) or 	add_job_to_jobs_list(&job)
-	return NULL;// TODO address of job in jobs list
+	return NULL; // TODO address of job in jobs list
 }

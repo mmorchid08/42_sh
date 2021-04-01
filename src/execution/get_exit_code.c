@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:19:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/01 20:33:20 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/02 09:03:12 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_exit_code(int wait_status)
 {
 	if (WIFEXITED(wait_status))
 		return (WEXITSTATUS(wait_status));
-	else if (WIFSIGNALED(wait_status));
+	else if (WIFSIGNALED(wait_status))
 		return (128 + WTERMSIG(wait_status));
 	else if (WIFSTOPPED(wait_status))
 		return (WSTOPSIG(wait_status));
