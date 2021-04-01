@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_process.c                                      :+:      :+:    :+:   */
+/*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 13:48:32 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/31 13:50:44 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/04/01 10:54:43 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/04/01 10:59:20 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-t_process	new_process(pid_t pid)
+int	wait_children(pid_t ret_pid)
 {
-	t_process	proc;
+	pid_t	pid;
+	int		wait_status;
 
-	proc.state = RUNNING;
-	proc.wait_status = 0;
-	proc.pid = pid;
-	return (proc);
+	while ((pid = waitpid(-1, &wait_status, 0)) != -1)
+	{
+		if (pid == ret_pid)
+			
+	}
 }

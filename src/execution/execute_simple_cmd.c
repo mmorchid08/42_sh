@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/31 23:43:41 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/01 11:06:10 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	}
 	// TODO hatim parent code
 	if (is_interactive == FALSE)
-		return (wait_children(pid));
+		return (get_exit_code(wait_children(pid)));
 	job = new_job(is_background);
 	add_process_to_job(job, pid);
-	job.ret_pid = pid;
+	job->ret_pid = pid;
 	if (is_background)
-		return (wait_job(job));
+		return (get_exit_code(wait_job(job)));
 	return (0);
 }
