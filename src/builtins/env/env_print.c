@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 19:01:18 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 19:13:43 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/02 18:27:42 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/02 18:27:52 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-void		print_env(t_vector *env, t_bool print_exported_only)
+void		env_print(t_vector *env, t_bool print_exported_only)
 {
 	t_var	*env_vars;
 	size_t	i;
@@ -25,20 +25,4 @@ void		print_env(t_vector *env, t_bool print_exported_only)
 			ft_printf(1, "%s=\"%s\"", env_vars[i].key, env_vars[i].value);
 		++i;
 	}
-}
-
-t_bool		is_valid_identifier(char *name)
-{
-	size_t	i;
-
-	if (!ft_isalpha(name[0]) && name[0] != '_')
-		return (FALSE);
-	i = 1;
-	while (name[i])
-	{
-		if (!ft_isalnum(name[i]) && name[i] != '_')
-			return (0);
-		++i;
-	}
-	return (TRUE);
 }
