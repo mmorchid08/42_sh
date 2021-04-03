@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:28:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 19:58:01 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/03 11:26:49 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,37 @@ int		parse_opt(char *arg, t_bool *option_n, t_bool *option_p)
 	return (EXIT_SUCCESS);
 }
 
-size_t	parse_options(char **a
+int		parse_options(char **args, t_bool *option_n, t_bool *option_p)
+{
+	size_t	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (ft_strequ(args[i], "--"))
+			return (i + 1);
+		if (args[i][0] == '-')
+		{
+			if (parse_opt(args[i], option_n, option_p) == EXIT_FAILURE)
+				return (-1);
+		}
+		else
+			break ;
+		++i;
+	}
+	return (i);
+}
+
+int		export_option_n(char **args)
+{
+
+}
 
 int		export(char **args)
 {
 	t_bool	option_n;
 	t_bool	option_p;
-	size_t	args_index;
+	int		args_index;
 
 	args_index = parse_options(args, &option_n, &option_p);
 	if (args_index == -1)
@@ -49,7 +73,7 @@ int		export(char **args)
 		print_env(g_shell_env, TRUE);
 	if (option_n == TRUE)
 	{
-		if (export_option_n() == EXIT_FAILURE)
+		if (export_option_n(args) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
