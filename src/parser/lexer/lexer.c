@@ -6,13 +6,13 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 19:26:28 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 18:21:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static t_lexer	*lexer_init(char *line, t_bool enable_alias_subtitution)
+static t_lexer	*lexer_init(char *line)
 {
 	t_lexer	*lex;
 
@@ -22,9 +22,6 @@ static t_lexer	*lexer_init(char *line, t_bool enable_alias_subtitution)
 	lex->line = line;
 	lex->i = 0;
 	lex->c = lex->line[lex->i];
-	lex->quote = 0;
-	lex->backslash = FALSE;
-	lex->enable_alias_subtitution = enable_alias_subtitution;
 	return (lex);
 }
 
@@ -35,25 +32,24 @@ static void		lexer_clean(t_lexer **lex)
 	ft_memdel((void**)lex);
 }
 
-t_vector		*lexer(char *line, t_bool enable_alias_subtitution)
+int				lexer(t_vector **tokens, char *line)
 {
-	t_lexer		*lex;
-	t_vector	*tokens;
+	static t_lexer	*lex;
 
-	lex = lexer_init(line, enable_alias_subtitution);
+	lex = lexer_init(line);
 	while (lex->c)
 	{
 		if (ft_isdigit(lex->c))
 			lexer_handle_io_number(lex);
-		if (lexer_is_word(lex->c, 0))
+		if (lexer_is_word(lex->c))
 			lexer_handle_word(lex);
 		if (lex->word->length > 0)
 			lexer_push_token(lex, WORD);
-		if (lexer_is_operator(lex->c, 0))
+		if (lexer_is_operator(lex->c))
 			lexer_handle_operator(lex);
 		lexer_skip_whitespaces(lex);
 	}
-	tokens = lex->tokens_list;
+	*tokens = lex->tokens_list;
 	lexer_clean(&lex);
-	return (tokens);
+	return (0);
 }

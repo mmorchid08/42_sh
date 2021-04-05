@@ -6,86 +6,83 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:46:41 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 19:00:41 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static void	update_quoting(t_lexer *lex)
+static void	identify_expansions(t_lexer *lex, t_stack *st)
 {
-	if (lex->quote == SINGLE_QUOTE && lex->c == SINGLE_QUOTE)
-		lex->quote = 0;
-	else if (lex->quote == DOUBLE_QUOTE && lex->c == DOUBLE_QUOTE)
-	{
-		if (lex->backslash == FALSE)
-			lex->quote = 0;
-	}
-	else if (lex->quote == 0 && lex->backslash == FALSE)
-		lex->quote = lexer_quote_type(lex->c);
-	if (lex->backslash)
-		lex->backslash = FALSE;
-	else
-		lex->backslash = lex->c == BACK_SLASH && lex->quote != SINGLE_QUOTE;
+	char *el;
+	char next_char;
+
+	el = (char *)stack_peek(st);
+	if (el && *el == '{' && lex->c == '}')
+		stack_pop(st);
+	if (el && *el == '(' && lex->c == ')')
+		stack_pop(st);
+	if (lex->c == '\'' && (!el || *el == '\0'))
+	next_char = lex->line[lex->i + 1];
+	if (lex->c == '$' && (next_char == '{' || next_char == '('))
+		stack_push(st, &next_char);
 }
 
-// static t_bool	lexer_is_command_start(t_vector *tokens_list)
-// {
-// 	t_token last_token;
+static void update_stack(t_lexer *lex, t_stack *st, t_bool backslash)
+{
+	char *el;
 
-// 	if (tokens_list->length == 0)
-// 		return (TRUE);
-// 	last_token = ((t_token*)tokens_list->array)[tokens_list->length - 1];
-// 	return (last_token.type == SEMI || last_token.type == AMPERSAND ||
-// 		last_token.type == PIPE || last_token.type == OROR ||
-// 		last_token.type == ANDAND);
-// }
+	el = (char *)stack_peek(st);
+	if (el && *el == SINGLE_QUOTE)
+	{
+		if (lex->c == SINGLE_QUOTE)
+			stack_pop(st);
+		return ;
+	}
+	if (backslash == TRUE)
+		return ;
+	identify_expansions(lex, st);
+	if (el && *el == DOUBLE_QUOTE && lex->c == DOUBLE_QUOTE)
+		stack_pop(st);
+	if (el && (*el == SINGLE_QUOTE || *el == DOUBLE_QUOTE))
+		return ;
+	else if (lex->c == SINGLE_QUOTE || lex->c == DOUBLE_QUOTE )
+		stack_push(st, &(lex->c));
+}
 
-// static char	*temp_alias_get(char *word)
-// {
-// 	if (ft_strequ(word, "ll"))
-// 		return (ft_strdup("ls -l -a -F"));
-// 	if (ft_strequ(word, "a"))
-// 		return (ft_strdup("b"));
-// 	if (ft_strequ(word, "cc"))
-// 		return (ft_strdup("gcc && ./a.out && echo HI | cat -e; ll"));
-// 	return (word);
-// }
+static void	update_backslash(t_lexer *lex, t_stack *st, t_bool *backslash)
+{
+	char *last_stack_el;
 
-// static void	lexer_handle_alias(t_lexer *lex)
-// {
-// 	char		*alias_subtitue;
-// 	t_vector	*tmp_tokens;
+	last_stack_el = (char *)stack_peek(st);
+	if (last_stack_el && *last_stack_el == SINGLE_QUOTE)
+		return ;
+	*backslash = !(*backslash) && lex->c == BACK_SLASH;
+}
 
-// 	string_push(lex->word, '\0');
-// 	alias_subtitue = temp_alias_get(lex->word->data);
-// 	if (alias_subtitue == lex->word->data)
-// 	{
-// 		lexer_push_token(lex, WORD);
-// 		return ;
-// 	}
-// 	tmp_tokens = lexer(alias_subtitue, FALSE);
-// 	ft_strdel(&alias_subtitue);
-// 	vector_insert_all(lex->tokens_list, tmp_tokens, lex->tokens_list->length);
-// 	tmp_tokens->free_element = free;
-// 	vector_free(tmp_tokens);
-// 	lex->word->length = 0;
-// }
+static t_bool	is_word_delimeter(t_lexer *lex, t_stack *st, t_bool backslash)
+{
+	char *last_stack_el;
+
+	last_stack_el = (char *)stack_peek(st);
+	if (lexer_is_word(lex->c))
+		return (FALSE);
+	return (backslash == FALSE && (!last_stack_el || *last_stack_el == '\0'));
+}
 
 void		lexer_handle_word(t_lexer *lex)
 {
-	t_token_type	token_type;
+	t_stack			*st;
+	t_bool			backslash;
 
-	token_type = WORD;
-	while (lex->c && lexer_is_word(lex->c, lex->quote || lex->backslash))
+	st = stack_new(sizeof(char), free);
+	backslash = FALSE;
+	while (lex->c && !is_word_delimeter(lex, st, backslash))
 	{
 		string_push(lex->word, lex->c);
-		update_quoting(lex);
+		update_stack(lex, st, backslash);
+		update_backslash(lex, st, &backslash);
 		lexer_advance(lex, 1);
 	}
-	// if (token_type == WORD && lexer_is_command_start(lex->tokens_list) &&
-	// 		lex->enable_alias_subtitution == TRUE)
-	// 	lexer_handle_alias(lex);
-	// else
-		lexer_push_token(lex, WORD);
+	lexer_push_token(lex, WORD);
 }

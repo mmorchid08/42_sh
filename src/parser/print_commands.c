@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:27:57 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 11:03:58 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 17:02:00 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	print_simple_cmd(t_simple_command *cmd)
 	args = cmd->args->array;
 	while (i < cmd->args->length)
 	{
-		ft_printf(1, "%s ", args[i]);
+		ft_printf(1, "%s|", args[i]);
 		++i;
 	}
 	ft_printf(1, "\n-- redirections: ");
