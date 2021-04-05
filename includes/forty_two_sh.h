@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 19:09:47 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/04 12:01:56 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,11 @@ int		ft_echo(char **cmd);
 void	del_token(void *element);
 void	del_redirection(void *element);
 void	del_var(void *element);
+
+/*
+** Utils
+*/
+
+t_bool	is_quote(char c);
 
 #endif
