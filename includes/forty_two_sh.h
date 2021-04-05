@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/04 12:01:56 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 11:12:07 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
-# include "../src/builtins/env/env.h"
+# include "../src/env/env.h"
 # include <stdbool.h>
 
 /*
@@ -29,6 +29,7 @@ int		jhin(char **cmd);
 int		check_is_not(int ret, int is_not);
 int		ft_test(char **cmd);
 int		ft_echo(char **cmd);
+int		export(char **av);
 
 /*
 **		free functions

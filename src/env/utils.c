@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 18:28:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/03 11:35:21 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/03 18:10:43 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,33 @@ t_bool	is_valid_identifier(char *name)
 	while (name[i])
 	{
 		if (!ft_isalnum(name[i]) && name[i] != '_')
-			return (0);
+			return (FALSE);
 		++i;
 	}
 	return (TRUE);
 }
 
-t_var	*split_char_to_var(char *str)
+char	*get_key_from_string(char *str)
+{
+	int		equal_index;
+
+	equal_index = ft_strichr(str, '=');
+	if (equal_index == -1)
+		return (ft_strdup(str));
+	return (ft_strsub(str, 0, equal_index));
+}
+
+char	*get_value_from_string(char *str)
+{
+	int		equal_index;
+
+	equal_index = ft_strichr(str, '=');
+	if (equal_index == -1)
+		return (NULL);
+	return (ft_strdup(str + equal_index + 1));
+}
+
+t_var	*string_to_var(char *str)
 {
 	t_var	*var;
 	int		equal_index;
@@ -37,11 +57,15 @@ t_var	*split_char_to_var(char *str)
 	equal_index = ft_strichr(str, '=');
 	if (equal_index == -1)
 	{
-		free(var);
-		return (NULL);
+		var->key = ft_strdup(str);
+		var->value = NULL;
+		var->is_exported = FALSE;
 	}
-	var->key = ft_strsub(str, 0, equal_index);
-	var->value = ft_strdup(str + equal_index + 1);
-	var->is_exported = TRUE;
+	else
+	{
+		var->key = ft_strsub(str, 0, equal_index);
+		var->value = ft_strdup(str + equal_index + 1);
+		var->is_exported = FALSE;
+	}
 	return (var);
 }

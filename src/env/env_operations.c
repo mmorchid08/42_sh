@@ -6,16 +6,48 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 18:28:34 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/02 18:36:38 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 12:08:08 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-void	env_set(t_vector *env, char *key, char *value)
+static void	env_push(t_vector *env, char *key, char *value, t_bool is_exported)
+{
+	t_var	new_var;
+
+	new_var.key = ft_strdup(key);
+	new_var.value = ft_strdup(value);
+	new_var.is_exported = is_exported;
+	vector_push(env, &new_var);
+}
+
+void		env_set(t_vector *env, char *key, char *value, t_bool is_exported)
 {
 	t_var	*vars;
-	t_var	new_var;
+	char	*tmp;
+	size_t	i;
+
+	i = 0;
+	vars = env->array;
+	while (i < env->length)
+	{
+		if (ft_strequ(key, vars[i].key))
+		{
+			vars[i].is_exported = is_exported;
+			tmp = vars[i].value;
+			vars[i].value = ft_strdup(value);
+			free(tmp);
+			return ;
+		}
+		++i;
+	}
+	env_push(env, key, value, is_exported);
+}
+
+void		env_set_value(t_vector *env, char *key, char *value)
+{
+	t_var	*vars;
 	char	*tmp;
 	size_t	i;
 
@@ -32,30 +64,10 @@ void	env_set(t_vector *env, char *key, char *value)
 		}
 		++i;
 	}
-	new_var.key = ft_strdup(key);
-	new_var.value = ft_strdup(value);
-	vector_push(env, &new_var);
+	env_push(env, key, value, FALSE);
 }
 
-void	env_unset(t_vector *env, char *key)
-{
-	t_var	*vars;
-	size_t	i;
-
-	i = 0;
-	vars = env->array;
-	while (i < env->length)
-	{
-		if (ft_strequ(key, vars[i].key))
-		{
-			vector_remove(env, i);
-			return ;
-		}
-		++i;
-	}
-}
-
-void	env_set_is_exported(t_vector *env, char *key, t_bool is_exported)
+void		env_set_exported(t_vector *env, char *key, t_bool is_exported)
 {
 	t_var	*vars;
 	size_t	i;
@@ -67,6 +79,25 @@ void	env_set_is_exported(t_vector *env, char *key, t_bool is_exported)
 		if (ft_strequ(key, vars[i].key))
 		{
 			vars[i].is_exported = is_exported;
+			return ;
+		}
+		++i;
+	}
+	env_push(env, key, NULL, is_exported);
+}
+
+void		env_unset(t_vector *env, char *key)
+{
+	t_var	*vars;
+	size_t	i;
+
+	i = 0;
+	vars = env->array;
+	while (i < env->length)
+	{
+		if (ft_strequ(key, vars[i].key))
+		{
+			vector_remove(env, i);
 			return ;
 		}
 		++i;

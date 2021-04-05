@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/30 15:59:32 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/05 11:19:00 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,10 @@ INCLUDES =	-Iincludes
 42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
 			src/errors/errors.h
 
-42sh = 	delete_functions.o main.o errors/errors.o
+42sh = 	delete_functions.o main.o errors/errors.o \
+		utils/is_quote.o \
+		builtins/export.o \
+		env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 

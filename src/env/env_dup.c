@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_to_envp.c                                      :+:      :+:    :+:   */
+/*   env_dup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 18:27:09 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/02 18:27:20 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/02 18:37:35 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/05 12:05:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-char		**env_to_envp(t_vector *env)
+t_vector	*env_dup(t_vector *env)
 {
-	t_var	*vars;
-	char	**envp;
-	size_t	i;
+	t_vector	*new_env;
+	t_var		*vars;
+	t_var		v;
+	size_t		i;
 
-	i = 0;
-	envp = (char **)ft_malloc((env->length + 1) * sizeof(char *));
+	new_env = vector_init_capacity(env->element_size, env->capacity,
+		env->free_element);
 	vars = env->array;
+	i = 0;
 	while (i < env->length)
 	{
-		envp[i] = ft_strglue(vars[i].key, '=', vars[i].value);
+		v.key = ft_strdup(vars[i].key);
+		v.value = ft_strdup(vars[i].value);
+		v.is_exported = vars[i].is_exported;
+		vector_push(new_env, &v);
 		++i;
 	}
-	envp[i] = NULL;
-	return (envp);
+	return (new_env);
 }

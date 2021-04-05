@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_dup.c                                          :+:      :+:    :+:   */
+/*   env_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 18:37:35 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/03 11:26:03 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/04 08:57:08 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/05 12:07:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-t_vector	*env_dup(t_vector *env)
+static char		*escape_string(char *str)
 {
-	t_vector	*new_env;
-	t_var		*vars;
-	t_var		v;
+	t_string	*escaped_str;
 	size_t		i;
 
-	new_env = vector_init_capacity(env->element_size, env->capacity,
-		env->free_element);
-	vars = env->array;
+	escaped_str = string_new();
 	i = 0;
-	while (i < env->length)
+	while (str[i])
 	{
-		v.key = ft_strdup(vars[i].key);
-		v.value = ft_strdup(vars[i].value);
-		v.is_exported = vars[i].is_exported;
-		vector_push(new_env, &v);
+		if (is_quote(str[i]))
+			string_push(escaped_str, BACK_SLASH);
+		string_push(escaped_str, str[i]);
 		++i;
 	}
+	return (string_get_data(escaped_str));
+}
+
+char			*env_get(t_vector *env, char *key)
+{
+	t_var	*vars;
+	size_t	i;
+
+	i = 0;
+	vars = env->array;
+	while (i < env->length)
+	{
+		if (ft_strequ(key, vars[i].key))
+			return (escape_string(vars[i].value));
+		++i;
+	}
+	return (NULL);
 }

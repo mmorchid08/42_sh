@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 12:00:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/04 12:01:59 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 11:09:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_bool	is_quote(char c)
 {
-	return (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH)
+	return (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH);
 }
