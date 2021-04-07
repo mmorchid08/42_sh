@@ -280,6 +280,8 @@ int			execute_simple_cmd(t_simple_command *simple, t_bool is_background,
 		ft_printf(2, "Forking error\n");
 		return (1);
 	}
+	else if (pid)
+		wait(0);
 	else if (pid == 0)
 	{
 		if (execve(full_path, args, env) == -1)
@@ -288,27 +290,96 @@ int			execute_simple_cmd(t_simple_command *simple, t_bool is_background,
 			exit(0);
 		}
 	}
-	else
-		wait(0);
 	return (pid);
+}
+
+void		backups(int f)
+{
+	static int	stdii;
+	static int	stdou;
+	static int	stder;
+	
+	if (f == 1)
+	{
+		stdii = dup(0);
+		stdou = dup(1);
+		stder = dup(2);
+	}
+	else
+	{
+		dup2(stdii, 0);
+		dup2(stdou, 1);
+		dup2(stder, 2);
+		if (f == 3)
+		{
+			close(stdii);
+			close(stdou);
+			close(stder);
+		}
+	}
+}
+
+int			manage_pipes(int i, int len)
+{
+	static	int		fd[2];
+
+	if (i + 1 != len)
+	{
+		if (pipe(fd) == -1)
+			exit(0);
+		dup2(fd[1], 1);
+		close(fd[1]);
+		return (fd[0]);
+	}
+	else
+	{
+		dup2(fd[0], 0);
+		close(fd[0]);
+		return (-1);
+	}
 }
 
 int			execute_pipe_seq(t_pipe_sequence *command)
 {
-	t_simple_command	**s_cmd;
+	t_simple_command	*s_cmd;
 	char				**args;
 	int					i;
-	int					x;
+	int					fd;
+	char				**env;
+	int					pid;
+	char				*full_path;
 
 	i = 0;
-	s_cmd = (t_simple_command **)command->commands->array;
-	while (s_cmd[i])
+	fd = -1;
+	s_cmd = (t_simple_command *)command->commands->array;
+	while (i < (int)command->commands->length)
 	{
-		args = s_cmd[i]->args->array;
-		x = 0;
-		while (args[x])
-			ft_printf(1, "--> %s\n", args[x++]);
-		ft_printf(1, "----------------------------\n");
+		args = (char **)s_cmd[i].args->array;
+		full_path = get_full_path(args[0], g_env);
+		env = env_to_array(g_env);
+		fd = manage_pipes(i, (int)command->commands->length); // pipe and fd things
+		if ((pid = fork()) == -1) // error
+		{
+			ft_printf(2, "Error forking\n");
+			return (-1);
+		}
+		else if (pid == 0) // child process
+		{
+			if (fd != -1) //pipe and fd things
+				close(fd);
+			if (execve(full_path, args, env))
+			{
+				ft_printf(2, "Error\n");
+				exit(0);
+			}
+		}
+		else // parent process
+		{
+			backups(2); //pipes and fd things;
+			if (i + 1 == (int)command->commands->length)
+				while (wait(0) > 0)
+					;
+		}
 		i++;
 	}
 	return (1);
@@ -320,6 +391,7 @@ void		execute_commands(t_vector *vec)
 	int					i;
 
 	i = 0;
+	backups(1);
 	while (i < (int)vec->length)
 	{
 		if (cmds_array[i].type == SIMPLE_CMD)
@@ -329,6 +401,7 @@ void		execute_commands(t_vector *vec)
 			g_exit_status = execute_pipe_seq(cmds_array[i].command); // you can add the variables u need.
 		i++;
 	}
+	backups(3);
 }
 
 int			main(int ac, char *av[], char *envp[])
