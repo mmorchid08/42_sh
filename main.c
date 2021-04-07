@@ -302,7 +302,7 @@ int			execute_pipe_seq(t_pipe_sequence *command)
 
 	i = 0;
 	s_cmd = (t_simple_command **)command->commands->array;
-	while (i < (int)command->commands->length)
+	while (s_cmd[i])
 	{
 		args = s_cmd[i]->args->array;
 		x = 0;
