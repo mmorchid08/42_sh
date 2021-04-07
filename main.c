@@ -29,6 +29,53 @@ t_t		*g_env;
 */
 
 /*
+**	t_t *env to array
+*/
+
+int			lst_size(t_t *env)
+{
+	int		i;
+	t_t		*fresh;
+
+	i = 0;
+	fresh = env;
+	while (fresh != NULL)
+	{
+		i++;
+		fresh = fresh->next;
+	}
+	return (i);
+}
+
+char		**env_to_array(t_t *env)
+{
+	t_t		*tail;
+	char	**a_env;
+	int		i;
+	char	*str_one;
+	char	*str_two;
+
+	a_env = (char **)ft_memalloc(sizeof(char *) * (lst_size(env) + 1));
+	a_env[lst_size(env)] = NULL;
+	tail = env;
+	i = 0;
+	while (tail)
+	{
+		if (ft_strcmp(tail->key, "?"))
+		{
+			str_one = ft_strjoin(tail->key, "=");
+			str_two = ft_strjoin(str_one, tail->value);
+			a_env[i++] = ft_strdup(str_two);
+			ft_strdel(&str_one);
+			ft_strdel(&str_two);
+		}
+		tail = tail->next;
+	}
+	return (a_env);
+}
+
+
+/*
 **	Init env
 */
 
@@ -47,7 +94,7 @@ void	split_them(t_t **tail, char **env, int index)
 		(*tail)->value = ft_strdup(temp_var[1]);
 	else
 		(*tail)->value = ft_strdup("");
-	free_2d(&temp_var);
+	ft_free_strings_array(temp_var);
 }
 
 t_t		*init_env(char **env)
@@ -84,21 +131,81 @@ t_t		*init_env(char **env)
 **	Remove quoting.
 */
 
+void	handle_quotes(char c, int *balance)
+{
+	if (c == '\"' && *balance == 0)
+		*balance = 2;
+	else if (c == '\'' && *balance == 0)
+		*balance = 1;
+	else if (c == '\"' && *balance == 2)
+		*balance = 0;
+	else if (c == '\'' && *balance == 1)
+		*balance = 0;
+}
+
+void	remove_quotes(char **str)
+{
+	int		i;
+	int		len;
+	int		b;
+	int		j;
+
+	i = 0;
+	len = ft_strlen(*str);
+	b = 0;
+	while (i < len)
+	{
+		if ((*str)[i] == '\'' || (*str)[i] == '"')
+			handle_quotes((*str)[i], &b);
+		if (((*str)[i] == '"' && (b == 0 || b == 2)) ||
+			((*str)[i] == '\'' && (b == 0 || b == 1)))
+		{
+			j = i - 1;
+			while (++j < len)
+				(*str)[j] = (*str)[1 + j];
+			len--;
+			i--;
+		}
+		i++;
+	}
+}
+
 /*
 **	End of remove quoting
 */
 
 /*
-**	In this part you will find certain functions to manage full_path;
+**	Tools.
 */
 
-void	check_perm(char *path)
+char		*ft_lsstsearch(t_t *env, char *to_search)
 {
-	if (access(path, F_OK) == 0)
-		mini_printf("%s: Permission Denied.\n", path);
-	else
-		mini_printf("%s: Command not found.\n", path);
+	t_t		*fresh;
+
+	fresh = env;
+	while (fresh != NULL)
+	{
+		if (!(ft_strcmp(fresh->key, to_search)))
+		{
+			if (!ft_strcmp(fresh->key, "?"))
+			{
+				ft_strdel(&fresh->value);
+				fresh->value = ft_itoa(g_exit_status);
+			}
+			return (fresh->value);
+		}
+		fresh = fresh->next;
+	}
+	return (NULL);
 }
+
+/*
+**	End of tools.
+*/
+
+/*
+**	In this part you will find certain functions to manage full_path;
+*/
 
 int		check_file(char *path)
 {
@@ -126,12 +233,12 @@ char	*brute_force(char *cmd, char *path_env)
 		free(tmp);
 		if (check_file(tmp2))
 		{
-			free_2d(&ab);
+			ft_free_strings_array(ab);
 			return (tmp2);
 		}
 		free(tmp2);
 	}
-	free_2d(&ab);
+	ft_free_strings_array(ab);
 	return (ft_strdup(cmd));
 }
 
@@ -140,9 +247,8 @@ char	*get_full_path(char *cmd, t_t *env)
 	char	*full_path;
 
 	if (!(check_file(cmd) && cmd[0] != '.' &&
-		cmd[0] != '/') &&
-		!check_builtins(cmd))
-		full_path = brute_force(cmd, ft_lstsearch(env, "PATH"));
+		cmd[0] != '/'))
+		full_path = brute_force(cmd, ft_lsstsearch(env, "PATH"));
 	else
 		full_path = ft_strdup(cmd);
 	return (full_path);
@@ -163,11 +269,49 @@ int			execute_simple_cmd(t_simple_command *simple, t_bool is_background,
 
 	args = (char **)simple->args->array;
 	full_path = get_full_path(args[0], g_env);
+	env = env_to_array(g_env);
 	i = 0;
+	is_background = 99;
+	is_interactive = 0;
 	while (args[i])
+		remove_quotes(&args[i++]);
+	if ((pid = fork()) == -1)
 	{
-
+		ft_printf(2, "Forking error\n");
+		return (1);
 	}
+	else if (pid == 0)
+	{
+		if (execve(full_path, args, env) == -1)
+		{
+			ft_printf(2, "Error executing\n");
+			exit(0);
+		}
+	}
+	else
+		wait(0);
+	return (pid);
+}
+
+int			execute_pipe_seq(t_pipe_sequence *command)
+{
+	t_simple_command	**s_cmd;
+	char				**args;
+	int					i;
+	int					x;
+
+	i = 0;
+	s_cmd = (t_simple_command **)command->commands->array;
+	while (i < (int)command->commands->length)
+	{
+		args = s_cmd[i]->args->array;
+		x = 0;
+		while (args[x])
+			ft_printf(1, "--> %s\n", args[x++]);
+		ft_printf(1, "----------------------------\n");
+		i++;
+	}
+	return (1);
 }
 
 void		execute_commands(t_vector *vec)
@@ -176,11 +320,14 @@ void		execute_commands(t_vector *vec)
 	int					i;
 
 	i = 0;
-	while (i < vec->length)
+	while (i < (int)vec->length)
 	{
 		if (cmds_array[i].type == SIMPLE_CMD)
-			g_exit_status = execute_simple_cmd(&cmds_array[i].command,
+			g_exit_status = execute_simple_cmd(cmds_array[i].command,
 			cmds_array[i].is_background_job, TRUE);
+		if (cmds_array[i].type == PIPE_SEQ)
+			g_exit_status = execute_pipe_seq(cmds_array[i].command); // you can add the variables u need.
+		i++;
 	}
 }
 
@@ -196,11 +343,14 @@ int			main(int ac, char *av[], char *envp[])
 		(void)parser(av[2]);
 	else if (ac == 1)
 	{
-		if (get_next_line(STDIN_FILENO, &cmd) != -1)
+		while (42)
 		{
+			ft_printf(1, "$> ");
+			get_next_line(0, &cmd);
 			vec = parser(cmd);
 			if (vec)
 				execute_commands(vec);
+			ft_strdel(&cmd);
 		}
 	}
 	else
