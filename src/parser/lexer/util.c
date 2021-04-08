@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:32:57 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 09:41:22 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/05 18:20:17 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,12 @@ char	lexer_quote_type(char c)
 	return (0);
 }
 
-int		lexer_is_space(char c, int quote)
+int		lexer_is_operator(char c)
 {
-	return (ft_isspace(c) && !quote);
+	return (c == ';' || c == '&' || c == '|' || c == '<' || c == '>');
 }
 
-int		lexer_is_number(char c, int quote)
+int		lexer_is_word(char c)
 {
-	return (ft_isdigit(c) && !quote);
-}
-
-int		lexer_is_operator(char c, int quote)
-{
-	return (!quote && (
-		c == ';' || c == '&' || c == '|' || c == '<' || c == '>'));
-}
-
-int		lexer_is_word(char c, int quote)
-{
-	return (
-		!lexer_is_space(c, quote) &&
-		!lexer_is_operator(c, quote));
+	return (!ft_isspace(c) && !lexer_is_operator(c));
 }
