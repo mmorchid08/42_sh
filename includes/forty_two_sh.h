@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 19:09:47 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/08 10:09:31 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
+# include "../readline/readline.h"
 # include "../src/builtins/env/env.h"
 # include <stdbool.h>
 

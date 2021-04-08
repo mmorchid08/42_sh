@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/30 15:59:32 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/08 10:10:26 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@
 NAME = 42sh
 LIBFT = libft/libft.a
 PARSER = src/parser/parser.a
+READLINE = readline/readline.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
@@ -48,14 +49,16 @@ mkfile_dir := $(dir $(mkfile_path))
 
 all: $(NAME)
 
-$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER)
-	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER)
+$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE) -ltermcap
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
 
 $(PARSER): force
 	@env $(PARSER_ENV) make -C src/parser/
+ $(READLINE) : force
+	@env make -C readline
 
 force:
 
