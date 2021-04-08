@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 12:55:19 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/08 11:51:31 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			main(int ac, char *av[], char *envp[])
 {
-	char *cmd;
+	// char *cmd;
 
 	(void)envp;
 	signal(SIGTSTP, SIG_IGN);
@@ -22,10 +22,12 @@ int			main(int ac, char *av[], char *envp[])
 		(void)parser(av[2]);
 	else if (ac == 1)
 	{
-		if (get_next_line(STDIN_FILENO, &cmd) != -1)
-			(void)parser(cmd);
+		// while (1)
+		// {
+		// 	if ()
+		// }
 	}
 	else
-		ft_printf(2, "Error\nusage: ./21sh [-c command]\n");
+		printf("Error\nusage: ./21sh [-c command]\n");
 	return (0);
 }
