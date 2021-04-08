@@ -6,86 +6,94 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:46:41 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/08 09:50:25 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static void	update_quoting(t_lexer *lex)
+static void	identify_expansions(t_lexer *lex)
 {
-	if (lex->quote == SINGLE_QUOTE && lex->c == SINGLE_QUOTE)
-		lex->quote = 0;
-	else if (lex->quote == DOUBLE_QUOTE && lex->c == DOUBLE_QUOTE)
+	char	*el;
+	char	next_char;
+
+	if (lex->quotes_stack->length > 0)
 	{
-		if (lex->backslash == FALSE)
-			lex->quote = 0;
+		el = (char *)stack_peek(lex->quotes_stack);
+		if (*el == '{' && lex->c == '}')
+			stack_pop(lex->quotes_stack);
+		if (*el == '(' && lex->c == ')')
+			stack_pop(lex->quotes_stack);
+		return ;
 	}
-	else if (lex->quote == 0 && lex->backslash == FALSE)
-		lex->quote = lexer_quote_type(lex->c);
-	if (lex->backslash)
-		lex->backslash = FALSE;
-	else
-		lex->backslash = lex->c == BACK_SLASH && lex->quote != SINGLE_QUOTE;
+	if (lex->c == '(')
+		stack_push(lex->quotes_stack, &(lex->c));
+	else if (lex->c == '$')
+	{
+		next_char = lex->line[lex-> i + 1];
+		if (next_char == '(' || next_char == '{')
+		{
+			stack_push(lex->quotes_stack, &next_char);
+			string_push(lex->word, next_char);
+			lexer_advance(lex, 1);
+		}
+	}
 }
 
-// static t_bool	lexer_is_command_start(t_vector *tokens_list)
-// {
-// 	t_token last_token;
-
-// 	if (tokens_list->length == 0)
-// 		return (TRUE);
-// 	last_token = ((t_token*)tokens_list->array)[tokens_list->length - 1];
-// 	return (last_token.type == SEMI || last_token.type == AMPERSAND ||
-// 		last_token.type == PIPE || last_token.type == OROR ||
-// 		last_token.type == ANDAND);
-// }
-
-// static char	*temp_alias_get(char *word)
-// {
-// 	if (ft_strequ(word, "ll"))
-// 		return (ft_strdup("ls -l -a -F"));
-// 	if (ft_strequ(word, "a"))
-// 		return (ft_strdup("b"));
-// 	if (ft_strequ(word, "cc"))
-// 		return (ft_strdup("gcc && ./a.out && echo HI | cat -e; ll"));
-// 	return (word);
-// }
-
-// static void	lexer_handle_alias(t_lexer *lex)
-// {
-// 	char		*alias_subtitue;
-// 	t_vector	*tmp_tokens;
-
-// 	string_push(lex->word, '\0');
-// 	alias_subtitue = temp_alias_get(lex->word->data);
-// 	if (alias_subtitue == lex->word->data)
-// 	{
-// 		lexer_push_token(lex, WORD);
-// 		return ;
-// 	}
-// 	tmp_tokens = lexer(alias_subtitue, FALSE);
-// 	ft_strdel(&alias_subtitue);
-// 	vector_insert_all(lex->tokens_list, tmp_tokens, lex->tokens_list->length);
-// 	tmp_tokens->free_element = free;
-// 	vector_free(tmp_tokens);
-// 	lex->word->length = 0;
-// }
-
-void		lexer_handle_word(t_lexer *lex)
+static	void	update_quotes_stack(t_lexer *lex)
 {
-	t_token_type	token_type;
+	char	*el;
 
-	token_type = WORD;
-	while (lex->c && lexer_is_word(lex->c, lex->quote || lex->backslash))
+	el = (char *)stack_peek(lex->quotes_stack);
+	if (el && *el == SINGLE_QUOTE)
+	{
+		if (lex->c == SINGLE_QUOTE)
+			stack_pop(lex->quotes_stack);
+		return ;
+	}
+	if (lex->backslash == TRUE)
+		return ;
+	identify_expansions(lex);
+	if (el && *el == DOUBLE_QUOTE && lex->c == DOUBLE_QUOTE)
+		stack_pop(lex->quotes_stack);
+	if (el && (*el == SINGLE_QUOTE || *el == DOUBLE_QUOTE))
+		return ;
+	else if (lex->c == SINGLE_QUOTE || lex->c == DOUBLE_QUOTE)
+		stack_push(lex->quotes_stack, &(lex->c));
+}
+
+static void	update_backslash(t_lexer *lex)
+{
+	char	*last_stack_el;
+
+	last_stack_el = (char *)stack_peek(lex->quotes_stack);
+	if (last_stack_el && *last_stack_el == SINGLE_QUOTE)
+		return ;
+	lex->backslash = !lex->backslash && lex->c == BACK_SLASH;
+}
+
+static t_bool	is_word_delimeter(t_lexer *lex)
+{
+	char	*last_el;
+
+	last_el = (char *)stack_peek(lex->quotes_stack);
+	if (lexer_is_word(lex->c))
+		return (FALSE);
+	return (lex->backslash == FALSE && (!last_el || *last_el == '\0'));
+}
+
+void	lexer_handle_word(t_lexer *lex)
+{
+	lex->quotes_stack = stack_new(sizeof(char), free);
+	lex->backslash = FALSE;
+	while (lex->c && !is_word_delimeter(lex))
 	{
 		string_push(lex->word, lex->c);
-		update_quoting(lex);
+		update_quotes_stack(lex);
+		update_backslash(lex);
 		lexer_advance(lex, 1);
 	}
-	// if (token_type == WORD && lexer_is_command_start(lex->tokens_list) &&
-	// 		lex->enable_alias_subtitution == TRUE)
-	// 	lexer_handle_alias(lex);
-	// else
+	lex->is_word_complete = lexer_is_word_complete(lex);
+	if (lex->is_word_complete)
 		lexer_push_token(lex, WORD);
 }

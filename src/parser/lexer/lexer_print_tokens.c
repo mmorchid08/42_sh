@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 08:55:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 11:06:59 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/08 09:50:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ char	*g_tokens_to_symbol[] = {
 
 void	lexer_print_tokens(t_vector *tokens_vec)
 {
-	t_token *tokens;
-	t_token tk;
+	t_token	*tokens;
+	t_token	tk;
 	size_t	tokens_len;
 	size_t	i;
 
-	tokens = (t_token*)tokens_vec->array;
+	tokens = (t_token *)tokens_vec->array;
 	tokens_len = tokens_vec->length;
 	i = 0;
 	while (i < tokens_len)
