@@ -6,16 +6,17 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/06 13:51:37 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/11 18:05:33 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
 
-typedef enum e_token_type {
+typedef enum	e_token_type {
 	START,
 	WORD,
+	ASSIGNMENT,
 	IO_NUMBER,
 	GREAT,
 	ANDGREAT,
@@ -35,12 +36,25 @@ typedef enum e_token_type {
 	NEWLINE
 }				t_token_type;
 
-typedef enum e_cmd_type
+typedef struct	s_var
+{
+	char	*key;
+	char	*value;
+	t_bool	is_exported;
+}				t_var;
+
+typedef enum	e_cmd_type
 {
 	SIMPLE_CMD,
 	PIPE_SEQ,
 	LOGIC_SEQ
 }				t_cmd_type;
+
+typedef struct	s_token
+{
+	t_token_type	type;
+	void			*data;
+}				t_token;
 
 /*
 ** void *command = switch(type):
@@ -81,6 +95,8 @@ typedef struct s_simple_command
 {
 	t_vector	*args;
 	t_vector	*redirections;
+	t_vector	*assignments;
+	char		*job_name;
 }				t_simple_command;
 
 /*
@@ -89,6 +105,7 @@ typedef struct s_simple_command
 typedef struct s_pipe_sequence
 {
 	t_vector	*commands;
+	char		*job_name;
 }				t_pipe_sequence;
 
 /*
@@ -99,6 +116,7 @@ typedef struct s_logic_sequence
 {
 	t_vector	*commands;
 	t_vector	*logic_ops;
+	char		*job_name;
 }				t_logic_sequence;
 
 typedef enum e_run_state
@@ -125,6 +143,7 @@ typedef struct s_job
 	t_bool		to_notify;
 	pid_t		ret_pid; // TODO give it better name
 	int			wait_status;
+	char		*job_name;
 }				t_job;
 
 typedef struct s_process
@@ -134,4 +153,16 @@ typedef struct s_process
 	pid_t			pid;
 }				t_process;
 
+typedef enum	e_job_print_mode
+{
+	NORMAL,
+	LONG,
+	PGID
+}				t_job_print_mode;
+
+typedef struct s_special_jobs
+{
+	t_job	*current;
+	t_job	*previous;
+}				t_special_jobs;
 #endif

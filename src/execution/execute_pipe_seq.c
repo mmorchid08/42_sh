@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/06 13:02:17 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:24:14 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 
 	i = 0;
 	if (is_interactive)
-			job = new_job(is_background);
+			job = new_job(is_background, pipe_seq->job_name);
 	while (i < pipe_seq->commands->length)
 	{
 		// TODO pipe prep
@@ -33,7 +33,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 			// TODO free job and kill all processes
 			return (-1);
 		}
-		// hmzah parent code 
+		// hmzah parent code
 		if (is_interactive)
 			add_process_to_job(job, pid);
 	}

@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/06 18:50:53 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/11 18:05:33 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ extern t_vector
 ** ================================ jobs =======================================
 */
 
-t_job		*new_job(t_bool is_background);
+t_job		*new_job(t_bool is_background, char *job_name);
 int			wait_job(t_job *job);
 void		init_jobs(void);
 void		add_process_to_job(t_job *job, pid_t pid);
@@ -41,6 +41,15 @@ void		add_to_job_list(t_job *job);
 t_job		*get_job_by_id(uint32_t id);
 void		remove_from_job_list(uint32_t job_id);
 void		update_stopped_jobs(t_job *job);
+void		update_job_state(t_job *job, pid_t pid, int wait_status);
+void		update_job(t_job *job);
+void		update_all_jobs(void);
+void		print_job(t_job *job, t_job_print_mode mode,
+			t_special_jobs *special_jobs);
+void		notify_job_state(void);
+t_job		*get_previous_job(void);
+t_job		*get_current_job(void);
+t_job		*get_job_by_selector(char *job_selector);
 
 
 /*

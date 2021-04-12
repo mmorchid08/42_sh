@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:01:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 23:32:19 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:15:45 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 t_error		g_errno;
 
 const char	*g_error_message_string[] = {
-	[EACES] = "Permission denied",
+	[EACCES] = "Permission denied",
 	[ENOCMD] = "Command not found",
 	[ENOENT] = "No such file or directory",
 	[ENOTDIR] = "Not a directory",
 	[ENAMETOOLONG] = "File name too long",
 	[ENOHOME] = "HOME not set",
-	[ENOOLDPWD]"OLDPWD not set",
+	[ENOOLDPWD]= "OLDPWD not set",
 	[EISDIR] = "is a directory",
 	[EREDIRECT] = "Redirection error",
 	[EAMBREDIRECT] = "ambiguous redirect",
@@ -29,6 +29,7 @@ const char	*g_error_message_string[] = {
 	[ETOOMANYPIPES] = "Too many pipes",
 	[EFORK] = "fork error",
 	[EOPENFILE] = "cannot open file",
+	[ENOJOB] = "no such job",
 	[EUNK] = "An error has occured"
 };
 

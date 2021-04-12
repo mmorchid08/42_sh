@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:05:06 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/07 19:09:50 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:33:09 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static	int		get_last_background_job_id(void)
 	return (0);
 }
 
-int	get_current_job(void)
+t_job	*get_current_job(void)
 {
 	int		id;
 
@@ -58,10 +58,12 @@ int	get_current_job(void)
 		id = *(int*)vector_get(g_stopped_jobs, g_stopped_jobs->length - 1);
 	else if (g_job_list->length > 0)
 		id = get_last_background_job_id();
-	return (id);
+	if (id != 0)
+		return (get_job_by_id(id));
+	return (NULL);
 }
 
-int	get_previous_job(void)
+t_job	*get_previous_job(void)
 {
 	int id;
 
@@ -82,5 +84,7 @@ int	get_previous_job(void)
 		else if (g_job_list->length - g_stopped_jobs->length == 1)
 			id = get_last_ackground_job_id();
 	}
-	return (id);
+	if (id != 0)
+		return (get_job_by_id(id));
+	return (NULL);
 }

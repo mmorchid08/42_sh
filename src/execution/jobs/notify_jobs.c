@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   notify_jobs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/08 19:40:13 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/04/11 13:56:32 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/04/11 14:17:40 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "forty_two_sh.h"
 
-# ifndef FORTY_TWO_SH_H
-#  include "forty_two_sh.h"
-# endif
+void	notify_job_state(void)
+{
+	int		i;
+	t_job	*job;
 
-#endif
+	i = 0;
+	while (i < g_job_list->length)
+	{
+		job = vector_get(g_job_list, i);
+		if (job->to_notify && job->is_background)
+		{
+			print_job(job);
+			job->to_notify = FALSE;
+			if (job->state == COMPLETED)
+				remove_from_job_list(job->id);
+		}
+	}
+}

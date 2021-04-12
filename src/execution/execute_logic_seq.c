@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:42:48 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/31 23:32:57 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:13:35 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	execute_logic_seq_background(t_logic_sequence *logic_seq)
 		// TODO handle fork error
 		return (-1);// TODO handle fork error
 	}
-	job = new_job(TRUE);
+	job = new_job(TRUE, logic_seq->job_name);
 	add_process_to_job(job, pid);
 	job->ret_pid = pid;
 	return (0);

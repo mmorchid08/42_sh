@@ -6,18 +6,17 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:55:34 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 17:13:42 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:15:41 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
 
-
-typedef enum	t_error 
+typedef enum	e_error
 {
 	EACCES = 1,
-	ENOTFOUND,
+	ENOCMD,
 	ENOENT,
 	ENOTDIR,
 	ENAMETOOLONG,
@@ -28,7 +27,9 @@ typedef enum	t_error
 	EAMBREDIRECT,
 	ESYNTAX,
 	ETOOMANYPIPES,
+	EFORK,
 	EOPENFILE,
+	ENOJOB,
 	EUNK
 }				t_error;
 
