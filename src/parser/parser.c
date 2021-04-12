@@ -6,23 +6,35 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/08 18:21:29 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 10:55:13 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
+static void	print_unmatch_error(t_lexer_ret *lex_ret)
+{
+	ft_putstr_fd("42h: unexpected EOF while looking for matching `", 2);
+	ft_putstr_fd(&lex_ret->unmached_char, 2);
+	ft_putchar_fd('"', 2);
+}
+
 t_vector	*parser(char *line)
 {
-	t_vector	*tokens;
+	t_lexer_ret	*lex_ret;
 	t_vector	*commands;
 
 	(void)line;
-	tokens = NULL;
-	lexer(&tokens, line);
-	lexer_add_newline_token(tokens);
-	lexer_print_tokens(tokens);
-	commands = parse_complete_commands(tokens);
+	lex_ret = lexer(line, FALSE);
+	if (lex_ret->is_matched == FALSE)
+	{
+		print_unmatch_error(lex_ret);
+		vector_free(lex_ret->tokens);
+		return (NULL);
+	}
+	lexer_add_newline_token(lex_ret->tokens);
+	lexer_print_tokens(lex_ret->tokens);
+	commands = parse_complete_commands(lex_ret->tokens);
 	print_commands(commands);
-	return (NULL);
+	return (commands);
 }

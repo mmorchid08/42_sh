@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 08:55:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/08 09:50:30 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 10:54:31 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	lexer_print_tokens(t_vector *tokens_vec)
 	while (i < tokens_len)
 	{
 		tk = tokens[i];
-		ft_printf(1, g_tokens_to_string[tk.type]);
+		printf("%s", g_tokens_to_string[tk.type]);
 		if (tk.type == WORD || tk.type == IO_NUMBER)
-			ft_printf(1, " %s", tk.data);
-		ft_printf(1, "\n");
+			printf(" %s", tk.data);
+		printf("\n");
 		++i;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 16:56:16 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 11:06:16 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 10:54:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ static int			read_buffer(char **buffer, char *delimiter)
 	int		ret;
 
 	*buffer = ft_strdup("");
-	while ((ret = get_next_line(0, &line)) != -1) // != ERROR
+	while ((ret = readline_21sh(&line, ">")) != ERROR)
 	{
-		// if (ret == INTERRUPTED)
-		// {
-		// 	free(*buffer);
-		// 	return (EXIT_FAILURE);
-		// }
-		// if (ret == EXIT)
-		// 	break ;
+		if (ret == INTERRUPTED)
+		{
+			free(*buffer);
+			return (EXIT_FAILURE);
+		}
+		if (ret == EXIT)
+			break ;
 		if (ft_strequ(line, delimiter))
 		{
 			free(line);
@@ -62,8 +62,8 @@ static int			read_buffer(char **buffer, char *delimiter)
 		*buffer = ft_strjoin_free(*buffer, line, 1, 1);
 		*buffer = ft_strjoin_free(*buffer, "\n", 1, 0);
 	}
-	// if (ret == ERROR)
-	// 	exit(1);
+	if (ret == ERROR)
+		exit(1);
 	return (ret == -1 ? EXIT_FAILURE: EXIT_SUCCESS);
 }
 
@@ -83,7 +83,7 @@ int			parse_here_doc(char *delimter_str)
 		return (-1);
 	// if (!delim->is_quoted)
 	// 	buffer = expand_here_doc_buffer(buffer);
-	ft_printf(pipe_fds[1], buffer);
+	ft_putstr_fd(buffer, pipe_fds[1]);
 	free(buffer);
 	close(pipe_fds[1]);
 	return (pipe_fds[0]);

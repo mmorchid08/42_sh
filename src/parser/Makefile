@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/05 16:56:50 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/12 10:56:07 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	lexer/lexer_print_tokens.o lexer/lexer_push_token.o \
 	lexer/lexer_skip_whitespaces.o lexer/util.o lexer/token_helpers.o \
 	lexer/lexer_operator_len.o lexer/lexer_add_newline_token.o \
+	lexer/lexer_is_word_complete.o \
 	parse_complete_commands/add_complete_cmd.o \
 	parse_complete_commands/cmd_tokens_helpers.o \
 	parse_complete_commands/parse_complete_commands.o \

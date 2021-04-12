@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/08 10:09:31 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 10:50:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,29 @@
 **		Builtins
 */
 
-int		jhin(char **cmd);
-int		check_is_not(int ret, int is_not);
-int		ft_test(char **cmd);
-int		ft_echo(char **cmd);
+int			jhin(char **cmd);
+int			check_is_not(int ret, int is_not);
+int			ft_test(char **cmd);
+int			ft_echo(char **cmd);
 
 /*
 **		free functions
 */
 
-void	del_token(void *element);
-void	del_redirection(void *element);
-void	del_var(void *element);
+void		del_token(void *element);
+void		del_redirection(void *element);
+void		del_var(void *element);
+
+/*
+** Prompt
+*/
+
+char		*prompt_1(void);
+
+/*
+** read
+*/
+
+t_vector	*read_commands(void);
 
 #endif

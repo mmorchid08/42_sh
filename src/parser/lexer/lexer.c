@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/08 18:21:21 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 10:53:35 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,20 @@ static t_lexer_ret	*lexer_return(t_lexer *lex, t_bool is_interactive_mode)
 	}
 	else if (is_interactive_mode && lex->backslash)
 	{
-		lex_ret->is_matched == lex->backslash;
+		lex_ret->is_matched = lex->backslash;
 		lex_ret->unmached_char = BACK_SLASH;
 	}
-	if (is_interactive_mode == FALSE)
-		lexer_clean(lex);
+	if (is_interactive_mode == FALSE || lex_ret->is_matched == TRUE)
+		lexer_clean(&lex);
+	return (lex_ret);
 }
 
 t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 {
-	#if is_interactive_mode == TRUE
-		static t_bool	lex_is_initialized = FALSE;
-		static t_lexer	*lex;
-	#endif
+	static t_lexer	*lex = NULL;
 
-	if (lex_is_initialized)
-	{
+	if (lex == NULL)
 		lex = lexer_init(line);
-		lex_is_initialized = TRUE;
-	}
 	while (lex->c)
 	{
 		if (lex->is_word_complete == FALSE)
