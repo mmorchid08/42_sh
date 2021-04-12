@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:02:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:52:34 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 11:59:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ t_vector	*read_commands(void)
 	char			*cmd_line;
 	t_readline_ret	read_ret;
 	t_lexer_ret		*lex_ret;
+	char			*prompt;
+	t_bool			first_read;
 
 	cmd_line = ft_strdup("");
+	prompt = prompt_1();
+	first_read = TRUE;
 	while (1)
 	{
-		read_ret = readline_21sh(&line, prompt_1());
-		if (read_ret == EXIT || read_ret == ERROR)
+		read_ret = readline_21sh(&line, prompt);
+		if ((read_ret == EXIT && first_read) || read_ret == ERROR)
 			exit(read_ret);
+		if (read_ret == EXIT)
+			break ;
 		if (read_ret == INTERRUPTED)
 			return (NULL);
 		cmd_line = ft_strjoin_free(cmd_line, line, 1, 1);
@@ -47,6 +53,8 @@ t_vector	*read_commands(void)
 			remove_ending_backslash(&cmd_line);
 		else
 			cmd_line = ft_strjoin_free(cmd_line, "\n", 1, 0);
+		prompt = "> ";
+		first_read = FALSE;
 	}
 	lexer_add_newline_token(lex_ret->tokens);
 	lexer_print_tokens(lex_ret->tokens);

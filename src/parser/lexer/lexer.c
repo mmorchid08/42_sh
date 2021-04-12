@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:53:35 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 12:04:35 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,26 @@ static void	lexer_clean(t_lexer **lex)
 	ft_memdel((void **)lex);
 }
 
-static t_lexer_ret	*lexer_return(t_lexer *lex, t_bool is_interactive_mode)
+static t_lexer_ret	*lexer_return(t_lexer **lex, t_bool is_interactive_mode)
 {
 	t_lexer_ret	*lex_ret;
 
 	lex_ret = (t_lexer_ret *)ft_malloc(sizeof(t_lexer_ret));
-	lex_ret->tokens = lex->tokens;
+	lex_ret->tokens = (*lex)->tokens;
 	lex_ret->is_matched = TRUE;
 	lex_ret->unmached_char = '\0';
-	if (lex->quotes_stack->length != 0)
+	if ((*lex)->quotes_stack->length != 0)
 	{
 		lex_ret->is_matched = FALSE;
-		lex_ret->unmached_char = *(char *)stack_peek(lex->quotes_stack);
+		lex_ret->unmached_char = *(char *)stack_peek((*lex)->quotes_stack);
 	}
-	else if (is_interactive_mode && lex->backslash)
+	else if (is_interactive_mode && (*lex)->backslash)
 	{
-		lex_ret->is_matched = lex->backslash;
+		lex_ret->is_matched = (*lex)->backslash;
 		lex_ret->unmached_char = BACK_SLASH;
 	}
 	if (is_interactive_mode == FALSE || lex_ret->is_matched == TRUE)
-		lexer_clean(&lex);
+		lexer_clean(lex);
 	return (lex_ret);
 }
 
@@ -64,6 +64,12 @@ t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 
 	if (lex == NULL)
 		lex = lexer_init(line);
+	else
+	{
+		lex->line = line;
+		lex->c = lex->line[lex->i];
+	}
+	// printf()
 	while (lex->c)
 	{
 		if (lex->is_word_complete == FALSE)
@@ -78,5 +84,5 @@ t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 			lexer_handle_operator(lex);
 		lexer_skip_whitespaces(lex);
 	}
-	return (lexer_return(lex, is_interactive_mode));
+	return (lexer_return(&lex, is_interactive_mode));
 }
