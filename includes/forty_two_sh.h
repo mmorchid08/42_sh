@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/11 18:05:33 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/12 17:40:03 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		notify_job_state(void);
 t_job		*get_previous_job(void);
 t_job		*get_current_job(void);
 t_job		*get_job_by_selector(char *job_selector);
+int			execute_job(t_vector *pids_vec, char *job_name,
+			t_bool is_background);
 
 
 /*
