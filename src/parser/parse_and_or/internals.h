@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 08:38:12 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 16:53:36 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 15:26:19 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct	s_parse_and_or
 	t_cmd_type			cmd_type;
 }				t_parse_and_or;
 
-void			push_cmd_token(t_parse_and_or *parser);
+void			and_or_push_cmd_token(t_parse_and_or *parser);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_print_tokens.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 08:55:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:54:31 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 15:23:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	lexer_print_tokens(t_vector *tokens_vec)
 		tk = tokens[i];
 		printf("%s", g_tokens_to_string[tk.type]);
 		if (tk.type == WORD || tk.type == IO_NUMBER)
-			printf(" %s", tk.data);
+			printf(" %s", (char *)tk.data);
 		printf("\n");
 		++i;
 	}

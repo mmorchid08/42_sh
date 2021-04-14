@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 11:01:32 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 15:32:08 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_logic_sequence		*parse_and_or(t_vector *tokens_vec)
 			and_or_push_logic_op(and_or);
 		}
 		else
-			push_cmd_token(and_or);
+			and_or_push_cmd_token(and_or);
 		and_or_advance(and_or);
 	}
 	if (and_or_push_command(and_or) == EXIT_FAILURE)

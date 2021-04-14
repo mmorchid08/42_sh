@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:52:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/12 15:23:42 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	shell_main(void)
 {
 	t_vector	*commands;
 
+	(void)commands;
 	commands = read_commands();
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 12:04:35 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/13 13:27:12 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 		lex->line = line;
 		lex->c = lex->line[lex->i];
 	}
-	// printf()
 	while (lex->c)
 	{
 		if (lex->is_word_complete == FALSE)
@@ -78,7 +77,7 @@ t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 			lexer_handle_io_number(lex);
 		if (lexer_is_word(lex->c))
 			lexer_handle_word(lex);
-		if (lex->word->length > 0)
+		if (lex->word->length > 0 && lex->is_word_complete)
 			lexer_push_token(lex, WORD);
 		if (lexer_is_operator(lex->c))
 			lexer_handle_operator(lex);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/12 10:51:32 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/12 15:34:06 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ mkfile_dir := $(dir $(mkfile_path))
 all: $(NAME)
 
 $(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE)
-	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE) -ltermcap
+	$(CC) -o $(NAME) $(42sh_OBJS) $(PARSER) $(READLINE) $(LIBFT) -ltermcap
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
@@ -58,7 +58,7 @@ $(LIBFT): force
 $(PARSER): force
 	@env $(PARSER_ENV) make -C src/parser/
  $(READLINE) : force
-	@env make -C readline
+	@make -C readline
 
 force:
 
