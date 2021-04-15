@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:01:19 by ylagtab           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/03/22 09:33:30 by ylagtab          ###   ########.fr       */
+=======
+/*   Updated: 2021/04/08 16:15:45 by mel-idri         ###   ########.fr       */
+>>>>>>> origin/job_control
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +32,8 @@ const char	*g_error_message_string[] = {
 	[ESYNTAX] = "syntax error near unexpected token",\
 	[ETOOMANYPIPES] = "Too many pipes",
 	[EFORK] = "fork error",
+	[EOPENFILE] = "cannot open file",
+	[ENOJOB] = "no such job",
 	[EUNK] = "An error has occured"
 };
 
