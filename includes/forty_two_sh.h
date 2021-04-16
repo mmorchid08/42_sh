@@ -6,12 +6,14 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/15 16:14:24 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:20:54 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORTY_TWO_SH_H
 # define FORTY_TWO_SH_H
+
+# include <stdbool.h>
 
 # include "../libft/libft.h"
 # include "constants.h"
@@ -23,6 +25,8 @@ void	del_token(void *element);
 void	del_redirection(void *element);
 void	del_var(void *element);
 
+extern	t_vector
+*g_shell_env;
 extern	int
 g_exit_status;
 extern int
@@ -68,6 +72,7 @@ int			execute_job(t_vector *pids_vec, char *job_name,
 ** ================================ execution ==================================
 */
 
+char		*get_full_path(char *cmd);
 void		handle_quotes(char c, int *balance);
 void		remove_quotes(char **str);
 void		execute_commands(t_vector *commands);

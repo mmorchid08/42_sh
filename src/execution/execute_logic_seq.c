@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_logic_seq.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:42:48 by mel-idri          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/03/31 23:32:57 by mel-idri         ###   ########.fr       */
-=======
-/*   Updated: 2021/04/09 12:13:35 by mel-idri         ###   ########.fr       */
->>>>>>> origin/job_control
+/*   Updated: 2021/04/16 16:58:01 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +61,7 @@ static int	execute_logic_seq_background(t_logic_sequence *logic_seq)
 		// TODO handle fork error
 		return (-1);// TODO handle fork error
 	}
-<<<<<<< HEAD
-	job = new_job(TRUE);
-=======
 	job = new_job(TRUE, logic_seq->job_name);
->>>>>>> origin/job_control
 	add_process_to_job(job, pid);
 	job->ret_pid = pid;
 	return (0);

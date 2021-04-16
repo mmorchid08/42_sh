@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/15 16:57:24 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:20:58 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	manage_pipes(t_bool is_true)
 	}
 }
 
-pid_t		execute_pip_pt2(char **args, char **a_env, t_bool is_end))
+pid_t		execute_pip_pt2(char **args, char **a_env, t_bool is_end)
 {
 	pid_t	pid;
 	char	*full_path;
@@ -48,7 +48,7 @@ pid_t		execute_pip_pt2(char **args, char **a_env, t_bool is_end))
 	}
 	else if (pid == 0)
 	{
-		full_path = get_full_path(args[0], g_shell_env);
+		full_path = get_full_path(args[0]);
 		if (fd != -1)
 			close(fd);
 		if (execve(full_path, args, a_env))

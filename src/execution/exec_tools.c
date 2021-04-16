@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_quotes.c                                    :+:      :+:    :+:   */
+/*   exec_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/15 16:13:09 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:16:35 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int		check_file(char *path)
 char	*ft_search_env(char *key)
 {
 	t_var	*env;
+	int		i;
 
 	env = (t_var *)g_shell_env->array;
-	while (env[i])
+	i = 0;
+	while (i < (int)g_shell_env->length)
 	{
 		if (!(ft_strcmp(env[i].key, key)))
 			return (env[i].value);

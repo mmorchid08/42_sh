@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/15 16:34:51 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/16 17:21:35 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ pid_t	ft_execve_scmd(char *full_path, char **cmd, char **a_env)
 	pid = fork();
 	if (pid == -1)
 	{
-		ft_strerror(EFORK, "fork error.");
+		ft_printf(2, "Error forking\n");
 		return (NULL);
 	}
 	else if (pid == 0)
@@ -49,7 +49,7 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	int			i;
 
 	cmd = (char **)simple_cmd->args->array;
-	full_path = get_full_path(cmd[0], g_shell_env);
+	full_path = get_full_path(cmd[0]);
 	a_env = env_to_array(g_shell_env);
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
