@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/13 13:27:12 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/17 13:31:29 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_lexer	*lexer_init(char *line)
 	lex->line = line;
 	lex->i = 0;
 	lex->c = lex->line[lex->i];
-	lex->quotes_stack = stack_new(sizeof(char), NULL);
+	lex->quotes_stack = stack_new(sizeof(char), free);
 	lex->backslash = FALSE;
 	lex->is_word_complete = TRUE;
 	return (lex);
@@ -31,6 +31,7 @@ static t_lexer	*lexer_init(char *line)
 static void	lexer_clean(t_lexer **lex)
 {
 	string_free((*lex)->word);
+	vector_free((*lex)->quotes_stack);
 	ft_bzero(*lex, sizeof(t_lexer));
 	ft_memdel((void **)lex);
 }
