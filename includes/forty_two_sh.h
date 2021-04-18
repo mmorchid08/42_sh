@@ -6,14 +6,16 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/16 17:20:54 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/18 07:52:27 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORTY_TWO_SH_H
 # define FORTY_TWO_SH_H
 
-# include <stdbool.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 # include "../libft/libft.h"
 # include "constants.h"
