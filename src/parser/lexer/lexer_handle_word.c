@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handle_word.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/13 15:28:00 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/17 13:55:11 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static	void	update_quotes_stack(t_lexer *lex)
 		identify_expansions(lex);
 		if (el && *el == DOUBLE_QUOTE && lex->c == DOUBLE_QUOTE)
 			poped_el = stack_pop(lex->quotes_stack);
-		else if (el && *el != DOUBLE_QUOTE)
+		else if (!el || *el != DOUBLE_QUOTE)
 		{
 			if (lex->c == SINGLE_QUOTE || lex->c == DOUBLE_QUOTE)
 				stack_push(lex->quotes_stack, &(lex->c));

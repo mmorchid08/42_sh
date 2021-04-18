@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/17 13:31:29 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/17 13:52:55 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,25 @@ static t_lexer_ret	*lexer_return(t_lexer **lex, t_bool is_interactive_mode)
 	}
 	else if (is_interactive_mode && (*lex)->backslash)
 	{
-		lex_ret->is_matched = (*lex)->backslash;
+		lex_ret->is_matched = (*lex)->backslash == FALSE;
 		lex_ret->unmached_char = BACK_SLASH;
 	}
 	if (is_interactive_mode == FALSE || lex_ret->is_matched == TRUE)
 		lexer_clean(lex);
 	return (lex_ret);
+}
+
+static void	lex_setup_multi_line(t_lexer *lex, char *line)
+{
+	lex->line = line;
+	lex->c = lex->line[lex->i];
+	if (lex->backslash)
+	{
+		lex->backslash = FALSE;
+		lex->is_word_complete = TRUE;
+		--(lex->word->length);
+		lexer_advance(lex, -1);
+	}
 }
 
 t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
@@ -66,10 +79,7 @@ t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 	if (lex == NULL)
 		lex = lexer_init(line);
 	else
-	{
-		lex->line = line;
-		lex->c = lex->line[lex->i];
-	}
+		lex_setup_multi_line(lex, line);
 	while (lex->c)
 	{
 		if (lex->is_word_complete == FALSE)
