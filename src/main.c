@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 15:23:42 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/18 15:37:17 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int	main(int ac, char *av[], char *envp[])
 			(void)shell_main();
 	}
 	else
-		printf("Error\nusage: ./21sh [-c command]\n");
+		ft_printf(2, "Error\nusage: ./21sh [-c command]\n");
 	return (0);
 }

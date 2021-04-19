@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:55:13 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/19 15:08:10 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static void	print_unmatch_error(t_lexer_ret *lex_ret)
 {
-	ft_putstr_fd("42h: unexpected EOF while looking for matching `", 2);
-	ft_putstr_fd(&lex_ret->unmached_char, 2);
-	ft_putchar_fd('"', 2);
+	ft_printf(2, "42h: unexpected EOF while looking for matching `%c\"\n",
+		lex_ret->unmached_char);
 }
 
 t_vector	*parser(char *line)
