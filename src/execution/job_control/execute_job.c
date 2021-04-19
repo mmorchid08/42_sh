@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:21:23 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/12 16:38:20 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:16 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	execute_job(t_vector *pids_vec, char *job_name, t_bool is_background)
 {
-	int		i;
+	size_t	i;
 	pid_t	*pid;
 	t_job	*job;
 
 	if (pids_vec == NULL || pids_vec->length == 0)
 	{
-		ft_printf(2, "42sh: job has no process"); 
+		ft_printf(2, "42sh: job has no process");
 		return (1);
 	}
 	if (pids_vec->length > 0)

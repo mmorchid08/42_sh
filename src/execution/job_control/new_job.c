@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_stopped_jobs.c                              :+:      :+:    :+:   */
+/*   new_job.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 18:43:06 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/06 18:57:51 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/03/30 14:50:46 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/04/19 23:28:22 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-t_vector	*g_stopped_jobs_ids;
-
-void	update_stopped_jobs(t_job *job)
+t_job	*new_job(t_bool is_background, char *job_name)
 {
-	int	i;
+	t_job	job;
 
-	i = 0;
-	if (job->state == STOPPED)
-		vector_push(g_stopped_jobs, job->id);
-	else
-	{
-		while (i < g_stopped_jobs->length)
-		{
-			if (*(int*)vector_get(g_stopped_jobs, i) == job->id)
-			{
-				vector_remove(g_stopped_jobs, i);
-				break;
-			}
-			i++;
-		}
-	}
+	ft_bzero(&job, sizeof(t_job));
+	job.is_background = is_background;
+	job.state = RUNNING;
+	job.job_name = job_name;
+	job.processes = vector_init(sizeof(t_process), NULL);
+	add_to_job_list(&job);
+	return (vector_get(g_job_list, g_job_list->length - 1));
 }

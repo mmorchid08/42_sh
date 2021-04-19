@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:18:03 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/08 17:46:12 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:14 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_job	*match_job_name_start(char *job_name_start)
 {
 	t_job	*job;
-	int		i;
+	size_t	i;
 	size_t	job_name_start_len;
 
 	i = 0;
@@ -33,7 +33,7 @@ static t_job	*match_job_name_start(char *job_name_start)
 static t_job	*match_job_name_contains(char *job_name_pattern)
 {
 	t_job	*job;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (i < g_job_list->length)
@@ -57,8 +57,8 @@ t_job	*get_job_by_selector(char *job_selector)
 		return (get_previous_job());
 	else if (ft_str_isnumeric(job_selector))
 	{
-		if (ft_atoi(job_selector) > 0 
-			&& ft_atoi(job_selector) <= g_job_list->length)
+		if (ft_atoi(job_selector) > 0
+			&& (size_t)ft_atoi(job_selector) <= g_job_list->length)
 			get_job_by_id(ft_atoi(job_selector));
 	}
 	else if (job_selector[0] == '?')

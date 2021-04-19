@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:30:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/06 18:44:15 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:28 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	update_job_state(t_job *job, pid_t pid, int wait_status)
 	if (recent_job_state != job->state)
 	{
 		job->to_notify = TRUE;
-		update_stopped_jobs(job);	
+		update_stopped_jobs(job);
 	}
 }
 
@@ -77,7 +77,7 @@ void	update_job(t_job *job)
 
 void	update_all_jobs(void)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < g_job_list->length)

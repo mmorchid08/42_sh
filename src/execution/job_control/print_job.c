@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 23:38:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/11 13:51:28 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:25 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	print_job_state_str(t_job *job)
 {
-
 	if (job->state == RUNNING)
 		ft_printf(1, "Running");
 	else if (job->state == STOPPED)
@@ -33,15 +32,15 @@ void	print_job(t_job *job, t_job_print_mode mode,
 	t_special_jobs *special_jobs)
 {
 	if (mode == PGID)
-		ft_printf("%s\n", job->pgid);
+		ft_printf(1, "%u\n", (int)job->pgid);
 	else
 	{
 		ft_printf(1, "[%d]", job->id);
 		if (job == special_jobs->current)
-			ft_printf(1, '+');
+			ft_printf(1, "+");
 		else if (job == special_jobs->previous)
-			ft_printf(1, '-');
-		ft_printf(1, ' ');	
+			ft_printf(1, "-");
+		ft_printf(1, " ");
 		if (mode == LONG)
 			ft_printf(1, "%d ", job->pgid);
 		print_job_state_str(job);

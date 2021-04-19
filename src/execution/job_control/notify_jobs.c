@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:56:32 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/11 14:17:40 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:23 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 void	notify_job_state(void)
 {
-	int		i;
-	t_job	*job;
+	size_t			i;
+	t_job			*job;
+	t_special_jobs	special_jobs;
 
 	i = 0;
+	special_jobs.current = get_current_job();
+	special_jobs.previous = get_previous_job();
 	while (i < g_job_list->length)
 	{
 		job = vector_get(g_job_list, i);
 		if (job->to_notify && job->is_background)
 		{
-			print_job(job);
+			print_job(job, NORMAL, &special_jobs);
 			job->to_notify = FALSE;
 			if (job->state == COMPLETED)
 				remove_from_job_list(job->id);

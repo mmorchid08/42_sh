@@ -6,16 +6,16 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 17:40:03 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:07:25 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORTY_TWO_SH_H
 # define FORTY_TWO_SH_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include "typedefs.h"
-# include "src/errors/errors.h"
+# include "../src/errors/errors.h"
 
 extern	int
 g_exit_status;

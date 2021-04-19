@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:06:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/06 18:57:46 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:17 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 
 t_vector	*g_job_list;
 
-/* 
-	initialize jobs lists.
-	this function should be called only once at the start of the program
-	along with initialization code.
-*/
-void	init_jobs(void)
-{
-	if (g_job_list == NULL)
-		g_job_list = vector_init(sizeof(t_job), free_job);
-	if (g_stopped_jobs_ids == NULL)
-		g_stopped_jobs_ids = vector_init(sizeof(int), NULL);
-	return ;
-}
 
 /*
 	a callback used by vector_init()
@@ -37,6 +24,20 @@ static void	free_job(void *job)
 
 	j = (t_job *)job;
 	vector_free(j->processes);
+}
+
+/* 
+	initialize jobs lists.
+	this function should be called only once at the start of the program
+	along with initialization code.
+*/
+void	init_jobs(void)
+{
+	if (g_job_list == NULL)
+		g_job_list = vector_init(sizeof(t_job), free_job);
+	if (g_stopped_jobs == NULL)
+		g_stopped_jobs = vector_init(sizeof(int), NULL);
+	return ;
 }
 
 void	add_to_job_list(t_job *job)
@@ -56,7 +57,7 @@ void	add_to_job_list(t_job *job)
 t_job	*get_job_by_id(uint32_t id)
 {
 	t_job *const	jobs_array = g_job_list->array;
-	int				i;
+	size_t			i;
 
 	if (g_job_list == NULL)
 		g_job_list = vector_init(sizeof(t_job), free_job);
@@ -73,7 +74,7 @@ t_job	*get_job_by_id(uint32_t id)
 void	remove_from_job_list(uint32_t job_id)
 {
 	t_job *const	jobs_array = g_job_list->array;
-	int				i;
+	size_t			i;
 
 	if (g_job_list == NULL)
 		g_job_list = vector_init(sizeof(t_job), free_job);
@@ -84,5 +85,4 @@ void	remove_from_job_list(uint32_t job_id)
 			vector_remove(g_job_list, i);
 		i++;
 	}
-	return (NULL);
 }

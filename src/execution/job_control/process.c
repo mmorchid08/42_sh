@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:54:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/06 13:05:45 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:27 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	add_process_to_job(t_job *job, pid_t pid)
 t_process	*get_process_from_job(t_job *job, pid_t pid)
 {
 	t_process *const	proc_array = job->processes->array;
-	int					i;
+	size_t				i;
 
 	i = 0;
 	while (i < job->processes->length)
@@ -58,7 +58,7 @@ t_process	*get_process_from_job(t_job *job, pid_t pid)
 void	remove_process_from_job(t_job *job, pid_t pid)
 {
 	t_process *const	proc_array = job->processes->array;
-	int					i;
+	size_t				i;
 
 	i = 0;
 	while (i < job->processes->length)

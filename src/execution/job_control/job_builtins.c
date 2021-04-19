@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:22:37 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/11 18:05:16 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:28:10 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	fg(char **args)
 		job = get_current_job();
 	if (job == NULL)
 	{
-		ft_printf(2, "42sh: fg: no such job\n"); // TODO use ft_setrerror instead
+		ft_printf(2, "42sh: fg: no such job\n");
 		return (1);
 	}
 	ft_printf(1, "%s\n", job->job_name);
@@ -71,7 +71,7 @@ int	bg(char **args)
 		if (job == NULL)
 		{
 			ret = 1;
-			ft_printf(2, "42sh: fg: %s no such job\n", *args); // TODO use ft_setrerror instead
+			ft_printf(2, "42sh: bg: %s: no such job\n", *args);
 			args++;
 			continue ;
 		}
@@ -86,8 +86,7 @@ int	bg(char **args)
 int	jobs(char **args)
 {
 	t_job_print_mode	mode;
-	t_job				*job;
-	int					i;
+	size_t				i;
 	int					ret;
 	t_special_jobs		special_jobs;
 
