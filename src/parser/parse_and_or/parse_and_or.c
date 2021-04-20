@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 15:32:08 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:02:12 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 static t_parse_and_or	*and_or_init(t_vector *tokens_vec)
 {
-	t_parse_and_or *and_or;
+	t_parse_and_or	*and_or;
 
-	and_or = (t_parse_and_or*)ft_malloc(sizeof(t_parse_and_or));
-	and_or->logic_cmd = (t_logic_sequence*)ft_malloc(sizeof(t_logic_sequence));
+	and_or = (t_parse_and_or *)ft_malloc(sizeof(t_parse_and_or));
+	and_or->logic_cmd = (t_logic_sequence *)ft_malloc(sizeof(t_logic_sequence));
 	and_or->logic_cmd->commands = vector_init(sizeof(t_command), free);
 	and_or->logic_cmd->logic_ops = vector_init(sizeof(t_token_type), free);
 	and_or->cmd_tokens = vector_init(sizeof(t_token), free);
 	and_or->cmd_type = SIMPLE_CMD;
-	and_or->tokens = (t_token*)tokens_vec->array;
+	and_or->tokens = (t_token *)tokens_vec->array;
 	and_or->tokens_len = tokens_vec->length;
 	and_or->tokens_index = 0;
 	and_or->current_token = and_or->tokens[and_or->tokens_index];
 	return (and_or);
 }
 
-void					and_or_advance(t_parse_and_or *and_or)
+static void	and_or_advance(t_parse_and_or *and_or)
 {
 	++(and_or->tokens_index);
 	and_or->current_token = and_or->tokens[and_or->tokens_index];
 }
 
-int						and_or_push_command(t_parse_and_or *and_or)
+static int	and_or_push_command(t_parse_and_or *and_or)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
-	cmd = (t_command*)ft_malloc(sizeof(t_command));
+	cmd = (t_command *)ft_malloc(sizeof(t_command));
 	cmd->type = and_or->cmd_type;
 	cmd->is_background_job = FALSE;
 	if (cmd->type == SIMPLE_CMD)
@@ -54,15 +54,14 @@ int						and_or_push_command(t_parse_and_or *and_or)
 	return (EXIT_SUCCESS);
 }
 
-void					and_or_push_logic_op(t_parse_and_or *and_or)
+static void	push_cmd_token(t_parse_and_or *parser)
 {
-	t_token_type type;
-
-	type = and_or->current_token.type;
-	vector_push(and_or->logic_cmd->logic_ops, &(type));
+	vector_push(parser->cmd_tokens, &(parser->current_token));
+	if (parser->current_token.type == PIPE)
+		parser->cmd_type = PIPE_SEQ;
 }
 
-t_logic_sequence		*parse_and_or(t_vector *tokens_vec)
+t_logic_sequence	*parse_and_or(t_vector *tokens_vec)
 {
 	t_parse_and_or		*and_or;
 	t_logic_sequence	*logic_cmd;
@@ -74,10 +73,11 @@ t_logic_sequence		*parse_and_or(t_vector *tokens_vec)
 		{
 			if (and_or_push_command(and_or) == EXIT_FAILURE)
 				return (NULL);
-			and_or_push_logic_op(and_or);
+			vector_push(and_or->logic_cmd->logic_ops,
+				&(and_or->current_token.type));
 		}
 		else
-			and_or_push_cmd_token(and_or);
+			push_cmd_token(and_or);
 		and_or_advance(and_or);
 	}
 	if (and_or_push_command(and_or) == EXIT_FAILURE)

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 13:25:17 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:19:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 static t_parse_complete	*parser_init(t_vector *tokens)
 {
-	t_parse_complete *parser;
+	t_parse_complete	*parser;
 
-	parser = (t_parse_complete*)ft_malloc(sizeof(t_parse_complete));
+	parser = (t_parse_complete *)ft_malloc(sizeof(t_parse_complete));
 	parser->commands = vector_init(sizeof(t_command), NULL);
 	parser->cmd_tokens = vector_init(sizeof(t_token), NULL);
 	parser->cmd_type = SIMPLE_CMD;
-	parser->tokens = (t_token*)tokens->array;
+	parser->tokens = (t_token *)tokens->array;
 	parser->tokens_len = tokens->length;
 	parser->tokens_index = 0;
 	parser->current_token = parser->tokens[parser->tokens_index];
 	return (parser);
 }
 
-static void				parser_clean(t_parse_complete **parser)
+static void	parser_clean(t_parse_complete **parser)
 {
 	ft_bzero(*parser, sizeof(t_parse_complete));
-	ft_memdel((void**)parser);
+	ft_memdel((void **)parser);
 }
 
-void					parser_advance(t_parse_complete *parser)
+void	parser_advance(t_parse_complete *parser)
 {
 	if (parser->tokens_index > parser->tokens_len - 1)
 		return ;
@@ -41,7 +41,7 @@ void					parser_advance(t_parse_complete *parser)
 	parser->current_token = parser->tokens[parser->tokens_index];
 }
 
-t_vector				*parse_complete_commands(t_vector *tokens)
+t_vector	*parse_complete_commands(t_vector *tokens)
 {
 	t_parse_complete	*parser;
 	t_vector			*commands;

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 16:56:16 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:54:57 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:45:07 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			parse_here_doc(char *delimter_str)
 	delim = get_delimiter(delimter_str);
 	if (read_buffer(&buffer, delim->str) == EXIT_FAILURE)
 		return (-1);
+	free(delim);
 	// if (!delim->is_quoted)
 	// 	buffer = expand_here_doc_buffer(buffer);
 	ft_putstr_fd(buffer, pipe_fds[1]);

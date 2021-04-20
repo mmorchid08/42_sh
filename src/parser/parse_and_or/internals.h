@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 08:38:12 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 15:26:19 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:01:21 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../parse_simple_cmd/parse_simple_cmd.h"
 # include "../parse_pipe/parse_pipe.h"
 
-typedef struct	s_parse_and_or
+typedef struct s_parse_and_or
 {
 	t_logic_sequence	*logic_cmd;
 	t_vector			*cmd_tokens;
@@ -26,8 +26,6 @@ typedef struct	s_parse_and_or
 	size_t				tokens_index;
 	size_t				tokens_len;
 	t_cmd_type			cmd_type;
-}				t_parse_and_or;
-
-void			and_or_push_cmd_token(t_parse_and_or *parser);
+}	t_parse_and_or;
 
 #endif

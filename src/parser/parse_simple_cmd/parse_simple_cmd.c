@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 18:02:06 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 10:51:50 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:22:35 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_parse_simple	*simple_init(t_vector *tokens_vec)
 {
-	t_parse_simple *s;
+	t_parse_simple	*s;
 
-	s = (t_parse_simple*)ft_malloc(sizeof(t_parse_simple));
-	s->cmd = (t_simple_command*)ft_malloc(sizeof(t_simple_command));
-	s->cmd->args = vector_init(sizeof(char*), free);
+	s = (t_parse_simple *)ft_malloc(sizeof(t_parse_simple));
+	s->cmd = (t_simple_command *)ft_malloc(sizeof(t_simple_command));
+	s->cmd->args = vector_init(sizeof(char *), free);
 	s->cmd->redirections = vector_init(sizeof(t_redirection), del_redirection);
 	s->cmd->assignments = vector_init(sizeof(t_var), del_var);
-	s->tokens = (t_token*)tokens_vec->array;
+	s->tokens = (t_token *)tokens_vec->array;
 	s->tokens_len = tokens_vec->length;
 	s->tokens_index = 0;
 	s->current_token = s->tokens[s->tokens_index];
@@ -29,7 +29,7 @@ static t_parse_simple	*simple_init(t_vector *tokens_vec)
 	return (s);
 }
 
-void					simple_free_all(t_parse_simple *sim)
+void	simple_free_all(t_parse_simple *sim)
 {
 	vector_free(sim->cmd->args);
 	vector_free(sim->cmd->redirections);
@@ -39,7 +39,7 @@ void					simple_free_all(t_parse_simple *sim)
 	free(sim);
 }
 
-t_simple_command		*parse_simple_cmd(t_vector *tokens_vec)
+t_simple_command	*parse_simple_cmd(t_vector *tokens_vec)
 {
 	t_parse_simple		*sim;
 	t_simple_command	*simple_cmd;

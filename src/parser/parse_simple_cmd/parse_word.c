@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 15:28:50 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/03 12:04:05 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:47:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ static size_t	find_assignment_equal(char *word)
 		}
 		++i;
 	}
+	if (is_quote(word[i]))
+		return (0);
 	return (equal_index);
 }
 
-void			parse_word(t_parse_simple *sim)
+void	parse_word(t_parse_simple *sim)
 {
 	char	*word;
 	size_t	equal_index;

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:01:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 11:01:18 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:49:49 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,7 @@ static int			add_simple_command(t_parse_pipe *p_p)
 
 static void				push_cmd_token(t_parse_pipe *p_p)
 {
-	t_token *token;
-
-	token = token_dup(p_p->current_token);
-	vector_push(p_p->cmd_tokens, token);
-	free(token);
+	vector_push(p_p->cmd_tokens, &(p_p->current_token));
 }
 
 t_pipe_sequence		*parse_pipe(t_vector *tokens_vec)
