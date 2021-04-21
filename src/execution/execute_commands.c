@@ -27,8 +27,8 @@ void	backups(int f)
 	else
 	{
 		dup2(stdin, 0);
-		dup2(stdou, 0);
-		dup2(stder, 0);
+		dup2(stdou, 1);
+		dup2(stder, 2);
 		if (f == 3)
 		{
 			close(stdin);
@@ -44,9 +44,9 @@ void	execute_commands(t_vector *commands)
 	int					i;
 
 	i = 0;
-	backups(1);
 	while (i < commands->length)
 	{
+		backups(1);
 		if (cmds_array[i].type == LOGIC_SEQ)
 			g_exit_status = execute_logic_seq(&cmds_array[i].command,
 					cmds_array[i].is_background_job);
@@ -57,6 +57,6 @@ void	execute_commands(t_vector *commands)
 			g_exit_status = execute_simple_cmd(&cmds_array[i].command,
 					cmds_array[i].is_background_job, TRUE);
 		i++;
+		backups(3);
 	}
-	backups(3);
 }

@@ -38,7 +38,11 @@ pid_t		execute_pip_pt2(char **args, char **a_env, t_bool is_end)
 	char	*full_path;
 	int		fd;
 	int		is_cmd;
+	int		i;
 
+	i = -1;
+	while (cmd[++i])
+		remove_quotes(&cmd[i]);
 	fd = manage_pipes(is_end);
 	pid = fork();
 	if (pid == -1)
@@ -78,7 +82,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	while (i < len)
 	{
 		args = cmd[i].args->array;
-		a_env = env_to_array(g_shell_env);
+		a_env = g_shell_env;
 		if ((pid = execute_pip_pt2(args, a_env, (i + 1 != len))) == -1)
 		{
 			ft_free_strings_array(a_env);
@@ -95,10 +99,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 {
 	t_simple_command	*s_cmd;
 	t_vector			*vec_pid;
-	char				**a_env;
-	int 				i;
 
-	i = 0;
 	s_cmd = (t_simple_command *)pipe_seq->commands->array;
 	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length);
 	if (vec_pid)

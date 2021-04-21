@@ -35,6 +35,46 @@ char	*ft_search_env(char *key)
 	return (NULL);
 }
 
+char	*ft_search_env(char *to_search)
+{
+	int	i;
+
+	while (g_shell_env[i])
+	{
+		if (!ft_strncmp(g_shell_env[i], "PATH", 4))
+			return (ft_strchr(g_shell_env[i], '='));
+		i++;
+	}
+}
+
+char	*try_every_possibility(char *cmd, char *path_env)
+{
+	char	**ab;
+	char	*tmp;
+	char	*tmp2;
+	int		i;
+
+	if (!path_env || !(ab = ft_strsplit(path_env, ':')))
+		return (ft_strdup(cmd));
+	i = -1;
+	tmp = NULL;
+	tmp2 = NULL;
+	while (ab[++i])
+	{
+		tmp = ft_strjoin(ab[i], "/");
+		tmp2 = ft_strjoin(tmp, cmd);
+		free(tmp);
+		if (check_file(tmp2))
+		{
+			ft_free_strings_array(ab);
+			return (tmp2);
+		}
+		free(tmp2);
+	}
+	ft_free_strings_array(ab);
+	return (ft_strdup(cmd));
+}
+
 char	*get_full_path(char *cmd)
 {
 	char	*full_path;

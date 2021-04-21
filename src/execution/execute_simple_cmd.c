@@ -50,7 +50,7 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 
 	cmd = (char **)simple_cmd->args->array;
 	full_path = get_full_path(cmd[0]);
-	a_env = env_to_array(g_shell_env);
+	a_env = g_shell_env;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
 	vec_pid = ft_execve_scmd(full_path, cmd, a_env);
