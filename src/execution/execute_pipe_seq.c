@@ -12,11 +12,11 @@
 
 #include "forty_two_sh.h"
 
-int	manage_pipes(t_bool is_true)
+int	manage_pipes(int i, int len)
 {
 	static int		fd[2];
 
-	if (is_true == true)
+	if i + 1 != len)
 	{
 		if (pipe(fd) == -1)
 			exit(0);
@@ -32,18 +32,18 @@ int	manage_pipes(t_bool is_true)
 	}
 }
 
-pid_t		execute_pip_pt2(char **args, char **a_env, t_bool is_end)
+pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 {
-	pid_t	pid;
-	char	*full_path;
-	int		fd;
-	int		is_cmd;
-	int		i;
+	pid_t		pid;
+	char		*full_path;
+	static int	fd;
+	int			is_cmd;
+	int			i;
 
 	i = -1;
 	while (cmd[++i])
 		remove_quotes(&cmd[i]);
-	fd = manage_pipes(is_end);
+	fd = manage_pipes(index, len);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -55,7 +55,7 @@ pid_t		execute_pip_pt2(char **args, char **a_env, t_bool is_end)
 		full_path = get_full_path(args[0]);
 		if (fd != -1)
 			close(fd);
-		if (execve(full_path, args, a_env))
+		if (execve(full_path, args, g_shell_env))
 		{
 			ft_printf(2, "Error executing\n");
 			exit(127);
@@ -73,7 +73,6 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 {
 	t_vector	*vec_pid;
 	char		**args;
-	char		**a_env;
 	pid_t		pid;
 	int			i;
 
@@ -82,12 +81,8 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	while (i < len)
 	{
 		args = cmd[i].args->array;
-		a_env = g_shell_env;
-		if ((pid = execute_pip_pt2(args, a_env, (i + 1 != len))) == -1)
-		{
-			ft_free_strings_array(a_env);
+		if ((pid = execute_pip_pt2(args, a_env, i + 1, len)))
 			return (NULL);
-		}
 		else
 			vector_push(vec_pid, pid);
 		i++;
