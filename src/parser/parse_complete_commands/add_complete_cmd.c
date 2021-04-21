@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:02:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:49:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 10:47:16 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int			add_complete_cmd(t_parse_complete *parser)
 {
 	t_command *cmd;
 
+	if (parser->cmd_tokens->length == 0)
+	{
+		unexpected_token(parser->current_token.type);
+		return (EXIT_FAILURE);
+	}
 	cmd = (t_command*)ft_malloc(sizeof(t_command));
 	cmd->type = parser->cmd_type;
 	cmd->is_background_job = parser->current_token.type == AMPERSAND;

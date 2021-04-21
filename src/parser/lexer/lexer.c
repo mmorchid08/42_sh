@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 15:28:47 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 11:59:01 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ static t_lexer_ret	*lexer_return(t_lexer **lex, t_bool is_interactive_mode)
 	lex_ret = (t_lexer_ret *)ft_malloc(sizeof(t_lexer_ret));
 	lex_ret->tokens = (*lex)->tokens;
 	lex_ret->is_matched = TRUE;
-	lex_ret->unmached_char = '\0';
+	lex_ret->unmatched_char = '\0';
 	if ((*lex)->quotes_stack->length != 0)
 	{
 		lex_ret->is_matched = FALSE;
-		lex_ret->unmached_char = *(char *)stack_peek((*lex)->quotes_stack);
+		lex_ret->unmatched_char = *(char *)stack_peek((*lex)->quotes_stack);
 	}
 	else if (is_interactive_mode && (*lex)->backslash)
 	{
 		lex_ret->is_matched = (*lex)->backslash == FALSE;
-		lex_ret->unmached_char = BACK_SLASH;
+		lex_ret->unmatched_char = BACK_SLASH;
 	}
 	if (is_interactive_mode == FALSE || lex_ret->is_matched == TRUE)
 		lexer_clean(lex);

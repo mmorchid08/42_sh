@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unexpected_token.c                                 :+:      :+:    :+:   */
+/*   parser_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:36:50 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/27 12:37:11 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:18:13 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,23 @@
 
 void	unexpected_token(t_token_type type)
 {
-	char *suffix;
+	ft_printf(2, "42sh: syntax error near unexpected token `%s'\n",
+		g_tokens_to_symbol[type]);
+}
 
-	suffix = g_tokens_to_string[type];
-	ft_strerror(ESYNTAX, NULL, suffix, FALSE);
+void	unmatch_quote_error(char unmatched_char)
+{
+	char	matched_char;
+
+	matched_char = '\0';
+	if (unmatched_char == '(')
+		matched_char = ')';
+	else if (unmatched_char == ')')
+		matched_char = '(';
+	else if (unmatched_char == '{')
+		matched_char = '}';
+	else if (unmatched_char == '}')
+		matched_char = '{';
+	ft_printf(2, "42h: unexpected EOF while looking for matching `%c\"\n",
+		matched_char);
 }

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 10:52:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 10:46:15 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "forty_two_sh.h"
 # include "../parse_simple_cmd/parse_simple_cmd.h"
 
-typedef struct	s_parse_pipe
+typedef struct s_parse_pipe
 {
 	t_pipe_sequence	*pipe_cmd;
 	t_vector		*cmd_tokens;
@@ -25,5 +25,7 @@ typedef struct	s_parse_pipe
 	size_t			tokens_index;
 	size_t			tokens_len;
 }				t_parse_pipe;
+
+void	unexpected_token(t_token_type type);
 
 #endif

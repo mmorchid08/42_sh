@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/08 18:21:35 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 11:58:51 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_lexer_ret
 {
 	t_vector	*tokens;
 	t_bool		is_matched;
-	char		unmached_char;
+	char		unmatched_char;
 
 }	t_lexer_ret;
 

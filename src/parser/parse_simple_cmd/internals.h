@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:37:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 16:13:12 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 10:46:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "forty_two_sh.h"
 
-typedef struct	s_parse_simple
+typedef struct s_parse_simple
 {
 	t_simple_command	*cmd;
 	t_token				*tokens;
@@ -25,18 +25,19 @@ typedef struct	s_parse_simple
 	t_bool				is_done_assigning;
 }				t_parse_simple;
 
-typedef	struct	s_delimiter
+typedef struct s_delimiter
 {
 	char	*str;
 	t_bool	is_quoted;
 }				t_delimiter;
 
-void			simple_advance(t_parse_simple *sim);
-int				parse_redirection(t_parse_simple *sim);
-void			parse_assignment(t_parse_simple *sim, char *word,
-					size_t equal_index);
-void			parse_word(t_parse_simple *sim);
-void			parse_argument(t_parse_simple *sim);
-int				parse_here_doc(char *delimter_str);
+void	simple_advance(t_parse_simple *sim);
+int		parse_redirection(t_parse_simple *sim);
+void	parse_assignment(t_parse_simple *sim, char *word,
+			size_t equal_index);
+void	parse_word(t_parse_simple *sim);
+void	parse_argument(t_parse_simple *sim);
+int		parse_here_doc(char *delimter_str);
+void	unexpected_token(t_token_type type);
 
 #endif

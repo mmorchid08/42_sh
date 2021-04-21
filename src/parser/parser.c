@@ -6,17 +6,11 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 16:18:52 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 11:59:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
-
-static void	print_unmatch_error(t_lexer_ret *lex_ret)
-{
-	ft_printf(2, "42h: unexpected EOF while looking for matching `%c\"\n",
-		lex_ret->unmached_char);
-}
 
 t_vector	*parser(char *line)
 {
@@ -27,7 +21,7 @@ t_vector	*parser(char *line)
 	lex_ret = lexer(line, FALSE);
 	if (lex_ret->is_matched == FALSE)
 	{
-		print_unmatch_error(lex_ret);
+		unmatch_quote_error(lex_ret->unmatched_char);
 		vector_free(lex_ret->tokens);
 		return (NULL);
 	}

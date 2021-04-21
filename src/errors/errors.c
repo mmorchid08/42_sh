@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:01:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/19 15:05:20 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 10:51:20 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_perror(char *prefix, char *suffix, t_bool exit_on_error)
 {
 	if (g_errno > EUNK)
 		g_errno = EUNK;
-	ft_putstr_fd("21sh: ", 2);
+	ft_putstr_fd("42sh: ", 2);
 	if (prefix != NULL)
 		ft_printf(2, "%s: ", prefix);
 	ft_putstr_fd(g_error_message_string[g_errno], 2);

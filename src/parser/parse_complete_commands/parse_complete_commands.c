@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 16:19:30 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 10:49:31 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@ static t_parse_complete	*parser_init(t_vector *tokens)
 	return (parser);
 }
 
-static void	parser_clean(t_parse_complete **parser)
+static void	parser_clean(t_parse_complete *parser)
 {
-	ft_bzero(*parser, sizeof(t_parse_complete));
-	ft_memdel((void **)parser);
+	vector_free(parser->cmd_tokens);
+	ft_bzero(parser, sizeof(t_parse_complete));
+	free(parser);
+}
+
+static void	*parser_free_all(t_parse_complete *parser)
+{
+	vector_free(parser->commands);
+	parser_clean(parser);
+	return (NULL);
 }
 
 void	parser_advance(t_parse_complete *parser)
@@ -52,16 +60,13 @@ t_vector	*parse_complete_commands(t_vector *tokens)
 		if (lexer_is_separator(parser->current_token.type))
 		{
 			if (add_complete_cmd(parser) == EXIT_FAILURE)
-			{
-				parser_clean(&parser);
-				return (NULL);
-			}
+				return (parser_free_all(parser));
 		}
 		else
 			push_cmd_token(parser);
 		parser_advance(parser);
 	}
 	commands = parser->commands;
-	parser_clean(&parser);
+	parser_clean(parser);
 	return (commands);
 }
