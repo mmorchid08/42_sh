@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:01:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 16:49:49 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 14:51:49 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,18 @@ static void			parse_pipe_clean(t_parse_pipe *p_p)
 	free(p_p);
 }
 
-static int			add_simple_command(t_parse_pipe *p_p)
+static int			add_simple_command(t_parse_pipe *p_p, t_bool is_last_cmd)
 {
 	t_simple_command *simple_cmd;
 
+	if (p_p->cmd_tokens->length == 0)
+	{
+		if (is_last_cmd)
+			g_errno = ESYNTAX;
+		else
+			unexpected_token(p_p->current_token.type);
+		return (EXIT_FAILURE);
+	}
 	simple_cmd = parse_simple_cmd(p_p->cmd_tokens);
 	if (simple_cmd == NULL)
 	{
@@ -80,14 +88,14 @@ t_pipe_sequence		*parse_pipe(t_vector *tokens_vec)
 	{
 		if (p_p->current_token.type == PIPE)
 		{
-			if (add_simple_command(p_p) == EXIT_FAILURE)
+			if (add_simple_command(p_p, FALSE) == EXIT_FAILURE)
 				return (NULL);
 		}
 		else
 			push_cmd_token(p_p);
 		parse_pipe_advance(p_p);
 	}
-	if (add_simple_command(p_p) == EXIT_FAILURE)
+	if (add_simple_command(p_p, TRUE) == EXIT_FAILURE)
 		return (NULL);
 	pipe_cmd = p_p->pipe_cmd;
 	pipe_cmd->job_name = get_job_name(tokens_vec);

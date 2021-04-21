@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:02:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/21 09:42:49 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 12:21:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ t_vector	*read_commands(void)
 	t_readline_ret	read_ret;
 	t_lexer_ret		*lex_ret;
 	char			*prompt;
-	t_bool			first_read;
+	t_bool			is_first_read;
 	t_vector		*commands;
 
 	cmd_line = ft_strdup("");
 	prompt = prompt_1();
-	first_read = TRUE;
+	is_first_read = TRUE;
 	while (1)
 	{
 		read_ret = readline_21sh(&line, prompt);
-		if ((read_ret == EXIT && first_read) || read_ret == ERROR)
+		ft_strdel(&prompt);
+		if ((read_ret == EXIT && is_first_read) || read_ret == ERROR)
 			exit(read_ret);
 		if (read_ret == EXIT)
 			break ;
@@ -50,21 +51,28 @@ t_vector	*read_commands(void)
 		lex_ret = lexer(cmd_line, TRUE);
 		if (lex_ret->is_matched == TRUE)
 			break ;
-		if (lex_ret->unmached_char == BACK_SLASH)
+		if (lex_ret->unmatched_char == BACK_SLASH)
 			remove_ending_backslash(&cmd_line);
 		else
 			cmd_line = ft_strjoin_free(cmd_line, "\n", 1, 0);
-		ft_strdel(&prompt);
+
 		prompt = "> ";
-		first_read = FALSE;
+		is_first_read = FALSE;
+	}
+	lex_ret = lexer(cmd_line, FALSE);
+	if (lex_ret->is_matched == FALSE)
+	{
+		unmatch_quote_error(lex_ret->unmatched_char);
+		vector_free(lex_ret->tokens);
+		return (NULL);
 	}
 	lexer_add_newline_token(lex_ret->tokens);
-	lexer_print_tokens(lex_ret->tokens);
+	// lexer_print_tokens(lex_ret->tokens);
 	commands = parse_complete_commands(lex_ret->tokens);
 	vector_free(lex_ret->tokens);
-	print_commands(commands);
+	if (commands)
+		print_commands(commands);
 	ft_strdel(&cmd_line);
-	ft_strdel(&prompt);
 	ft_memdel((void **)&lex_ret);
 	return (commands);
 }

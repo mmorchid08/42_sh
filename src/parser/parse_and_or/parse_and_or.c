@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 17:02:12 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 15:06:03 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,18 @@ static void	and_or_advance(t_parse_and_or *and_or)
 	and_or->current_token = and_or->tokens[and_or->tokens_index];
 }
 
-static int	and_or_push_command(t_parse_and_or *and_or)
+static int	and_or_push_command(t_parse_and_or *and_or, t_bool is_last_cmd)
 {
 	t_command	*cmd;
 
+	if (and_or->cmd_tokens->length == 0)
+	{
+		if (is_last_cmd)
+			g_errno = ESYNTAX;
+		else
+			unexpected_token(and_or->current_token.type);
+		return (EXIT_FAILURE);
+	}
 	cmd = (t_command *)ft_malloc(sizeof(t_command));
 	cmd->type = and_or->cmd_type;
 	cmd->is_background_job = FALSE;
@@ -46,6 +54,11 @@ static int	and_or_push_command(t_parse_and_or *and_or)
 		cmd->command = parse_simple_cmd(and_or->cmd_tokens);
 	else if (cmd->type == PIPE_SEQ)
 		cmd->command = parse_pipe(and_or->cmd_tokens);
+	if (cmd->command == NULL && g_errno == ESYNTAX)
+	{
+		g_errno = EUNK;
+		unexpected_token(and_or->current_token.type);
+	}
 	if (cmd->command == NULL)
 		return (EXIT_FAILURE);
 	vector_push(and_or->logic_cmd->commands, cmd);
@@ -71,7 +84,7 @@ t_logic_sequence	*parse_and_or(t_vector *tokens_vec)
 	{
 		if (lexer_is_and_or(and_or->current_token.type))
 		{
-			if (and_or_push_command(and_or) == EXIT_FAILURE)
+			if (and_or_push_command(and_or, FALSE) == EXIT_FAILURE)
 				return (NULL);
 			vector_push(and_or->logic_cmd->logic_ops,
 				&(and_or->current_token.type));
@@ -80,7 +93,7 @@ t_logic_sequence	*parse_and_or(t_vector *tokens_vec)
 			push_cmd_token(and_or);
 		and_or_advance(and_or);
 	}
-	if (and_or_push_command(and_or) == EXIT_FAILURE)
+	if (and_or_push_command(and_or, TRUE) == EXIT_FAILURE)
 		return (NULL);
 	logic_cmd = and_or->logic_cmd;
 	logic_cmd->job_name = get_job_name(tokens_vec);
