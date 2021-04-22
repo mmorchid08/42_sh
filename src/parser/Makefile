@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/21 10:50:13 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/22 14:46:59 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,8 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	parse_complete_commands/add_complete_cmd.o \
 	parse_complete_commands/cmd_tokens_helpers.o \
 	parse_complete_commands/parse_complete_commands.o \
-	parse_and_or/parse_and_or.o \
-	parse_pipe/parse_pipe.o \
+	parse_and_or/parse_and_or.o parse_and_or/add_cmd.o \
+	parse_pipe/parse_pipe.o parse_pipe/add_simple_cmd.o \
 	parse_simple_cmd/parse_argument.o parse_simple_cmd/parse_assignment.o \
 	parse_simple_cmd/parse_redirection.o parse_simple_cmd/simple_advance.o \
 	parse_simple_cmd/parse_simple_cmd.o parse_simple_cmd/parse_here_document.o \

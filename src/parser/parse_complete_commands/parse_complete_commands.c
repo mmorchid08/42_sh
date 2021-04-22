@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/21 10:49:31 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:54:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,18 @@ t_vector	*parse_complete_commands(t_vector *tokens)
 	t_vector			*commands;
 
 	parser = parser_init(tokens);
-	while (parser->tokens_index < parser->tokens_len)
-	{
-		if (lexer_is_separator(parser->current_token.type))
+	if (parser->tokens_len > 1 || parser->current_token.type != NEWLINE)
+		while (parser->tokens_index < parser->tokens_len)
 		{
-			if (add_complete_cmd(parser) == EXIT_FAILURE)
-				return (parser_free_all(parser));
+			if (lexer_is_separator(parser->current_token.type))
+			{
+				if (add_complete_cmd(parser) == EXIT_FAILURE)
+					return (parser_free_all(parser));
+			}
+			else
+				push_cmd_token(parser);
+			parser_advance(parser);
 		}
-		else
-			push_cmd_token(parser);
-		parser_advance(parser);
-	}
 	commands = parser->commands;
 	parser_clean(parser);
 	return (commands);

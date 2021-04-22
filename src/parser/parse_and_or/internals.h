@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 08:38:12 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/21 10:46:05 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 13:41:50 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ typedef struct s_parse_and_or
 }	t_parse_and_or;
 
 void	unexpected_token(t_token_type type);
+int		and_or_push_command(t_parse_and_or *and_or, t_bool is_last_cmd);
 
 #endif

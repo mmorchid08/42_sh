@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 18:57:01 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/21 10:46:15 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:47:34 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ typedef struct s_parse_pipe
 }				t_parse_pipe;
 
 void	unexpected_token(t_token_type type);
+int		add_simple_cmd(t_parse_pipe *p_p, t_bool is_last_cmd);
 
 #endif
