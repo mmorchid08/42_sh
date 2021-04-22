@@ -22,6 +22,5 @@ t_vector	*parser(char *line)
 	lexer_add_newline_token(tokens);
 	lexer_print_tokens(tokens);
 	commands = parse_complete_commands(tokens);
-	print_commands(commands);
-	return (NULL);
+	return (commands);
 }
