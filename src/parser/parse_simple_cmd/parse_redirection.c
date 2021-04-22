@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:52:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 15:40:23 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:44:37 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 static int	syntax_error(t_parse_simple *sim)
 {
 	if (sim->current_token.type == NA)
-	{
 		g_errno = ESYNTAX;
-		return (EXIT_FAILURE);
-	}
-	unexpected_token(sim->current_token.type);
+	else
+		unexpected_token(sim->current_token.type);
 	return (EXIT_FAILURE);
 }
 
