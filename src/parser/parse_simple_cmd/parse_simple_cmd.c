@@ -6,11 +6,16 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 18:02:06 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 16:22:35 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 11:05:13 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
+
+static void	free_arg(void *el)
+{
+	free(*((char **)el));
+}
 
 static t_parse_simple	*simple_init(t_vector *tokens_vec)
 {
@@ -18,7 +23,7 @@ static t_parse_simple	*simple_init(t_vector *tokens_vec)
 
 	s = (t_parse_simple *)ft_malloc(sizeof(t_parse_simple));
 	s->cmd = (t_simple_command *)ft_malloc(sizeof(t_simple_command));
-	s->cmd->args = vector_init(sizeof(char *), free);
+	s->cmd->args = vector_init(sizeof(char *), free_arg);
 	s->cmd->redirections = vector_init(sizeof(t_redirection), del_redirection);
 	s->cmd->assignments = vector_init(sizeof(t_var), del_var);
 	s->tokens = (t_token *)tokens_vec->array;
@@ -45,7 +50,7 @@ t_simple_command	*parse_simple_cmd(t_vector *tokens_vec)
 	t_simple_command	*simple_cmd;
 
 	sim = simple_init(tokens_vec);
-	while (sim->tokens_index < sim->tokens_len)
+	while (sim->tokens_index < sim->tokens_len && sim->current_token.type != NA)
 	{
 		if (lexer_is_redirection(sim->current_token.type))
 		{
