@@ -17,7 +17,7 @@ int	manage_pipes(int i, int len)
 {
 	static int		fd[2];
 
-	if (i != len)
+	if (i + 1 != len)
 	{
 		if (pipe(fd) == -1)
 			exit(0);
@@ -37,14 +37,16 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 {
 	pid_t		pid;
 	char		*full_path;
-	static int	fd;
+	static int	fd = -1;
 	int			i;
 
-	fd = -1;
 	i = -1;
 	while (args[++i])
 		remove_quotes(&args[i]);
-	fd = manage_pipes(index, len);
+	if (fd != -1)
+		fd = manage_pipes(0, 1);
+	if (index + 1 < len)
+		fd = manage_pipes(1, 1);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -66,7 +68,7 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 	{
 		backups(2);
 		//for_testing
-		if (index == len)
+		if (index + 1 == len)
 			while (wait(0) > 0)
 				;
 	}
@@ -85,7 +87,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	while (i < len)
 	{
 		args = cmd[i].args->array;
-		pid = execute_pip_pt2(args, g_shell_env, i + 1, len);
+		pid = execute_pip_pt2(args, g_shell_env, i, len);
 		i++;
 	}
 	return (vec_pid);
