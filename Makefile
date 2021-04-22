@@ -41,18 +41,18 @@ INCLUDES =	-Iincludes
 	execution/get_exit_code.o \
 	execution/remove_quotes.o \
 	execution/wait_children.o \
-	execution/job_control/execute_job.c \
-	execution/job_control/get_job_by_selector.c \
-	execution/job_control/get_latest_jobs.c \
-	execution/job_control/job_builtins.c \
-	execution/job_control/job_list.c \
-	execution/job_control/new_job.c \
-	execution/job_control/notify_jobs.c \
-	execution/job_control/print_job.c \
-	execution/job_control/process.c \
-	execution/job_control/update_job.c \
-	execution/job_control/update_stopped_jobs.c \
-	execution/job_control/wait_job.c
+	execution/job_control/execute_job.o \
+	execution/job_control/get_job_by_selector.o \
+	execution/job_control/get_latest_jobs.o \
+	execution/job_control/job_builtins.o \
+	execution/job_control/job_list.o \
+	execution/job_control/new_job.o \
+	execution/job_control/notify_jobs.o \
+	execution/job_control/print_job.o \
+	execution/job_control/process.o \
+	execution/job_control/update_job.o \
+	execution/job_control/update_stopped_jobs.o \
+	execution/job_control/wait_job.o
 	
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
