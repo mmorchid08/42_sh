@@ -60,7 +60,6 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 		{
 			ft_printf(2, "Error executing\n");
 			exit(127);
-			return (-1);
 		}
 	}
 	else
