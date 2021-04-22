@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
+#include <stdbool.h>
 
 int	manage_pipes(int i, int len)
 {
 	static int		fd[2];
 
-	if (i + 1 != len)
+	if (i != len)
 	{
 		if (pipe(fd) == -1)
 			exit(0);
@@ -39,6 +40,7 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 	static int	fd;
 	int			i;
 
+	fd = -1;
 	i = -1;
 	while (args[++i])
 		remove_quotes(&args[i]);
@@ -62,7 +64,13 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 		}
 	}
 	else
+	{
 		backups(2);
+		//for_testing
+		if (index == len)
+			while (wait(0) > 0)
+				;
+	}
 	return (pid);
 }
 
@@ -78,10 +86,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	while (i < len)
 	{
 		args = cmd[i].args->array;
-		if ((pid = execute_pip_pt2(args, g_shell_env, i + 1, len)))
-			return (NULL);
-		else
-			vector_push(vec_pid, &pid);
+		pid = execute_pip_pt2(args, g_shell_env, i + 1, len);
 		i++;
 	}
 	return (vec_pid);
@@ -108,10 +113,11 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				f_pid = pid[i];
 			i++;
 		}
+		is_background = false;
 		if (is_interactive == FALSE)
 			return (wait_children(f_pid));
-		else
-			execute_job(vec_pid, pipe_seq->job_name, is_background);
+		//else
+		//	execute_job(vec_pid, pipe_seq->job_name, is_background);
 	}
 	return (0);
 }
