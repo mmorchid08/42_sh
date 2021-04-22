@@ -12,6 +12,9 @@
 
 #include "forty_two_sh.h"
 
+t_vector
+*g_stopped_jobs;
+
 int
 g_exit_status;
 

@@ -20,7 +20,6 @@ t_vector	*parser(char *line)
 	(void)line;
 	tokens = lexer(line, TRUE);
 	lexer_add_newline_token(tokens);
-	lexer_print_tokens(tokens);
 	commands = parse_complete_commands(tokens);
 	return (commands);
 }

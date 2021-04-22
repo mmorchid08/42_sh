@@ -59,7 +59,7 @@ mkfile_dir := $(dir $(mkfile_path))
 all: $(NAME)
 
 $(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
-	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
