@@ -6,22 +6,21 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/17 13:55:11 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 10:21:54 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static void	identify_expansions(t_lexer *lex)
+static void	handle_braces_parenthese(t_lexer *lex)
 {
 	char	*el;
 	void	*poped_el;
-	char	next_char;
 
 	poped_el = NULL;
 	el = (char *)stack_peek(lex->quotes_stack);
 	if (el && *el == '{' && lex->c == '}')
-			poped_el = stack_pop(lex->quotes_stack);
+		poped_el = stack_pop(lex->quotes_stack);
 	else if (el && *el == '(' && lex->c == ')')
 		poped_el = stack_pop(lex->quotes_stack);
 	if (poped_el == NULL)
@@ -30,11 +29,10 @@ static void	identify_expansions(t_lexer *lex)
 			stack_push(lex->quotes_stack, &(lex->c));
 		else if (lex->c == '$')
 		{
-			next_char = lex->line[lex->i + 1];
-			if (next_char == '(' || next_char == '{')
+			if (lex->line[lex->i + 1] == '(' || lex->line[lex->i + 1] == '{')
 			{
-				stack_push(lex->quotes_stack, &next_char);
-				string_push(lex->word, next_char);
+				stack_push(lex->quotes_stack, &(lex->line[lex->i + 1]));
+				string_push(lex->word, lex->line[lex->i + 1]);
 				lexer_advance(lex, 1);
 			}
 		}
@@ -42,7 +40,7 @@ static void	identify_expansions(t_lexer *lex)
 	free(poped_el);
 }
 
-static	void	update_quotes_stack(t_lexer *lex)
+static void	update_quotes_stack(t_lexer *lex)
 {
 	char	*el;
 	void	*poped_el;
@@ -56,8 +54,9 @@ static	void	update_quotes_stack(t_lexer *lex)
 	}
 	else if (lex->backslash == TRUE)
 		return ;
-	else {
-		identify_expansions(lex);
+	else
+	{
+		handle_braces_parenthese(lex);
 		if (el && *el == DOUBLE_QUOTE && lex->c == DOUBLE_QUOTE)
 			poped_el = stack_pop(lex->quotes_stack);
 		else if (!el || *el != DOUBLE_QUOTE)
