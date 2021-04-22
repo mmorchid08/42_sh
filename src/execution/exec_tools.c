@@ -19,32 +19,18 @@ int		check_file(char *path)
 	return (0);
 }
 
-char	*ft_search_env(char *key)
-{
-	t_var	*env;
-	int		i;
-
-	env = (t_var *)g_shell_env->array;
-	i = 0;
-	while (i < (int)g_shell_env->length)
-	{
-		if (!(ft_strcmp(env[i].key, key)))
-			return (env[i].value);
-		i++;
-	}
-	return (NULL);
-}
-
 char	*ft_search_env(char *to_search)
 {
 	int	i;
 
+	i = 0;
 	while (g_shell_env[i])
 	{
-		if (!ft_strncmp(g_shell_env[i], "PATH", 4))
+		if (!ft_strncmp(g_shell_env[i], to_search, 4))
 			return (ft_strchr(g_shell_env[i], '='));
 		i++;
 	}
+	return (NULL);
 }
 
 char	*try_every_possibility(char *cmd, char *path_env)

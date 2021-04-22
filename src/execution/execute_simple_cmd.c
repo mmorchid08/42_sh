@@ -12,11 +12,12 @@
 
 #include "forty_two_sh.h"
 
-pid_t	ft_execve_scmd(char *full_path, char **cmd, char **a_env)
+t_vector	*ft_execve_scmd(char *full_path, char **cmd, char **a_env)
 {
 	t_vector	*vec_pid;
 	pid_t		pid;
 
+	vec_pid = NULL;
 	pid = fork();
 	if (pid == -1)
 	{
@@ -29,14 +30,15 @@ pid_t	ft_execve_scmd(char *full_path, char **cmd, char **a_env)
 		{
 			ft_printf(2, "Error\n");
 			exit(127);
+			return (NULL);
 		}
 	}
 	else
 	{
 		vec_pid = vector_init(sizeof(pid_t), free);
-		vector_push(vec_pid, pid);
-		return (vec_pid);
+		vector_push(vec_pid, &pid);
 	}
+	return (vec_pid);
 }
 
 int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
@@ -48,9 +50,11 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	char		**a_env;
 	int			i;
 
+	vec_pid = NULL;
 	cmd = (char **)simple_cmd->args->array;
 	full_path = get_full_path(cmd[0]);
 	a_env = g_shell_env;
+	i = 0;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
 	vec_pid = ft_execve_scmd(full_path, cmd, a_env);

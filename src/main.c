@@ -18,8 +18,8 @@ g_exit_status;
 int
 g_term_fd;
 
-t_vector
-*g_shell_env;
+char
+**g_shell_env;
 
 static int	appendline(char **s, char **line)
 {
@@ -89,7 +89,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)av;
 	(void)ac;
-	(void)envp;
+	g_shell_env = envp;
 	g_term_fd = open("/dev/tty", O_RDWR);
 	if (g_term_fd == -1)
 		ft_strerror(EOPENFILE,"open", NULL, TRUE);

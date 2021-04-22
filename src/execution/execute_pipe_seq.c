@@ -16,7 +16,7 @@ int	manage_pipes(int i, int len)
 {
 	static int		fd[2];
 
-	if i + 1 != len)
+	if (i + 1 != len)
 	{
 		if (pipe(fd) == -1)
 			exit(0);
@@ -37,12 +37,11 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 	pid_t		pid;
 	char		*full_path;
 	static int	fd;
-	int			is_cmd;
 	int			i;
 
 	i = -1;
-	while (cmd[++i])
-		remove_quotes(&cmd[i]);
+	while (args[++i])
+		remove_quotes(&args[i]);
 	fd = manage_pipes(index, len);
 	pid = fork();
 	if (pid == -1)
@@ -55,18 +54,16 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 		full_path = get_full_path(args[0]);
 		if (fd != -1)
 			close(fd);
-		if (execve(full_path, args, g_shell_env))
+		if (execve(full_path, args, a_env))
 		{
 			ft_printf(2, "Error executing\n");
 			exit(127);
-			return (-1)
+			return (-1);
 		}
 	}
 	else
-	{
 		backups(2);
-		return (pid);
-	}
+	return (pid);
 }
 
 t_vector	*execute_pip(t_simple_command *cmd, int len)
@@ -81,12 +78,13 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	while (i < len)
 	{
 		args = cmd[i].args->array;
-		if ((pid = execute_pip_pt2(args, a_env, i + 1, len)))
+		if ((pid = execute_pip_pt2(args, g_shell_env, i + 1, len)))
 			return (NULL);
 		else
-			vector_push(vec_pid, pid);
+			vector_push(vec_pid, &pid);
 		i++;
 	}
+	return (vec_pid);
 }
 
 int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
@@ -94,13 +92,24 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 {
 	t_simple_command	*s_cmd;
 	t_vector			*vec_pid;
+	pid_t			*pid;
+	pid_t			f_pid;
+	int			i;
 
 	s_cmd = (t_simple_command *)pipe_seq->commands->array;
 	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length);
 	if (vec_pid)
 	{
+		i = 0;
+		pid = (pid_t *)vec_pid->array;
+		while (i < (int)vec_pid->length)
+		{
+			if (!pid[i + 1])
+				f_pid = pid[i];
+			i++;
+		}
 		if (is_interactive == FALSE)
-			return (wait_children(pid));
+			return (wait_children(f_pid));
 		else
 			execute_job(vec_pid, pipe_seq->job_name, is_background);
 	}

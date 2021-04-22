@@ -44,17 +44,17 @@ void	execute_commands(t_vector *commands)
 	int					i;
 
 	i = 0;
-	while (i < commands->length)
+	while (i < (int)commands->length)
 	{
 		backups(1);
 		if (cmds_array[i].type == LOGIC_SEQ)
-			g_exit_status = execute_logic_seq(&cmds_array[i].command,
+			g_exit_status = execute_logic_seq(cmds_array[i].command,
 					cmds_array[i].is_background_job);
 		else if (cmds_array[i].type == PIPE_SEQ)
-			g_exit_status = execute_pipe_seq(&cmds_array[i].command,
+			g_exit_status = execute_pipe_seq(cmds_array[i].command,
 					cmds_array[i].is_background_job, TRUE);
 		else if (cmds_array[i].type == SIMPLE_CMD)
-			g_exit_status = execute_simple_cmd(&cmds_array[i].command,
+			g_exit_status = execute_simple_cmd(cmds_array[i].command,
 					cmds_array[i].is_background_job, TRUE);
 		i++;
 		backups(3);

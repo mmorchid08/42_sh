@@ -37,7 +37,7 @@ static int	logic_seq_executor(t_logic_sequence *logic_seq,
 
 	i = 0;
 	ret = execute_logical_segment(&cmds[0], is_background, is_interactive);
-	while (i < logic_seq->logic_ops->length)
+	while (i < (int)logic_seq->logic_ops->length)
 	{
 		if ((ret == 0 && ops[i] == ANDAND)
 			|| (ret != 0 && ops[i] == OROR))

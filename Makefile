@@ -18,6 +18,7 @@
 NAME = 42sh
 LIBFT = libft/libft.a
 PARSER = src/parser/parser.a
+JOBS = src/execution/job_control/job_control.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
@@ -31,7 +32,16 @@ INCLUDES =	-Iincludes
 42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
 			src/errors/errors.h
 
-42sh = 	delete_functions.o main.o errors/errors.o
+42sh = 	delete_functions.o main.o errors/errors.o \
+	execution/exec_tools.o \
+	execution/execute_commands.o \
+	execution/execute_logic_seq.o \
+	execution/execute_pipe_seq.o \
+	execution/execute_simple_cmd.o \
+	execution/get_exit_code.o \
+	execution/remove_quotes.o \
+	execution/wait_children.o
+	
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 

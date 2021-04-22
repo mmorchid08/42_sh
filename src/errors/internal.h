@@ -13,8 +13,6 @@
 #ifndef INTERNAL_H
 # define INTERNAL_H
 
-# ifndef FORTY_TWO_SH_H
 #  include "forty_two_sh.h"
-# endif
 
 #endif

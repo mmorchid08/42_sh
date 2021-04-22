@@ -28,8 +28,8 @@ void	del_token(void *element);
 void	del_redirection(void *element);
 void	del_var(void *element);
 
-extern	t_vector
-*g_shell_env;
+extern	char
+**g_shell_env;
 extern	int
 g_exit_status;
 extern int
@@ -81,13 +81,17 @@ void		remove_quotes(char **str);
 void		execute_commands(t_vector *commands);
 int			execute_simple_cmd(t_simple_command *simple_cmd,
 				t_bool is_background, t_bool is_interactive);
+int		execute_logic_seq(t_logic_sequence *logic_seq, t_bool is_background);
 int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				t_bool is_interactive);
 int			get_exit_code(int wait_status);
+int			wait_children(pid_t ret_pid);
 
 /*
 ** ============================= end execution =================================
 */
 
+void		backups(int f);
+int		get_next_line(int fd, char **line);
 
 #endif
