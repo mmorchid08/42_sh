@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:08:53 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 17:04:54 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 11:12:25 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	del_redirection(void *element)
 
 	redirect = (t_redirection *)element;
 	free(redirect->righ_fd);
-	free(redirect);
 }
 
 void	del_var(void *element)
@@ -37,5 +36,4 @@ void	del_var(void *element)
 	var = (t_var *)element;
 	free(var->key);
 	free(var->value);
-	free(var);
 }
