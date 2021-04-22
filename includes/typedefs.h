@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 19:02:44 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 10:46:01 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef enum	e_token_type {
 	ANDAND,
 	SEMI,
 	AMPERSAND,
-	NEWLINE
+	NEWLINE,
+	NA
 }				t_token_type;
 
 typedef struct	s_var
