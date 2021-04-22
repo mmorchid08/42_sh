@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:01:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/21 14:51:49 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 11:07:31 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ static int			add_simple_command(t_parse_pipe *p_p, t_bool is_last_cmd)
 	simple_cmd = parse_simple_cmd(p_p->cmd_tokens);
 	if (simple_cmd == NULL)
 	{
+		if (g_errno == ESYNTAX)
+		{
+			unexpected_token(p_p->current_token.type);
+			g_errno = EUNK;
+		}
 		parse_pipe_free_all(p_p);
 		return (EXIT_FAILURE);
 	}
