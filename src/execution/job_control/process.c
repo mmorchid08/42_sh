@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:54:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:27 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/23 17:52:24 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	add_process_to_job(t_job *job, pid_t pid)
 	{
 		setpgid(pid, pid);
 		job->pgid = pid;
-		if (job->is_background)
+		if (job->is_background == FALSE)
 			tcsetpgrp(g_term_fd, job->pgid);
 	}
 	else
