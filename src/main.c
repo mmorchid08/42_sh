@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:46:41 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/23 22:05:56 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,13 @@ int	main(int ac, char **av, char **envp)
 	if (g_term_fd == -1)
 		ft_strerror(EOPENFILE,"open", NULL, TRUE);
 	init_jobs();
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	while (42)
 	{
+		update_all_jobs();
+		notify_job_state();
 		write(1, "$> ", 3);
 		get_next_line(0, &cmd);
 		vec = parser(cmd);

@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 13:56:32 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:23 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/23 04:35:29 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	notify_job_state(void)
 			if (job->state == COMPLETED)
 				remove_from_job_list(job->id);
 		}
+		i++;
 	}
 }
