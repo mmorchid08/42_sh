@@ -62,15 +62,13 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 		{
 			ft_printf(2, "Error executing\n");
 			exit(127);
+			return (-1);
 		}
 	}
 	else
 	{
 		backups(2);
 		//for_testing
-		if (index + 1 == len)
-			while (wait(0) > 0)
-				;
 	}
 	return (pid);
 }
@@ -83,11 +81,15 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	int			i;
 
 	i = 0;
-	vec_pid = vector_init(sizeof(pid_t), free);
+	vec_pid = vector_init(sizeof(pid_t), NULL);
 	while (i < len)
 	{
 		args = cmd[i].args->array;
 		pid = execute_pip_pt2(args, g_shell_env, i, len);
+		if (pid != -1)
+			vector_push(vec_pid, &pid);
+		else
+			return (NULL);
 		i++;
 	}
 	return (vec_pid);
@@ -117,8 +119,8 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 		is_background = false;
 		if (is_interactive == FALSE)
 			return (wait_children(f_pid));
-		//else
-		//	execute_job(vec_pid, pipe_seq->job_name, is_background);
+		else
+			execute_job(vec_pid, pipe_seq->job_name, is_background);
 	}
 	return (0);
 }
