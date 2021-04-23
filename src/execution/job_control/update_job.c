@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:30:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:28 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/23 03:47:27 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void	update_all_jobs(void)
 
 	i = 0;
 	while (i < g_job_list->length)
-		update_job(((t_job *)g_job_list->array) + i);
+		update_job(((t_job *)g_job_list->array) + i++);
 }
