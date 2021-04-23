@@ -3,20 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/19 16:07:25 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/18 07:52:27 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORTY_TWO_SH_H
 # define FORTY_TWO_SH_H
 
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <signal.h>
+
 # include "../libft/libft.h"
+# include "constants.h"
 # include "typedefs.h"
 # include "../src/errors/errors.h"
+# include "../src/parser/parser.h"
 
+void	del_token(void *element);
+void	del_redirection(void *element);
+void	del_var(void *element);
+
+extern	char
+**g_shell_env;
 extern	int
 g_exit_status;
 extern int
@@ -62,16 +75,23 @@ int			execute_job(t_vector *pids_vec, char *job_name,
 ** ================================ execution ==================================
 */
 
+char		*get_full_path(char *cmd);
+void		handle_quotes(char c, int *balance);
+void		remove_quotes(char **str);
 void		execute_commands(t_vector *commands);
 int			execute_simple_cmd(t_simple_command *simple_cmd,
 				t_bool is_background, t_bool is_interactive);
+int		execute_logic_seq(t_logic_sequence *logic_seq, t_bool is_background);
 int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				t_bool is_interactive);
 int			get_exit_code(int wait_status);
+int			wait_children(pid_t ret_pid);
 
 /*
 ** ============================= end execution =================================
 */
 
+void		backups(int f);
+int		get_next_line(int fd, char **line);
 
 #endif

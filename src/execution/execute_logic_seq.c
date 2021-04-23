@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_logic_seq.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:42:48 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/09 12:13:35 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:58:01 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	logic_seq_executor(t_logic_sequence *logic_seq,
 
 	i = 0;
 	ret = execute_logical_segment(&cmds[0], is_background, is_interactive);
-	while (i < logic_seq->logic_ops->length)
+	while (i < (int)logic_seq->logic_ops->length)
 	{
 		if ((ret == 0 && ops[i] == ANDAND)
 			|| (ret != 0 && ops[i] == OROR))

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   simple_advance.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:06 by hmzah            ###   ########.fr       */
+/*   Created: 2021/03/24 16:53:48 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/28 16:59:12 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "internals.h"
 
-#  include "forty_two_sh.h"
-
-#endif
+void	simple_advance(t_parse_simple *sim)
+{
+	++(sim->tokens_index);
+	sim->current_token = sim->tokens[sim->tokens_index];
+}

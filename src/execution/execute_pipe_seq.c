@@ -3,45 +3,123 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/08 14:24:14 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/16 17:20:58 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
+#include <stdbool.h>
+
+int	manage_pipes(int i, int len)
+{
+	static int		fd[2];
+
+	if (i + 1 != len)
+	{
+		if (pipe(fd) == -1)
+			exit(0);
+		dup2(fd[1], 1);
+		close(fd[1]);
+		return (fd[0]);
+	}
+	else
+	{
+		dup2(fd[0], 0);
+		close(fd[0]);
+		return (-1);
+	}
+}
+
+pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
+{
+	pid_t		pid;
+	char		*full_path;
+	static int	fd = -1;
+	int			i;
+
+	i = -1;
+	while (args[++i])
+		remove_quotes(&args[i]);
+	if (fd != -1)
+		fd = manage_pipes(0, 1);
+	if (index + 1 < len)
+		fd = manage_pipes(1, 1);
+	pid = fork();
+	if (pid == -1)
+	{
+		ft_printf(2, "Error forking.\n");
+		return (-1);
+	}
+	else if (pid == 0)
+	{
+		full_path = get_full_path(args[0]);
+		if (fd != -1)
+			close(fd);
+		if (execve(full_path, args, a_env))
+		{
+			ft_printf(2, "Error executing\n");
+			exit(127);
+		}
+	}
+	else
+	{
+		backups(2);
+		//for_testing
+		if (index + 1 == len)
+			while (wait(0) > 0)
+				;
+	}
+	return (pid);
+}
+
+t_vector	*execute_pip(t_simple_command *cmd, int len)
+{
+	t_vector	*vec_pid;
+	char		**args;
+	pid_t		pid;
+	int			i;
+
+	i = 0;
+	vec_pid = vector_init(sizeof(pid_t), free);
+	while (i < len)
+	{
+		args = cmd[i].args->array;
+		pid = execute_pip_pt2(args, g_shell_env, i, len);
+		i++;
+	}
+	return (vec_pid);
+}
 
 int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 			t_bool is_interactive)
 {
-	pid_t	pid;
-	t_job	*job;
-	int 	i;
+	t_simple_command	*s_cmd;
+	t_vector			*vec_pid;
+	pid_t			*pid;
+	pid_t			f_pid;
+	int			i;
 
-	i = 0;
-	if (is_interactive)
-			job = new_job(is_background, pipe_seq->job_name);
-	while (i < pipe_seq->commands->length)
+	s_cmd = (t_simple_command *)pipe_seq->commands->array;
+	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length);
+	if (vec_pid)
 	{
-		// TODO pipe prep
-		if ((pid = fork()) == 0)
-			;// hmzah_child_code
-		else if (pid < 0)
+		i = 0;
+		pid = (pid_t *)vec_pid->array;
+		while (i < (int)vec_pid->length)
 		{
-			// TODO handle fork error
-			// TODO free job and kill all processes
-			return (-1);
+			if (!pid[i + 1])
+				f_pid = pid[i];
+			i++;
 		}
-		// hmzah parent code
-		if (is_interactive)
-			add_process_to_job(job, pid);
+		is_background = false;
+		if (is_interactive == FALSE)
+			return (wait_children(f_pid));
+		//else
+		//	execute_job(vec_pid, pipe_seq->job_name, is_background);
 	}
-	if (is_interactive == FALSE)
-		return (wait_children(pid));
-	job->ret_pid = pid;
-	if (is_background)
-		return (wait_job(job));
 	return (0);
 }
 // TODO fix norme

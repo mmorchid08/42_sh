@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   lexer_handle_io_number.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:06 by hmzah            ###   ########.fr       */
+/*   Created: 2021/03/21 18:59:40 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/21 19:04:20 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "internals.h"
 
-#  include "forty_two_sh.h"
-
-#endif
+void	lexer_handle_io_number(t_lexer *lex)
+{
+	while (lex->c && ft_isdigit(lex->c))
+	{
+		string_push(lex->word, lex->c);
+		lexer_advance(lex, 1);
+	}
+	if (lex->c == '>' || lex->c == '<')
+		lexer_push_token(lex, IO_NUMBER);
+}

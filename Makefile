@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/03/20 13:28:59 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/03/30 15:59:32 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,71 +17,72 @@
 # name
 NAME = 42sh
 LIBFT = libft/libft.a
+PARSER = src/parser/parser.a
+JOBS = src/execution/job_control/job_control.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
-CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES) -g
 CC = gcc
+PARSER_ENV=42sh_headers=$(mkfile_dir)/includes/forty_two_sh.h 42sh_include_dirs=-I$(mkfile_dir)includes/
 
 # 42sh																		   #
-INCLUDES = -I. -Iincludes -Ilibft
-42sh_INC = includes/forty_two_sh.h includes/typedefs.h src/errors/errors.h 
-42sh = main.o 
+INCLUDES =	-Iincludes
+
+42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
+			src/errors/errors.h
+
+42sh = 	delete_functions.o main.o errors/errors.o \
+	execution/exec_tools.o \
+	execution/execute_commands.o \
+	execution/execute_logic_seq.o \
+	execution/execute_pipe_seq.o \
+	execution/execute_simple_cmd.o \
+	execution/get_exit_code.o \
+	execution/remove_quotes.o \
+	execution/wait_children.o
+	
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 
 # objects directory
 OBJS_DIR = objs
 
-# Colors
-BLACK	= \033[30m
-RED		= \033[31m
-GREEN	= \033[32m
-YELLOW	= \033[93m
-BLUE	= \033[34m
-MAGENTA	= \033[35m
-CYAN	= \033[36m
-WHITE	= \033[37m
-RESET	= \033[0m
+#
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
 
 # **************************************************************************** #
 #	rules																	   #
 # **************************************************************************** #
+
 all: $(NAME)
 
-$(NAME): $(42sh_OBJS) $(LIBFT)
-	@$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT)
-	@echo "$(GREEN)program$(RESET) $(NAME): $(GREEN)UPDATED!$(RESET)";
+$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
 
+$(PARSER): force
+	@env $(PARSER_ENV) make -C src/parser/
+
+$(JOBS): force
+	@env $(PARSER_ENV) make -C src/execution/job_control
+
 force:
 
-$(42sh_OBJS): $(OBJS_DIR)/%.o : src/%.c $(42sh_INC) | $(OBJS_DIR)
+$(OBJS_DIR)/%.o : src/%.c $(42sh_INC)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ -I src/
-	@echo "$(YELLOW)OBJ$(RESET) $<: $(YELLOW)UPDATED!$(RESET)";
-
-$(OBJS_DIR):
-	@if [ ! -d $(OBJS_DIR) ]; then \
-		echo "$(CYAN)DIR$(RESET) $(OBJS_DIR)/: $(CYAN)CREATED!$(RESET)"; \
-		mkdir $(OBJS_DIR); \
-	fi;
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make clean -C libft/
-	@if [ -d $(OBJS_DIR) ]; then \
-		echo "$(RED)OBJ$(RESET) 42sh objs: $(RED)REMOVED!$(RESET)"; \
-		rm -rf $(OBJS_DIR); \
-	fi;
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@make fclean -C libft/
-	@if [ -f $(NAME) ]; then \
-		echo "$(RED)program$(RESET) $(NAME): $(RED)REMOVED!$(RESET)"; \
-		rm -f $(NAME); \
-	fi;
+	make fclean -C libft/
+	make fclean -C src/parser/
+	rm -f $(NAME)
 
 re:
 	@make fclean

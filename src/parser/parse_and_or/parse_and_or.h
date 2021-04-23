@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   parse_and_or.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:06 by hmzah            ###   ########.fr       */
+/*   Created: 2021/03/26 10:07:15 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/26 10:56:29 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#ifndef PARSE_AND_OR_H
+# define PARSE_AND_OR_H
 
-#  include "forty_two_sh.h"
+t_logic_sequence		*parse_and_or(t_vector *tokens_vec);
 
 #endif

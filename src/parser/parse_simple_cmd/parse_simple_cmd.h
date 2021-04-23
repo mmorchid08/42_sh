@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   parse_simple_cmd.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:06 by hmzah            ###   ########.fr       */
+/*   Created: 2021/03/24 16:37:56 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/31 11:02:34 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#ifndef PARSE_SIMPLE_CMD_H
+# define PARSE_SIMPLE_CMD_H
 
-#  include "forty_two_sh.h"
+t_simple_command	*parse_simple_cmd(t_vector *tokens_vec);
 
 #endif

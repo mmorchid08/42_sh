@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   lexer_skip_whitespaces.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:06 by hmzah            ###   ########.fr       */
+/*   Created: 2021/03/21 19:12:19 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/22 09:36:46 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "internals.h"
 
-#  include "forty_two_sh.h"
-
-#endif
+void	lexer_skip_whitespaces(t_lexer *lex)
+{
+	while (ft_isspace(lex->c))
+		lexer_advance(lex, 1);
+}

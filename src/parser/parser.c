@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.h                                         :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 10:02:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:06 by hmzah            ###   ########.fr       */
+/*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/30 17:47:11 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERNAL_H
-# define INTERNAL_H
+#include "internals.h"
 
-#  include "forty_two_sh.h"
+t_vector	*parser(char *line)
+{
+	t_vector *tokens;
+	t_vector *commands;
 
-#endif
+	(void)line;
+	tokens = lexer(line, TRUE);
+	lexer_add_newline_token(tokens);
+	commands = parse_complete_commands(tokens);
+	return (commands);
+}

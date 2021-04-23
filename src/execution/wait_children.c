@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 10:54:43 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/06 14:39:01 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:16:52 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	wait_children(pid_t ret_pid)
 		if (pid == -1)
 			break ;
 		if (pid == ret_pid)
-			ret_status = get_exit_code(wait_status);
+			ret_status = wait_status;
 	}
 	return (ret_status);
 }
