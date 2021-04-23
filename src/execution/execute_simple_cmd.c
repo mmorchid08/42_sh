@@ -63,7 +63,7 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 		if (is_interactive == FALSE)
 			return (get_exit_code(wait_children((pid_t)vec_pid->array)));
 		else
-			execute_job(vec_pid, simple_cmd->job_name, is_background);
-	}	
-	return (0);
+			return (execute_job(vec_pid, simple_cmd->job_name, is_background));
+	}
+	return (1);
 }

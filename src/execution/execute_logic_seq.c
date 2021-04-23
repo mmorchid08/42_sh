@@ -43,6 +43,8 @@ static int	logic_seq_executor(t_logic_sequence *logic_seq,
 			|| (ret != 0 && ops[i] == OROR))
 			ret = execute_logical_segment(&cmds[i + 1], is_background,
 				is_interactive);
+		else
+			break;
 		i++;
 	}
 	return (ret);

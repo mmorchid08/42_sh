@@ -36,5 +36,5 @@ int	wait_job(t_job *job)
 		}
 	}
 	tcsetpgrp(g_term_fd, getpgrp());
-	return (get_exit_code(job->wait_status));
+	return (job->wait_status);
 }

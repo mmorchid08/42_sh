@@ -116,7 +116,6 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				f_pid = pid[i];
 			i++;
 		}
-		is_background = false;
 		if (is_interactive == FALSE)
 			return (wait_children(f_pid));
 		else
