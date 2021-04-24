@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:21:23 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:16 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/24 00:33:38 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	execute_job(t_vector *pids_vec, char *job_name, t_bool is_background)
 		i++;
 	}
 	job->ret_pid = *pid;
-	if (is_background == FALSE)
+	if (is_background)
+		ft_printf(1, "[%d] %d\n", job->id, job->ret_pid);
+	else
 		return (get_exit_code(wait_job(job)));
 	return (0);
 }
