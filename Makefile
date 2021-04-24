@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/12 15:34:06 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/24 13:09:52 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ INCLUDES =	-Iincludes
 42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
 			src/errors/errors.h
 
-42sh = 	delete_functions.o main.o errors/errors.o prompt.o read_commands.o
+42sh = 	delete_functions.o main.o errors/errors.o prompt.o \
+		read_cmd_multiline/read_cmd_multiline.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 

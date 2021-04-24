@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/12 10:50:28 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:11:04 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ char		*prompt_1(void);
 ** read
 */
 
-t_vector	*read_commands(void);
+char	*read_cmd_multiline(void);
 
 #endif
