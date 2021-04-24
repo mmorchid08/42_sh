@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:01:51 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/21 11:59:01 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:16:04 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	lexer_clean(t_lexer **lex)
 	ft_memdel((void **)lex);
 }
 
-static t_lexer_ret	*lexer_return(t_lexer **lex, t_bool is_interactive_mode)
+static t_lexer_ret	*lexer_return(t_lexer **lex)
 {
 	t_lexer_ret	*lex_ret;
 
@@ -44,42 +44,25 @@ static t_lexer_ret	*lexer_return(t_lexer **lex, t_bool is_interactive_mode)
 	lex_ret->tokens = (*lex)->tokens;
 	lex_ret->is_matched = TRUE;
 	lex_ret->unmatched_char = '\0';
-	if ((*lex)->quotes_stack->length != 0)
-	{
-		lex_ret->is_matched = FALSE;
-		lex_ret->unmatched_char = *(char *)stack_peek((*lex)->quotes_stack);
-	}
-	else if (is_interactive_mode && (*lex)->backslash)
+	if ((*lex)->backslash)
 	{
 		lex_ret->is_matched = (*lex)->backslash == FALSE;
 		lex_ret->unmatched_char = BACK_SLASH;
 	}
-	if (is_interactive_mode == FALSE || lex_ret->is_matched == TRUE)
-		lexer_clean(lex);
+	else if ((*lex)->quotes_stack->length != 0)
+	{
+		lex_ret->is_matched = FALSE;
+		lex_ret->unmatched_char = *(char *)stack_peek((*lex)->quotes_stack);
+	}
+	lexer_clean(lex);
 	return (lex_ret);
 }
 
-static void	lex_setup_multi_line(t_lexer *lex, char *line)
+t_lexer_ret	*lexer(char *line)
 {
-	lex->line = line;
-	lex->c = lex->line[lex->i];
-	if (lex->backslash)
-	{
-		lex->backslash = FALSE;
-		lex->is_word_complete = TRUE;
-		--(lex->word->length);
-		lexer_advance(lex, -1);
-	}
-}
+	t_lexer	*lex;
 
-t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
-{
-	static t_lexer	*lex = NULL;
-
-	if (lex == NULL)
-		lex = lexer_init(line);
-	else
-		lex_setup_multi_line(lex, line);
+	lex = lexer_init(line);
 	while (lex->c)
 	{
 		if (lex->is_word_complete == FALSE)
@@ -94,5 +77,5 @@ t_lexer_ret	*lexer(char *line, t_bool is_interactive_mode)
 			lexer_handle_operator(lex);
 		lexer_skip_whitespaces(lex);
 	}
-	return (lexer_return(&lex, is_interactive_mode));
+	return (lexer_return(&lex));
 }
