@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 15:37:17 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:06:26 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 int	shell_main(void)
 {
 	t_vector	*commands;
+	char		*cmd_line;
 
 	(void)commands;
-	commands = read_commands();
+	cmd_line = read_cmd_multiline();
+	if (cmd_line)
+		commands = parser(cmd_line);
 	return (EXIT_SUCCESS);
 }
 
