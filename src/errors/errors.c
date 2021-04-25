@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:01:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:24 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/24 23:24:43 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ const char	*g_error_message_string[] = {
 	[ENOTDIR] = "Not a directory",
 	[ENAMETOOLONG] = "File name too long",
 	[ENOHOME] = "HOME not set",
-	[ENOOLDPWD]= "OLDPWD not set",
+	[ENOOLDPWD] = "OLDPWD not set",
 	[EISDIR] = "is a directory",
 	[EREDIRECT] = "Redirection error",
 	[EAMBREDIRECT] = "ambiguous redirect",
-	[ESYNTAX] = "syntax error near unexpected token",\
+	[ESYNTAX] = "syntax error near unexpected token",
 	[ETOOMANYPIPES] = "Too many pipes",
 	[EFORK] = "fork error",
 	[EOPENFILE] = "cannot open file",
@@ -37,13 +37,13 @@ void	ft_perror(char *prefix, char *suffix, t_bool exit_on_error)
 {
 	if (g_errno > EUNK)
 		g_errno = EUNK;
-	ft_printf(2, "21sh: ");
+	ft_putstr_fd("42sh: ", 2);
 	if (prefix != NULL)
 		ft_printf(2, "%s: ", prefix);
-	ft_printf(2, "%s", g_error_message_string[g_errno]);
+	ft_putstr_fd(g_error_message_string[g_errno], 2);
 	if (suffix != NULL)
 		ft_printf(2, " %s", suffix);
-	ft_printf(2, "\n");
+	ft_putstr_fd("\n", 2);
 	if (g_errno > 0 && exit_on_error == TRUE)
 		exit(g_errno);
 }

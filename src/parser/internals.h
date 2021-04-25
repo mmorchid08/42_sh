@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 13:39:53 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 13:34:24 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/21 09:32:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@
 # include "parse_complete_commands/parse_complete_commands.h"
 
 void	unexpected_token(t_token_type type);
-void	print_commands(t_vector *commands_vec);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/15 16:03:29 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/24 23:20:01 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef enum	e_token_type {
 	ANDAND,
 	SEMI,
 	AMPERSAND,
-	NEWLINE
+	NEWLINE,
+	NA
 }				t_token_type;
 
 typedef struct	s_var
@@ -110,6 +111,7 @@ typedef struct s_pipe_sequence
 
 /*
 ** t_vector *commands [t_command]
+** t_vector	*logic_ops [t_token_type]
 */
 typedef struct s_logic_sequence
 {

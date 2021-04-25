@@ -6,7 +6,7 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/24 15:37:01 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/24 23:19:15 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME = 42sh
 LIBFT = libft/libft.a
 PARSER = src/parser/parser.a
 JOBS = src/execution/job_control/job_control.a
+READLINE = readline/readline.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
@@ -41,7 +42,8 @@ INCLUDES =	-Iincludes
 	execution/get_exit_code.o \
 	execution/remove_quotes.o \
 	execution/wait_children.o
-	
+	prompt.o \
+	read_cmd_multiline/read_cmd_multiline.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 
@@ -58,8 +60,8 @@ mkfile_dir := $(dir $(mkfile_path))
 
 all: $(NAME)
 
-$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
-	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
+$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE) $(JOBS)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(PARSER) $(READLINE) $(JOBS) $(LIBFT) -ltermcap
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
@@ -70,6 +72,9 @@ $(PARSER): force
 $(JOBS): force
 	make -C src/execution/job_control
 
+ $(READLINE) : force
+	@make -C readline
+
 force:
 
 $(OBJS_DIR)/%.o : src/%.c $(42sh_INC)
@@ -79,11 +84,13 @@ $(OBJS_DIR)/%.o : src/%.c $(42sh_INC)
 clean:
 	rm -rf $(OBJS_DIR)
 	make clean -C src/execution/job_control
+	make clean -C readline
 
 fclean: clean
 	make fclean -C libft/
 	make fclean -C src/parser/
 	make fclean -C src/execution/job_control
+	make fclean -C readline
 	rm -f $(NAME)
 
 re:

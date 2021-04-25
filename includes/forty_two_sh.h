@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:27 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/24 23:16:21 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
+# include "../readline/readline.h"
+# include "../src/builtins/env/env.h"
+# include <stdbool.h>
 
 void	del_token(void *element);
 void	del_redirection(void *element);
@@ -87,11 +90,32 @@ int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
 
+
 /*
 ** ============================= end execution =================================
 */
 
 void		backups(int f);
 int		get_next_line(int fd, char **line);
+
+/*
+**		free functions
+*/
+
+void		del_token(void *element);
+void		del_redirection(void *element);
+void		del_var(void *element);
+
+/*
+** Prompt
+*/
+
+char		*prompt_1(void);
+
+/*
+** read
+*/
+
+char	*read_cmd_multiline(void);
 
 #endif

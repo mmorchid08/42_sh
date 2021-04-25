@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:02:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:49:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:32:59 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,30 @@
 
 static void	*get_command_by_type(t_parse_complete *parser)
 {
-	void *command;
+	void	*command;
 
+	g_errno = EXIT_SUCCESS;
 	if (parser->cmd_type == SIMPLE_CMD)
 		command = parse_simple_cmd(parser->cmd_tokens);
 	else if (parser->cmd_type == PIPE_SEQ)
 		command = parse_pipe(parser->cmd_tokens);
 	else
 		command = parse_and_or(parser->cmd_tokens);
+	if (command == NULL && g_errno == ESYNTAX)
+		unexpected_token(parser->current_token.type);
 	return (command);
 }
 
-int			add_complete_cmd(t_parse_complete *parser)
+int	add_complete_cmd(t_parse_complete *parser)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
-	cmd = (t_command*)ft_malloc(sizeof(t_command));
+	if (parser->cmd_tokens->length == 0)
+	{
+		unexpected_token(parser->current_token.type);
+		return (EXIT_FAILURE);
+	}
+	cmd = (t_command *)ft_malloc(sizeof(t_command));
 	cmd->type = parser->cmd_type;
 	cmd->is_background_job = parser->current_token.type == AMPERSAND;
 	cmd->command = get_command_by_type(parser);
