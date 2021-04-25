@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:47:11 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/05 11:09:59 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/05 11:10:12 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internals.h"
+#ifndef INTERNALS_H
+# define INTERNALS_H
 
-t_vector	*parser(char *line)
-{
-	t_vector *tokens;
-	t_vector *commands;
+# include "forty_two_sh.h"
 
-	(void)line;
-	tokens = lexer(line, TRUE);
-	lexer_add_newline_token(tokens);
-<<<<<<< HEAD
-	commands = parse_complete_commands(tokens);
-	return (commands);
-=======
-	lexer_print_tokens(tokens);
-	commands = parse_complete_commands(tokens);
-	print_commands(commands);
-	return (NULL);
->>>>>>> origin/expansion
-}
+#endif

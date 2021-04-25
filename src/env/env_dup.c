@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   env_dup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:47:11 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/02 18:37:35 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/05 12:05:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-t_vector	*parser(char *line)
+t_vector	*env_dup(t_vector *env)
 {
-	t_vector *tokens;
-	t_vector *commands;
+	t_vector	*new_env;
+	t_var		*vars;
+	t_var		v;
+	size_t		i;
 
-	(void)line;
-	tokens = lexer(line, TRUE);
-	lexer_add_newline_token(tokens);
-<<<<<<< HEAD
-	commands = parse_complete_commands(tokens);
-	return (commands);
-=======
-	lexer_print_tokens(tokens);
-	commands = parse_complete_commands(tokens);
-	print_commands(commands);
-	return (NULL);
->>>>>>> origin/expansion
+	new_env = vector_init_capacity(env->element_size, env->capacity,
+		env->free_element);
+	vars = env->array;
+	i = 0;
+	while (i < env->length)
+	{
+		v.key = ft_strdup(vars[i].key);
+		v.value = ft_strdup(vars[i].value);
+		v.is_exported = vars[i].is_exported;
+		vector_push(new_env, &v);
+		++i;
+	}
+	return (new_env);
 }

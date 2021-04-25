@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   is_quote.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 17:47:11 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/04 12:00:19 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/05 11:09:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internals.h"
+#include "forty_two_sh.h"
 
-t_vector	*parser(char *line)
+t_bool	is_quote(char c)
 {
-	t_vector *tokens;
-	t_vector *commands;
-
-	(void)line;
-	tokens = lexer(line, TRUE);
-	lexer_add_newline_token(tokens);
-<<<<<<< HEAD
-	commands = parse_complete_commands(tokens);
-	return (commands);
-=======
-	lexer_print_tokens(tokens);
-	commands = parse_complete_commands(tokens);
-	print_commands(commands);
-	return (NULL);
->>>>>>> origin/expansion
+	return (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH);
 }

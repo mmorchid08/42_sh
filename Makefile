@@ -6,7 +6,11 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2021/03/30 15:59:32 by ylagtab          ###   ########.fr        #
+=======
+#    Updated: 2021/04/05 11:19:00 by ylagtab          ###   ########.fr        #
+>>>>>>> origin/expansion
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +22,10 @@
 NAME = 42sh
 LIBFT = libft/libft.a
 PARSER = src/parser/parser.a
+<<<<<<< HEAD
 JOBS = src/execution/job_control/job_control.a
+=======
+>>>>>>> origin/expansion
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
@@ -33,6 +40,7 @@ INCLUDES =	-Iincludes
 			src/errors/errors.h
 
 42sh = 	delete_functions.o main.o errors/errors.o \
+<<<<<<< HEAD
 	execution/exec_tools.o \
 	execution/execute_commands.o \
 	execution/execute_logic_seq.o \
@@ -42,6 +50,11 @@ INCLUDES =	-Iincludes
 	execution/remove_quotes.o \
 	execution/wait_children.o
 	
+=======
+		utils/is_quote.o \
+		builtins/export.o \
+		env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o
+>>>>>>> origin/expansion
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})
 
@@ -58,8 +71,13 @@ mkfile_dir := $(dir $(mkfile_path))
 
 all: $(NAME)
 
+<<<<<<< HEAD
 $(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
 	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER) $(JOBS)
+=======
+$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(LIBFT) $(PARSER)
+>>>>>>> origin/expansion
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
@@ -67,9 +85,12 @@ $(LIBFT): force
 $(PARSER): force
 	@env $(PARSER_ENV) make -C src/parser/
 
+<<<<<<< HEAD
 $(JOBS): force
 	@env $(PARSER_ENV) make -C src/execution/job_control
 
+=======
+>>>>>>> origin/expansion
 force:
 
 $(OBJS_DIR)/%.o : src/%.c $(42sh_INC)

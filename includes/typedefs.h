@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
 /*   Updated: 2021/04/15 16:03:29 by hmzah            ###   ########.fr       */
+=======
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/03/31 19:02:44 by ylagtab          ###   ########.fr       */
+>>>>>>> origin/expansion
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +117,10 @@ typedef struct s_pipe_sequence
 
 /*
 ** t_vector *commands [t_command]
+<<<<<<< HEAD
+=======
+** t_vector	*logic_ops [t_token_type]
+>>>>>>> origin/expansion
 */
 typedef struct s_logic_sequence
 {
