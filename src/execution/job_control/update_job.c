@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:30:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/23 03:47:27 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:33:22 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	update_job_state(t_job *job, pid_t pid, int wait_status)
 	proc->wait_status = wait_status;
 	recent_job_state = job->state;
 	if (proc->state == RUNNING)
-		job->count.running++;
+		job->count.running--;
 	else if (proc->state == STOPPED)
-		job->count.stopped++;
+		job->count.stopped--;
 	update_proc_state(job, proc, wait_status);
 	if (job->count.running > 0)
 		job->state = RUNNING;
