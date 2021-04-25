@@ -6,7 +6,7 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/24 23:19:15 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/25 00:17:18 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ INCLUDES =	-Iincludes
 	execution/execute_simple_cmd.o \
 	execution/get_exit_code.o \
 	execution/remove_quotes.o \
-	execution/wait_children.o
+	execution/wait_children.o \
 	prompt.o \
 	read_cmd_multiline/read_cmd_multiline.o
 
