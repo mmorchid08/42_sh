@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 23:38:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:25 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:41:14 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_job(t_job *job, t_job_print_mode mode,
 		if (mode == LONG)
 			ft_printf(1, "%d ", job->pgid);
 		print_job_state_str(job);
-		ft_printf(1, " %s", job->job_name);
+		ft_printf(1, " %s\n", job->job_name);
 		job->to_notify = FALSE;
 	}
 }
