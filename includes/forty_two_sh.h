@@ -75,6 +75,7 @@ int			execute_job(t_vector *pids_vec, char *job_name,
 ** ================================ execution ==================================
 */
 
+int			do_pipes_and_red(int i, int len, t_vector *red);
 char		*get_full_path(char *cmd);
 void		handle_quotes(char c, int *balance);
 void		remove_quotes(char **str);

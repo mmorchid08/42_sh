@@ -13,40 +13,11 @@
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
-int	manage_pipes(int i, int len)
-{
-	static int		fd[2];
-
-	if (i + 1 != len)
-	{
-		if (pipe(fd) == -1)
-			exit(0);
-		dup2(fd[1], 1);
-		close(fd[1]);
-		return (fd[0]);
-	}
-	else
-	{
-		dup2(fd[0], 0);
-		close(fd[0]);
-		return (-1);
-	}
-}
-
-pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
+pid_t		execute_pip_pt2(char **args, char **a_env)
 {
 	pid_t		pid;
 	char		*full_path;
-	static int	fd = -1;
-	int			i;
 
-	i = -1;
-	while (args[++i])
-		remove_quotes(&args[i]);
-	if (fd != -1)
-		fd = manage_pipes(0, 1);
-	if (index + 1 < len)
-		fd = manage_pipes(1, 1);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -55,9 +26,10 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 	}
 	else if (pid == 0)
 	{
-		full_path = get_full_path(args[0]);
-		if (fd != -1)
-			close(fd);
+		if (!check_builtins(args[0]))
+			full_path = get_full_path(args[0]);
+		if (check_builtins(args[0]))
+			execute_bultins(args);
 		if (execve(full_path, args, a_env))
 		{
 			ft_printf(2, "Error executing\n");
@@ -66,10 +38,7 @@ pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
 		}
 	}
 	else
-	{
 		backups(2);
-		//for_testing
-	}
 	return (pid);
 }
 
@@ -79,18 +48,22 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	char		**args;
 	pid_t		pid;
 	int			i;
+	int			x;
 
-	i = 0;
+	i = -1;
 	vec_pid = vector_init(sizeof(pid_t), NULL);
-	while (i < len)
+	while (++i < len)
 	{
 		args = cmd[i].args->array;
+		x = -1;
+		while (args[++x])
+			remove_quotes(&args[x]);
+		x = do_pipes_and_red(index, len, cmd[i].redirections);
 		pid = execute_pip_pt2(args, g_shell_env, i, len);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
 		else
 			return (NULL);
-		i++;
 	}
 	return (vec_pid);
 }
@@ -116,7 +89,6 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				f_pid = pid[i];
 			i++;
 		}
-		is_background = false;
 		if (is_interactive == FALSE)
 			return (wait_children(f_pid));
 		else
