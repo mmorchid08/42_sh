@@ -21,8 +21,8 @@ g_exit_status;
 int
 g_term_fd;
 
-char
-**g_shell_env;
+t_vector
+*g_shell_env;
 
 static int	appendline(char **s, char **line)
 {

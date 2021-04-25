@@ -19,16 +19,18 @@ int		check_file(char *path)
 	return (0);
 }
 
-char	*ft_search_env(char *to_search)
+char			*env_get(t_vector *env, char *key)
 {
-	int	i;
+	t_var	*vars;
+	size_t	i;
 
 	i = 0;
-	while (g_shell_env[i])
+	vars = env->array;
+	while (i < env->length)
 	{
-		if (!ft_strncmp(g_shell_env[i], to_search, 4))
-			return (ft_strchr(g_shell_env[i], '='));
-		i++;
+		if (ft_strequ(key, vars[i].key))
+			return (vars[i].value);
+		++i;
 	}
 	return (NULL);
 }
@@ -66,7 +68,7 @@ char	*get_full_path(char *cmd)
 	char	*full_path;
 
 	if (!(check_file(cmd) && cmd[0] != '.' && cmd[0] != '/'))
-		full_path = try_every_possibility(cmd, ft_search_env("PATH"));
+		full_path = try_every_possibility(cmd, env_get(g_shell_env, "PATH"));
 	else
 		full_path = ft_strdup(cmd);
 	return (full_path);
