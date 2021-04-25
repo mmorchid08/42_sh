@@ -44,7 +44,11 @@ static int	logic_seq_executor(t_logic_sequence *logic_seq,
 			ret = execute_logical_segment(&cmds[i + 1], is_background,
 				is_interactive);
 		else
+<<<<<<< HEAD
 			break ;
+=======
+			break;
+>>>>>>> 27eb4429e170203ed8c98927b8c2e5c213fae565
 		i++;
 	}
 	return (ret);

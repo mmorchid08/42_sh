@@ -65,7 +65,11 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 		else
 			return (execute_job(vec_pid, simple_cmd->job_name, is_background));
 	}
+<<<<<<< HEAD
 	else
 		return (-1);
 	return (0);
+=======
+	return (1);
+>>>>>>> 27eb4429e170203ed8c98927b8c2e5c213fae565
 }
