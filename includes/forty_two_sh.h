@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/24 23:16:21 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/25 00:33:22 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	del_token(void *element);
 void	del_redirection(void *element);
 void	del_var(void *element);
 
-extern	char
-**g_shell_env;
+
 extern	int
 g_exit_status;
 extern int
@@ -41,6 +40,8 @@ extern t_vector
 *g_job_list;
 extern t_vector
 *g_stopped_jobs;
+extern char
+**environ;
 
 
 /*

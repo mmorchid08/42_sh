@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/16 17:16:35 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/25 00:31:21 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ int		check_file(char *path)
 	return (0);
 }
 
-char	*ft_search_env(char *to_search)
-{
-	int	i;
+// char	*ft_search_env(char *to_search)
+// {
+// 	int	i;
 
-	i = 0;
-	while (g_shell_env[i])
-	{
-		if (!ft_strncmp(g_shell_env[i], to_search, 4))
-			return (ft_strchr(g_shell_env[i], '='));
-		i++;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	while (g_shell_env[i])
+// 	{
+// 		if (!ft_strncmp(g_shell_env[i], to_search, 4))
+// 			return (ft_strchr(g_shell_env[i], '='));
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
 
 char	*try_every_possibility(char *cmd, char *path_env)
 {
@@ -66,7 +66,7 @@ char	*get_full_path(char *cmd)
 	char	*full_path;
 
 	if (!(check_file(cmd) && cmd[0] != '.' && cmd[0] != '/'))
-		full_path = try_every_possibility(cmd, ft_search_env("PATH"));
+		full_path = try_every_possibility(cmd, "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands");
 	else
 		full_path = ft_strdup(cmd);
 	return (full_path);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/16 17:20:58 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/25 00:32:57 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	while (i < len)
 	{
 		args = cmd[i].args->array;
-		pid = execute_pip_pt2(args, g_shell_env, i, len);
+		pid = execute_pip_pt2(args, environ, i, len);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
 		else

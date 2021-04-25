@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/16 17:21:35 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/25 00:34:25 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,15 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	t_vector	*vec_pid;
 	char		*full_path;
 	char		**cmd;
-	char		**a_env;
 	int			i;
 
 	vec_pid = NULL;
 	cmd = (char **)simple_cmd->args->array;
 	full_path = get_full_path(cmd[0]);
-	a_env = g_shell_env;
 	i = 0;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
-	vec_pid = ft_execve_scmd(full_path, cmd, a_env);
+	vec_pid = ft_execve_scmd(full_path, cmd, environ);
 	if (vec_pid != NULL)
 	{
 		if (is_interactive == FALSE)
