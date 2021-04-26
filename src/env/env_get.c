@@ -12,7 +12,7 @@
 
 #include "internals.h"
 
-static char		*escape_string(char *str)
+/*static char		*escape_string(char *str)
 {
 	t_string	*escaped_str;
 	size_t		i;
@@ -27,7 +27,7 @@ static char		*escape_string(char *str)
 		++i;
 	}
 	return (string_get_data(escaped_str));
-}
+}*/
 
 char			*env_get(t_vector *env, char *key)
 {
@@ -39,7 +39,8 @@ char			*env_get(t_vector *env, char *key)
 	while (i < env->length)
 	{
 		if (ft_strequ(key, vars[i].key))
-			return (escape_string(vars[i].value));
+			return (vars[i].value);
+			// return (escape_string(vars[i].value));
 		++i;
 	}
 	return (NULL);

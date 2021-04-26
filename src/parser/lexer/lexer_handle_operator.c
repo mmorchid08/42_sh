@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handle_operator.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 16:20:28 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/22 11:01:28 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/07 18:19:35 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static t_token_type	which_less_operator(t_lexer *lex)
 	return (LESS);
 }
 
-void				lexer_handle_operator(t_lexer *lex)
+void	lexer_handle_operator(t_lexer *lex)
 {
-	t_token_type token_type;
+	t_token_type	token_type;
 
 	token_type = 0;
 	if (lex->c == ';')

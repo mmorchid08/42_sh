@@ -53,7 +53,7 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	vec_pid = NULL;
 	cmd = (char **)simple_cmd->args->array;
 	full_path = get_full_path(cmd[0]);
-	a_env = g_shell_env;
+	a_env = env_to_envp(g_shell_env);
 	i = 0;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
@@ -65,11 +65,7 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 		else
 			return (execute_job(vec_pid, simple_cmd->job_name, is_background));
 	}
-<<<<<<< HEAD
 	else
 		return (-1);
 	return (0);
-=======
-	return (1);
->>>>>>> 27eb4429e170203ed8c98927b8c2e5c213fae565
 }

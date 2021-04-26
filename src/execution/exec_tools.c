@@ -19,22 +19,6 @@ int		check_file(char *path)
 	return (0);
 }
 
-char			*env_get(t_vector *env, char *key)
-{
-	t_var	*vars;
-	size_t	i;
-
-	i = 0;
-	vars = env->array;
-	while (i < env->length)
-	{
-		if (ft_strequ(key, vars[i].key))
-			return (vars[i].value);
-		++i;
-	}
-	return (NULL);
-}
-
 char	*try_every_possibility(char *cmd, char *path_env)
 {
 	char	**ab;

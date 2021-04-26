@@ -3,30 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-<<<<<<< HEAD
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
 /*   Updated: 2021/04/18 07:46:41 by hmzah            ###   ########.fr       */
-=======
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/30 12:55:19 by ylagtab          ###   ########.fr       */
->>>>>>> origin/expansion
-=======
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/23 22:05:56 by mel-idri         ###   ########.fr       */
->>>>>>> 27eb4429e170203ed8c98927b8c2e5c213fae565
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-<<<<<<< HEAD
 t_vector
 *g_stopped_jobs;
 
@@ -107,7 +92,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)av;
 	(void)ac;
-	g_shell_env = envp;
+	g_shell_env = env_init(envp);
 	g_term_fd = open("/dev/tty", O_RDWR);
 	if (g_term_fd == -1)
 		ft_strerror(EOPENFILE,"open", NULL, TRUE);
@@ -126,22 +111,4 @@ int	main(int ac, char **av, char **envp)
 			execute_commands(vec);
 		ft_strdel(&cmd);
 	}
-=======
-int			main(int ac, char *av[], char *envp[])
-{
-	char *cmd;
-
-	(void)envp;
-	signal(SIGTSTP, SIG_IGN);
-	if (ac == 3 && ft_strcmp(av[1], "-c") == 0)
-		(void)parser(av[2]);
-	else if (ac == 1)
-	{
-		if (get_next_line(STDIN_FILENO, &cmd) != -1)
-			(void)parser(cmd);
-	}
-	else
-		ft_printf(2, "Error\nusage: ./21sh [-c command]\n");
->>>>>>> origin/expansion
-	return (0);
 }

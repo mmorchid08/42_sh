@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_tokens_helpers.c                               :+:      :+:    :+:   */
+/*   submit_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/28 11:42:53 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/28 11:59:31 by ylagtab          ###   ########.fr       */
+/*   Created: 2020/12/11 23:08:39 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internals.h"
+#include "readline_internal.h"
 
-void		push_cmd_token(t_parse_and_or *parser)
+char		*submit_command(void)
 {
-	vector_push(parser->cmd_tokens, &(parser->current_token));
-	if (parser->current_token.type == PIPE)
-		parser->cmd_type = PIPE_SEQ;
+	goto_end();
+	ft_putchar('\n');
+	return (dynstr_vec_to_str(g_rl_state.lines));
 }

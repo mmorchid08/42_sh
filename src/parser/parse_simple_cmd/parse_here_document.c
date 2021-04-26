@@ -6,54 +6,56 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 16:56:16 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/26 11:06:16 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/22 15:38:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static t_bool		is_quote(char c)
-{
-	return (c == DOUBLE_QUOTE || c == SINGLE_QUOTE || c == BACK_SLASH);
-}
-
-static t_bool		str_is_quoted(char *str)
+static t_bool	str_is_quoted(char *str)
 {
 	while (*str)
 	{
-		if (is_quote(*str) > 0)
+		if (*str == DOUBLE_QUOTE || *str == SINGLE_QUOTE || *str == BACK_SLASH)
 			return (TRUE);
 		++str;
 	}
 	return (FALSE);
 }
 
+// delim->str = remove_quotes_from_word(delim->str);
+
 static t_delimiter	*get_delimiter(char *str)
 {
 	t_delimiter	*delim;
 
-	delim = (t_delimiter*)ft_malloc(sizeof(t_delimiter));
+	delim = (t_delimiter *)ft_malloc(sizeof(t_delimiter));
 	delim->str = str;
 	delim->is_quoted = str_is_quoted(delim->str);
-	// delim->str = remove_quotes_from_word(delim->str);
 	return (delim);
 }
 
-static int			read_buffer(char **buffer, char *delimiter)
+static int	read_buffer(char **buffer, char *delimiter)
 {
 	char	*line;
-	int		ret;
+	// int		ret;
 
 	*buffer = ft_strdup("");
-	while ((ret = get_next_line(0, &line)) != -1) // != ERROR
+	while (1)
 	{
-		// if (ret == INTERRUPTED)
-		// {
-		// 	free(*buffer);
-		// 	return (EXIT_FAILURE);
-		// }
-		// if (ret == EXIT)
-		// 	break ;
+		//temp
+		ft_printf(1, "> ");
+		get_next_line(0, &line);
+		//ret = readline_21sh(&line, ">");
+		/*if (ret == ERROR)
+			exit(1);
+		if (ret == INTERRUPTED)
+		{
+			free(*buffer);
+			return (EXIT_FAILURE);
+		}
+		if (ret == EXIT)
+			break ;*/
 		if (ft_strequ(line, delimiter))
 		{
 			free(line);
@@ -62,12 +64,13 @@ static int			read_buffer(char **buffer, char *delimiter)
 		*buffer = ft_strjoin_free(*buffer, line, 1, 1);
 		*buffer = ft_strjoin_free(*buffer, "\n", 1, 0);
 	}
-	// if (ret == ERROR)
-	// 	exit(1);
-	return (ret == -1 ? EXIT_FAILURE: EXIT_SUCCESS);
+	return (1);
 }
 
-int			parse_here_doc(char *delimter_str)
+// if (!delim->is_quoted)
+// 	buffer = expand_here_doc_buffer(buffer);
+
+int	parse_here_doc(char *delimter_str)
 {
 	t_delimiter	*delim;
 	char		*buffer;
@@ -79,11 +82,10 @@ int			parse_here_doc(char *delimter_str)
 		return (-1);
 	}
 	delim = get_delimiter(delimter_str);
-	if (read_buffer(&buffer, delim->str) == EXIT_FAILURE)
+	if (read_buffer(&buffer, delim->str) == -1)
 		return (-1);
-	// if (!delim->is_quoted)
-	// 	buffer = expand_here_doc_buffer(buffer);
-	ft_printf(pipe_fds[1], buffer);
+	free(delim);
+	ft_putstr_fd(buffer, pipe_fds[1]);
 	free(buffer);
 	close(pipe_fds[1]);
 	return (pipe_fds[0]);

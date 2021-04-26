@@ -3,44 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
 /*   Updated: 2021/04/18 07:52:27 by hmzah            ###   ########.fr       */
-=======
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/05 11:12:07 by ylagtab          ###   ########.fr       */
->>>>>>> origin/expansion
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORTY_TWO_SH_H
 # define FORTY_TWO_SH_H
 
-<<<<<<< HEAD
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
 
-=======
->>>>>>> origin/expansion
 # include "../libft/libft.h"
 # include "constants.h"
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
-<<<<<<< HEAD
+# include "../src/env/env.h"
+# include "../readline/readline.h"
 
 void	del_token(void *element);
 void	del_redirection(void *element);
 void	del_var(void *element);
 
-extern	char
-**g_shell_env;
+extern	t_vector
+*g_shell_env;
 extern	int
 g_exit_status;
 extern int
@@ -98,19 +89,13 @@ int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				t_bool is_interactive);
 int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
-=======
-# include "../src/env/env.h"
-# include <stdbool.h>
->>>>>>> origin/expansion
 
 /*
 ** ============================= end execution =================================
 */
 
-<<<<<<< HEAD
-void		backups(int f);
 int		get_next_line(int fd, char **line);
-=======
+void		backups(int f);
 int		jhin(char **cmd);
 int		check_is_not(int ret, int is_not);
 int		ft_test(char **cmd);
@@ -121,15 +106,26 @@ int		export(char **av);
 **		free functions
 */
 
-void	del_token(void *element);
-void	del_redirection(void *element);
-void	del_var(void *element);
+void		del_token(void *element);
+void		del_redirection(void *element);
+void		del_var(void *element);
+
+/*
+** Prompt
+*/
+
+char		*prompt_1(void);
+
+/*
+** read
+*/
+
+char	*read_cmd_multiline(void);
 
 /*
 ** Utils
 */
 
 t_bool	is_quote(char c);
->>>>>>> origin/expansion
 
 #endif

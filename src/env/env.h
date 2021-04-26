@@ -15,6 +15,7 @@
 
 extern t_vector	*g_shell_env;
 
+char	*env_get(t_vector *env, char *key);
 t_vector	*env_init(char **envp);
 t_vector	*env_dup(t_vector *env);
 char		**env_to_envp(t_vector *env);

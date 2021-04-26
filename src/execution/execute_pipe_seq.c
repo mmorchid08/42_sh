@@ -13,11 +13,13 @@
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
-pid_t		execute_pip_pt2(char **args, char **a_env)
+pid_t		execute_pip_pt2(char **args)
 {
 	pid_t		pid;
 	char		*full_path;
+	char		**a_env;
 
+	a_env = env_to_envp(g_shell_env);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -26,10 +28,10 @@ pid_t		execute_pip_pt2(char **args, char **a_env)
 	}
 	else if (pid == 0)
 	{
-		if (!check_builtins(args[0]))
+		// if (!check_builtins(args[0]))
 			full_path = get_full_path(args[0]);
-		if (check_builtins(args[0]))
-			execute_bultins(args);
+		// if (check_builtins(args[0]))
+		// 	execute_bultins(args);
 		if (execve(full_path, args, a_env))
 		{
 			ft_printf(2, "Error executing\n");
@@ -58,8 +60,8 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 		x = -1;
 		while (args[++x])
 			remove_quotes(&args[x]);
-		x = do_pipes_and_red(index, len, cmd[i].redirections);
-		pid = execute_pip_pt2(args, g_shell_env, i, len);
+		x = do_pipes_and_red(i, len, cmd[i].redirections);
+		pid = execute_pip_pt2(args);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
 		else

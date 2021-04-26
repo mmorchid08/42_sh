@@ -12,11 +12,11 @@
 
 #include "forty_two_sh.h"
 
-int	manage_pipes(int fd)
+int	manage_pipes(int i)
 {
 	static int		fd[2];
 
-	if (fd == -1)
+	if (i == -1)
 	{
 		if (pipe(fd) == -1)
 			exit(0);
@@ -32,19 +32,19 @@ int	manage_pipes(int fd)
 	}
 }
 
-void	do_redirections(t_vector *red)
-{
-	int	i;
+// void	do_redirections(t_vector *red)
+// {
+// 	int	i;
 
-	i = -1;
-	while (++i < red->length)
-	{
-		if (!word)
-		{
-			if (red[i].array->left_fd)
-		}
-	}
-}
+// 	i = -1;
+// 	while (++i < red->length)
+// 	{
+// 		if (!word)
+// 		{
+// 			if (red[i].array->left_fd)
+// 		}
+// 	}
+// }
 
 int		do_pipes_and_red(int i, int len, t_vector *red)
 {
@@ -55,6 +55,7 @@ int		do_pipes_and_red(int i, int len, t_vector *red)
 	if (i + 1 < len)
 		fd = manage_pipes(fd);
 	if (red)
-		do_redirections(red);
+		len++;
+	// 	do_redirections(red);
 	return (fd);
 }
