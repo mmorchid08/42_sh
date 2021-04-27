@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:22:37 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:10 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/27 12:47:32 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	print_selected_jobs(char **selectors, t_job_print_mode mode,
 	return (ret);
 }
 
-int	fg(char **args)
+int	ft_fg(char **args)
 {
 	t_job	*job;
 
@@ -57,7 +57,7 @@ int	fg(char **args)
 	return (wait_job(job));
 }
 
-int	bg(char **args)
+int	ft_bg(char **args)
 {
 	int		ret;
 	int		i;
@@ -83,7 +83,7 @@ int	bg(char **args)
 	return (ret);
 }
 
-int	jobs(char **args)
+int	ft_jobs(char **args)
 {
 	t_job_print_mode	mode;
 	size_t				i;
