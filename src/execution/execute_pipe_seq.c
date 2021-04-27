@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/16 17:20:58 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 10:38:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ pid_t		execute_pip_pt2(char **args)
 	pid = fork();
 	if (pid == -1)
 	{
-		ft_printf(2, "Error forking.\n");
+		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return (-1);
 	}
 	else if (pid == 0)
@@ -34,9 +34,11 @@ pid_t		execute_pip_pt2(char **args)
 		// 	execute_bultins(args);
 		if (execve(full_path, args, a_env))
 		{
-			ft_printf(2, "Error executing\n");
+			if (access(full_path, F_OK) == 0)
+				ft_strerror(EACCES, args[0], NULL, FALSE);
+			else
+				ft_strerror(ENOCMD, args[0], NULL, FALSE);
 			exit(127);
-			return (-1);
 		}
 	}
 	else
@@ -61,7 +63,8 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 		x = 0;
 		while (args[x] != NULL)
 			remove_quotes(&(args[x++]));
-		x = do_pipes_and_red(i, len, cmd[i].redirections);
+		if ((x = do_pipes_and_red(i, len, cmd[i].redirections)) == 1)
+			return (NULL);
 		pid = execute_pip_pt2(args);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);

@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/16 17:21:35 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 10:37:40 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ t_vector	*ft_execve_scmd(char *full_path, char **cmd, char **a_env)
 	pid = fork();
 	if (pid == -1)
 	{
-		ft_printf(2, "Error forking\n");
+		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return (NULL);
 	}
 	else if (pid == 0)
 	{
 		if (execve(full_path, cmd, a_env) == -1)
 		{
-			ft_printf(2, "Error\n");
+			if (access(full_path, F_OK) == 0)
+				ft_strerror(EACCES, cmd[0], NULL, FALSE);
+			else
+				ft_strerror(ENOCMD, cmd[0], NULL, FALSE);
 			exit(127);
-			return (NULL);
 		}
 	}
 	else
@@ -58,7 +60,8 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	i = 0;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
-	do_pipes_and_red(0, 0, simple_cmd->redirections);
+	if (do_pipes_and_red(0, 0, simple_cmd->redirections) == 1)
+		return (-1);
 	vec_pid = ft_execve_scmd(full_path, cmd, a_env);
 	if (vec_pid != NULL)
 	{

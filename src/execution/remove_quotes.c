@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/15 16:13:09 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 08:46:43 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,7 @@ void	remove_quotes(char **str)
 	int		j;
 
 	i = 0;
-	if (*str)
-		ft_printf(1, "hh\n");
-	if (*str || ft_strcmp(*str, ""))
-		len = ft_strlen((*str));
-	else
-		len = 0;
+	len = ft_strlen((*str));
 	b = 0;
 	while (i < len)
 	{
