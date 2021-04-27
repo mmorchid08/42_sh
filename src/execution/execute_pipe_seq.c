@@ -56,10 +56,11 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	vec_pid = vector_init(sizeof(pid_t), NULL);
 	while (++i < len)
 	{
-		args = cmd[i].args->array;
-		x = -1;
-		while (args[++x])
-			remove_quotes(&args[x]);
+		vector_push(cmd[i].args, &(char *){NULL});
+		args = (char **)cmd[i].args->array;
+		x = 0;
+		while (args[x] != NULL)
+			remove_quotes(&(args[x++]));
 		x = do_pipes_and_red(i, len, cmd[i].redirections);
 		pid = execute_pip_pt2(args);
 		if (pid != -1)

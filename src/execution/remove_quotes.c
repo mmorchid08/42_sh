@@ -32,7 +32,12 @@ void	remove_quotes(char **str)
 	int		j;
 
 	i = 0;
-	len = ft_strlen(*str);
+	if (*str)
+		ft_printf(1, "hh\n");
+	if (*str || ft_strcmp(*str, ""))
+		len = ft_strlen((*str));
+	else
+		len = 0;
 	b = 0;
 	while (i < len)
 	{

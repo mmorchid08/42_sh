@@ -32,19 +32,18 @@ int	manage_pipes(int i)
 	}
 }
 
-// void	do_redirections(t_vector *red)
-// {
-// 	int	i;
+void	do_redirections(t_vector *red)
+{
+	int				i;
+	t_redirection	*redi;
 
-// 	i = -1;
-// 	while (++i < red->length)
-// 	{
-// 		if (!word)
-// 		{
-// 			if (red[i].array->left_fd)
-// 		}
-// 	}
-// }
+	i = -1;
+	while (++i < (int)red->length)
+	{
+		redi = (t_redirection *)red[i].array;
+		ft_printf(1, "--> %s\n", redi->righ_fd);
+	}
+}
 
 int		do_pipes_and_red(int i, int len, t_vector *red)
 {
@@ -55,7 +54,9 @@ int		do_pipes_and_red(int i, int len, t_vector *red)
 	if (i + 1 < len)
 		fd = manage_pipes(fd);
 	if (red)
-		len++;
-	// 	do_redirections(red);
+	{
+		ft_printf(1, "hhgggggg\n");
+		do_redirections(red);
+	}
 	return (fd);
 }
