@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/27 12:54:50 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 13:17:26 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ pid_t		execute_pip_pt2(char **args)
 	}
 	else if (pid == 0)
 	{
-		// if (!check_builtins(args[0]))
-			full_path = get_full_path(args[0]);
-		// if (check_builtins(args[0]))
-		// 	execute_bultins(args);
-		if (execve(full_path, args, a_env))
+		if (check_builtins(args[0]))
+			execute_bultins(args);
+		else
 		{
-			if (access(full_path, F_OK) == 0)
-				ft_strerror(EACCES, args[0], NULL, FALSE);
-			else
-				ft_strerror(ENOCMD, args[0], NULL, FALSE);
-			exit(127);
+			full_path = get_full_path(args[0]);
+			if (execve(full_path, args, a_env))
+			{
+				if (access(full_path, F_OK) == 0)
+					ft_strerror(EACCES, args[0], NULL, FALSE);
+				else
+					ft_strerror(ENOCMD, args[0], NULL, FALSE);
+				exit(127);
+			}
 		}
 	}
 	else

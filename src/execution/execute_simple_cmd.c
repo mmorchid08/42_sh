@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/27 12:54:42 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 13:16:00 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,18 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	vec_pid = NULL;
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
-	full_path = get_full_path(cmd[0]);
+	if (!check_builtins(cmd[0]))
+		full_path = get_full_path(cmd[0]);
 	a_env = env_to_envp(g_shell_env);
 	i = 0;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
 	if ((i = do_pipes_and_red(0, 0, simple_cmd->redirections)) == 1)
 		return (-1);
-	vec_pid = ft_execve_scmd(full_path, cmd, a_env);
+	if (check_builtins(cmd[0]) && is_background == FALSE)
+		execute_builtins(cmd);
+	else
+		vec_pid = ft_execve_scmd(full_path, cmd, a_env);
 	if (vec_pid != NULL)
 	{
 		if (is_interactive == FALSE)
