@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_here_document.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 16:56:16 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 15:38:30 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/27 12:52:37 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	read_buffer(char **buffer, char *delimiter)
 // if (!delim->is_quoted)
 // 	buffer = expand_here_doc_buffer(buffer);
 
-int	parse_here_doc(char *delimter_str)
+int		parse_here_doc(char *delimter_str)
 {
 	t_delimiter	*delim;
 	char		*buffer;

@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/27 10:37:40 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 12:54:42 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	i = 0;
 	while (cmd[i])
 		remove_quotes(&cmd[i++]);
-	if (do_pipes_and_red(0, 0, simple_cmd->redirections) == 1)
+	if ((i = do_pipes_and_red(0, 0, simple_cmd->redirections)) == 1)
 		return (-1);
 	vec_pid = ft_execve_scmd(full_path, cmd, a_env);
 	if (vec_pid != NULL)

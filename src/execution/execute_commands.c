@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:22:43 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/15 16:41:19 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 11:07:54 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	backups(int f)
 		stdou = dup(1);
 		stder = dup(2);
 	}
+	else if (f == -1)
+		dup2(stdou, 1);
 	else
 	{
 		dup2(stdii, 0);

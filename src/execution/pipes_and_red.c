@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/27 10:32:55 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 12:56:28 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ int	do_redirections(t_vector *red)
 	while (++i < (int)red->length)
 	{
 		redi = (t_redirection *)red[i].array;
-		if (redi->type == DLESS
-			|| (redi->type == GREATAND && str_is_number(redi->righ_fd, redi->type))
+		if (redi->type == DLESS)
+			dup2(ft_atoi(redi->righ_fd), 0);
+		if ((redi->type == GREATAND && str_is_number(redi->righ_fd, redi->type))
 			|| (redi->type == LESSAND && str_is_number(redi->righ_fd, redi->type))
 			|| redi->type == GREATANDDASH || redi->type == LESSANDDASH)
 		{
@@ -117,8 +118,9 @@ int	do_redirections(t_vector *red)
 				redi->left_fd = 1;
 			if (redi->type == GREATANDDASH || redi->type == LESSANDDASH)
 				close(redi->left_fd);
-			else if (dup2(ft_atoi(redi->righ_fd), fd) == -1)
-				return (-1);
+			else if (redi->righ_fd)
+				if (dup2(ft_atoi(redi->righ_fd), fd) == -1)
+					return (-1);
 		}
 		else
 			if (open_files_for_red(redi) == -1)
@@ -127,7 +129,6 @@ int	do_redirections(t_vector *red)
 	return (1);
 }
 
-
 int		do_pipes_and_red(int i, int len, t_vector *red)
 {
 	static int	fd = -1;
@@ -135,13 +136,11 @@ int		do_pipes_and_red(int i, int len, t_vector *red)
 	if (fd != -1)
 		fd = manage_pipes(fd);
 	if (i + 1 < len)
-		fd = manage_pipes(fd);
+		fd = manage_pipes(-1);
 	if (red)
 	{
 		if (do_redirections(red) == -1)
-		{
 			return (1);
-		}
 	}
 	return (fd);
 }
