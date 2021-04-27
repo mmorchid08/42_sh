@@ -105,4 +105,5 @@ int		ft_test(char **cmd)
 		ft_printf(2, "test: too many arguments\n");
 		return (2);
 	}
+	return (0);
 }

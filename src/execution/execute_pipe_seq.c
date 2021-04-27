@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/27 13:17:26 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 13:33:06 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ pid_t		execute_pip_pt2(char **args)
 	else if (pid == 0)
 	{
 		if (check_builtins(args[0]))
-			execute_bultins(args);
+			execute_builtins(args);
 		else
 		{
 			full_path = get_full_path(args[0]);

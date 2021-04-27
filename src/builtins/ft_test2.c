@@ -47,6 +47,7 @@ int		do_op(char *fnum, char *op, char *snum)
 		return (x < y ? 0 : 1);
 	if (!ft_strcmp(op, "-le"))
 		return (x <= y ? 0 : 1);
+	return (0);
 }
 
 int		jhin(char **cmd)

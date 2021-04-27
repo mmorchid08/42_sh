@@ -22,7 +22,7 @@ void	do_special_char(char c)
 		ft_printf(1, "%c", c);
 }
 
-void	do_prinnting(char *str)
+void	do_printing(char *str)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ void	do_prinnting(char *str)
 	}
 }
 
-void	ft_echo(char **str)
+int	ft_echo(char **str)
 {
 	int	i;
 	int	opt;

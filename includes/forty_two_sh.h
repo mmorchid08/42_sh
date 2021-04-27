@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/27 12:48:30 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:32:43 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,14 @@ void		remove_quotes(char **str);
 void		execute_commands(t_vector *commands);
 int			execute_simple_cmd(t_simple_command *simple_cmd,
 				t_bool is_background, t_bool is_interactive);
-int		execute_logic_seq(t_logic_sequence *logic_seq, t_bool is_background);
+int			execute_logic_seq(t_logic_sequence *logic_seq,
+				t_bool is_background);
 int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				t_bool is_interactive);
 int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
+void		execute_builtins(char **cmd);
+int			check_builtins(char *cmd);
 
 /*
 ** ============================= end execution =================================

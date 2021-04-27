@@ -3,13 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
+#    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
+#    Updated: 2021/04/27 14:13:22 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# **************************************************************************** #
 #	variables																   #
 # **************************************************************************** #
 
@@ -43,6 +43,11 @@ INCLUDES =	-Iincludes
 	execution/wait_children.o \
 	utils/is_quote.o \
 	builtins/export.o \
+	builtins/job_builtins.o \
+	builtins/ft_echo.o \
+	builtins/ft_test.o \
+	builtins/ft_test2.o \
+	execution/builtins.o \
 	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o \
 	read_cmd_multiline/read_cmd_multiline.o
 
