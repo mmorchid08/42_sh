@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:30:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/24 16:33:22 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/27 02:41:03 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,15 @@ void	update_job(t_job *job)
 void	update_all_jobs(void)
 {
 	size_t	i;
+	t_job	*job;
 
 	i = 0;
 	while (i < g_job_list->length)
-		update_job(((t_job *)g_job_list->array) + i++);
+	{
+		job = vector_get(g_job_list, i);
+		update_job(job);
+		if (job->state == COMPLETED && job->is_background == FALSE)
+			remove_from_job_list(job->id);
+		i++;
+	}
 }
