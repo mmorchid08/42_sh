@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/18 07:52:27 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/27 12:48:30 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ t_job		*get_current_job(void);
 t_job		*get_job_by_selector(char *job_selector);
 int			execute_job(t_vector *pids_vec, char *job_name,
 			t_bool is_background);
+int			ft_fg(char **args);
+int			ft_bg(char **args);
+int			ft_jobs(char **args);
 
 
 /*
