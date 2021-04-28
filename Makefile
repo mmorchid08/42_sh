@@ -6,7 +6,7 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/27 14:13:22 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/28 12:32:28 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ $(PARSER): force
 	@env $(PARSER_ENV) make -C src/parser/
 
 $(JOBS): force
-	@env $(PARSER_ENV) make -C src/execution/job_control
+	make -C src/execution/job_control
 
 force:
 
@@ -86,10 +86,12 @@ $(OBJS_DIR)/%.o : src/%.c $(42sh_INC)
 
 clean:
 	rm -rf $(OBJS_DIR)
+	make clean -C src/execution/job_control
 
 fclean: clean
 	make fclean -C libft/
 	make fclean -C src/parser/
+	make fclean -C src/execution/job_control
 	rm -f $(NAME)
 
 re:
