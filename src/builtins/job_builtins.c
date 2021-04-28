@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:22:37 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:10 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:02:25 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ static int	print_selected_jobs(char **selectors, t_job_print_mode mode,
 	return (ret);
 }
 
-int	fg(char **args)
+int	ft_fg(char **args)
 {
 	t_job	*job;
 
+	++args;
 	if (args[0])
 		job = get_job_by_selector(args[0]);
 	else
@@ -57,12 +58,13 @@ int	fg(char **args)
 	return (wait_job(job));
 }
 
-int	bg(char **args)
+int	ft_bg(char **args)
 {
 	int		ret;
 	int		i;
 	t_job	*job;
 
+	++args;
 	i = 0;
 	ret = 0;
 	while (*args)
@@ -83,13 +85,15 @@ int	bg(char **args)
 	return (ret);
 }
 
-int	jobs(char **args)
+int	ft_jobs(char **args)
 {
 	t_job_print_mode	mode;
 	size_t				i;
 	int					ret;
 	t_special_jobs		special_jobs;
 
+
+	++args;
 	mode = NORMAL;
 	if (ft_strequ(args[0], "-p") && args++)
 		mode = PGID;

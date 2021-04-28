@@ -6,11 +6,10 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/25 00:17:18 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/28 14:16:04 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# **************************************************************************** #
 #	variables																   #
 # **************************************************************************** #
 
@@ -39,10 +38,19 @@ INCLUDES =	-Iincludes
 	execution/execute_logic_seq.o \
 	execution/execute_pipe_seq.o \
 	execution/execute_simple_cmd.o \
+	execution/pipes_and_red.o \
 	execution/get_exit_code.o \
 	execution/remove_quotes.o \
 	execution/wait_children.o \
 	prompt.o \
+	utils/is_quote.o \
+	builtins/export.o \
+	builtins/job_builtins.o \
+	builtins/ft_echo.o \
+	builtins/ft_test.o \
+	builtins/ft_test2.o \
+	execution/builtins.o \
+	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o \
 	read_cmd_multiline/read_cmd_multiline.o
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})

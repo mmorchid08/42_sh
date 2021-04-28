@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/25 00:33:22 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:20:47 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
-# include "../readline/readline.h"
-# include "../src/builtins/env/env.h"
 # include <stdbool.h>
+# include "../src/env/env.h"
+# include "../readline/readline.h"
 
 void	del_token(void *element);
 void	del_redirection(void *element);
 void	del_var(void *element);
 
-
+extern	t_vector
+*g_shell_env;
 extern	int
 g_exit_status;
 extern int
@@ -69,6 +70,9 @@ t_job		*get_current_job(void);
 t_job		*get_job_by_selector(char *job_selector);
 int			execute_job(t_vector *pids_vec, char *job_name,
 			t_bool is_background);
+int			ft_fg(char **args);
+int			ft_bg(char **args);
+int			ft_jobs(char **args);
 
 
 /*
@@ -79,25 +83,33 @@ int			execute_job(t_vector *pids_vec, char *job_name,
 ** ================================ execution ==================================
 */
 
+int			do_pipes_and_red(int i, int len, t_vector *red);
 char		*get_full_path(char *cmd);
 void		handle_quotes(char c, int *balance);
 void		remove_quotes(char **str);
 void		execute_commands(t_vector *commands);
 int			execute_simple_cmd(t_simple_command *simple_cmd,
 				t_bool is_background, t_bool is_interactive);
-int		execute_logic_seq(t_logic_sequence *logic_seq, t_bool is_background);
+int			execute_logic_seq(t_logic_sequence *logic_seq,
+				t_bool is_background);
 int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				t_bool is_interactive);
 int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
-
+void		execute_builtins(char **cmd);
+int			check_builtins(char *cmd);
 
 /*
 ** ============================= end execution =================================
 */
 
-void		backups(int f);
 int		get_next_line(int fd, char **line);
+void		backups(int f);
+int		jhin(char **cmd);
+int		check_is_not(int ret, int is_not);
+int		ft_test(char **cmd);
+int		ft_echo(char **cmd);
+int		export(char **av);
 
 /*
 **		free functions
@@ -118,5 +130,11 @@ char		*prompt_1(void);
 */
 
 char	*read_cmd_multiline(void);
+
+/*
+** Utils
+*/
+
+t_bool	is_quote(char c);
 
 #endif

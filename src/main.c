@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/25 00:21:38 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:57:49 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	shell_main(void)
 int	main(int ac, char *av[], char *envp[])
 {
 	(void)av;
-	(void)envp;
+	g_shell_env = env_init(envp);
 	g_term_fd = open("/dev/tty", O_RDWR);
 	if (g_term_fd == -1)
 		ft_strerror(EOPENFILE,"open", NULL, TRUE);

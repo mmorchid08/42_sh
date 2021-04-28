@@ -6,7 +6,7 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/19 23:28:20 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/28 12:29:41 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ INCLUDES =	$(42SH_ROOT)/includes/forty_two_sh.h $(42SH_ROOT)/includes/typedefs.h
 SRCS = execute_job.c \
 	get_job_by_selector.c \
 	get_latest_jobs.c \
-	job_builtins.c \
 	job_list.c \
 	new_job.c \
 	notify_jobs.c \

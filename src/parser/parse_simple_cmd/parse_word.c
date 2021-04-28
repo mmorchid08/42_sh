@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 15:28:50 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/20 16:47:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/28 15:23:14 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@
 **		*backslash = c == BACK_SLASH && *quote != SINGLE_QUOTE;
 **}
 */
-
-static t_bool	is_quote(char c)
-{
-	return (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH);
-}
 
 static size_t	find_assignment_equal(char *word)
 {

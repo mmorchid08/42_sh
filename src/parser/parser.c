@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:28:42 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/24 15:17:23 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/28 14:31:03 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ t_vector	*parser(char *line)
 	commands = parse_complete_commands(lex_ret->tokens);
 	vector_free(lex_ret->tokens);
 	free(lex_ret);
-	if (commands)
-		print_commands(commands);
 	return (commands);
 }

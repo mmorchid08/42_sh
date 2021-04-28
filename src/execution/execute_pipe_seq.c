@@ -6,70 +6,45 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/25 00:32:57 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:33:06 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
-int	manage_pipes(int i, int len)
-{
-	static int		fd[2];
-
-	if (i + 1 != len)
-	{
-		if (pipe(fd) == -1)
-			exit(0);
-		dup2(fd[1], 1);
-		close(fd[1]);
-		return (fd[0]);
-	}
-	else
-	{
-		dup2(fd[0], 0);
-		close(fd[0]);
-		return (-1);
-	}
-}
-
-pid_t		execute_pip_pt2(char **args, char **a_env, int index, int len)
+pid_t		execute_pip_pt2(char **args)
 {
 	pid_t		pid;
 	char		*full_path;
-	static int	fd = -1;
-	int			i;
+	char		**a_env;
 
-	i = -1;
-	while (args[++i])
-		remove_quotes(&args[i]);
-	if (fd != -1)
-		fd = manage_pipes(0, 1);
-	if (index + 1 < len)
-		fd = manage_pipes(1, 1);
+	a_env = env_to_envp(g_shell_env);
 	pid = fork();
 	if (pid == -1)
 	{
-		ft_printf(2, "Error forking.\n");
+		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return (-1);
 	}
 	else if (pid == 0)
 	{
-		full_path = get_full_path(args[0]);
-		if (fd != -1)
-			close(fd);
-		if (execve(full_path, args, a_env))
+		if (check_builtins(args[0]))
+			execute_builtins(args);
+		else
 		{
-			ft_printf(2, "Error executing\n");
-			exit(127);
-			return (-1);
+			full_path = get_full_path(args[0]);
+			if (execve(full_path, args, a_env))
+			{
+				if (access(full_path, F_OK) == 0)
+					ft_strerror(EACCES, args[0], NULL, FALSE);
+				else
+					ft_strerror(ENOCMD, args[0], NULL, FALSE);
+				exit(127);
+			}
 		}
 	}
 	else
-	{
 		backups(2);
-		//for_testing
-	}
 	return (pid);
 }
 
@@ -79,18 +54,24 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 	char		**args;
 	pid_t		pid;
 	int			i;
+	int			x;
 
-	i = 0;
+	i = -1;
 	vec_pid = vector_init(sizeof(pid_t), NULL);
-	while (i < len)
+	while (++i < len)
 	{
-		args = cmd[i].args->array;
-		pid = execute_pip_pt2(args, environ, i, len);
+		vector_push(cmd[i].args, &(char *){NULL});
+		args = (char **)cmd[i].args->array;
+		x = 0;
+		while (args[x] != NULL)
+			remove_quotes(&(args[x++]));
+		if ((x = do_pipes_and_red(i, len, cmd[i].redirections)) == 1)
+			return (NULL);
+		pid = execute_pip_pt2(args);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
 		else
 			return (NULL);
-		i++;
 	}
 	return (vec_pid);
 }

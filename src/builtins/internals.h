@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   internals.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 18:26:22 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/01 12:45:19 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/05 11:09:59 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/04/05 11:10:12 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#ifndef INTERNALS_H
+# define INTERNALS_H
 
-extern t_vector	*g_shell_env;
+# include "forty_two_sh.h"
 
 #endif

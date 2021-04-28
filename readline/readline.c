@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:54:11 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/05 16:34:23 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/26 02:54:54 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char			*readline_read_loop(void)
 	int		ret;
 
 	is_in_seq = FALSE;
-	while ((ret = read(0, &c, 1)) > 0)
+	while ((ret = read(0, &c, 1)) > 0 || ret == -1)
 		if (!is_in_seq && c == '\e')
 			is_in_seq = TRUE;
 		else if (is_in_seq)
