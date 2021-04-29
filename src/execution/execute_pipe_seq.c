@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 10:31:33 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 16:13:51 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ pid_t	execute_pip_pt2(char **args)
 	else if (pid == 0)
 	{
 		if (check_builtins(args[0]))
+		{
 			execute_builtins(args);
+			exit(0);
+		}
 		else
 			ft_execve_pip(args);
 	}
