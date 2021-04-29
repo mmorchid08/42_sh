@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 09:40:53 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 15:14:41 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_error(char *str)
 	}
 	else
 		ft_printf(2, "42sh: %s: No such file or directory\n", str);
+	closedir(dir);
 	return (-1);
 }
 

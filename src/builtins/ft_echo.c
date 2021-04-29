@@ -1,25 +1,30 @@
 #include "forty_two_sh.h"
 
-void	do_special_char(char c)
+int	do_special_char(char c)
 {
-	if (c == 'a')
-		ft_printf(1, "\a");
+	if (c == 'n')
+		ft_putchar('\n');
+	else if (c == 'a')
+		ft_putchar('\a');
 	else if (c == 'b')
-		ft_printf(1, "\b");
-	else if (c == 'c')
-		ft_printf(1, "c");
+		ft_putchar('\b');
+	else if (c == 'e' || c == 'E')
+		ft_putchar('\e');
 	else if (c == 'f')
-		ft_printf(1, "\f");
-	else if (c == 'n')
-		ft_printf(1, "\n");
+		ft_putchar('\f');
 	else if (c == 'r')
-		ft_printf(1, "\r");
+		ft_putchar('\r');
 	else if (c == 't')
-		ft_printf(1, "\t");
+		ft_putchar('\t');
 	else if (c == 'v')
-		ft_printf(1, "\v");
+		ft_putchar('\v');
+	else if (c == '\\')
+		ft_putchar('\\');
+	else if (c == '0')
+		ft_putchar('\0');
 	else
-		ft_printf(1, "%c", c);
+		return (0);
+	return (1);
 }
 
 void	do_printing(char *str)
@@ -30,7 +35,12 @@ void	do_printing(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\\')
-			do_special_char(str[i + 1]);
+		{
+			if (do_special_char(str[i + 1]) == 1)
+				i++;
+			else
+				ft_putchar(str[i]);
+		}
 		else
 			ft_printf(1, "%c", str[i]);
 		i++;

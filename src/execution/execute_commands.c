@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:22:43 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/27 11:07:54 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 15:33:07 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ void	backups(int f)
 
 	if (f == 1)
 	{
-		stdii = dup(0);
-		stdou = dup(1);
-		stder = dup(2);
+		stdii = dup2(0, 199);
+		stdou = dup2(1, 200);
+		stder = dup2(2, 201);
 	}
-	else if (f == -1)
-		dup2(stdou, 1);
 	else
 	{
 		dup2(stdii, 0);
@@ -46,9 +44,9 @@ void	execute_commands(t_vector *commands)
 	int					i;
 
 	i = 0;
-	backups(1);
 	while (i < (int)commands->length)
 	{
+		backups(1);
 		if (cmds_array[i].type == LOGIC_SEQ)
 			g_exit_status = execute_logic_seq(cmds_array[i].command,
 					cmds_array[i].is_background_job);
@@ -59,6 +57,6 @@ void	execute_commands(t_vector *commands)
 			g_exit_status = execute_simple_cmd(cmds_array[i].command,
 					cmds_array[i].is_background_job, TRUE);
 		i++;
+		backups(3);
 	}
-	backups(3);
 }
