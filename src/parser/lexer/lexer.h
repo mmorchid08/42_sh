@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/28 14:31:18 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 14:19:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ typedef struct s_lexer_ret
 
 }	t_lexer_ret;
 
+typedef struct s_string
+{
+	char	*data;
+	size_t	capacity;
+	size_t	length;
+}				t_string;
+
 t_lexer_ret	*lexer(char *line);
 void		lexer_print_tokens(t_vector *tokens_vec);
 void		lexer_add_newline_token(t_vector *tokens);
@@ -32,5 +39,8 @@ t_bool		lexer_is_separator(t_token_type type);
 t_bool		lexer_is_and_or(t_token_type type);
 char		lexer_quote_type(char c);
 t_token		*token_dup(t_token token);
-
+t_string	*string_new(void);
+void		string_free(t_string *str);
+void		string_push(t_string *str, char c);
+char		*string_get_data(t_string *str);
 #endif

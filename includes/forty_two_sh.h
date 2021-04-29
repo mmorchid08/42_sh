@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 10:07:50 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 14:13:29 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
-# include <stdbool.h>
 # include "../src/env/env.h"
+# include "../src/builtins/builtins.h"
 # include "../readline/readline.h"
 
 void	del_token(void *element);
@@ -111,7 +111,6 @@ int		jhin(char **cmd);
 int		check_is_not(int ret, int is_not);
 int		ft_test(char **cmd);
 int		ft_echo(char **cmd);
-int		export(char **av);
 
 /*
 **		free functions
