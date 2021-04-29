@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:52:38 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/28 14:34:27 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:07:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	parse_redirection(t_parse_simple *sim)
 	if (redirect.left_fd != -1)
 		simple_advance(sim);
 	redirect.type = sim->current_token.type;
-	simple_advance(sim);
 	if (redirect.type != GREATANDDASH && redirect.type != LESSANDDASH)
 	{
+		simple_advance(sim);
 		if (sim->current_token.type != WORD || sim->current_token.type == NA)
 			return (syntax_error(sim));
 		if (set_right_fd(sim, &redirect) == EXIT_FAILURE)
