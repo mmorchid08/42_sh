@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 10:14:51 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 16:52:39 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ void	remove_quotes(char **str)
 		}
 		i++;
 	}
+}
+
+void	remove_quotes_from_args(char **args)
+{
+	while (*args != NULL)
+		remove_quotes(args++);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 10:39:42 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 21:26:40 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,24 @@ void	execute_builtins(char **cmd)
 {
 	if (!ft_strcmp(cmd[0], "test"))
 		g_exit_status = ft_test(cmd);
-	else if (!ft_strcmp(cmd[0], "env"))
-		env_print(g_shell_env, FALSE);
 	else if (!ft_strcmp(cmd[0], "echo"))
-		ft_echo(cmd);
+		g_exit_status = ft_echo(cmd);
 	else if (!ft_strcmp(cmd[0], "jobs"))
-		ft_jobs(cmd);
+		g_exit_status = ft_jobs(cmd);
 	else if (!ft_strcmp(cmd[0], "cd"))
 		;// ft_cd(cmd);
 	else if (!ft_strcmp(cmd[0], "hash"))
 		;// ft_hash(cmd);
 	else if (!ft_strcmp(cmd[0], "fg"))
-		ft_fg(cmd);
+		g_exit_status = ft_fg(cmd);
 	else if (!ft_strcmp(cmd[0], "bg"))
-		ft_bg(cmd);
+		g_exit_status = ft_bg(cmd);
 	else if (!ft_strcmp(cmd[0], "set"))
 		;// ft_set(cmd);
 	else if (!ft_strcmp(cmd[0], "unset"))
 		;// ft_unset(cmd);
 	else if (!ft_strcmp(cmd[0], "export"))
-		export(cmd);
+		g_exit_status = export(cmd);
 	else if (!ft_strcmp(cmd[0], "type"))
 		;// ft_type(cmd);
 	else if (!ft_strcmp(cmd[0], "alias"))

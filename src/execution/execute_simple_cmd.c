@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 16:48:20 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 21:20:59 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_execve(char *full_path, char **cmd, char **a_env)
 	}
 }
 
-void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
+void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
+	t_bool is_background)
 {
 	pid_t		pid;
 	char		*full_path;
@@ -35,13 +36,16 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
 		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return ;
 	}
-	else if (pid == 0)
+	set_process_group(ter_i(pid == 0, getpid(), pid), (int [1]){0},
+		is_background);
+	if (pid == 0)
 	{
+		reset_signals();
 		full_path = get_full_path(cmd[0]);
 		if (check_builtins(cmd[0]))
 		{
 			execute_builtins(cmd);
-			exit(0);
+			exit(g_exit_status);
 		}
 		else
 			ft_execve(full_path, cmd, a_env);
@@ -50,23 +54,20 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
 	vector_push(*vec_pid, &pid);
 }
 
-int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_b)
+int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 {
 	char	**a_env;
 	char	*full_path;
-	int		i;
 
 	a_env = env_to_envp(g_shell_env);
-	i = 0;
-	while ((*cmd)[i])
-		remove_quotes(&(*cmd)[i++]);
+	remove_quotes_from_args(*cmd);
 	full_path = get_full_path((*cmd)[0]);
 	if (do_pipes_and_red(0, 0, red) == 1)
 		return (-1);
-	if (check_builtins((*cmd)[0]) && is_b == FALSE)
+	if (check_builtins((*cmd)[0]) && is_background == FALSE)
 		execute_builtins(*cmd);
 	else
-		ft_execve_scmd(*cmd, a_env, p_vec);
+		ft_execve_scmd(*cmd, a_env, p_vec, is_background);
 	return (EXIT_SUCCESS);
 }
 
