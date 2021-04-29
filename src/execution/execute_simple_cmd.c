@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 16:11:48 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 16:48:20 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_b)
 	return (EXIT_SUCCESS);
 }
 
+/*void	do_value(t_vector *values)
+{
+	
+}*/
+
 int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	t_bool is_interactive)
 {
@@ -79,9 +84,11 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	vec_pid = NULL;
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
-	if (exec_pt2(&cmd, simple_cmd->redirections, &vec_pid, is_background)
-		== -1)
-		return (-1);
+	//do_values(simple_cmd->assignments);
+	if (cmd[0] && cmd)
+		if (exec_pt2(&cmd, simple_cmd->redirections, &vec_pid, is_background)
+			== -1)
+			return (-1);
 	if (vec_pid != NULL)
 	{
 		if (is_interactive == FALSE)
