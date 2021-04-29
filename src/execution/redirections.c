@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 09:39:53 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 10:08:39 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 15:38:46 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,14 @@ int	if_not_word(t_redirection *red)
 	if (red->type == GREATANDDASH || red->type == LESSANDDASH)
 		close(red->left_fd);
 	else if (red->righ_fd)
+	{
 		if (dup2(ft_atoi(red->righ_fd), fd) == -1)
+		{
+			ft_printf(2, "42sh: %d: bad file descriptor\n",
+				ft_atoi(red->righ_fd));
 			return (-1);
+		}
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -94,21 +100,24 @@ int	do_redirections(t_vector *red)
 	t_redirection	*redi;
 
 	i = -1;
+	redi = (t_redirection *)red->array;
 	while (++i < (int)red->length)
 	{
-		redi = (t_redirection *)red[i].array;
-		if (redi->type == DLESS)
-			dup2(ft_atoi(redi->righ_fd), 0);
-		if (check_is_word(redi))
+		if (redi[i].type == DLESS)
 		{
-			if (if_not_word(redi) == -1)
+			if (redi[i].left_fd == -1)
+				redi[i].left_fd = 0;
+			dup2(ft_atoi(redi[i].righ_fd), redi[i].left_fd);
+			close(ft_atoi(redi[i].righ_fd));
+		}
+		if (check_is_word(&redi[i]))
+		{
+			if (if_not_word(&redi[i]) == -1)
 				return (-1);
 		}
 		else
-		{
-			if (open_files_for_red(redi) == -1)
+			if (open_files_for_red(&redi[i]) == -1)
 				return (-1);
-		}
 	}
 	return (1);
 }
