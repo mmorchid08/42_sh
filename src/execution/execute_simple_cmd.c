@@ -6,11 +6,23 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 10:23:13 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 16:11:48 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
+
+void	ft_execve(char *full_path, char **cmd, char **a_env)
+{
+	if (execve(full_path, cmd, a_env) == -1)
+	{
+		if (access(full_path, F_OK) == 0)
+			ft_strerror(EACCES, cmd[0], NULL, FALSE);
+		else
+			ft_strerror(ENOCMD, cmd[0], NULL, FALSE);
+		exit(127);
+	}
+}
 
 void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
 {
@@ -26,14 +38,13 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
 	else if (pid == 0)
 	{
 		full_path = get_full_path(cmd[0]);
-		if (execve(full_path, cmd, a_env) == -1)
+		if (check_builtins(cmd[0]))
 		{
-			if (access(full_path, F_OK) == 0)
-				ft_strerror(EACCES, cmd[0], NULL, FALSE);
-			else
-				ft_strerror(ENOCMD, cmd[0], NULL, FALSE);
-			exit(127);
+			execute_builtins(cmd);
+			exit(0);
 		}
+		else
+			ft_execve(full_path, cmd, a_env);
 	}
 	*vec_pid = vector_init(sizeof(pid_t), NULL);
 	vector_push(*vec_pid, &pid);
