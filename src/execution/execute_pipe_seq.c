@@ -3,23 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/27 13:33:06 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:31:33 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
-pid_t		execute_pip_pt2(char **args)
+void	ft_execve_pip(char **cmd)
+{
+	char	*full_path;
+	char	**a_env;
+
+	full_path = get_full_path(cmd[0]);
+	a_env = env_to_envp(g_shell_env);
+	if (execve(full_path, cmd, a_env) == -1)
+	{
+		if (access(full_path, F_OK) == 0)
+			ft_strerror(EACCES, cmd[0], NULL, FALSE);
+		else
+			ft_strerror(ENOCMD, cmd[0], NULL, FALSE);
+		exit(127);
+	}
+}
+
+pid_t	execute_pip_pt2(char **args)
 {
 	pid_t		pid;
-	char		*full_path;
-	char		**a_env;
 
-	a_env = env_to_envp(g_shell_env);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -31,20 +45,9 @@ pid_t		execute_pip_pt2(char **args)
 		if (check_builtins(args[0]))
 			execute_builtins(args);
 		else
-		{
-			full_path = get_full_path(args[0]);
-			if (execve(full_path, args, a_env))
-			{
-				if (access(full_path, F_OK) == 0)
-					ft_strerror(EACCES, args[0], NULL, FALSE);
-				else
-					ft_strerror(ENOCMD, args[0], NULL, FALSE);
-				exit(127);
-			}
-		}
+			ft_execve_pip(args);
 	}
-	else
-		backups(2);
+	backups(2);
 	return (pid);
 }
 
@@ -65,7 +68,8 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 		x = 0;
 		while (args[x] != NULL)
 			remove_quotes(&(args[x++]));
-		if ((x = do_pipes_and_red(i, len, cmd[i].redirections)) == 1)
+		x = do_pipes_and_red(i, len, cmd[i].redirections);
+		if (x == 1)
 			return (NULL);
 		pid = execute_pip_pt2(args);
 		if (pid != -1)
@@ -81,9 +85,9 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 {
 	t_simple_command	*s_cmd;
 	t_vector			*vec_pid;
-	pid_t			*pid;
-	pid_t			f_pid;
-	int			i;
+	pid_t				*pid;
+	pid_t				f_pid;
+	int					i;
 
 	s_cmd = (t_simple_command *)pipe_seq->commands->array;
 	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length);

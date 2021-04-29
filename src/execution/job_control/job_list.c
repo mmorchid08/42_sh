@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   job_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:06:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:17 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:40:00 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
 t_vector	*g_job_list;
-
 
 /*
 	a callback used by vector_init()

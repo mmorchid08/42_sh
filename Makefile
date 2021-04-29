@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/28 14:16:04 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/29 10:08:14 by hmzah            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ INCLUDES =	-Iincludes
 	execution/execute_simple_cmd.o \
 	execution/pipes_and_red.o \
 	execution/get_exit_code.o \
+	execution/redirections.o \
 	execution/remove_quotes.o \
 	execution/wait_children.o \
 	prompt.o \

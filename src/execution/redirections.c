@@ -1,0 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/29 09:39:53 by hmzah             #+#    #+#             */
+/*   Updated: 2021/04/29 10:08:39 by hmzah            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "forty_two_sh.h"
+
+int	open_files_for_red(t_redirection *red)
+{
+	int	fd;
+
+	fd = -1;
+	if (red->type == GREAT || red->type == GREATAND || red->type == ANDGREAT)
+		fd = open(red->righ_fd, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	else if (red->type == DGREAT)
+		fd = open(red->righ_fd, O_RDWR | O_CREAT | O_APPEND, 0644);
+	else if (red->type == LESS)
+	{
+		fd = open(red->righ_fd, O_RDWR);
+		if (fd == -1)
+			return (ft_error(red->righ_fd));
+	}
+	if (red->type == GREATAND || red->type == LESSAND)
+		dup2(fd, 2);
+	if (red->type == LESS || red->type == LESSAND)
+		dup2(fd, 0);
+	else if (red->left_fd != -1)
+		dup2(fd, red->left_fd);
+	else if (!(red->type == DLESS))
+		dup2(fd, 1);
+	if (fd != -1)
+		close(fd);
+	return (1);
+}
+
+int	str_is_number(char *str, t_token_type type)
+{
+	int	i;
+
+	i = -1;
+	if (type != GREATANDDASH && type != LESSANDDASH)
+	{
+		while (str[++i])
+		{
+			if (!ft_isdigit(str[i]))
+				return (0);
+		}
+	}
+	return (1);
+}
+
+int	check_is_word(t_redirection *red)
+{
+	if ((red->type == GREATAND
+			&& str_is_number(red->righ_fd, red->type))
+		|| (red->type == LESSAND
+			&& str_is_number(red->righ_fd, red->type))
+		|| red->type == GREATANDDASH || red->type == LESSANDDASH)
+		return (1);
+	else
+		return (0);
+}
+
+int	if_not_word(t_redirection *red)
+{
+	int	fd;
+
+	fd = -1;
+	if (red->left_fd == -1)
+		fd = 1;
+	else
+		fd = red->left_fd;
+	if (red->left_fd == -1
+		&& (red->type == GREATAND || red->type == GREATANDDASH))
+		red->left_fd = 1;
+	if (red->type == GREATANDDASH || red->type == LESSANDDASH)
+		close(red->left_fd);
+	else if (red->righ_fd)
+		if (dup2(ft_atoi(red->righ_fd), fd) == -1)
+			return (-1);
+	return (EXIT_SUCCESS);
+}
+
+int	do_redirections(t_vector *red)
+{
+	int				i;
+	t_redirection	*redi;
+
+	i = -1;
+	while (++i < (int)red->length)
+	{
+		redi = (t_redirection *)red[i].array;
+		if (redi->type == DLESS)
+			dup2(ft_atoi(redi->righ_fd), 0);
+		if (check_is_word(redi))
+		{
+			if (if_not_word(redi) == -1)
+				return (-1);
+		}
+		else
+		{
+			if (open_files_for_red(redi) == -1)
+				return (-1);
+		}
+	}
+	return (1);
+}

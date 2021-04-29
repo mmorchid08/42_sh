@@ -6,13 +6,13 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/16 17:16:35 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/29 10:37:20 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-int		check_file(char *path)
+int	check_file(char *path)
 {
 	if (access(path, F_OK) != -1)
 		return (1);
@@ -26,7 +26,8 @@ char	*try_every_possibility(char *cmd, char *path_env)
 	char	*tmp2;
 	int		i;
 
-	if (!path_env || !(ab = ft_strsplit(path_env, ':')))
+	ab = ft_strsplit(path_env, ':');
+	if (!path_env || !ab)
 		return (ft_strdup(cmd));
 	i = -1;
 	tmp = NULL;
@@ -51,7 +52,8 @@ char	*get_full_path(char *cmd)
 {
 	char	*full_path;
 
-	if (!(check_file(cmd) && cmd[0] != '.' && cmd[0] != '/'))
+	if (!(check_file(cmd) && cmd[0] != '.' && cmd[0] != '/')
+		&& !check_builtins(cmd))
 		full_path = try_every_possibility(cmd, env_get(g_shell_env, "PATH"));
 	else
 		full_path = ft_strdup(cmd);

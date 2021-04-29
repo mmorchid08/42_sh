@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:37:39 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/03/31 18:25:31 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/29 10:40:23 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,3 @@ int		unset_var(t_vector *env, char *key)
 	}
 	return (EXIT_SUCCESS);
 }
-
-int		set_shell_env_var()

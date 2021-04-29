@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/28 15:20:47 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:07:50 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int			ft_jobs(char **args);
 ** ================================ execution ==================================
 */
 
+int			do_redirections(t_vector *red);
+int			ft_error(char *str);
 int			do_pipes_and_red(int i, int len, t_vector *red);
 char		*get_full_path(char *cmd);
 void		handle_quotes(char c, int *balance);

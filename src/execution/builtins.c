@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/27 16:36:23 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:39:42 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-int		check_builtins(char *cmd)
+int	check_builtins(char *cmd)
 {
-	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "set") ||
-		!ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "env") ||
-		!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "exit") ||
-		!ft_strcmp(cmd, "hash") || !ft_strcmp(cmd, "test") ||
-		!ft_strcmp(cmd, "type") || !ft_strcmp(cmd, "jobs") ||
-		!ft_strcmp(cmd, "alias") || !ft_strcmp(cmd, "fg") ||
-		!ft_strcmp(cmd, "bg"))
+	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "set")
+		|| !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "exit")
+		|| !ft_strcmp(cmd, "hash") || !ft_strcmp(cmd, "test")
+		|| !ft_strcmp(cmd, "type") || !ft_strcmp(cmd, "jobs")
+		|| !ft_strcmp(cmd, "alias") || !ft_strcmp(cmd, "fg")
+		|| !ft_strcmp(cmd, "bg"))
 		return (1);
 	return (0);
 }
@@ -29,6 +29,8 @@ void	execute_builtins(char **cmd)
 {
 	if (!ft_strcmp(cmd[0], "test"))
 		g_exit_status = ft_test(cmd);
+	else if (!ft_strcmp(cmd[0], "env"))
+		env_print(g_shell_env, FALSE);
 	else if (!ft_strcmp(cmd[0], "echo"))
 		ft_echo(cmd);
 	else if (!ft_strcmp(cmd[0], "jobs"))
