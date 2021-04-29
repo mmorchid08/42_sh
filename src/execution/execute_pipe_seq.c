@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 21:27:26 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 23:35:34 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ t_vector	*execute_pip(t_simple_command *cmd, int len, t_bool is_background)
 	{
 		vector_push(cmd[i].args, &(char *){NULL});
 		args = (char **)cmd[i].args->array;
+		remove_quotes_from_args(args);
+		if (do_pipes_and_red(i, len, cmd[i].redirections) == 1)
+			return (NULL);
 		pid = execute_pip_pt2(args, &pgid, is_background);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
