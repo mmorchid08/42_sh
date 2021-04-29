@@ -6,13 +6,13 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 08:57:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 14:19:21 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:41:20 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internals.h"
 
-static char	*escape_string(char *str)
+char	*escape_string(char *str)
 {
 	t_string	*escaped_str;
 	size_t		i;
@@ -40,7 +40,6 @@ char	*env_get(t_vector *env, char *key)
 	{
 		if (ft_strequ(key, vars[i].key))
 			return (vars[i].value);
-			return (escape_string(vars[i].value));
 		++i;
 	}
 	return (NULL);
