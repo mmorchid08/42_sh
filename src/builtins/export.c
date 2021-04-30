@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:28:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/05 11:18:23 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:40:25 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		parse_opt(char *arg, t_bool *option_n, t_bool *option_p)
 {
 	size_t	i;
 
-	i = 0;
+	i = 1;
 	while (arg[i])
 	{
 		if (arg[i] == 'n')
@@ -38,7 +38,7 @@ int		parse_options(char **av, t_bool *option_n, t_bool *option_p)
 {
 	size_t	i;
 
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
 		if (ft_strequ(av[i], "--"))
@@ -55,13 +55,11 @@ int		parse_options(char **av, t_bool *option_n, t_bool *option_p)
 	return (i);
 }
 
-int		export_args(char **av, t_bool option_n)
+int		export_args(char **av, int i, t_bool option_n)
 {
 	t_var	*var;
-	size_t	i;
 	int		ret_status;
 
-	i = 0;
 	ret_status = EXIT_SUCCESS;
 	while (av[i])
 	{
@@ -70,6 +68,7 @@ int		export_args(char **av, t_bool option_n)
 		{
 			ft_printf(1, "42sh: export: `%s\': not a valid identifier", av[i]);
 			ret_status = EXIT_FAILURE;
+			++i;
 			continue ;
 		}
 		if (option_n || var->value == NULL)
@@ -87,12 +86,14 @@ int		export(char **av)
 	t_bool	option_p;
 	int		first_name_index;
 
+	option_n = FALSE;
+	option_p = FALSE;
 	first_name_index = parse_options(av, &option_n, &option_p);
 	if (first_name_index == -1)
 		return (EXIT_FAILURE);
 	if (av[first_name_index] == NULL)
 		env_print(g_shell_env, TRUE);
-	if (export_args(av, option_n) == EXIT_FAILURE)
+	else if (export_args(av, first_name_index, option_n) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
