@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/28 14:17:42 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/30 09:52:02 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,4 +166,22 @@ typedef struct s_special_jobs
 	t_job	*current;
 	t_job	*previous;
 }				t_special_jobs;
+
+typedef struct	s_hash_content
+{
+	void			*value;
+	char			*key;
+	struct s_hash_content	*next;
+	struct s_hash_content	*last;
+}				t_hash_content;
+
+
+typedef struct	s_hash_table
+{
+	t_hash_content *table;
+	unsigned int size;
+	unsigned int used_size;
+	unsigned int expanding_size;
+}				t_hash_table;
+
 #endif

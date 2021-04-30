@@ -6,7 +6,7 @@
 #    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/30 08:31:11 by hmzah            ###   ########.fr        #
+#    Updated: 2021/04/30 12:07:28 by hmzah            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,11 @@ INCLUDES =	-Iincludes
 	builtins/ft_exit.o \
 	builtins/ft_test.o \
 	builtins/ft_test2.o \
+	builtins/hash.o \
+	builtins/hash2.o \
+	builtins/cd.o \
+	builtins/cd_helper.o \
+	builtins/cd_helper2.o \
 	execution/builtins.o \
 	read_cmd_multiline/read_cmd_multiline.o \
 	utils/is_quote.o \

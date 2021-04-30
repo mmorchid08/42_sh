@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 15:33:01 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 10:04:02 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ g_exit_status;
 
 int
 g_term_fd;
+
+t_hash_table
+*g_hash;
 
 
 int	shell_main(void)
@@ -42,6 +45,7 @@ int	shell_main(void)
 int	main(int ac, char *av[], char *envp[])
 {
 	(void)av;
+	g_hash = new_hash_table(sizeof(char *), sizeof(char *));
 	g_shell_env = env_init(envp);
 	g_term_fd = open("/dev/tty", O_RDWR);
 	if (g_term_fd == -1)

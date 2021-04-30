@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 08:30:51 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 12:09:27 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ extern	t_vector
 *g_job_list;
 extern	t_vector
 *g_stopped_jobs;
+extern	t_hash_table
+*g_hash;
 
 
 /*
@@ -108,14 +110,27 @@ int			manage_pipes(int i);
 ** ============================= end execution =================================
 */
 
+int			is_correct_path(char *path, int print_error);
+char		*concat_path_with_cdpath(char *path);
+int			ft_cd(char **cmd);
 int			get_next_line(int fd, char **line);
 void		backups(int f);
 int			jhin(char **cmd);
 int			check_is_not(int ret, int is_not);
 int			ft_test(char **cmd);
 int			ft_echo(char **cmd, t_vector *red);
+void 		free_hash_table(t_hash_table **hash_tab, void (*del)(void **));
+void		print_hash(t_hash_table *hash);
+t_hash_table	*new_hash_table(unsigned int size, unsigned int expnading_size);
+int 		hash_insert(t_hash_table *hash_tab, char *key, void *value, int expand);
+void 		*hash_find(t_hash_table *hash_tab, const char *key);
 int			export(char **av);
 void		ft_exit(char **cmd);
+
+char	*ft_strnjoin(char **strings, int n);
+int		ft_isinstr(char c, const char *s);
+char	*ft_skip_unitl_char(const char *str, const char *compare,
+																int (*f)(int));
 
 /*
 **		free functions
