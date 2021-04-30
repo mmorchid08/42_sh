@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 00:01:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 14:04:56 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:17:55 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	set(char **av)
 	size_t	i;
 	t_var	*vars;
 
-	if (ft_strings_array_length(av) > 0)
+	if (ft_strings_array_length(av) > 1)
 	{
-		ft_printf(2, "42sh: set: wrong number of arguments");
+		ft_printf(2, "42sh: set: wrong number of arguments\n");
 		return (EXIT_FAILURE);
 	}
 	i = 0;
