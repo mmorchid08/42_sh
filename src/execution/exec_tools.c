@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 12:18:23 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 14:36:43 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,23 @@ char	*get_full_path(char *cmd)
 {
 	char	*full_path;
 
-	/*if (hash_find(g_hash, cmd) == NULL)
+	if ((char *)hash_find(g_hash, cmd) == NULL)
 	{
-		ft_printf(1, "is dddhere\n");*/
+		ft_printf(1, "HERE\n");
 		if (!(check_file(cmd) && cmd[0] != '.' && cmd[0] != '/')
 			&& !check_builtins(cmd))
 		{
 			full_path = try_every_possibility(cmd, env_get(g_shell_env, "PATH"));
-			// hash_insert(g_hash, ft_strdup(cmd), ft_strdup(full_path), sizeof(char *));
+			hash_insert(g_hash, ft_strdup(cmd), ft_strdup(full_path), 1);
 		}
 		else
 			full_path = ft_strdup(cmd);
 		return (full_path);
-	//}
-	/*else
+	}
+	else
 	{
-		ft_printf(1, "is here\n");
 		return (hash_find(g_hash, cmd));
-	}*/
+	}
 }
 
 void	reset_signals(void)

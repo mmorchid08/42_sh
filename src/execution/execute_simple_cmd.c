@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 11:00:53 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 14:23:05 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 {
 	char	**a_env;
-	char	*full_path;
 
 	a_env = env_to_envp(g_shell_env);
 	g_red = red;
 	remove_quotes_from_args(*cmd);
-	full_path = get_full_path((*cmd)[0]);
 	if (do_pipes_and_red(0, 0, red) == 1)
 		return (-1);
 	if (check_builtins((*cmd)[0]) && is_background == FALSE)

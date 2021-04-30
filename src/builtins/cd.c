@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmzah <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
+/*   Updated: 2021/04/30 13:17:13 by hmzah            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "forty_two_sh.h"
+#include <dirent.h>
 
 void	ft_update_pwd(char *path)
 {
@@ -7,10 +20,7 @@ void	ft_update_pwd(char *path)
 	pwd = env_get(g_shell_env, "PWD");
 	if (pwd)
 		env_set_value(g_shell_env, "OLDPWD", pwd);
-		// edit_add_var("OLDPWD", pwd->value, 0, 1);
 	env_set_value(g_shell_env, "PWD", path);
-	// edit_add_var("PWD", path, 0, 1);
-	ft_printf(1, "%s\n", path);
 }
 
 int		get_cd_flag(char ***cmd)
@@ -87,6 +97,7 @@ int		ft_cd(char **cmd)
 {
 	char	*path;
 	int		logicaly;
+	DIR		*dir;
 
 	if ((logicaly = get_cd_flag(&cmd)) == -1 || (cmd[0] && cmd[1]))
 		return (cmd[1] ? ft_printf(2, "cd: to many argument\n") : -1);
@@ -102,7 +113,11 @@ int		ft_cd(char **cmd)
 			ft_update_pwd(path);
 			return (0);
 		}
-		ft_printf(2, "cd: permission denied\n");
+		dir = opendir(path);
+		if (dir != NULL)
+			ft_printf(2, "cd: permission denied\n");
+		else
+			ft_printf(2, "cd: directory not found\n");
 		return (15);
 	}
 	return (1);

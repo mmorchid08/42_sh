@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 09:55:25 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 11:03:20 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 14:26:36 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,25 @@ void free_hash_content(t_hash_content **table, unsigned int size,
 
 void	print_hash(t_hash_table *hash_tab)
 {
-	t_hash_content	*hash;
-
-	hash = hash_tab->table;
-	while (hash)
-	{
-		ft_printf(1, "%s	%s\n", (char *)hash->value, hash->key);
-		hash = hash->next;
-	}
+    unsigned int i;
+    i = 0;
+	t_hash_content	*table;
+	t_hash_content	*ptr;
+	
+	table = hash_tab->table;
+    while (++i < hash_tab->size)
+    {
+        if (table[i].key)
+        {
+            ft_printf(1, "%s	%s\n", table->key, (char *)table->value);
+            ptr = table->next;
+            while (ptr)
+            {
+                ft_printf(1, "%s	%s\n", ptr->key, (char *)ptr->value);
+                ptr = ptr->next;
+            }   
+        }
+    }
 }
 
 void free_hash_table(t_hash_table **hash_tab, void (*del)(void **))
