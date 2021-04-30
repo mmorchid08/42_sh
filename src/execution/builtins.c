@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 17:00:13 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 07:32:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	execute_builtins(char **cmd, t_vector *red)
 	else if (!ft_strcmp(cmd[0], "env"))
 		env_print(g_shell_env, TRUE);
 	else if (!ft_strcmp(cmd[0], "echo"))
-<<<<<<< HEAD
 		g_exit_status = ft_echo(cmd, red);
-=======
-		ft_echo(cmd, red);
->>>>>>> 61d466e42e380e172e0dbafbd926a2656c1ccb3a
 	else if (!ft_strcmp(cmd[0], "jobs"))
 		ft_jobs(cmd);
 	else if (!ft_strcmp(cmd[0], "cd"))
