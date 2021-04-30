@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 08:04:20 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 08:30:51 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int			check_is_not(int ret, int is_not);
 int			ft_test(char **cmd);
 int			ft_echo(char **cmd, t_vector *red);
 int			export(char **av);
+void		ft_exit(char **cmd);
 
 /*
 **		free functions

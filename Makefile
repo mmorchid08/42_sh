@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
+#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/29 14:22:37 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/04/30 08:31:11 by hmzah            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ INCLUDES =	-Iincludes
 	builtins/export.o \
 	builtins/job_builtins.o \
 	builtins/ft_echo.o \
+	builtins/ft_exit.o \
 	builtins/ft_test.o \
 	builtins/ft_test2.o \
 	execution/builtins.o \
