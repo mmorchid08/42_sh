@@ -1,5 +1,4 @@
 builtins : not finished yet
-false && echo foo || echo bar : again returning value
 
 Expansions and environment not yet.
 
