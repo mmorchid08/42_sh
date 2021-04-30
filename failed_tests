@@ -1,10 +1,3 @@
 Not tried yet Tests: A list of test we didn't try yet.
-cd
 type
 Expansions
-Command substitution
-hashtable
-
-
-Failed test : A list of failed test.
-Every other test was passed
