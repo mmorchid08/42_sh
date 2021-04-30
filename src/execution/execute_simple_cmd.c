@@ -24,7 +24,8 @@ void	ft_execve(char *full_path, char **cmd, char **a_env)
 	}
 }
 
-void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
+void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
+	t_vector *red)
 {
 	pid_t		pid;
 	char		*full_path;
@@ -40,7 +41,7 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid)
 		full_path = get_full_path(cmd[0]);
 		if (check_builtins(cmd[0]))
 		{
-			execute_builtins(cmd);
+			execute_builtins(cmd, red);
 			exit(0);
 		}
 		else
@@ -64,9 +65,9 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_b)
 	if (do_pipes_and_red(0, 0, red) == 1)
 		return (-1);
 	if (check_builtins((*cmd)[0]) && is_b == FALSE)
-		execute_builtins(*cmd);
+		execute_builtins(*cmd, red);
 	else
-		ft_execve_scmd(*cmd, a_env, p_vec);
+		ft_execve_scmd(*cmd, a_env, p_vec, red);
 	return (EXIT_SUCCESS);
 }
 
