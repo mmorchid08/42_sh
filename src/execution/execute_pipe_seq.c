@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 23:35:34 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/30 03:49:17 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background)
 	if (pid == 0)
 	{
 		reset_signals();
+		manage_pipes(2);
 		if (check_builtins(args[0]))
 		{
 			execute_builtins(args);

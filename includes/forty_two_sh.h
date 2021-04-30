@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 17:41:22 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/30 03:48:24 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		execute_builtins(char **cmd);
 int			check_builtins(char *cmd);
 void		remove_quotes_from_args(char **args);
 void		reset_signals(void);
+int			manage_pipes(int i);
 
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_and_red.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 15:14:41 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 03:50:33 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	manage_pipes(int i)
 		dup2(fd[1], 1);
 		close(fd[1]);
 		return (fd[0]);
+	}
+	else if (i == 2)
+	{
+		return (close(fd[0]));
 	}
 	else
 	{
