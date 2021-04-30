@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 08:02:41 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 14:25:15 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 		if (is_interactive == FALSE)
 			return (get_exit_code(wait_children(f_pid)));
 		else
-			execute_job(vec_pid, pipe_seq->job_name, is_background);
+			return(execute_job(vec_pid, pipe_seq->job_name, is_background));
 	}
 	return (g_exit_status);
 }
