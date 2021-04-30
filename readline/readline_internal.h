@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/04 17:34:00 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/30 22:36:39 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 # undef lines
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include "readline_typedefs.h"
 # define TERMCAP_SEQ_COUNT 11
 # define DONE 0

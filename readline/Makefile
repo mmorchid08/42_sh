@@ -6,13 +6,11 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/28 10:25:34 by mel-idri          #+#    #+#              #
-#    Updated: 2021/03/07 10:50:41 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/04/30 16:45:56 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = readline.a
-TMP_NAME = readline.tmp.a
-LIBFT = libft/libft.a
 CFLAGS = -Wall -Wextra -Werror
 ifeq ($(DEBUG), true)
 	CFLAGS = -g -Wall -Wextra
@@ -67,33 +65,21 @@ INCLUDES = readline.h readline_typedefs.h
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-	cp $(LIBFT) $(TMP_NAME)
-	nm -j -defined-only $(TMP_NAME) \
-			|grep -v ':\|^$$' \
-			|sed 's/\(.*\)/\1 _rl\1/' > redefined_symbols
-	ar r $(TMP_NAME) $(OBJS)
-	objcopy --redefine-syms redefined_symbols $(TMP_NAME)
-	mv $(TMP_NAME) $(NAME)
-	ranlib $(NAME)
-	rm -f redefined_symbols
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+
 objs/%.o : %.c | objs
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 $(OBJS) : $(INCLUDES)
 
-$(LIBFT): force
-	$(MAKE) -C libft/
-
 objs:
 	mkdir objs
 
 clean:
-	$(MAKE) -C libft/ clean
 	rm -rf objs
 
 fclean: clean
-	$(MAKE) -C libft/ fclean
 	rm -f $(NAME)
 
 re:

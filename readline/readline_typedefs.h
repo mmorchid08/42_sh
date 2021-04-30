@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:08 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/05 16:32:32 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:38:54 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 # define READLINE_TYPEDEFS_H
 
 typedef struct termios	t_termios;
-typedef enum		e_bool
-{
-	FALSE = 0,
-	TRUE
-}					t_bool;
+
 typedef struct		s_term_attrs
 {
 	t_termios		attrs;
