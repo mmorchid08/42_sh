@@ -1,6 +1,15 @@
-builtins : not finished yet
+Not tried yet Tests: A list of test we didn't try yet.
+exit 1 | exit 2 | exit 3; echo "stayin' alive"
+echo abc; exit; echo def
+exit 999999999999999999999999999999999999999999
+exit abc
+exit 1 2 3
+cd
+type
+Expansions
+Command substitution
+hashtable
 
-Expansions and environment not yet.
 
-JOBS:
-emacs -nw & : weird behavior
+Failed test : A list of failed test.
+Every other test was passed

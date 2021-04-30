@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:54:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/23 17:52:24 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/29 17:52:57 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,25 @@ static t_process	new_process(pid_t pid)
 	return (proc);
 }
 
+void	set_process_group(pid_t pid, pid_t *pgid, t_bool is_background)
+{
+	if (*pgid == 0)
+	{
+		setpgid(pid, pid);
+		*pgid = pid;
+		if (is_background == FALSE)
+			tcsetpgrp(g_term_fd, *pgid);
+	}
+	else if (*pgid > 0)
+		setpgid(pid, *pgid);
+}
+
 void	add_process_to_job(t_job *job, pid_t pid)
 {
 	t_process	proc;
 
 	if (job->processes->length == 0)
-	{
-		setpgid(pid, pid);
 		job->pgid = pid;
-		if (job->is_background == FALSE)
-			tcsetpgrp(g_term_fd, job->pgid);
-	}
-	else
-		setpgid(pid, job->pgid);
 	proc = new_process(pid);
 	vector_push(job->processes, &proc);
 	job->count.running++;

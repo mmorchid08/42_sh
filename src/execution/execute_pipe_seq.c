@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 16:49:40 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 08:02:41 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_execve_pip(char **cmd)
 	}
 }
 
-pid_t	execute_pip_pt2(char **args, t_vector *red)
+pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
+	t_vector *red)
 {
 	pid_t		pid;
 
@@ -40,12 +41,15 @@ pid_t	execute_pip_pt2(char **args, t_vector *red)
 		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return (-1);
 	}
-	else if (pid == 0)
+	set_process_group(ter_i(pid == 0, getpid(), pid), pgid, is_background);
+	if (pid == 0)
 	{
+		reset_signals();
+		manage_pipes(2);
 		if (check_builtins(args[0]))
 		{
 			execute_builtins(args, red);
-			exit(0);
+			exit(g_exit_status);
 		}
 		else if (args && args[0])
 			ft_execve_pip(args);
@@ -56,31 +60,30 @@ pid_t	execute_pip_pt2(char **args, t_vector *red)
 	return (pid);
 }
 
-t_vector	*execute_pip(t_simple_command *cmd, int len)
+t_vector	*execute_pip(t_simple_command *cmd, int len, t_bool is_background)
 {
 	t_vector	*vec_pid;
 	char		**args;
 	pid_t		pid;
 	int			i;
-	int			x;
+	pid_t		pgid;
 
-	i = -1;
+	i = 0;
+	pgid = 0;
 	vec_pid = vector_init(sizeof(pid_t), NULL);
-	while (++i < len)
+	while (i < len)
 	{
 		vector_push(cmd[i].args, &(char *){NULL});
 		args = (char **)cmd[i].args->array;
-		x = 0;
-		while (args[x] != NULL)
-			remove_quotes(&(args[x++]));
-		x = do_pipes_and_red(i, len, cmd[i].redirections);
-		if (x == 1)
+		remove_quotes_from_args(args);
+		if (do_pipes_and_red(i, len, cmd[i].redirections) == 1)
 			return (NULL);
-		pid = execute_pip_pt2(args, cmd[i].redirections);
+		pid = execute_pip_pt2(args, &pgid, is_background, cmd[i].redirections);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
 		else
 			return (NULL);
+		i++;
 	}
 	return (vec_pid);
 }
@@ -95,7 +98,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 	int					i;
 
 	s_cmd = (t_simple_command *)pipe_seq->commands->array;
-	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length);
+	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length, is_background);
 	if (vec_pid)
 	{
 		i = 0;
@@ -113,4 +116,3 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 	}
 	return (g_exit_status);
 }
-// TODO fix norme

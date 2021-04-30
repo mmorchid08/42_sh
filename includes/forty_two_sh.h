@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 08:00:11 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 08:04:20 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,20 @@
 # include "../src/builtins/builtins.h"
 # include "../readline/readline.h"
 
-void	del_token(void *element);
-void	del_redirection(void *element);
-void	del_var(void *element);
+void		del_token(void *element);
+void		del_redirection(void *element);
+void		del_var(void *element);
 
 extern	t_vector
 *g_shell_env;
 extern	int
 g_exit_status;
-extern int
+extern	int
 g_term_fd;
-extern t_vector
+extern	t_vector
 *g_job_list;
-extern t_vector
+extern	t_vector
 *g_stopped_jobs;
-extern char
-**environ;
 
 
 /*
@@ -63,16 +61,17 @@ void		update_job_state(t_job *job, pid_t pid, int wait_status);
 void		update_job(t_job *job);
 void		update_all_jobs(void);
 void		print_job(t_job *job, t_job_print_mode mode,
-			t_special_jobs *special_jobs);
+				t_special_jobs *special_jobs);
 void		notify_job_state(void);
 t_job		*get_previous_job(void);
 t_job		*get_current_job(void);
 t_job		*get_job_by_selector(char *job_selector);
 int			execute_job(t_vector *pids_vec, char *job_name,
-			t_bool is_background);
+				t_bool is_background);
 int			ft_fg(char **args);
 int			ft_bg(char **args);
 int			ft_jobs(char **args);
+void		set_process_group(pid_t pid, pid_t *pgid, t_bool is_background);
 
 
 /*
@@ -100,18 +99,22 @@ int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
 void		execute_builtins(char **cmd, t_vector *red);
 int			check_builtins(char *cmd);
+void		remove_quotes_from_args(char **args);
+void		reset_signals(void);
+int			manage_pipes(int i);
+
 
 /*
 ** ============================= end execution =================================
 */
 
-int		get_next_line(int fd, char **line);
+int			get_next_line(int fd, char **line);
 void		backups(int f);
-int		jhin(char **cmd);
-int		check_is_not(int ret, int is_not);
-int		ft_test(char **cmd);
-int		ft_echo(char **cmd, t_vector *red);
-int		export(char **av);
+int			jhin(char **cmd);
+int			check_is_not(int ret, int is_not);
+int			ft_test(char **cmd);
+int			ft_echo(char **cmd, t_vector *red);
+int			export(char **av);
 
 /*
 **		free functions
@@ -131,12 +134,12 @@ char		*prompt_1(void);
 ** read
 */
 
-char	*read_cmd_multiline(void);
+char		*read_cmd_multiline(void);
 
 /*
 ** Utils
 */
 
-t_bool	is_quote(char c);
+t_bool		is_quote(char c);
 
 #endif

@@ -6,11 +6,14 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 07:33:08 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 08:04:01 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
+
+t_vector
+*g_red;
 
 void	ft_execve(char *full_path, char **cmd, char **a_env)
 {
@@ -25,7 +28,7 @@ void	ft_execve(char *full_path, char **cmd, char **a_env)
 }
 
 void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
-	t_vector *red)
+	t_bool is_background)
 {
 	pid_t		pid;
 	char		*full_path;
@@ -36,13 +39,16 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return ;
 	}
-	else if (pid == 0)
+	set_process_group(ter_i(pid == 0, getpid(), pid), (int [1]){0},
+		is_background);
+	if (pid == 0)
 	{
+		reset_signals();
 		full_path = get_full_path(cmd[0]);
 		if (check_builtins(cmd[0]))
 		{
-			execute_builtins(cmd, red);
-			exit(0);
+			execute_builtins(cmd, g_red);
+			exit(g_exit_status);
 		}
 		else
 			ft_execve(full_path, cmd, a_env);
@@ -51,24 +57,22 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 	vector_push(*vec_pid, &pid);
 }
 
-int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_b)
+int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 {
 	char	**a_env;
 	char	*full_path;
-	int		i;
 
 	a_env = env_to_envp(g_shell_env);
-	i = 0;
-	while ((*cmd)[i])
-		remove_quotes(&(*cmd)[i++]);
+	g_red = red;
+	remove_quotes_from_args(*cmd);
 	full_path = get_full_path((*cmd)[0]);
 	if (do_pipes_and_red(0, 0, red) == 1)
 		return (-1);
-	if (check_builtins((*cmd)[0]) && is_b == FALSE)
+	if (check_builtins((*cmd)[0]) && is_background == FALSE)
 		execute_builtins(*cmd, red);
 	else
-		ft_execve_scmd(*cmd, a_env, p_vec, red);
-	return (g_exit_status);
+		ft_execve_scmd(*cmd, a_env, p_vec, is_background);
+	return (EXIT_SUCCESS);
 }
 
 void	do_value(t_vector *values)
