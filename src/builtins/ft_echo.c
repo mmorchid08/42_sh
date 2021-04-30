@@ -27,51 +27,55 @@ int	do_special_char(char c)
 	return (1);
 }
 
-void	do_printing(char *str)
+void	do_printing(char **str, int i)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while (str[i])
+	j = i;
+	while (str[j])
 	{
-		if (str[i] == '\\')
-		{
-			if (do_special_char(str[i + 1]) == 1)
-				i++;
-			else
-				ft_putchar(str[i]);
-		}
-		else
-			ft_printf(1, "%c", str[i]);
-		i++;
+		ft_printf(1, "%s", str[j]);
+		if (str[j + 1])
+			ft_printf(1, " ");
+		j++;
 	}
 }
 
-int	ft_echo(char **str)
+int	check_for_errors(t_vector *redi)
+{
+	t_redirection	*red;
+	int				i;
+
+	red = (t_redirection *)redi->array;
+	i = 0;
+	while (i < (int)redi->length)
+		i++;
+	if (red->type == LESSANDDASH || red->type == GREATANDDASH)
+		return (1);
+	return (0);
+}
+
+int	ft_echo(char **str, t_vector *red)
 {
 	int	i;
 	int	opt;
 
 	i = 1;
 	opt = 0;
-	if (!str[i])
+	if (check_for_errors(red))
 	{
-		ft_printf(1, "\n");
-		return (0);
+		ft_printf(2, "42sh: echo: write error: Bad file descriptor\n");
+		g_exit_status = 1;
+		return (g_exit_status);
 	}
 	while (!ft_strcmp("-n", str[i]))
 	{
 		opt = 1;
 		i++;
 	}
-	while (str[i])
-	{
-		do_printing(str[i]);
-		i++;
-		if (str[i])
-			ft_printf(1, " ");
-	}
+	do_printing(str, i);
 	if (opt == 0)
 		ft_printf(1, "\n");
-	return (0);
+	g_exit_status = 0;
+	return (g_exit_status);
 }

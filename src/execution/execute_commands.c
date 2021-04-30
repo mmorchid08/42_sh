@@ -58,5 +58,6 @@ void	execute_commands(t_vector *commands)
 					cmds_array[i].is_background_job, TRUE);
 		i++;
 		backups(3);
+		ft_printf(1, "exit status : %d\n", g_exit_status);
 	}
 }
