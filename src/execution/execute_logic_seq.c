@@ -17,12 +17,15 @@ static int	execute_logical_segment(t_command *cmd, t_bool is_background,
 {
 	int	ret;
 
+	backups(3);
+	backups(1);
 	if (cmd->type == PIPE_SEQ)
 		ret = execute_pipe_seq((t_pipe_sequence *)cmd->command, is_background,
 				is_interactive);
 	else
 		ret = execute_simple_cmd((t_simple_command *)cmd->command,
 				is_background, is_interactive);
+	backups(3);
 	return (ret);
 }
 
@@ -42,8 +45,6 @@ static int	logic_seq_executor(t_logic_sequence *logic_seq,
 			|| (ret != 0 && ops[i] == OROR))
 			ret = execute_logical_segment(&cmds[i + 1], is_background,
 					is_interactive);
-		else
-			break ;
 		i++;
 	}
 	return (ret);

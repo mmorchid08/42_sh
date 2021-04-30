@@ -1,15 +1,7 @@
-base64 < /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e s/1/Yes/g -es/0/No/g : waiting problem
-echo out >&- | echo out2 : waiting problem
-echo out >&- || echo out2 : echo returning problem
-cat <heredoc> abd : segfault.. but this is a weird test. Can you check it with me pls.
 builtins : not finished yet
-echo 'No error' || echo 'You cant see me' : another echo returing value problem.
 false && echo foo || echo bar : again returning value
-echo has lot of errors.
 
 Expansions and environment not yet.
-
-
 
 JOBS:
 emacs -nw & : weird behavior

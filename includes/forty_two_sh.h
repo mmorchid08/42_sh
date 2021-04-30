@@ -98,7 +98,7 @@ int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 				t_bool is_interactive);
 int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
-void		execute_builtins(char **cmd);
+void		execute_builtins(char **cmd, t_vector *red);
 int			check_builtins(char *cmd);
 
 /*
@@ -110,7 +110,7 @@ void		backups(int f);
 int		jhin(char **cmd);
 int		check_is_not(int ret, int is_not);
 int		ft_test(char **cmd);
-int		ft_echo(char **cmd);
+int		ft_echo(char **cmd, t_vector *red);
 int		export(char **av);
 
 /*

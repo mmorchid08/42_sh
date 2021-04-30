@@ -68,7 +68,7 @@ int		jhin(char **cmd)
 			ft_printf(2, "test: integer expression expected: %s\n", cmd[2]);
 			return (2);
 		}
-		return (do_op(cmd[0], cmd[1], cmd[0]));
+		return (do_op(cmd[0], cmd[1], cmd[2]));
 	}
 	ft_printf(2, "test: unkown condition: %s\n", cmd[1]);
 	return (2);

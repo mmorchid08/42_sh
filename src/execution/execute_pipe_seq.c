@@ -30,7 +30,7 @@ void	ft_execve_pip(char **cmd)
 	}
 }
 
-pid_t	execute_pip_pt2(char **args)
+pid_t	execute_pip_pt2(char **args, t_vector *red)
 {
 	pid_t		pid;
 
@@ -44,7 +44,7 @@ pid_t	execute_pip_pt2(char **args)
 	{
 		if (check_builtins(args[0]))
 		{
-			execute_builtins(args);
+			execute_builtins(args, red);
 			exit(0);
 		}
 		else if (args && args[0])
@@ -76,7 +76,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len)
 		x = do_pipes_and_red(i, len, cmd[i].redirections);
 		if (x == 1)
 			return (NULL);
-		pid = execute_pip_pt2(args);
+		pid = execute_pip_pt2(args, cmd[i].redirections);
 		if (pid != -1)
 			vector_push(vec_pid, &pid);
 		else
@@ -107,10 +107,10 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 			i++;
 		}
 		if (is_interactive == FALSE)
-			return (wait_children(f_pid));
+			return (get_exit_code(wait_children(f_pid)));
 		else
 			execute_job(vec_pid, pipe_seq->job_name, is_background);
 	}
-	return (0);
+	return (g_exit_status);
 }
 // TODO fix norme

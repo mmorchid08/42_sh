@@ -25,14 +25,14 @@ int	check_builtins(char *cmd)
 	return (0);
 }
 
-void	execute_builtins(char **cmd)
+void	execute_builtins(char **cmd, t_vector *red)
 {
 	if (!ft_strcmp(cmd[0], "test"))
 		g_exit_status = ft_test(cmd);
 	else if (!ft_strcmp(cmd[0], "env"))
 		env_print(g_shell_env, FALSE);
 	else if (!ft_strcmp(cmd[0], "echo"))
-		ft_echo(cmd);
+		g_exit_status = ft_echo(cmd, red);
 	else if (!ft_strcmp(cmd[0], "jobs"))
 		ft_jobs(cmd);
 	else if (!ft_strcmp(cmd[0], "cd"))
