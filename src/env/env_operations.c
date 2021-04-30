@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 18:28:34 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 16:52:13 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/04/30 08:00:20 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	env_push(t_vector *env, char *key, char *value, t_bool is_exported)
 	vector_push(env, &new_var);
 }
 
-void		env_set(t_vector *env, char *key, char *value, t_bool is_exported)
+void	env_set(t_vector *env, char *key, char *value, t_bool is_exported)
 {
 	t_var	*vars;
 	char	*tmp;
@@ -45,7 +45,7 @@ void		env_set(t_vector *env, char *key, char *value, t_bool is_exported)
 	env_push(env, key, value, is_exported);
 }
 
-void		env_set_value(t_vector *env, char *key, char *value)
+void	env_set_value(t_vector *env, char *key, char *value)
 {
 	t_var	*vars;
 	char	*tmp;
@@ -67,7 +67,7 @@ void		env_set_value(t_vector *env, char *key, char *value)
 	env_push(env, key, value, FALSE);
 }
 
-void		env_set_exported(t_vector *env, char *key, t_bool is_exported)
+void	env_set_exported(t_vector *env, char *key, t_bool is_exported)
 {
 	t_var	*vars;
 	size_t	i;
@@ -86,7 +86,7 @@ void		env_set_exported(t_vector *env, char *key, t_bool is_exported)
 	env_push(env, key, NULL, is_exported);
 }
 
-void		env_unset(t_vector *env, char *key)
+void	env_unset(t_vector *env, char *key)
 {
 	t_var	*vars;
 	size_t	i;
