@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 19:01:18 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/05 11:19:11 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/04/30 14:17:24 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vector	*env_init(char **envp)
 	return (env);
 }
 
-char		**env_to_envp(t_vector *env)
+char	**env_to_envp(t_vector *env)
 {
 	t_var	*vars;
 	char	**envp;
@@ -49,14 +49,15 @@ char		**env_to_envp(t_vector *env)
 	vars = env->array;
 	while (i < env->length)
 	{
-		envp[i] = ft_strglue(vars[i].key, '=', vars[i].value);
+		if (vars[i].is_exported == TRUE)
+			envp[i] = ft_strglue(vars[i].key, '=', vars[i].value);
 		++i;
 	}
 	envp[i] = NULL;
 	return (envp);
 }
 
-void		env_print(t_vector *env, t_bool print_exported_only)
+void	env_print(t_vector *env, t_bool print_exported_only)
 {
 	t_var	*vars;
 	size_t	i;
