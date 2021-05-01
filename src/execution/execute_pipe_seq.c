@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 12:34:02 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 14:22:10 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len, t_bool is_background)
 	return (vec_pid);
 }
 
-int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
-			t_bool is_interactive)
+int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background)
 {
 	t_simple_command	*s_cmd;
 	t_vector			*vec_pid;
@@ -108,7 +107,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 		pid = (pid_t *)vec_pid->array;
 		while (++i < (int)vec_pid->length)
 			f_pid = pid[i];
-		if (is_interactive == FALSE)
+		if (g_is_job_enabled == FALSE)
 		{
 			i = get_exit_code(wait_children(f_pid));
 			vector_free(vec_pid);

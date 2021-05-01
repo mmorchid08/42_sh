@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   execute_job.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:21:23 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 12:28:41 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 16:36:30 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
+
+t_bool	g_is_job_enabled = TRUE;
+
+/*
+create vector from a single pid 
+*/
+t_vector	*pid2vec(pid_t pid)
+{
+	t_vector	*vec;
+
+	vec = vector_init(sizeof(pid_t), NULL);
+	vector_push(vec, &pid);
+	return (vec);
+}
 
 int	execute_job(t_vector *pids_vec, char *job_name, t_bool is_background)
 {

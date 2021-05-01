@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:22:43 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:44:14 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 15:27:50 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	execute_commands(t_vector *commands)
 					cmds_array[i].is_background_job);
 		else if (cmds_array[i].type == PIPE_SEQ)
 			g_exit_status = execute_pipe_seq(cmds_array[i].command,
-					cmds_array[i].is_background_job, TRUE);
+					cmds_array[i].is_background_job);
 		else if (cmds_array[i].type == SIMPLE_CMD)
 			g_exit_status = execute_simple_cmd(cmds_array[i].command,
-					cmds_array[i].is_background_job, TRUE);
+					cmds_array[i].is_background_job);
 		i++;
 		backups(3);
 	}

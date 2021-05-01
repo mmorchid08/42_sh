@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 12:28:00 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 14:22:22 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void	do_value(t_vector *values)
 	}
 }
 
-int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
-	t_bool is_interactive)
+int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 {
 	t_vector	*vec_pid;
 	char		**cmd;
@@ -107,7 +106,7 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 			return (-1);
 	if (vec_pid != NULL)
 	{
-		if (is_interactive == FALSE)
+		if (g_is_job_enabled == FALSE)
 		{
 			exit_code = get_exit_code(wait_children((pid_t)vec_pid->array));
 			vector_free(vec_pid);

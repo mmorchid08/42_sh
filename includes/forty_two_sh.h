@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/01 10:35:13 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 15:44:08 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ extern	t_vector
 *g_stopped_jobs;
 extern	t_t
 *g_hash;
+extern	t_bool
+g_is_job_enabled;
 
 /*
 ** ================================ jobs =======================================
@@ -73,6 +75,7 @@ int			ft_fg(char **args);
 int			ft_bg(char **args);
 int			ft_jobs(char **args);
 void		set_process_group(pid_t pid, pid_t *pgid, t_bool is_background);
+t_vector	*pid2vec(pid_t pid);
 
 /*
 ** ============================= end jobs ======================================
@@ -90,11 +93,10 @@ void		handle_quotes(char c, int *balance);
 void		remove_quotes(char **str);
 void		execute_commands(t_vector *commands);
 int			execute_simple_cmd(t_simple_command *simple_cmd,
-				t_bool is_background, t_bool is_interactive);
+				t_bool is_background);
 int			execute_logic_seq(t_logic_sequence *logic_seq,
 				t_bool is_background);
-int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
-				t_bool is_interactive);
+int			execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background);
 int			get_exit_code(int wait_status);
 int			wait_children(pid_t ret_pid);
 void		execute_builtins(char **cmd, t_vector *red);
