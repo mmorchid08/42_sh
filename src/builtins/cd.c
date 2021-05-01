@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 10:41:23 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 11:42:54 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,31 @@ int	get_cd_flag(char ***cmd)
 
 char	*ft_get_cwd(char *path, char *ret, char *tmp, char *tmp2)
 {
-	int			diff;
+	int			df;
 
-	if (ret && !(*ret = 0))
+	if (ret && !assign_v((void **)ret, 0))
+	{
 		while (*path)
-			if ((tmp = ft_skip_unitl_char(path, "/", NULL)))
+		{
+			if (assign_v((void **)&tmp, ft_skip_unitl_char(path, "/", NULL)))
 			{
-				if ((diff = (tmp - path)) == 2 && ft_strnequ(path, "..", 2))
+				if (assign_i(&df, tmp - path) == 2 && ft_strnequ(path, "..", 2))
 				{
-					if (*ret && (tmp2 = ft_strrchr(ret, '/')))
+					if (*ret && assign_v((void **)&tmp2, ft_strrchr(ret, '/')))
 						*tmp2 = 0;
 				}
-				else if (diff && (diff != 1 || *path != '.'))
+				else if (df && (df != 1 || *path != '.'))
 				{
-					if ((tmp2 = ft_strchr(ret, 0)) && (!*ret || tmp2[-1] != 47))
+					if (assign_v((void **)&tmp2, ft_strchr(ret, 0))
+						&& (!*ret || tmp2[-1] != 47))
 						ft_strcat(tmp2, "/");
-					ft_strncat(tmp2 + 1, path, diff);
+					ft_strncat(tmp2 + 1, path, df);
 				}
-				path += diff + !!*tmp;
+				path += df + !!*tmp;
 			}
-	return (ret && !*ret ? ft_strcat(ret, "/") : ret);
+		}
+	}
+	return (ter_v(ret && !*ret, ft_strcat(ret, "/"), ret));
 }
 
 char	*get_cd_path(char *path)
@@ -85,7 +90,8 @@ char	*get_cd_path(char *path)
 	}
 	if (path && *path && !ft_isinstr(*path, "./"))
 		path = concat_path_with_cdpath(path);
-	if (path && *path && *path != '/' && (pwd = env_get(g_shell_env, "PWD")))
+	if (path && *path && *path != '/'
+		&& assign_v((void **)&pwd, env_get(g_shell_env, "PWD")))
 	{
 		tmp = path;
 		path = ft_strnjoin((char *[]){pwd, "/", path}, 3);
@@ -99,8 +105,8 @@ int	ft_cd(char **cmd)
 	int		logicaly;
 	DIR		*dir;
 
-	if ((logicaly = get_cd_flag(&cmd)) == -1 || (cmd[0] && cmd[1]))
-		return (cmd[1] ? ft_printf(2, "cd: to many argument\n") : -1);
+	if (assign_i(&logicaly, get_cd_flag(&cmd)) == -1 || (cmd[0] && cmd[1]))
+		return (ter_i(!!cmd[1], ft_printf(2, "cd: to many argument\n"), -1));
 	path = get_cd_path(ft_strdup(*cmd));
 	if (path)
 	{
@@ -115,10 +121,8 @@ int	ft_cd(char **cmd)
 		}
 		dir = opendir(path);
 		if (dir != NULL)
-			ft_printf(2, "cd: permission denied\n");
-		else
-			ft_printf(2, "cd: directory not found\n");
-		return (15);
+			return (ft_printf(2, "cd: permission denied\n") * 0 + 15);
+		return (ft_printf(2, "cd: directory not found\n") * 0 + 15);
 	}
 	return (1);
 }

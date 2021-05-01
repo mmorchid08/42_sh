@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:20 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 09:52:27 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 11:43:29 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,31 @@
 
 char	*ft_strnjoin(char **strings, int n)
 {
-	char	*concat;
-	size_t	size;
-	int		i;
-	int		*lenghts;
+	char		*concat;
+	size_t		size;
+	int			i;
+	int *const	lenghts = (int *)ft_memalloc(sizeof(int) * n);
 
 	size = 0;
 	i = -1;
-	lenghts = (int *)ft_memalloc(sizeof(int) * n);
+	concat = NULL;
 	while (++i < n)
 	{
 		if (!strings[i])
-		{
-			free(lenghts);
-			return (NULL);
-		}
+			break ;
 		lenghts[i] = ft_strlen(strings[i]);
 		size += lenghts[i];
 	}
-	concat = ft_strnew(size);
-	if (concat)
+	if (i == n && assign_v((void **)&concat, ft_strnew(size)))
 	{
 		i = -1;
 		size = 0;
 		while (++i < n)
-		{
-			ft_strcat(concat + size, strings[i]);
-			size += lenghts[i];
-		}
+			ft_strcat(concat + assign_ul(&size, size + lenghts[i])
+				- lenghts[i], strings[i]);
 	}
 	free(lenghts);
-	return (concat);
+	return (ter_v(i != n, NULL, concat));
 }
 
 int	ft_isinstr(char c, const char *s)
