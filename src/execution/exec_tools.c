@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 14:36:43 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:13:52 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	check_file(char *path)
 
 int	check_file_permissions(char *path)
 {
-	struct stat st;
-	
+	struct stat	st;
+
 	if (!check_file(path)
 		|| access(path, X_OK) == -1
 		|| lstat(path, &st) == -1
@@ -72,7 +72,8 @@ char	*get_full_path(char *cmd)
 		if (!ft_strchr(cmd, '/') && !check_builtins(cmd))
 		{
 			ft_printf(1, "got here\n");
-			full_path = try_every_possibility(cmd, env_get(g_shell_env, "PATH"));
+			full_path = try_every_possibility(cmd,
+					env_get(g_shell_env, "PATH"));
 			if (ft_strchr(full_path, '/'))
 				g_hash = insert_name(g_hash, cmd, full_path);
 		}

@@ -3,29 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 14:25:15 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 09:13:02 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
-void	ft_execve_pip(char **cmd)
+void	ft_execve_pip(char **args, char *full_path, t_vector *red)
 {
 	char	**a_env;
 
 	a_env = env_to_envp(g_shell_env);
-	if (execve(full_path, cmd, a_env) == -1)
+	if (check_builtins(args[0]))
 	{
-		if (access(full_path, F_OK) == 0)
-			ft_strerror(EACCES, cmd[0], NULL, FALSE);
-		else
-			ft_strerror(ENOCMD, cmd[0], NULL, FALSE);
-		exit(127);
+		execute_builtins(args, red);
+		exit(g_exit_status);
 	}
+	else if (args && args[0])
+	{
+		if (execve(full_path, args, a_env) == -1)
+		{
+			if (access(full_path, F_OK) == 0)
+				ft_strerror(EACCES, args[0], NULL, FALSE);
+			else
+				ft_strerror(ENOCMD, args[0], NULL, FALSE);
+			exit(127);
+		}
+	}
+	else
+		exit(0);
 }
 
 pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
@@ -46,15 +56,7 @@ pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
 	{
 		reset_signals();
 		manage_pipes(2);
-		if (check_builtins(args[0]))
-		{
-			execute_builtins(args, red);
-			exit(g_exit_status);
-		}
-		else if (args && args[0])
-			ft_execve_pip(args);
-		else
-			exit(0);
+		ft_execve_pip(args, full_path, red);
 	}
 	ft_strdel(&full_path);
 	backups(2);
@@ -113,7 +115,7 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 		if (is_interactive == FALSE)
 			return (get_exit_code(wait_children(f_pid)));
 		else
-			return(execute_job(vec_pid, pipe_seq->job_name, is_background));
+			return (execute_job(vec_pid, pipe_seq->job_name, is_background));
 	}
 	return (g_exit_status);
 }

@@ -6,14 +6,13 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 14:23:05 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:08:03 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-t_vector
-*g_red;
+t_vector	*g_red;
 
 void	ft_execve(char *full_path, char **cmd, char **a_env)
 {
@@ -28,7 +27,7 @@ void	ft_execve(char *full_path, char **cmd, char **a_env)
 }
 
 void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
-	t_bool is_background)
+	t_bool is_b)
 {
 	pid_t		pid;
 	char		*full_path;
@@ -40,8 +39,7 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 		ft_strerror(EFORK, NULL, NULL, FALSE);
 		return ;
 	}
-	set_process_group(ter_i(pid == 0, getpid(), pid), (int [1]){0},
-		is_background);
+	set_process_group(ter_i(pid == 0, getpid(), pid), (int [1]){0}, is_b);
 	if (pid == 0)
 	{
 		reset_signals();
