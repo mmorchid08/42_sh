@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 14:45:13 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:53:47 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@ char	*ft_get_cwd(char *path, char *ret, char *tmp, char *tmp2)
 {
 	int			df;
 
-	if (ret && !assign_p((void **)ret, 0))
+	if (ret && !assign_p(ret, 0))
 	{
 		while (*path)
 		{
-			if (assign_p((void **)&tmp, ft_skip_unitl_char(path, "/", NULL)))
+			if (assign_p(&tmp, ft_skip_unitl_char(path, "/", NULL)))
 			{
 				if (assign_i(&df, tmp - path) == 2 && ft_strnequ(path, "..", 2))
 				{
-					if (*ret && assign_p((void **)&tmp2, ft_strrchr(ret, '/')))
+					if (*ret && assign_p(&tmp2, ft_strrchr(ret, '/')))
 						*tmp2 = 0;
 				}
 				else if (df && (df != 1 || *path != '.'))
 				{
-					if (assign_p((void **)&tmp2, ft_strchr(ret, 0))
+					if (assign_p(&tmp2, ft_strchr(ret, 0))
 						&& (!*ret || tmp2[-1] != 47))
 						ft_strcat(tmp2, "/");
 					ft_strncat(tmp2 + 1, path, df);
@@ -91,7 +91,7 @@ char	*get_cd_path(char *path)
 	if (path && *path && !ft_isinstr(*path, "./"))
 		path = concat_path_with_cdpath(path);
 	if (path && *path && *path != '/'
-		&& assign_p((void **)&pwd, env_get(g_shell_env, "PWD")))
+		&& assign_p(&pwd, env_get(g_shell_env, "PWD")))
 	{
 		tmp = path;
 		path = ft_strnjoin((char *[]){pwd, "/", path}, 3);

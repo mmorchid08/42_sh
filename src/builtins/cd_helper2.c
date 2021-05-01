@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:20 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 14:44:42 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:52:34 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strnjoin(char **strings, int n)
 		lenghts[i] = ft_strlen(strings[i]);
 		size += lenghts[i];
 	}
-	if (i == n && assign_p((void **)&concat, ft_strnew(size)))
+	if (i == n && assign_p(&concat, ft_strnew(size)))
 	{
 		i = -1;
 		size = 0;
