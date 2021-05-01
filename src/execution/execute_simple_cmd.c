@@ -53,6 +53,7 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 		else
 			ft_execve(full_path, cmd, a_env);
 	}
+	ft_strdel(&full_path);
 	*vec_pid = vector_init(sizeof(pid_t), NULL);
 	vector_push(*vec_pid, &pid);
 }
@@ -65,11 +66,15 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 	g_red = red;
 	remove_quotes_from_args(*cmd);
 	if (do_pipes_and_red(0, 0, red) == 1)
+	{
+		ft_free_strings_array(a_env);
 		return (-1);
+	}
 	if (check_builtins((*cmd)[0]) && is_background == FALSE)
 		execute_builtins(*cmd, red);
 	else
 		ft_execve_scmd(*cmd, a_env, p_vec, is_background);
+	ft_free_strings_array(a_env);
 	return (EXIT_SUCCESS);
 }
 

@@ -15,10 +15,8 @@
 
 void	ft_execve_pip(char **cmd)
 {
-	char	*full_path;
 	char	**a_env;
 
-	full_path = get_full_path(cmd[0]);
 	a_env = env_to_envp(g_shell_env);
 	if (execve(full_path, cmd, a_env) == -1)
 	{
@@ -34,7 +32,9 @@ pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
 	t_vector *red)
 {
 	pid_t		pid;
+	char		*full_path;
 
+	full_path = get_full_path(args[0]);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -56,6 +56,7 @@ pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
 		else
 			exit(0);
 	}
+	ft_strdel(&full_path);
 	backups(2);
 	return (pid);
 }

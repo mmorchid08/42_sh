@@ -81,7 +81,7 @@ char	*get_full_path(char *cmd)
 		return (full_path);
 	}
 	else
-		return (value);
+		return (ft_strdup(value));
 }
 
 void	reset_signals(void)
