@@ -12,7 +12,7 @@
 
 #include "forty_two_sh.h"
 
-t_hash_table	*g_hash;
+t_t				*g_hash;
 t_vector		*g_stopped_jobs;
 int				g_exit_status;
 int				g_term_fd;
@@ -43,13 +43,15 @@ int	sh_system(char *line)
 	commands = parser(line);
 	if (commands && commands->length > 0)
 		execute_commands(commands);
+	if (g_hash)
+		free_hash(&g_hash);
 	return (g_exit_status);
 }
 
 int	main(int ac, char *av[], char *envp[])
 {
 	(void)av;
-	g_hash = new_hash_table(100, 100);
+	g_hash = NULL;
 	g_shell_env = env_init(envp);
 	signal(SIGTTOU, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
@@ -62,6 +64,8 @@ int	main(int ac, char *av[], char *envp[])
 			ft_strerror(EOPENFILE, "open", NULL, TRUE);
 		while (1)
 			(void)shell_main();
+		if (g_hash)
+			free_hash(&g_hash);
 	}
 	else if (ac == 2)
 		return (sh_system(av[1]));

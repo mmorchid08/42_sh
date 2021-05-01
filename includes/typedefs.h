@@ -167,21 +167,13 @@ typedef struct s_special_jobs
 	t_job	*previous;
 }				t_special_jobs;
 
-typedef struct	s_hash_content
+typedef struct		s_tree
 {
-	void			*value;
 	char			*key;
-	struct s_hash_content	*next;
-	struct s_hash_content	*last;
-}				t_hash_content;
-
-
-typedef struct	s_hash_table
-{
-	t_hash_content *table;
-	unsigned int size;
-	unsigned int used_size;
-	unsigned int expanding_size;
-}				t_hash_table;
+	char			*value;
+	int				count;
+	struct s_tree	*right;
+	struct s_tree	*left;
+}					t_t;
 
 #endif

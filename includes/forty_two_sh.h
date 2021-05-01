@@ -41,7 +41,7 @@ extern	t_vector
 *g_job_list;
 extern	t_vector
 *g_stopped_jobs;
-extern	t_hash_table
+extern	t_t
 *g_hash;
 
 
@@ -119,11 +119,10 @@ int			jhin(char **cmd);
 int			check_is_not(int ret, int is_not);
 int			ft_test(char **cmd);
 int			ft_echo(char **cmd, t_vector *red);
-void 		free_hash_table(t_hash_table **hash_tab, void (*del)(void **));
-void		print_hash(t_hash_table *hash);
-t_hash_table	*new_hash_table(unsigned int size, unsigned int expnading_size);
-int 		hash_insert(t_hash_table *hash_tab, char *key, void *value, int expand);
-void 		*hash_find(t_hash_table *hash_tab, const char *key);
+void		print_hash(t_t *root);
+char		*find_key_in_hash(t_t *root, char *key);
+void		free_hash(t_t **root);
+t_t			*insert_name(t_t *root, char *key, char *value);
 int			export(char **av);
 void		ft_exit(char **cmd);
 

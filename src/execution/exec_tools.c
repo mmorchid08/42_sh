@@ -63,15 +63,18 @@ char	*try_every_possibility(char *cmd, char *path_env)
 char	*get_full_path(char *cmd)
 {
 	char	*full_path;
+	char	*value;
 
-	if ((char *)hash_find(g_hash, cmd) == NULL)
+	value = NULL;
+	value = find_key_in_hash(g_hash, cmd);
+	if (!value)
 	{
-		ft_printf(1, "HERE\n");
-		if (!(check_file(cmd) && cmd[0] != '.' && cmd[0] != '/')
-			&& !check_builtins(cmd))
+		if (!ft_strchr(cmd, '/') && !check_builtins(cmd))
 		{
+			ft_printf(1, "got here\n");
 			full_path = try_every_possibility(cmd, env_get(g_shell_env, "PATH"));
-			hash_insert(g_hash, ft_strdup(cmd), ft_strdup(full_path), 1);
+			if (ft_strchr(full_path, '/'))
+				g_hash = insert_name(g_hash, cmd, full_path);
 		}
 		else
 			full_path = ft_strdup(cmd);
@@ -79,8 +82,9 @@ char	*get_full_path(char *cmd)
 	}
 	else
 	{
-		return (hash_find(g_hash, cmd));
+		return (value);
 	}
+
 }
 
 void	reset_signals(void)

@@ -12,94 +12,90 @@
 
 #include "forty_two_sh.h"
 
-unsigned long hash_key(const char *key)
+t_t			*get_new_node(char *key, char *value)
 {
-    unsigned long hash = 0;
+	t_t		*root;
 
-    while (*key)
-    {
-        hash += (unsigned long)*key;
-        hash += (hash << 10);
-        hash ^= (hash >> 6);
-        key++;
-    }
-    hash += (hash << 3);
-    hash ^= (hash >> 11);
-    hash += (hash << 15);
-    return (hash);
+	root = (t_t *)ft_memalloc(sizeof(t_t));
+	root->key = ft_strdup(key);
+	root->value = ft_strdup(value);
+	root->count = 1;
+	root->left = NULL;
+	root->right = NULL;
+	return (root);
 }
 
-t_hash_table *resize_hashtable(t_hash_table *hash_tab)
+t_t			*insert_name(t_t *root, char *key, char *value)
 {
-    unsigned int i;
-    t_hash_content *tmp;
-    t_hash_table *newtab;
-    unsigned int size;
-
-    size = hash_tab->size + hash_tab->expanding_size;
-    i = 0;
-    newtab = new_hash_table(size, hash_tab->expanding_size);
-    while (i < size)
-    {
-        if (hash_tab->table[i].key)
-        {
-            hash_insert(newtab, hash_tab->table[i].key,
-					hash_tab->table[i].value, 0);
-            if ((tmp = hash_tab->table[i].next))
-                while (tmp)
-                {
-                    hash_insert(newtab, tmp->key, tmp->value, 0);
-                    tmp = tmp->next;
-                }
-        }
-        i++;
-    }
-    free_hash_table(&hash_tab, NULL);
-    return (newtab);
+	if (root == NULL)
+	{
+		root = get_new_node(key, value);
+		return (root);
+	}
+	if (ft_strcmp(key, root->key) < 0)
+		root->left = insert_name(root->left, key, value);
+	else if (!ft_strcmp(key, root->key))
+		root->count++;
+	else
+		root->right  = insert_name(root->right, key, value);
+	return (root);
 }
 
-int hash_insert(t_hash_table *hash_tab, char *key, void *value, int expand)
+void		print_hash(t_t *root)
 {
-    unsigned int pos;
-    t_hash_content *tmp;
+	static int	i = 0;
+	static int	f_time = 0;
+	int			len;
 
-    if (hash_tab->used_size == hash_tab->size)
-        if (!expand || !(hash_tab = resize_hashtable(hash_tab)))
-            return (0);
-    pos = hash_key(key) % hash_tab->size;
-    if (hash_tab->table[pos].key)
-    {
-        tmp = ft_memalloc(sizeof(t_hash_content));
-        tmp->key = key;
-        tmp->value = value;
-        if (hash_tab->table[pos].last)
-            hash_tab->table[pos].last->next = tmp;
-        hash_tab->table[pos].last = tmp;
-        if (!hash_tab->table[pos].next)
-            hash_tab->table[pos].next = tmp;
-        hash_tab->used_size++;
-        return (1);
-    }
-    hash_tab->table[pos].key = key;
-    hash_tab->table[pos].value = value;
-    hash_tab->used_size++;
-    return (1);
+	if (root == NULL && f_time == 0)
+	{
+		ft_printf(1, "hash: hash table empty\n");
+		return ;
+	}
+	if (root != NULL)
+	{
+		if (root->left)
+			print_hash(root->left);
+		if (i++ == 0)
+			ft_printf(1, "hits    command\n");
+		len = ft_nbrlen(root->count);
+		while (len++ < 4)
+			ft_printf(1, " ");
+		ft_printf(1, "%d    %s\n", root->count, root->value);
+		if (root->right)
+			print_hash(root->right);
+	}
 }
 
-void *hash_find(t_hash_table *hash_tab, const char *key)
+char    *find_key_in_hash(t_t *root, char *key)
 {
-    unsigned int pos;
-    t_hash_content *tmp;
+	char	*value;
 
-    pos = hash_key(key) % hash_tab->size;
-    if (!hash_tab->table[pos].next || ft_strequ(key, hash_tab->table[pos].key))
-        return (hash_tab->table[pos].value);
-    tmp = hash_tab->table[pos].next;
-    while (tmp)
-    {
-        if (ft_strequ(key, tmp->key))
-            return (tmp->value);
-        tmp = tmp->next;
-    }
-    return (NULL);
+	if (root == NULL)
+		return (NULL);
+	if (!ft_strcmp(root->key, key))
+	{
+		root->count++;
+		return (root->value);
+	}
+	value = find_key_in_hash(root->left, key);
+	if (value)
+		return (value);
+	value = find_key_in_hash(root->right, key);
+	if (value)
+		return (value);
+	return (NULL);
+}
+
+void	free_hash(t_t **root)
+{
+	t_t	*tail;
+
+	if (*root == NULL)
+		return ;
+	tail = *root;
+	free_hash(&(tail->left));
+	free_hash(&(tail->right));
+	ft_strdel(&(tail->key));
+	ft_strdel(&(tail->value));
 }

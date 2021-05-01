@@ -33,6 +33,7 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 	pid_t		pid;
 	char		*full_path;
 
+	full_path = get_full_path(cmd[0]);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -44,7 +45,6 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 	if (pid == 0)
 	{
 		reset_signals();
-		full_path = get_full_path(cmd[0]);
 		if (check_builtins(cmd[0]))
 		{
 			execute_builtins(cmd, g_red);

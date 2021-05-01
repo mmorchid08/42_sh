@@ -51,7 +51,6 @@ INCLUDES =	-Iincludes
 	builtins/ft_test.o \
 	builtins/ft_test2.o \
 	builtins/hash.o \
-	builtins/hash2.o \
 	builtins/cd.o \
 	builtins/cd_helper.o \
 	builtins/cd_helper2.o \
