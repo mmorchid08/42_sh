@@ -48,7 +48,7 @@ void	execute_builtins(char **cmd, t_vector *red)
 	else if (!ft_strcmp(cmd[0], "export"))
 		g_exit_status = export(cmd);
 	else if (!ft_strcmp(cmd[0], "type"))
-		;// ft_type(cmd);
+		ft_type(cmd);
 	else if (!ft_strcmp(cmd[0], "exit"))
 		ft_exit(cmd);
 }

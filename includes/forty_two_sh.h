@@ -122,6 +122,7 @@ int			ft_echo(char **cmd, t_vector *red);
 void		print_hash(t_t *root);
 char		*find_key_in_hash(t_t *root, char *key);
 void		free_hash(t_t **root);
+void		ft_type(char **cmd);
 t_t			*insert_name(t_t *root, char *key, char *value);
 int			export(char **av);
 void		ft_exit(char **cmd);
