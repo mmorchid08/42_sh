@@ -6,13 +6,13 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 09:55:21 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 14:28:28 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:16:22 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-t_t			*get_new_node(char *key, char *value)
+t_t	*get_new_node(char *key, char *value)
 {
 	t_t		*root;
 
@@ -25,7 +25,7 @@ t_t			*get_new_node(char *key, char *value)
 	return (root);
 }
 
-t_t			*insert_name(t_t *root, char *key, char *value)
+t_t	*insert_name(t_t *root, char *key, char *value)
 {
 	if (root == NULL)
 	{
@@ -37,11 +37,11 @@ t_t			*insert_name(t_t *root, char *key, char *value)
 	else if (!ft_strcmp(key, root->key))
 		root->count++;
 	else
-		root->right  = insert_name(root->right, key, value);
+		root->right = insert_name(root->right, key, value);
 	return (root);
 }
 
-void		print_hash(t_t *root)
+void	print_hash(t_t *root)
 {
 	static int	i = 0;
 	static int	f_time = 0;
@@ -67,7 +67,7 @@ void		print_hash(t_t *root)
 	}
 }
 
-char    *find_key_in_hash(t_t *root, char *key)
+char	*find_key_in_hash(t_t *root, char *key)
 {
 	char	*value;
 

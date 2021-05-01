@@ -6,14 +6,14 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 09:52:02 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 10:36:20 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
 
-typedef enum	e_token_type {
+typedef enum e_token_type {
 	START,
 	WORD,
 	ASSIGNMENT,
@@ -37,21 +37,21 @@ typedef enum	e_token_type {
 	NA
 }				t_token_type;
 
-typedef struct	s_var
+typedef struct s_var
 {
 	char	*key;
 	char	*value;
 	t_bool	is_exported;
 }				t_var;
 
-typedef enum	e_cmd_type
+typedef enum e_cmd_type
 {
 	SIMPLE_CMD,
 	PIPE_SEQ,
 	LOGIC_SEQ
 }				t_cmd_type;
 
-typedef struct	s_token
+typedef struct s_token
 {
 	t_token_type	type;
 	void			*data;
@@ -142,7 +142,7 @@ typedef struct s_job
 	}			count;
 	t_vector	*processes;
 	t_bool		to_notify;
-	pid_t		ret_pid; // TODO give it better name
+	pid_t		ret_pid;
 	int			wait_status;
 	char		*job_name;
 }				t_job;
@@ -154,7 +154,7 @@ typedef struct s_process
 	pid_t			pid;
 }				t_process;
 
-typedef enum	e_job_print_mode
+typedef enum e_job_print_mode
 {
 	NORMAL,
 	LONG,
@@ -167,7 +167,7 @@ typedef struct s_special_jobs
 	t_job	*previous;
 }				t_special_jobs;
 
-typedef struct		s_tree
+typedef struct s_tree
 {
 	char			*key;
 	char			*value;

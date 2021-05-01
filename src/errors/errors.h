@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:55:34 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/28 14:29:26 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 09:56:02 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
 
-typedef enum	e_error
+typedef enum e_error
 {
 	EACCES = 1,
 	ENOCMD,

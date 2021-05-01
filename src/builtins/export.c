@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:28:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 14:40:25 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/01 09:50:45 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-int		parse_opt(char *arg, t_bool *option_n, t_bool *option_p)
+int	parse_opt(char *arg, t_bool *option_n, t_bool *option_p)
 {
 	size_t	i;
 
@@ -34,7 +34,7 @@ int		parse_opt(char *arg, t_bool *option_n, t_bool *option_p)
 	return (EXIT_SUCCESS);
 }
 
-int		parse_options(char **av, t_bool *option_n, t_bool *option_p)
+int	parse_options(char **av, t_bool *option_n, t_bool *option_p)
 {
 	size_t	i;
 
@@ -55,7 +55,7 @@ int		parse_options(char **av, t_bool *option_n, t_bool *option_p)
 	return (i);
 }
 
-int		export_args(char **av, int i, t_bool option_n)
+int	export_args(char **av, int i, t_bool option_n)
 {
 	t_var	*var;
 	int		ret_status;
@@ -80,7 +80,7 @@ int		export_args(char **av, int i, t_bool option_n)
 	return (ret_status);
 }
 
-int		export(char **av)
+int	export(char **av)
 {
 	t_bool	option_n;
 	t_bool	option_p;

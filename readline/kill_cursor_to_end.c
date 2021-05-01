@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   kill_cursor_to_end.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 00:15:20 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:26:29 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	kill_cursor_to_end(void)
 	{
 		dyn_str_append_chr(clipboard, '\n');
 		dyn_str_append(clipboard, rl->lines->array[i].str);
-		vector_remove((t_vector*)rl->lines, i);
+		vector_remove((t_vector *)rl->lines, i);
 	}
 	update_lines();
 }

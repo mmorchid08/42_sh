@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 13:17:13 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:14:58 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-void			ft_type(char **cmd)
+void	ft_type(char **cmd)
 {
 	int		i;
 	char	*full_path;

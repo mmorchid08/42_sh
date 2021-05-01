@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 13:17:13 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:54:22 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_update_pwd(char *path)
 	env_set_value(g_shell_env, "PWD", path);
 }
 
-int		get_cd_flag(char ***cmd)
+int	get_cd_flag(char ***cmd)
 {
 	char	**tmp;
 	int		ret;
@@ -93,7 +93,7 @@ char	*get_cd_path(char *path)
 	return (path);
 }
 
-int		ft_cd(char **cmd)
+int	ft_cd(char **cmd)
 {
 	char	*path;
 	int		logicaly;

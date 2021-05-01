@@ -1,0 +1,15 @@
+Includes:
+All normed
+------------------------
+Libft:
+All normed
+------------------------
+Readline Folder :
+goto_previous_word.c
+move_cursor_to.c
+readline.c
+readline_internal.h
+-------------------------
+src:
+cd.c
+cd_helper2.c

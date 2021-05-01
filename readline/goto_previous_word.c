@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   goto_previous_word.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 23:21:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:28:14 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline_internal.h"
 
-void			goto_previous_word(void)
+void	goto_previous_word(void)
 {
 	t_readline_state *const	rl = &g_rl_state;
 	int						i;

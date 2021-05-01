@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_internal.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 22:36:39 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:12:23 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,10 @@
 #  define VDSUSP -1
 # endif
 
-extern t_readline_state
-g_rl_state;
-extern t_history_state
-g_history;
-extern t_term_attrs
-g_orig_attrs;
-extern t_bool
-g_is_interrupted;
+extern t_readline_state	g_rl_state;
+extern t_history_state	g_history;
+extern t_term_attrs		g_orig_attrs;
+extern t_bool			g_is_interrupted;
 
 int				handle_termcap_sequences(char *c);
 void			exit_error(char *msg);
@@ -77,7 +73,7 @@ t_dynstr_vector	*clone_dynstr_vector(t_dynstr_vector *orig_dynstr_vector);
 int				dynstr_vector_equ(t_dynstr_vector *dynstr_vec1,
 					t_dynstr_vector *dynstr_vec2);
 void			mark_hist_entry_as_dirty(void);
-char			*submit_command();
+char			*submit_command(void);
 void			test_multiline(void);
 int				reprint_char(void);
 int				check_used_capabilities(void);

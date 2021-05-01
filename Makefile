@@ -6,7 +6,7 @@
 #    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/30 12:07:28 by hmzah            ###   ########.fr        #
+#    Updated: 2021/05/01 09:46:28 by hmzah            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ INCLUDES =	-Iincludes
 	builtins/ft_exit.o \
 	builtins/ft_test.o \
 	builtins/ft_test2.o \
+	builtins/ft_test3.o \
 	builtins/hash.o \
 	builtins/type.o \
 	builtins/cd.o \

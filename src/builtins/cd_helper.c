@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cd_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:16 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 13:17:17 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:53:53 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 #include <dirent.h>
 
-int		is_correct_path(char *path, int print_error)
+int	is_correct_path(char *path, int print_error)
 {
 	DIR	*dir;
+
 	if (path && !access(path, F_OK))
 	{
 		dir = opendir(path);
@@ -54,7 +55,7 @@ char	*concat_path_with_cdpath(char *path)
 
 	i = 0;
 	var = env_get(g_shell_env, "CDPATH");
-	cd_paths = ft_strsplit(var ? var : NULL, ' ');
+	cd_paths = ft_strsplit(var, ' ');
 	if (cd_paths)
 	{
 		while (cd_paths[i])

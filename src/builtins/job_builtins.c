@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:22:37 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/30 01:42:29 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 09:15:16 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	ft_jobs(char **args)
 	size_t				i;
 	int					ret;
 	t_special_jobs		special_jobs;
-
 
 	++args;
 	mode = NORMAL;

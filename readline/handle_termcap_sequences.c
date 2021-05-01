@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_termcap_sequences.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:16:38 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/05 16:24:38 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:27:27 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_match_state	match_termcap_sequence(char *buf, size_t buf_len,
 			is_partially_matched = TRUE;
 			if (ft_strequ(buf, g_termcap_sequences[i].seq))
 			{
-				*termcap_seq = (t_termcap_seq*)g_termcap_sequences + i;
+				*termcap_seq = (t_termcap_seq *)g_termcap_sequences + i;
 				return (MATCH);
 			}
 		}
@@ -53,7 +53,7 @@ static t_match_state	match_termcap_sequence(char *buf, size_t buf_len,
 		return (MISMATCH);
 }
 
-int						handle_termcap_sequences(char *c)
+int	handle_termcap_sequences(char *c)
 {
 	static char		buf[10] = "\e";
 	t_match_state	match_state;

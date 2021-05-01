@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_control_chars.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 14:17:42 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/05 16:12:23 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:27:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	handle_control_chars(char c)
 		kill_cursor_to_end();
 	else if (c == 25)
 		yank_clipboard();
-	else if (c == 4 &&
-			(g_rl_state.lines->array[0].len > 0 ||
-			g_rl_state.lines->length > 1))
+	else if (c == 4
+		&& (g_rl_state.lines->array[0].len > 0
+			|| g_rl_state.lines->length > 1))
 		delete_next_char();
 }

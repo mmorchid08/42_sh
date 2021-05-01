@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 12:09:27 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 10:35:13 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ extern	t_vector
 extern	t_t
 *g_hash;
 
-
 /*
 ** ================================ jobs =======================================
 */
@@ -75,7 +74,6 @@ int			ft_bg(char **args);
 int			ft_jobs(char **args);
 void		set_process_group(pid_t pid, pid_t *pgid, t_bool is_background);
 
-
 /*
 ** ============================= end jobs ======================================
 */
@@ -105,16 +103,18 @@ void		remove_quotes_from_args(char **args);
 void		reset_signals(void);
 int			manage_pipes(int i);
 
-
 /*
 ** ============================= end execution =================================
 */
 
+int			do_tree(char *word, char *flag);
+int			do_tests(int i, int is_not, char **cmd);
 int			is_correct_path(char *path, int print_error);
 char		*concat_path_with_cdpath(char *path);
 int			ft_cd(char **cmd);
 int			get_next_line(int fd, char **line);
 void		backups(int f);
+int			check_nbr(char *str, t_bool stat, int f);
 int			jhin(char **cmd);
 int			check_is_not(int ret, int is_not);
 int			ft_test(char **cmd);
@@ -127,10 +127,10 @@ t_t			*insert_name(t_t *root, char *key, char *value);
 int			export(char **av);
 void		ft_exit(char **cmd);
 
-char	*ft_strnjoin(char **strings, int n);
-int		ft_isinstr(char c, const char *s);
-char	*ft_skip_unitl_char(const char *str, const char *compare,
-																int (*f)(int));
+char		*ft_strnjoin(char **strings, int n);
+int			ft_isinstr(char c, const char *s);
+char		*ft_skip_unitl_char(const char *str, const char *compare,
+				int (*f)(int));
 
 /*
 **		free functions

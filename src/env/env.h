@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:26:22 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/05 11:16:48 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/01 09:55:08 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 extern t_vector	*g_shell_env;
 
-char	*env_get(t_vector *env, char *key);
+char		*env_get(t_vector *env, char *key);
 t_vector	*env_init(char **envp);
 t_vector	*env_dup(t_vector *env);
 char		**env_to_envp(t_vector *env);

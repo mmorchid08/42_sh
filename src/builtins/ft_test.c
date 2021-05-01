@@ -13,45 +13,45 @@
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
-int		check_p(char *word, char *flag, struct stat buf)
+int	check_p(char *word, char *flag, struct stat buf)
 {
 	if (!ft_strcmp(flag, "-x"))
-		return ((access(word, X_OK) == 0) ? 0 : 1);
+		return (check_nbr(NULL, (access(word, X_OK) == 0), 2));
 	else if (!ft_strcmp(flag, "-r"))
-		return ((access(word, R_OK) == 0) ? 0 : 1);
+		return (check_nbr(NULL, (access(word, R_OK) == 0), 2));
 	else if (!ft_strcmp(flag, "-w"))
-		return ((access(word, W_OK) == 0) ? 0 : 1);
+		return (check_nbr(NULL, (access(word, W_OK) == 0), 2));
 	else if (!ft_strcmp(flag, "-e"))
-		return ((access(word, F_OK) == 0) ? 0 : 1);
+		return (check_nbr(NULL, (access(word, F_OK) == 0), 2));
 	else if (!ft_strcmp(flag, "-s"))
-		return (buf.st_size > 0 ? 0 : 1);
+		return (check_nbr(NULL, buf.st_size > 0, 2));
 	else if (!ft_strcmp(flag, "-u"))
-		return ((buf.st_mode & S_ISUID) ? 0 : 1);
+		return (check_nbr(NULL, buf.st_mode & S_ISUID, 2));
 	else if (!ft_strcmp(flag, "-g"))
-		return ((buf.st_mode & S_ISGID) ? 0 : 1);
+		return (check_nbr(NULL, buf.st_mode & S_ISGID, 2));
 	return (-1);
 }
 
-int		check_t(struct stat buf, char *flag)
+int	check_t(struct stat buf, char *flag)
 {
 	if (!ft_strcmp(flag, "-b"))
-		return ((!S_ISBLK(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISBLK(buf.st_mode), 2));
 	else if (!ft_strcmp(flag, "-c"))
-		return ((!S_ISCHR(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISCHR(buf.st_mode), 2));
 	else if (!ft_strcmp(flag, "-d"))
-		return ((!S_ISDIR(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISDIR(buf.st_mode), 2));
 	else if (!ft_strcmp(flag, "-f"))
-		return ((!S_ISREG(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISREG(buf.st_mode), 2));
 	else if (!ft_strcmp(flag, "-L"))
-		return ((!S_ISLNK(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISLNK(buf.st_mode), 2));
 	else if (!ft_strcmp(flag, "-p"))
-		return ((!S_ISFIFO(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISFIFO(buf.st_mode), 2));
 	else if (!ft_strcmp(flag, "-S"))
-		return ((!S_ISSOCK(buf.st_mode)) ? 1 : 0);
+		return (check_nbr(NULL, S_ISSOCK(buf.st_mode), 2));
 	return (-1);
 }
 
-int		file_part(char *word, char *flag)
+int	file_part(char *word, char *flag)
 {
 	struct stat	buf;
 	int			ret;
@@ -66,16 +66,16 @@ int		file_part(char *word, char *flag)
 	return (2);
 }
 
-int		do_tree(char *word, char *flag)
+int	do_tree(char *word, char *flag)
 {
 	if (!ft_strcmp(flag, "-z"))
-		return (ft_strlen(word) ? 1 : 0);
+		return (check_nbr(NULL, (!ft_strlen(word)), 2));
 	else if (!ft_strcmp(flag, "-n"))
-		return (ft_strlen(word) ? 0 : 1);
+		return (check_nbr(NULL, ft_strlen(word), 2));
 	return (file_part(word, flag));
 }
 
-int		ft_test(char **cmd)
+int	ft_test(char **cmd)
 {
 	int	i;
 	int	is_not;
@@ -92,18 +92,5 @@ int		ft_test(char **cmd)
 	}
 	else
 		cmd = &cmd[1];
-	if (i == 1)
-		return (check_is_not(1, is_not));
-	else if (i == 2 && cmd[0])
-		return (check_is_not(0, is_not));
-	else if (i == 3)
-		return (check_is_not(do_tree(cmd[0], cmd[1]), is_not));
-	else if (i == 4)
-		return (check_is_not(jhin(cmd), is_not));
-	else if (i > 4)
-	{
-		ft_printf(2, "test: too many arguments\n");
-		return (2);
-	}
-	return (0);
+	return (do_tests(i, is_not, cmd));
 }

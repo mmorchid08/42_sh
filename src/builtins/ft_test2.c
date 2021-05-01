@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_test2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/01 09:28:01 by hmzah             #+#    #+#             */
+/*   Updated: 2021/05/01 09:48:03 by hmzah            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "forty_two_sh.h"
+#include <stdbool.h>
 
 char	check_op(char *op)
 {
@@ -17,18 +30,27 @@ char	check_op(char *op)
 	return (0);
 }
 
-int		check_nbr(char *str)
+int	check_nbr(char *str, t_bool stat, int f)
 {
 	int	i;
 
 	i = -1;
-	while (str[++i])
-		if (!ft_isdigit(str[i]))
+	if (f == 1)
+	{
+		while (str[++i])
+			if (!ft_isdigit(str[i]))
+				return (0);
+		return (1);
+	}
+	else
+	{
+		if (stat == true)
 			return (0);
-	return (1);
+		return (1);
+	}
 }
 
-int		do_op(char *fnum, char *op, char *snum)
+int	do_op(char *fnum, char *op, char *snum)
 {
 	int	x;
 	int	y;
@@ -36,34 +58,34 @@ int		do_op(char *fnum, char *op, char *snum)
 	x = ft_atoi(fnum);
 	y = ft_atoi(snum);
 	if (!ft_strcmp(op, "-eq"))
-		return (x == y ? 0 : 1);
+		return (check_nbr(NULL, x == y, 2));
 	if (!ft_strcmp(op, "-ne"))
-		return (x != y ? 0 : 1);
+		return (check_nbr(NULL, x != y, 2));
 	if (!ft_strcmp(op, "-gt"))
-		return (x > y ? 0 : 1);
+		return (check_nbr(NULL, x > y, 2));
 	if (!ft_strcmp(op, "-ge"))
-		return (x >= y ? 0 : 1);
+		return (check_nbr(NULL, x >= y, 2));
 	if (!ft_strcmp(op, "-lt"))
-		return (x < y ? 0 : 1);
+		return (check_nbr(NULL, x < y, 2));
 	if (!ft_strcmp(op, "-le"))
-		return (x <= y ? 0 : 1);
+		return (check_nbr(NULL, x <= y, 2));
 	return (0);
 }
 
-int		jhin(char **cmd)
+int	jhin(char **cmd)
 {
 	if (!ft_strcmp(cmd[1], "="))
-		return ((ft_strcmp(cmd[0], cmd[2])) ? 1 : 0);
+		return (check_nbr(NULL, ft_strcmp(cmd[0], cmd[2]), 2));
 	else if (!ft_strcmp(cmd[1], "!="))
-		return ((ft_strcmp(cmd[0], cmd[2])) ? 0 : 1);
+		return (check_nbr(NULL, ft_strcmp(cmd[0], cmd[2]), 2));
 	else if (check_op(cmd[1]))
 	{
-		if (!check_nbr(cmd[0]))
+		if (!check_nbr(cmd[0], 0, 1))
 		{
 			ft_printf(2, "test: integer expression expected: %s\n", cmd[0]);
 			return (2);
 		}
-		else if (!check_nbr(cmd[2]))
+		else if (!check_nbr(cmd[2], 0, 1))
 		{
 			ft_printf(2, "test: integer expression expected: %s\n", cmd[2]);
 			return (2);
@@ -74,10 +96,13 @@ int		jhin(char **cmd)
 	return (2);
 }
 
-
-int		check_is_not(int ret, int is_not)
+int	check_is_not(int ret, int is_not)
 {
 	if (is_not && (ret == 1 || ret == 0))
-		return (ret == 1 ? 0 : 1);
+	{
+		if (ret == 1)
+			return (0);
+		return (1);
+	}
 	return (ret);
 }

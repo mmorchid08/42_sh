@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   goto_next_line.c                                   :+:      :+:    :+:   */
+/*   ft_test3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 20:39:35 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:30:19 by hmzah            ###   ########.fr       */
+/*   Created: 2021/05/01 09:45:08 by hmzah             #+#    #+#             */
+/*   Updated: 2021/05/01 09:46:36 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline_internal.h"
+#include "forty_two_sh.h"
 
-void	goto_next_line(void)
+int	do_tests(int i, int is_not, char **cmd)
 {
-	t_readline_state *const	rl = &g_rl_state;
-
-	if (rl->current_line < rl->lines->length - 1)
+	if (i == 1)
+		return (check_is_not(1, is_not));
+	else if (i == 2 && cmd[0])
+		return (check_is_not(0, is_not));
+	else if (i == 3)
+		return (check_is_not(do_tree(cmd[0], cmd[1]), is_not));
+	else if (i == 4)
+		return (check_is_not(jhin(cmd), is_not));
+	else if (i > 4)
 	{
-		if (rl->cursor_line_pos <= rl->lines->array[rl->current_line + 1].len)
-			move_cursor_to(rl->current_line + 1, rl->cursor_line_pos);
-		else
-			move_cursor_to(rl->current_line + 1,
-				rl->lines->array[rl->current_line + 1].len);
+		ft_printf(2, "test: too many arguments\n");
+		return (2);
 	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_dup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 18:37:35 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/05 12:05:23 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/01 09:55:17 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_vector	*env_dup(t_vector *env)
 	size_t		i;
 
 	new_env = vector_init_capacity(env->element_size, env->capacity,
-		env->free_element);
+			env->free_element);
 	vars = env->array;
 	i = 0;
 	while (i < env->length)
