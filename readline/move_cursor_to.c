@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 01:33:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:24:20 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 12:56:07 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ static int	get_cursor_line_index(int line, int cursor_line_pos)
 
 static int	get_relative_column(int line, int cursor_line_pos)
 {
-	return (((cursor_line_pos +
-	(line == 0 ? g_rl_state.prompt_len : 0)) %
-	g_rl_state.win_cols) -
-	((g_rl_state.cursor_line_pos +
-	(g_rl_state.current_line == 0 ? g_rl_state.prompt_len : 0)) %
-	g_rl_state.win_cols));
+	return (((cursor_line_pos
+				+ ter_ul(line == 0, g_rl_state.prompt_len, 0))
+			% g_rl_state.win_cols)
+		- ((g_rl_state.cursor_line_pos
+				+ ter_ul
+				(g_rl_state.current_line == 0, g_rl_state.prompt_len, 0))
+			% g_rl_state.win_cols));
 }
 
 static void	cursor_goto_relative(int rel_col, int rel_row)

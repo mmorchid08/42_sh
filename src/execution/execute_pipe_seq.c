@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 09:13:02 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 12:34:02 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,16 @@ int	execute_pipe_seq(t_pipe_sequence *pipe_seq, t_bool is_background,
 	vec_pid = execute_pip(s_cmd, pipe_seq->commands->length, is_background);
 	if (vec_pid)
 	{
-		i = 0;
+		i = -1;
 		pid = (pid_t *)vec_pid->array;
-		while (i < (int)vec_pid->length)
-		{
-			if (!pid[i + 1])
-				f_pid = pid[i];
-			i++;
-		}
+		while (++i < (int)vec_pid->length)
+			f_pid = pid[i];
 		if (is_interactive == FALSE)
-			return (get_exit_code(wait_children(f_pid)));
+		{
+			i = get_exit_code(wait_children(f_pid));
+			vector_free(vec_pid);
+			return (i);
+		}
 		else
 			return (execute_job(vec_pid, pipe_seq->job_name, is_background));
 	}

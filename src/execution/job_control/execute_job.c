@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_job.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:21:23 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/24 00:33:38 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 12:28:41 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	execute_job(t_vector *pids_vec, char *job_name, t_bool is_background)
 		add_process_to_job(job, *pid);
 		i++;
 	}
+	vector_free(pids_vec);
 	job->ret_pid = *pid;
 	if (is_background)
 		ft_printf(1, "[%d] %d\n", job->id, job->ret_pid);

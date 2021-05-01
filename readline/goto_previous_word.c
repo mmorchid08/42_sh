@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 23:21:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:28:14 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 12:53:24 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	goto_previous_word(void)
 	}
 	while (i >= 0 && ft_isalnum(rl->lines->array[j].str[i]))
 		i--;
-	move_cursor_to(j, i < 0 ? 0 : i + 1);
+	move_cursor_to(j, ter_i(i < 0, 0, i + 1));
 }

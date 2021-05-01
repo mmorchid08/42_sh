@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 09:08:03 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 12:28:00 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 {
 	t_vector	*vec_pid;
 	char		**cmd;
+	int			exit_code;
 
 	vec_pid = NULL;
 	vector_push(simple_cmd->args, &(char *){NULL});
@@ -107,7 +108,11 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background,
 	if (vec_pid != NULL)
 	{
 		if (is_interactive == FALSE)
-			return (get_exit_code(wait_children((pid_t)vec_pid->array)));
+		{
+			exit_code = get_exit_code(wait_children((pid_t)vec_pid->array));
+			vector_free(vec_pid);
+			return (exit_code);
+		}
 		else
 			return (execute_job(vec_pid, simple_cmd->job_name, is_background));
 	}

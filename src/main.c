@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/30 14:43:48 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/01 12:26:27 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_t				*g_hash;
 t_vector		*g_stopped_jobs;
 int				g_exit_status;
 int				g_term_fd;
+char			*g_path_env;
 
 int	shell_main(void)
 {
@@ -29,7 +30,10 @@ int	shell_main(void)
 	{
 		commands = parser(cmd_line);
 		if (commands && commands->length > 0)
+		{
 			execute_commands(commands);
+			vector_free(commands);
+		}
 	}
 	return (EXIT_SUCCESS);
 }
@@ -66,6 +70,8 @@ int	main(int ac, char *av[], char *envp[])
 			(void)shell_main();
 		if (g_hash)
 			free_hash(&g_hash);
+		if (g_shell_env)
+			vector_free(g_shell_env);
 	}
 	else if (ac == 2)
 		return (sh_system(av[1]));
