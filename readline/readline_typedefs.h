@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   readline_typedefs.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:08 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 11:45:38 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 13:43:13 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_TYPEDEFS_H
 # define READLINE_TYPEDEFS_H
 
-typedef struct termios	t_termios;
-
 typedef struct s_term_attrs
 {
-	t_termios		attrs;
+	struct termios	attrs;
 	t_bool			is_initialized;
 }					t_term_attrs;
 typedef struct s_termcap_seq

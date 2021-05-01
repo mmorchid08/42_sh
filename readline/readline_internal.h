@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_internal.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:12:23 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 13:45:20 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@
 # define STDERR_FD 2
 # define SIGINT_HANDLER 0
 # define SIGWINCH_HANDLER 1
-# ifdef __linux__
-#  define T_SIGHANDLER __sighandler_t
-# elif __MACH__
-#  define T_SIGHANDLER sig_t
-# endif
 # ifndef VDSUSP
 #  define VDSUSP -1
 # endif
@@ -85,7 +80,7 @@ void			add_hist_entry(char *entry_str);
 void			append_to_last_hist_entry(char *partial_entry);
 char			*get_last_hist_entry(void);
 void			update_win_dimensions(void);
-void			set_signal_handlers(T_SIGHANDLER *signals);
-void			restore_signal_handlers(T_SIGHANDLER *signals);
+void			set_signal_handlers(sig_t *signals);
+void			restore_signal_handlers(sig_t *signals);
 
 #endif

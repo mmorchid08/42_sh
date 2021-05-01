@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:54:11 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 12:52:21 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 13:45:51 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_term_attrs		g_orig_attrs;
 
 void	init_term(void)
 {
-	t_termios			new_attrs;
+	struct termios	new_attrs;
 
 	new_attrs = g_orig_attrs.attrs;
 	new_attrs.c_lflag &= ~(ECHO | ICANON);
@@ -68,7 +68,7 @@ char	*readline_read_loop(void)
 char	*readline(char *prompt)
 {
 	char			*line;
-	T_SIGHANDLER	sig_handlers[2];
+	sig_t			sig_handlers[2];
 
 	line = NULL;
 	if (tcgetattr(0, &g_orig_attrs.attrs) == -1)
