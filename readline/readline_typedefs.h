@@ -6,14 +6,14 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:08 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:11:25 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 10:42:52 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_TYPEDEFS_H
 # define READLINE_TYPEDEFS_H
 
-typedef struct s_termios	t_termios;
+typedef struct termios	t_termios;
 
 typedef struct s_term_attrs
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
+#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 10:14:12 by ylagtab           #+#    #+#              #
-#    Updated: 2021/04/22 14:46:59 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/05/01 10:42:07 by hmzah            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ PARSER = lexer/lexer.o lexer/lexer_advance.o lexer/lexer_handle_io_number.o \
 	parse_simple_cmd/parse_redirection.o parse_simple_cmd/simple_advance.o \
 	parse_simple_cmd/parse_simple_cmd.o parse_simple_cmd/parse_here_document.o \
 	parse_simple_cmd/parse_word.o \
-	parser.o get_job_name.o print_commands.o parser_helpers.o
+	parser.o get_job_name.o parser_helpers.o
 
 OBJS = $(addprefix $(OBJS_DIR)/, ${PARSER})
 

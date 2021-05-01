@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:22:43 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 15:33:07 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/01 10:44:14 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ void	execute_commands(t_vector *commands)
 					cmds_array[i].is_background_job, TRUE);
 		i++;
 		backups(3);
-		ft_printf(1, "exit status : %d\n", g_exit_status);
 	}
 }

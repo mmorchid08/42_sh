@@ -9,7 +9,11 @@ goto_previous_word.c
 move_cursor_to.c
 readline.c
 readline_internal.h
+readline_typedefs.h
 -------------------------
 src:
 cd.c
 cd_helper2.c
+-------------------------
+Parser
+All normed
