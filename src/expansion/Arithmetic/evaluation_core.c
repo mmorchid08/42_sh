@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   evaluation_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 05:17:28 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 02:54:38 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:40:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arithmetic.h"
 
-static int	convert_variable(t_list **token, long long *result)
+static int	convert_variable(t_d_list **token, long long *result)
 {
 	int			prefix;
 	int			postfix;
@@ -41,7 +41,7 @@ static int	convert_variable(t_list **token, long long *result)
 	return (0);
 }
 
-long long	convert_operand(t_list **token, long long *result)
+long long	convert_operand(t_d_list **token, long long *result)
 {
 	int	sign;
 	int	error;
@@ -70,7 +70,7 @@ long long	convert_operand(t_list **token, long long *result)
 	return (error);
 }
 
-int	convert_operator(t_list **token, int *result, int skip_token)
+int	convert_operator(t_d_list **token, int *result, int skip_token)
 {
 	static char	*opertrs[14] = {"||", "&&", "!=", "==", ">", "<", ">=", "<=",
 								"-", "+", "%", "/", "*", 0};
@@ -95,7 +95,7 @@ int	convert_operator(t_list **token, int *result, int skip_token)
 	return (1);
 }
 
-int	eval_expr(t_list **tokens, long long *result)
+int	eval_expr(t_d_list **tokens, long long *result)
 {
 	int			has_error;
 	int			operator;
@@ -122,8 +122,8 @@ int	eval_expr(t_list **tokens, long long *result)
 
 char	*expand_ar_expr(char *expr)
 {
-	t_list		*tokens;
-	t_list		*tokens_tmp;
+	t_d_list	*tokens;
+	t_d_list	*tokens_tmp;
 	long long	result;
 	int			status;
 
@@ -133,13 +133,13 @@ char	*expand_ar_expr(char *expr)
 	if (assign_i(&status, eval_expr(&tokens, &result)))
 	{
 		if (status == 2)
-			ft_printf("divised by zero\n");
+			ft_printf(1, "divised by zero\n");
 		else
-			ft_printf("token error: %s\n",
+			ft_printf(1, "token error: %s\n",
 				ter_p(tokens, tokens->content, NULL));
-		ft_lstdel2(&tokens_tmp, free);
+		ft_dlstdel2(&tokens_tmp, free);
 		return (NULL);
 	}
-	ft_lstdel2(&tokens_tmp, free);
+	ft_dlstdel2(&tokens_tmp, free);
 	return (ft_itoa(result));
 }

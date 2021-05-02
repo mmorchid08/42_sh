@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_remove.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 04:41:04 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 02:34:16 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:41:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static long	matched_len(char *str, char *patrn, long val, long (*f)(long, long))
 {
-	t_list				*ret;
-	t_list				*ends;
-	t_list				*tmp;
+	t_d_list			*ret;
+	t_d_list			*ends;
+	t_d_list			*tmp;
 	t_matched_strings	*ptr;
 
 	if (!assign_p(&ret, reg_match(str, patrn)))

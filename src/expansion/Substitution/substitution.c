@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   substitution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 02:26:22 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 02:31:00 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:27:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "expansion.h"
 
 static long	count_chars(const char *str, const char *chars, size_t size)
 {

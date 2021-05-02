@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   evaluation_helper.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 02:53:57 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 00:27:26 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:25:47 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ long long	do_op(long long *op1, int oparator, long op2, int ret)
 	return (ret);
 }
 
-int	do_logical_op(t_list **token, long long *result, int operator)
+int	do_logical_op(t_d_list **token, long long *result, int operator)
 {
 	int	bracket;
 
@@ -82,11 +82,11 @@ int	get_precedence(int operator)
 	return (0);
 }
 
-int	operator_have_precedence(t_list **token, int operator1)
+int	operator_have_precedence(t_d_list **token, int operator1)
 {
-	int		operator2;
-	t_list	*tmp;
-	int		bracket;
+	int			operator2;
+	t_d_list	*tmp;
+	int			bracket;
 
 	bracket = 0;
 	tmp = ter_p(*token, (*token)->next, NULL);

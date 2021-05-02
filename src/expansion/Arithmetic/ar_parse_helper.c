@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ar_parse_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 04:45:21 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 00:10:59 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:28:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arithmetic.h"
 
-t_list	*parse_number(char **expression)
+t_d_list	*parse_number(char **expression)
 {
-	char	*tmp;
-	t_list	*token;
+	char		*tmp;
+	t_d_list	*token;
 
 	tmp = *expression;
 	if (ft_strnequ(*expression, "0x", 2))
@@ -25,17 +25,17 @@ t_list	*parse_number(char **expression)
 	else
 		*expression = ft_skip_chars(*expression, NULL, ft_isdigit);
 	tmp = ft_strsub(tmp, 0, *expression - tmp);
-	token = ft_lstnew(tmp, ft_strlen(tmp) + 1);
+	token = ft_dlstnew(tmp, ft_strlen(tmp) + 1);
 	free(tmp);
 	return (token);
 }
 
-t_list	*parse_variable(char **expr)
+t_d_list	*parse_variable(char **expr)
 {
-	char	*tmp;
-	t_list	*token;
-	int		i;
-	int		j;
+	char		*tmp;
+	t_d_list	*token;
+	int			i;
+	int			j;
 
 	i = 0;
 	tmp = *expr;
@@ -51,7 +51,7 @@ t_list	*parse_variable(char **expr)
 	if (i == 0)
 		return (NULL);
 	tmp = ft_strsub(tmp, 0, i);
-	token = ft_lstnew(tmp, i + 1);
+	token = ft_dlstnew(tmp, i + 1);
 	free(tmp);
 	return (token);
 }
