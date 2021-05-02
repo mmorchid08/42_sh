@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 15:36:38 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 15:49:32 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ char		*read_cmd_multiline(void);
 */
 
 t_bool		is_quote(char c);
+t_bool		quote_type(char c);
 
 int			sh_system(char *line);
 
