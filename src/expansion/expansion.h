@@ -6,16 +6,17 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:09:49 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/04/30 15:21:06 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 15:34:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANSION_H
 # define EXPANSION_H
 
-# include "forty_two_sh.h"
+# include "../../includes/forty_two_sh.h"
 # include <limits.h>
 # include <pwd.h>
+# include "adapters/adapters.h"
 
 typedef struct s_parser_expansion
 {
@@ -47,5 +48,7 @@ char					*expand_ar_expr(char *expr);
 
 t_parser_expansion		expand_sub_art(char *str);
 t_parser_expansion		expand_parametre(char *str);
+char					*expand(char *str,
+							t_parser_expansion (*expand_fun)(char *));
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 05:17:28 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 13:40:33 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 15:31:26 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	convert_variable(t_d_list **token, long long *result)
 	int			prefix;
 	int			postfix;
 	char		*tmp[2];
-	t_variables	*var;
+	t_var	*var;
 
 	prefix = 0;
 	postfix = 0;
@@ -36,7 +36,7 @@ static int	convert_variable(t_d_list **token, long long *result)
 	}
 	if (assign_p(&var, get_var(*tmp)) && !is_number(var->value))
 		return (1);
-	*result = ter_p(var != NULL, ft_atoi(var->value), 0) + prefix;
+	*result = ter_i(var != NULL, ft_atoi(var->value), 0) + prefix;
 	ar_edit_var(*tmp, *result + postfix, postfix || prefix);
 	return (0);
 }
@@ -48,7 +48,7 @@ long long	convert_operand(t_d_list **token, long long *result)
 
 	if (!*token)
 		return (1);
-	assign(&sign, 1) && assign_i(&error, 0);
+	assign_i(&sign, 1) && assign_i(&error, 0);
 	if (ft_strequ((*token)->content, "-") && assign_i(&sign, -1))
 		*token = (*token)->next;
 	if (ft_strequ((*token)->content, "(")
@@ -136,7 +136,7 @@ char	*expand_ar_expr(char *expr)
 			ft_printf(1, "divised by zero\n");
 		else
 			ft_printf(1, "token error: %s\n",
-				ter_p(tokens, tokens->content, NULL));
+				ter_p((size_t)tokens, tokens->content, NULL));
 		ft_dlstdel2(&tokens_tmp, free);
 		return (NULL);
 	}

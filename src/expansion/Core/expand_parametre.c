@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parametre.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:12:20 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 02:45:10 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:33:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-static void	exp_parm_update_status(void)
-{
-	char	*tmp;
+// static void	exp_parm_update_status(void)
+// {
+// 	char	*tmp;
 
-	tmp = ft_itoa(JOB_LIST->status);
-	edit_add_var("_status", tmp, 0, 0);
-	ft_strdel(&tmp);
-	tmp = ft_itoa(getpid());
-	edit_add_var("_pid", tmp, 0, 0);
-	free(tmp);
-}
+// 	tmp = ft_itoa(JOB_LIST->status);
+// 	edit_add_var("_status", tmp, 0, 0);
+// 	ft_strdel(&tmp);
+// 	tmp = ft_itoa(getpid());
+// 	edit_add_var("_pid", tmp, 0, 0);
+// 	free(tmp);
+// }
 
 static char	*get_variable_name(char **s)
 {
@@ -50,8 +50,8 @@ static char	*get_variable_name(char **s)
 
 static char	*dispach_expansion(char *var_name, char *expression)
 {
-	var_name = ter_p(ft_strstr(var_name, "?"), "_status", var_name);
-	var_name = ter_p(ft_strstr(var_name, "$"), "_pid", var_name);
+	// var_name = ter_p(ft_strstr(var_name, "?"), "_status", var_name);
+	// var_name = ter_p(ft_strstr(var_name, "$"), "_pid", var_name);
 	if (*var_name == '#')
 		return (expand_string_lenght(var_name, expression));
 	if (!*expression)
@@ -95,11 +95,11 @@ t_parser_expansion	expand_parametre(char *str)
 	else
 		tmp = NULL;
 	var_name = get_variable_name(&str);
-	ret.index = ter_p(tmp, tmp + 1, str);
+	ret.index = ter_p((size_t)tmp, tmp + 1, str);
 	!tmp && str--;
-	exp_parm_update_status();
+	// exp_parm_update_status();
 	if (var_name && !assign_p(&ret.str, dispach_expansion(var_name, str)))
-		PRINT_ERROR2(dup, ": bad substitution");
+		ft_printf(2, "42sh: %s: bad substitution\n", dup);
 	free(var_name);
 	return (ret);
 }

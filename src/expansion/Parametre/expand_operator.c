@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_operator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 04:40:19 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 02:40:01 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:26:52 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*expand_defaul_val(char *var_name, char *expression)
 {
-	t_variables	*var;
+	t_var	*var;
 
 	if (assign_p(&var, get_var(var_name)) && !ft_strequ(var->value, ""))
 		return (ft_strdup(var->value));
@@ -23,7 +23,7 @@ char	*expand_defaul_val(char *var_name, char *expression)
 
 char	*expand_alternative_val(char *var_name, char *expression)
 {
-	t_variables	*var;
+	t_var	*var;
 
 	if (assign_p(&var, get_var(var_name)) && !ft_strequ(var->value, ""))
 		return (expand(ft_strdup(expression + 2), NULL));
@@ -32,8 +32,8 @@ char	*expand_alternative_val(char *var_name, char *expression)
 
 char	*assign_default_val(char *var_name, char *expression)
 {
-	char		*val;
-	t_variables	*var;
+	char	*val;
+	t_var	*var;
 
 	if (!assign_p(&var, get_var(var_name)) || ft_strequ(var->value, ""))
 	{
@@ -49,14 +49,14 @@ char	*assign_default_val(char *var_name, char *expression)
 
 char	*indicate_error(char *var_name, char *expression)
 {
-	char		*val;
-	t_variables	*var;
+	char	*val;
+	t_var	*var;
 
 	if (assign_p(&var, get_var(var_name)) && !ft_strequ(var->value, ""))
 		return (ft_strdup(var->value));
 	else
 		val = expand(ft_strdup(expression + 2), NULL);
-	ft_printf_fd(2, "42sh: %s: %s\n", var_name, ter_p(val != NULL, val, ""));
+	ft_printf(2, "42sh: %s: %s\n", var_name, ter_p(val != NULL, val, ""));
 	free(val);
 	return (NULL);
 }

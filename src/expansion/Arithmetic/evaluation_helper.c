@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 02:53:57 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 13:25:47 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 15:31:55 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	operator_have_precedence(t_d_list **token, int operator1)
 	int			bracket;
 
 	bracket = 0;
-	tmp = ter_p(*token, (*token)->next, NULL);
+	tmp = ter_p((size_t)(*token), (*token)->next, NULL);
 	if (*token && ft_strequ((*token)->content, "("))
 		bracket = 1;
 	while (tmp && bracket)

@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 02:26:22 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 13:27:57 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 13:49:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*cmd_substitution(const char *cmd)
 		if (pid == 0)
 		{
 			dup2(fd[1], 1);
-			sh_system((char *)cmd, 0);
+			sh_system((char *)cmd);
 			close(fd[1]);
 			exit(0);
 		}
