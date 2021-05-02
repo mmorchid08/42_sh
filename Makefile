@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/01 09:46:28 by hmzah            ###   ########.fr        #
+#    Updated: 2021/05/02 16:19:25 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,13 @@ LIBFT = libft/libft.a
 PARSER = src/parser/parser.a
 JOBS = src/execution/job_control/job_control.a
 READLINE = readline/readline.a
+EXPANSION = src/expansion/expansion.a
 LIBFT_OPT = "LIBFT_EXIT_ON_ALLOC_FAIL=1"
 
 # compilation variables
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES) -g
 CC = gcc
-PARSER_ENV=42sh_headers=$(mkfile_dir)/includes/forty_two_sh.h 42sh_include_dirs=-I$(mkfile_dir)includes/
+LIBS_ENV=42sh_headers=$(mkfile_dir)/includes/forty_two_sh.h 42sh_include_dirs=-I$(mkfile_dir)includes/
 
 # 42sh																		   #
 INCLUDES =	-Iincludes
@@ -78,14 +79,17 @@ mkfile_dir := $(dir $(mkfile_path))
 
 all: $(NAME)
 
-$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE) $(JOBS)
-	$(CC) -o $(NAME) $(42sh_OBJS) $(PARSER) $(READLINE) $(JOBS) $(LIBFT) -ltermcap
+$(NAME): $(42sh_OBJS) $(LIBFT) $(PARSER) $(READLINE) $(JOBS) $(EXPANSION)
+	$(CC) -o $(NAME) $(42sh_OBJS) $(PARSER) $(READLINE) $(JOBS) $(EXPANSION) $(LIBFT) -ltermcap
 
 $(LIBFT): force
 	@env $(LIBFT_OPT) make -C libft/
 
 $(PARSER): force
-	@env $(PARSER_ENV) make -C src/parser/
+	@env $(LIBS_ENV) make -C src/parser/
+
+$(EXPANSION): force
+	@env $(LIBS_ENV) make -C src/expansion/
 
 $(JOBS): force
 	make -C src/execution/job_control

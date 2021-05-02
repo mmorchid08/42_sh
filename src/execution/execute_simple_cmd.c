@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 14:22:22 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/02 16:17:15 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 
 	vec_pid = NULL;
 	vector_push(simple_cmd->args, &(char *){NULL});
+	expand_args(simple_cmd->args);
 	cmd = (char **)simple_cmd->args->array;
 	do_value(simple_cmd->assignments);
 	if (cmd[0] && cmd)
