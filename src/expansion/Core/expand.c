@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 20:27:30 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/01 16:12:29 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 01:57:09 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*expand_tilde(char *str)
 		if (str[1] == '/' || str[1] == '\0')
 		{
 			var = env_get(g_shell_env, "HOME");
-			tmp = ft_strjoin(var ? var->value : "", str + 1);
+			tmp = ft_strjoin(ter_p(var != NULL, var->value, ""), str + 1);
 			free(str);
 			str = tmp;
 		}
@@ -42,7 +42,8 @@ static char	*join_expan_result(t_parser_expansion result, char **str)
 	char	*ret;
 
 	tmp = *str;
-	if ((*str = ft_strnjoin((char *[]){tmp, result.str, result.index}, 3)))
+	if (assign_p(str, ft_strnjoin(
+				(char *[]){tmp, result.str, result.index}, 3)))
 	{
 		ret = *str + ft_strlen(result.str) + ft_strlen(tmp);
 		free(tmp);
@@ -54,7 +55,7 @@ static char	*join_expan_result(t_parser_expansion result, char **str)
 	return (NULL);
 }
 
-char		*expand(char *str, t_parser_expansion (*expand_fun)(char *))
+char	*expand(char *str, t_parser_expansion (*expand_fun)(char *))
 {
 	char				*tmp;
 	int					qoute;
@@ -69,12 +70,12 @@ char		*expand(char *str, t_parser_expansion (*expand_fun)(char *))
 			tmp++;
 		else if (!qoute && *tmp == '$' && tmp[1] && !ft_strchr(" \t\n", tmp[1]))
 		{
-			expand_fun = tmp[1] == '(' ? expand_sub_art : expand_parametre;
+			expand_fun = ter_p(tmp[1] == '(', expand_sub_art, expand_parametre);
 			result = expand_fun(&tmp[1]);
 			*tmp = 0;
-			if (!(tmp = join_expan_result(result, &str)))
+			if (!assign_p(&tmp, join_expan_result(result, &str)))
 				return (NULL);
-			continue;
+			continue ;
 		}
 		else if (*tmp == '\'')
 			qoute ^= 1;

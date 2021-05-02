@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ar_parse_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-ihi <aait-ihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 04:45:21 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 20:20:33 by aait-ihi         ###   ########.fr       */
+/*   Updated: 2021/05/02 00:10:59 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	*parse_variable(char **expr)
 	while (ft_isalnum(**expr) || **expr == '_')
 		tmp[i++] = *(*expr)++;
 	*expr = ft_skip_chars(*expr, " ", NULL);
-	if (ft_isinstr(**expr, "+-") && **expr == expr[0][1] && (j = i))
+	if (ft_isinstr(**expr, "+-") && **expr == expr[0][1] && assign_i(&j, i))
 		while (i - j < 2)
 			tmp[i++] = *(*expr)++;
 	if (i == 0)

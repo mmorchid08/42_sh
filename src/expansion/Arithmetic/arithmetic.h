@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arithmetic.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-ihi <aait-ihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 03:18:45 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 06:37:41 by aait-ihi         ###   ########.fr       */
+/*   Updated: 2021/05/02 00:27:49 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define ARITHMETIC_H
 
 # include "expansion.h"
-# define BETWEEN(v, v1, v2) ((v) >= (v1) && (v) <= (v2))
 # define HEX_BASE "0123456789abcdef"
 # define OCTAL_BASE "01234567"
 

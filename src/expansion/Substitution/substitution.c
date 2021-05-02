@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-ihi <aait-ihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 02:26:22 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 06:34:04 by aait-ihi         ###   ########.fr       */
+/*   Updated: 2021/05/02 02:31:00 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	join_result(char *dst, char *src, int size)
 	return (j);
 }
 
-char		*get_fd_content(int fd)
+char	*get_fd_content(int fd)
 {
 	char	buff[100001];
 	char	*tmp;
@@ -55,22 +55,23 @@ char		*get_fd_content(int fd)
 
 	size = 0;
 	ret = NULL;
-	while ((r = read(fd, buff, 100000)) > 0)
+	while (assign_i(&r, read(fd, buff, 100000)) > 0)
 	{
 		tmp = ret;
-		if (!(ret = malloc(size + r + count_chars(buff, "\"'$(){}\\", r) + 1)))
+		if (!assign_p(&ret, malloc(size + r
+					+ count_chars(buff, "\"'$(){}\\", r) + 1)))
 		{
 			free(tmp);
 			return (NULL);
 		}
-		ft_strcpy(ret, tmp ? tmp : "");
+		ft_strcpy(ret, ter_p(tmp != NULL, tmp, ""));
 		size += join_result(ret + size, buff, r);
 		free(tmp);
 	}
 	return (ret);
 }
 
-char		*cmd_substitution(const char *cmd)
+char	*cmd_substitution(const char *cmd)
 {
 	int		fd[2];
 	pid_t	pid;

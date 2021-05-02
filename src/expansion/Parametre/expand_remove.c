@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_remove.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-ihi <aait-ihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 04:41:04 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 06:32:29 by aait-ihi         ###   ########.fr       */
+/*   Updated: 2021/05/02 02:34:16 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static long	matched_len(char *str, char *patrn, long val, long (*f)(long, long))
 	t_list				*tmp;
 	t_matched_strings	*ptr;
 
-	if (!(ret = reg_match(str, patrn)))
+	if (!assign_p(&ret, reg_match(str, patrn)))
 		return (0);
 	while (ret)
 	{
@@ -40,7 +40,7 @@ static long	matched_len(char *str, char *patrn, long val, long (*f)(long, long))
 	return (val);
 }
 
-char		*expand_rem_pre(char *var_name, char *expr, long val,
+char	*expand_rem_pre(char *var_name, char *expr, long val,
 														long (*f)(long, long))
 {
 	char		*ret;
@@ -49,9 +49,10 @@ char		*expand_rem_pre(char *var_name, char *expr, long val,
 	t_variables	*var;
 
 	ret = NULL;
-	if (!(var = get_var(var_name)))
+	if (!assign_p(&var, get_var(var_name)))
 		return (ft_strdup(""));
-	if ((tmp = expand(ft_strjoin("^", ft_skip_chars(expr, "#", NULL)), NULL)))
+	if (assign_p(&tmp, expand(ft_strjoin("^", ft_skip_chars(expr, "#", NULL)),
+				NULL)))
 	{
 		cut_len = matched_len(var->value, tmp, val, f);
 		free(tmp);
@@ -60,7 +61,7 @@ char		*expand_rem_pre(char *var_name, char *expr, long val,
 	return (ret);
 }
 
-char		*expand_rem_suf(char *var_name, char *expr, long val,
+char	*expand_rem_suf(char *var_name, char *expr, long val,
 														long (*f)(long, long))
 {
 	char		*ret;
@@ -69,9 +70,10 @@ char		*expand_rem_suf(char *var_name, char *expr, long val,
 	t_variables	*var;
 
 	ret = NULL;
-	if (!(var = get_var(var_name)))
+	if (!assign_p(&var, get_var(var_name)))
 		return (ft_strdup(""));
-	if ((tmp = expand(ft_strjoin(ft_skip_chars(expr, "%", NULL), "$"), NULL)))
+	if (assign_p(&tmp, expand(ft_strjoin(ft_skip_chars(expr, "%", NULL), "$"),
+				NULL)))
 	{
 		cut_len = matched_len(var->value, tmp, val, f);
 		free(tmp);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   arithmetic_expansion_parse.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjamal <cjamal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 04:17:51 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 21:03:41 by cjamal           ###   ########.fr       */
+/*   Updated: 2021/05/02 00:19:03 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arithmetic.h"
 
-int		get_sign(char **expression)
+int	get_sign(char **expression)
 {
 	int		sign;
 	char	*tmp;
@@ -84,11 +84,11 @@ t_list	*get_operator(char **expr, t_list *token)
 	return (token);
 }
 
-int		get_parentese(char **expression, t_list **token)
+int	get_parentese(char **expression, t_list **token)
 {
 	if (**expression == ')')
 	{
-		ft_lstenqueue(token, ft_lstnew((char[]){')', 0}, 2));
+		ft_lstenqueue(token, ft_lstnew((char []){')', 0}, 2));
 		(*expression)++;
 		return (1);
 	}
@@ -105,9 +105,9 @@ t_list	*parse_ar_expression(char **expression, t_list *token)
 	*expression = ft_skip_chars(*expression, " ", NULL);
 	while (**expression && **expression != ')')
 	{
-		if (!(i % 2) && !(token = get_operand(expression, token)))
+		if (!(i % 2) && !assign_p(&token, get_operand(expression, token)))
 			return (NULL);
-		else if ((i % 2) && !(token = get_operator(expression, token)))
+		else if ((i % 2) && !assign_p(&token, get_operator(expression, token)))
 			return (NULL);
 		i = (i + 1) % 2;
 	}

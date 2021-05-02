@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   evaluation_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-ihi <aait-ihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 05:17:28 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 20:17:32 by aait-ihi         ###   ########.fr       */
+/*   Updated: 2021/05/02 02:54:38 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int	convert_variable(t_list **token, long long *result)
 		postfix = (44 - tmp[1][0]) * !prefix;
 		tmp[1][0] = 0;
 	}
-	if ((var = get_var(*tmp)) && !is_number(var->value))
+	if (assign_p(&var, get_var(*tmp)) && !is_number(var->value))
 		return (1);
-	*result = (var ? ft_atoi(var->value) : 0) + prefix;
+	*result = ter_p(var != NULL, ft_atoi(var->value), 0) + prefix;
 	ar_edit_var(*tmp, *result + postfix, postfix || prefix);
 	return (0);
 }
@@ -48,11 +48,11 @@ long long	convert_operand(t_list **token, long long *result)
 
 	if (!*token)
 		return (1);
-	sign = 1;
-	error = 0;
-	if (ft_strequ((*token)->content, "-") && (sign = -1))
+	assign(&sign, 1) && assign_i(&error, 0);
+	if (ft_strequ((*token)->content, "-") && assign_i(&sign, -1))
 		*token = (*token)->next;
-	if (ft_strequ((*token)->content, "(") && ((*token = (*token)->next) || 1))
+	if (ft_strequ((*token)->content, "(")
+		&& (assign_p(token, (*token)->next) || 1))
 		error = eval_expr(token, result);
 	else if (ft_isdigit(*((char *)(*token)->content)))
 	{
@@ -65,12 +65,12 @@ long long	convert_operand(t_list **token, long long *result)
 	}
 	else
 		error = convert_variable(token, result);
-	*token ? (*token = (*token)->next) : 0;
+	*token != NULL && assign_p(token, (*token)->next);
 	*result *= sign;
 	return (error);
 }
 
-int			convert_operator(t_list **token, int *result, int skip_token)
+int	convert_operator(t_list **token, int *result, int skip_token)
 {
 	static char	*opertrs[14] = {"||", "&&", "!=", "==", ">", "<", ">=", "<=",
 								"-", "+", "%", "/", "*", 0};
@@ -85,7 +85,7 @@ int			convert_operator(t_list **token, int *result, int skip_token)
 			break ;
 		i++;
 	}
-	if (BETWEEN(i, 0, 12))
+	if (ft_between(i, 0, 12))
 	{
 		if (skip_token)
 			*token = (*token)->next;
@@ -95,7 +95,7 @@ int			convert_operator(t_list **token, int *result, int skip_token)
 	return (1);
 }
 
-int			eval_expr(t_list **tokens, long long *result)
+int	eval_expr(t_list **tokens, long long *result)
 {
 	int			has_error;
 	int			operator;
@@ -108,7 +108,7 @@ int			eval_expr(t_list **tokens, long long *result)
 		if (!has_error && (operator == 1 || operator == 2))
 		{
 			has_error = do_logical_op(tokens, result, operator);
-			continue;
+			continue ;
 		}
 		if (!has_error && operator_have_precedence(tokens, operator))
 			has_error = convert_operand(tokens, &operand2);
@@ -120,7 +120,7 @@ int			eval_expr(t_list **tokens, long long *result)
 	return (has_error);
 }
 
-char		*expand_ar_expr(char *expr)
+char	*expand_ar_expr(char *expr)
 {
 	t_list		*tokens;
 	t_list		*tokens_tmp;
@@ -130,12 +130,13 @@ char		*expand_ar_expr(char *expr)
 	result = 0;
 	tokens = parse_ar_expression(&expr, NULL);
 	tokens_tmp = tokens;
-	if ((status = eval_expr(&tokens, &result)))
+	if (assign_i(&status, eval_expr(&tokens, &result)))
 	{
 		if (status == 2)
 			ft_printf("divised by zero\n");
 		else
-			ft_printf("token error: %s\n", tokens ? tokens->content : NULL);
+			ft_printf("token error: %s\n",
+				ter_p(tokens, tokens->content, NULL));
 		ft_lstdel2(&tokens_tmp, free);
 		return (NULL);
 	}

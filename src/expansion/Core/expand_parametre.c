@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parametre.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-ihi <aait-ihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:12:20 by aait-ihi          #+#    #+#             */
-/*   Updated: 2020/03/02 22:17:04 by aait-ihi         ###   ########.fr       */
+/*   Updated: 2021/05/02 02:45:10 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-static void			exp_parm_update_status(void)
+static void	exp_parm_update_status(void)
 {
 	char	*tmp;
 
@@ -24,7 +24,7 @@ static void			exp_parm_update_status(void)
 	free(tmp);
 }
 
-static char			*get_variable_name(char **s)
+static char	*get_variable_name(char **s)
 {
 	int		i;
 	char	*tmp;
@@ -48,10 +48,10 @@ static char			*get_variable_name(char **s)
 	return (NULL);
 }
 
-static char			*dispach_expansion(char *var_name, char *expression)
+static char	*dispach_expansion(char *var_name, char *expression)
 {
-	var_name = ft_strstr(var_name, "?") ? "_status" : var_name;
-	var_name = ft_strstr(var_name, "$") ? "_pid" : var_name;
+	var_name = ter_p(ft_strstr(var_name, "?"), "_status", var_name);
+	var_name = ter_p(ft_strstr(var_name, "$"), "_pid", var_name);
 	if (*var_name == '#')
 		return (expand_string_lenght(var_name, expression));
 	if (!*expression)
@@ -84,7 +84,8 @@ t_parser_expansion	expand_parametre(char *str)
 
 	var_name = NULL;
 	ft_bzero(&ret, sizeof(t_parser_expansion));
-	if ((tmp = get_matched_bracket(str, "(){}''\"\"", NULL, 1)) && *str == '{')
+	if (assign_p(&tmp, get_matched_bracket(str, "(){}''\"\"", NULL, 1))
+		&& *str == '{')
 	{
 		*tmp = 0;
 		str++;
@@ -94,9 +95,10 @@ t_parser_expansion	expand_parametre(char *str)
 	else
 		tmp = NULL;
 	var_name = get_variable_name(&str);
-	ret.index = tmp ? tmp + 1 : str--;
+	ret.index = ter_p(tmp, tmp + 1, str);
+	!tmp && str--;
 	exp_parm_update_status();
-	if (var_name && !(ret.str = dispach_expansion(var_name, str)))
+	if (var_name && !assign_p(&ret.str, dispach_expansion(var_name, str)))
 		PRINT_ERROR2(dup, ": bad substitution");
 	free(var_name);
 	return (ret);
