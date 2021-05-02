@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:09:49 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 15:34:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 16:07:00 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ t_parser_expansion		expand_sub_art(char *str);
 t_parser_expansion		expand_parametre(char *str);
 char					*expand(char *str,
 							t_parser_expansion (*expand_fun)(char *));
+void					expand_args(t_vector *args_vec);
 
 #endif

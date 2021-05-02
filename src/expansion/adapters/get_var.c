@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:01:14 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 15:28:49 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 16:15:09 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_var	*get_pid_status_var(char *key)
 
 	ft_strcpy(tmp_key, key);
 	var.key = tmp_key;
-	var.value = env_get(key);
+	var.value = env_get(g_shell_env, key);
 	return (&var);
 }
 

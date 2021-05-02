@@ -6,11 +6,11 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:25:09 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 15:26:16 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 16:15:20 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "forty_two_sh.h"
+#include "expansion.h"
 
 int	is_number(char *str)
 {
