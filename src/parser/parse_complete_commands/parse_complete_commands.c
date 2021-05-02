@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_complete_commands.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 08:42:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 15:32:51 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 15:40:51 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_parse_complete	*parser_init(t_vector *tokens)
 	t_parse_complete	*parser;
 
 	parser = (t_parse_complete *)ft_malloc(sizeof(t_parse_complete));
-	parser->commands = vector_init(sizeof(t_command), NULL);
+	parser->commands = vector_init(sizeof(t_command), free_command);
 	parser->cmd_tokens = vector_init(sizeof(t_token), NULL);
 	parser->cmd_type = SIMPLE_CMD;
 	parser->tokens = (t_token *)tokens->array;

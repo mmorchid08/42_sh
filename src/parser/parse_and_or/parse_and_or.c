@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 14:40:39 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 16:31:18 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static t_parse_and_or	*and_or_init(t_vector *tokens_vec)
 
 	and_or = (t_parse_and_or *)ft_malloc(sizeof(t_parse_and_or));
 	and_or->logic_cmd = (t_logic_sequence *)ft_malloc(sizeof(t_logic_sequence));
-	and_or->logic_cmd->commands = vector_init(sizeof(t_command), free);
-	and_or->logic_cmd->logic_ops = vector_init(sizeof(t_token_type), free);
+	and_or->logic_cmd->commands = vector_init(sizeof(t_command), free_command);
+	and_or->logic_cmd->logic_ops = vector_init(sizeof(t_token_type), NULL);
 	and_or->cmd_tokens = vector_init(sizeof(t_token), free);
 	and_or->cmd_type = SIMPLE_CMD;
 	and_or->tokens = (t_token *)tokens_vec->array;
