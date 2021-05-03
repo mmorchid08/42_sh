@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 14:06:01 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:00:49 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	ft_execve_scmd(char **cmd, t_vector **vec_pid,
 	vector_push(*vec_pid, &pid);
 }
 
-int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
+int	exec_pt2(char **cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 {
 	g_red = red;
-	remove_quotes_from_args(*cmd);
+	remove_quotes_from_args(cmd);
 	if (do_pipes_and_red(0, 0, red) == 1)
 	{
 		if (g_shell_env != g_temp_env)
@@ -71,10 +71,10 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 		g_temp_env = NULL;
 		return (-1);
 	}
-	if (check_builtins((*cmd)[0]) && is_background == FALSE)
-		execute_builtins(*cmd, red);
+	if (check_builtins((cmd)[0]) && is_background == FALSE)
+		execute_builtins(cmd, red);
 	else
-		ft_execve_scmd(*cmd, p_vec, is_background);
+		ft_execve_scmd(cmd, p_vec, is_background);
 	if (g_shell_env != g_temp_env)
 		vector_free(g_temp_env);
 	g_temp_env = NULL;
@@ -114,7 +114,7 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
 	if (cmd[0] && cmd)
-		if (exec_pt2(&cmd, simple_cmd->redirections, &vec_pid, is_background)
+		if (exec_pt2(cmd, simple_cmd->redirections, &vec_pid, is_background)
 			== -1)
 			return (-1);
 	if (vec_pid != NULL)

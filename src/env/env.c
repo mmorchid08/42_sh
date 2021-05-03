@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 19:01:18 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 12:56:53 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 14:52:28 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,27 @@ char	**env_to_envp(t_vector *env)
 	t_var	*vars;
 	char	**envp;
 	size_t	i;
+	size_t	j;
+	size_t	len;
 
 	i = 0;
-	envp = (char **)ft_malloc((env->length + 1) * sizeof(char *));
+	len = 0;
 	vars = env->array;
 	while (i < env->length)
 	{
+		if (vars[i++].is_exported == TRUE)
+			++len;
+	}
+	i = 0;
+	j = 0;
+	envp = (char **)ft_malloc((len + 1) * sizeof(char *));
+	while (i < env->length)
+	{
 		if (vars[i].is_exported == TRUE)
-			envp[i] = ft_strglue(vars[i].key, '=', vars[i].value);
+			envp[j++] = ft_strglue(vars[i].key, '=', vars[i].value);
 		++i;
 	}
-	envp[i] = NULL;
+	envp[j] = NULL;
 	return (envp);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 12:48:02 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 14:54:57 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	shell_main(void)
 		push_line_to_history(cmd_line);
 		ft_strdel(&cmd_line);
 		if (commands && commands->length > 0)
-		{
 			execute_commands(commands);
-		}
 		vector_free(commands);
 	}
 	return (EXIT_SUCCESS);

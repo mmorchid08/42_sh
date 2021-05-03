@@ -6,18 +6,20 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 12:49:48 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:00:10 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 #include <stdbool.h>
 
+t_vector	*g_pip_env;
+
 void	ft_execve_pip(char **args, char *full_path, t_vector *red)
 {
 	char	**a_env;
 
-	a_env = env_to_envp(g_shell_env);
+	a_env = env_to_envp(g_pip_env);
 	if (check_builtins(args[0]))
 	{
 		execute_builtins(args, red);
@@ -25,9 +27,10 @@ void	ft_execve_pip(char **args, char *full_path, t_vector *red)
 	}
 	else if (args && args[0])
 	{
+
 		if (execve(full_path, args, a_env) == -1)
 		{
-			if (access(full_path, F_OK) == 0)
+			if (access(full_path, X_OK) == 0)
 				ft_strerror(EACCES, args[0], NULL, FALSE);
 			else
 				ft_strerror(ENOCMD, args[0], NULL, FALSE);
@@ -49,6 +52,8 @@ pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
 	if (pid == -1)
 	{
 		ft_strerror(EFORK, NULL, NULL, FALSE);
+		if (g_shell_env != g_pip_env)
+			vector_free(g_pip_env);
 		return (-1);
 	}
 	set_process_group(ter_i(pid == 0, getpid(), pid), pgid, is_background);
@@ -59,6 +64,8 @@ pid_t	execute_pip_pt2(char **args, pid_t *pgid, t_bool is_background,
 		ft_execve_pip(args, full_path, red);
 	}
 	ft_strdel(&full_path);
+	if (g_shell_env != g_pip_env)
+		vector_free(g_pip_env);
 	backups(2);
 	return (pid);
 }
@@ -77,6 +84,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len, t_bool is_background)
 	while (i < len)
 	{
 		expand_args(cmd[i].args);
+		do_value(cmd[i].assignments, cmd[i].args->length, &g_pip_env);
 		vector_push(cmd[i].args, &(char *){NULL});
 		args = (char **)cmd[i].args->array;
 		remove_quotes_from_args(args);
