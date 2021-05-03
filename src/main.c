@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/01 12:26:27 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 11:38:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ t_vector		*g_stopped_jobs;
 int				g_exit_status;
 int				g_term_fd;
 char			*g_path_env;
+
+void	push_line_to_history(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (ft_isspace(line[i]))
+		++i;
+	if (line[i] == '\0')
+		return ;
+	add_hist_entry(line);
+}
 
 int	shell_main(void)
 {
@@ -29,6 +41,8 @@ int	shell_main(void)
 	if (cmd_line)
 	{
 		commands = parser(cmd_line);
+		push_line_to_history(cmd_line);
+		ft_strdel(&cmd_line);
 		if (commands && commands->length > 0)
 		{
 			execute_commands(commands);
