@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 16:13:55 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 16:30:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ char		*ft_skip_unitl_char(const char *str, const char *compare,
 **		free functions
 */
 
+void		del_arg(void *el);
 void		del_token(void *element);
 void		del_redirection(void *element);
 void		del_var(void *element);

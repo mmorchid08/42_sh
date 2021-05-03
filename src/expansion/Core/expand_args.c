@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 15:10:11 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 16:29:01 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ static char	*get_word(char *str, size_t *i)
 	return (res);
 }
 
-static t_vector	*split(char *str)
+t_vector	*split(char *str, void (*free_element)(void *element))
 {
 	t_vector	*splitted_words;
 	char		*word;
 	size_t		i;
 
 	i = 0;
-	splitted_words = vector_init(sizeof(char *), NULL);
+	splitted_words = vector_init(sizeof(char *), free_element);
 	while (str && str[i])
 	{
 		while (ft_isspace(str[i]))
@@ -95,7 +95,7 @@ void	expand_args(t_vector *args_vec)
 		word = ft_strdup(av[i]);
 		word = expand(word, NULL);
 		tmp = ft_strtrim(word);
-		splitted_words = split(tmp);
+		splitted_words = split(tmp, NULL);
 		free(word);
 		free(tmp);
 		vector_remove(args_vec, i);

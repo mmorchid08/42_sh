@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_and_red.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 03:50:33 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:49:16 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,50 @@ int	manage_pipes(int i)
 	}
 }
 
+static int	free_all(t_vector *splitted_words, char *a, char *b, t_bool e)
+{
+	vector_free(splitted_words);
+	if (e)
+	{
+		free(a);
+		ft_printf(2, "42sh: %s ambiguous redirect\n", b);
+	}
+	return (EXIT_FAILURE);
+}
+
+static int	expand_red(t_vector *red_vec)
+{
+	t_vector		*splitted_words;
+	t_redirection	*reds;
+	char			*word;
+	char			*tmp;
+	size_t			i;
+
+	i = 0;
+	reds = red_vec->array;
+	while (i < red_vec->length)
+	{
+		if (reds[i].type == GREATANDDASH && reds[i].type == LESSANDDASH)
+		{
+			++i;
+			continue ;
+		}
+		word = ft_strdup(reds[i].righ_fd);
+		word = expand(word, NULL);
+		tmp = ft_strtrim(word);
+		free(word);
+		splitted_words = split(tmp, del_arg);
+		if (splitted_words->length != 1)
+			return (free_all(splitted_words, tmp, reds[i].righ_fd, TRUE));
+		word = reds[i].righ_fd;
+		reds[i].righ_fd = tmp;
+		free(word);
+		free_all(splitted_words, tmp, NULL, FALSE);
+		++i;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_error(char *str)
 {
 	DIR	*dir;
@@ -65,7 +109,7 @@ int	do_pipes_and_red(int i, int len, t_vector *red)
 		fd = manage_pipes(-1);
 	if (red)
 	{
-		if (do_redirections(red) == -1)
+		if (expand_red(red) == EXIT_FAILURE || do_redirections(red) == -1)
 			return (1);
 	}
 	return (fd);

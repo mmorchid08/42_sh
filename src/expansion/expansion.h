@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:09:49 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 16:07:00 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/03 16:31:24 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ t_parser_expansion		expand_parametre(char *str);
 char					*expand(char *str,
 							t_parser_expansion (*expand_fun)(char *));
 void					expand_args(t_vector *args_vec);
+
+t_vector				*split(char *str, void (*free_element)(void *element));
 
 #endif

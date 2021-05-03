@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 17:08:53 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/28 14:18:07 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:31:00 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ void	del_var(void *element)
 	var = (t_var *)element;
 	free(var->key);
 	free(var->value);
+}
+
+void	del_arg(void *el)
+{
+	free(*((char **)el));
 }
