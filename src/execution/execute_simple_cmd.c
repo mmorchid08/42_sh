@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 12:58:43 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 14:06:01 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 t_vector	*g_red;
 t_vector	*g_temp_env;
 
-void	ft_execve(char *full_path, char **cmd, char **a_env)
+void	ft_execve(char *full_path, char **cmd)
 {
+	char	**a_env;
+
+	a_env = env_to_envp(g_temp_env);
 	if (execve(full_path, cmd, a_env) == -1)
 	{
 		if (access(full_path, F_OK) == 0)
@@ -27,7 +30,7 @@ void	ft_execve(char *full_path, char **cmd, char **a_env)
 	}
 }
 
-void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
+void	ft_execve_scmd(char **cmd, t_vector **vec_pid,
 	t_bool is_b)
 {
 	pid_t		pid;
@@ -50,7 +53,7 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 			exit(g_exit_status);
 		}
 		else
-			ft_execve(full_path, cmd, a_env);
+			ft_execve(full_path, cmd);
 	}
 	ft_strdel(&full_path);
 	*vec_pid = vector_init(sizeof(pid_t), NULL);
@@ -59,45 +62,42 @@ void	ft_execve_scmd(char **cmd, char **a_env, t_vector **vec_pid,
 
 int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 {
-	char	**a_env;
-
-	a_env = env_to_envp(g_temp_env);
 	g_red = red;
 	remove_quotes_from_args(*cmd);
 	if (do_pipes_and_red(0, 0, red) == 1)
 	{
-		ft_free_strings_array(a_env);
 		if (g_shell_env != g_temp_env)
 			vector_free(g_temp_env);
+		g_temp_env = NULL;
 		return (-1);
 	}
 	if (check_builtins((*cmd)[0]) && is_background == FALSE)
 		execute_builtins(*cmd, red);
 	else
-		ft_execve_scmd(*cmd, a_env, p_vec, is_background);
-	ft_free_strings_array(a_env);
+		ft_execve_scmd(*cmd, p_vec, is_background);
 	if (g_shell_env != g_temp_env)
 		vector_free(g_temp_env);
+	g_temp_env = NULL;
 	return (EXIT_SUCCESS);
 }
 
-void	do_value(t_vector *values, size_t args_len)
+void	do_value(t_vector *values, size_t args_len, t_vector **env)
 {
 	t_var	*vars;
 	int		i;
 
 	if (args_len > 0)
-		g_temp_env = env_dup(g_shell_env);
+		*env = env_dup(g_shell_env);
 	else
-		g_temp_env = g_shell_env;
+		*env = g_shell_env;
 	vars = (t_var *)values->array;
 	i = 0;
 	while (i < (int)values->length)
 	{
 		if (args_len > 0)
-			env_set(g_temp_env, vars[i].key, vars[i].value, TRUE);
+			env_set(*env, vars[i].key, vars[i].value, TRUE);
 		else
-			env_set_value(g_temp_env, vars[i].key, vars[i].value);
+			env_set_value(*env, vars[i].key, vars[i].value);
 		i++;
 	}
 }
@@ -110,7 +110,7 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 
 	vec_pid = NULL;
 	expand_args(simple_cmd->args);
-	do_value(simple_cmd->assignments, simple_cmd->args->length);
+	do_value(simple_cmd->assignments, simple_cmd->args->length, &g_temp_env);
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
 	if (cmd[0] && cmd)

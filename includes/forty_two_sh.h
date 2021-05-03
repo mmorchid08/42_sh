@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 11:18:16 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:43:53 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int			manage_pipes(int i);
 ** ============================= end execution =================================
 */
 
+void		do_value(t_vector *values, size_t args_len, t_vector **env);
 int			do_tree(char *word, char *flag);
 int			do_tests(int i, int is_not, char **cmd);
 int			is_correct_path(char *path, int print_error);
