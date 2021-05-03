@@ -49,9 +49,11 @@ int	check_for_errors(t_vector *redi)
 	red = (t_redirection *)redi->array;
 	i = 0;
 	while (i < (int)redi->length)
+	{
+		if (red[i].type == LESSANDDASH || red[i].type == GREATANDDASH)
+			return (1);
 		i++;
-	if (red->type == LESSANDDASH || red->type == GREATANDDASH)
-		return (1);
+	}
 	return (0);
 }
 
