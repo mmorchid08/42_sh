@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 12:41:58 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 12:58:43 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 	if (do_pipes_and_red(0, 0, red) == 1)
 	{
 		ft_free_strings_array(a_env);
-		vector_free(g_temp_env);
+		if (g_shell_env != g_temp_env)
+			vector_free(g_temp_env);
 		return (-1);
 	}
 	if (check_builtins((*cmd)[0]) && is_background == FALSE)
@@ -75,7 +76,8 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 	else
 		ft_execve_scmd(*cmd, a_env, p_vec, is_background);
 	ft_free_strings_array(a_env);
-	vector_free(g_temp_env);
+	if (g_shell_env != g_temp_env)
+		vector_free(g_temp_env);
 	return (EXIT_SUCCESS);
 }
 
@@ -92,7 +94,10 @@ void	do_value(t_vector *values, size_t args_len)
 	i = 0;
 	while (i < (int)values->length)
 	{
-		env_set_value(g_temp_env, vars[i].key, vars[i].value);
+		if (args_len > 0)
+			env_set(g_temp_env, vars[i].key, vars[i].value, TRUE);
+		else
+			env_set_value(g_temp_env, vars[i].key, vars[i].value);
 		i++;
 	}
 }
