@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 16:11:10 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/03 10:40:20 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	expand_args(t_vector *args_vec)
 	av = args_vec->array;
 	while (i < args_vec->length)
 	{
-		word = expand(av[i], NULL);
+		word = ft_strdup(av[i]);
+		word = expand(word, NULL);
 		tmp = ft_strtrim(word);
 		splitted_words = split(tmp);
 		free(word);
