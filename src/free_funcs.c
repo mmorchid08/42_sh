@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 14:58:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/02 16:23:24 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:19:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	free_command(void *elem)
 		free_pipe_seq(cmd->command);
 	else if (cmd->type == SIMPLE_CMD)
 		free_simple_cmd(cmd->command);
+	free(cmd->command);
 }
