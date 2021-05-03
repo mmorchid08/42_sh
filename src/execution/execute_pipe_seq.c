@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_seq.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 14:22:10 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:49:48 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_vector	*execute_pip(t_simple_command *cmd, int len, t_bool is_background)
 	vec_pid = vector_init(sizeof(pid_t), NULL);
 	while (i < len)
 	{
+		expand_args(cmd[i].args);
 		vector_push(cmd[i].args, &(char *){NULL});
 		args = (char **)cmd[i].args->array;
 		remove_quotes_from_args(args);
