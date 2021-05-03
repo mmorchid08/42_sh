@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 13:37:11 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 14:49:41 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/03 15:43:22 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	and_or_push_command(t_parse_and_or *and_or, t_bool is_last_cmd)
 	if (cmd == NULL)
 		return (EXIT_FAILURE);
 	vector_push(and_or->logic_cmd->commands, cmd);
+	free(cmd);
 	and_or->cmd_tokens->length = 0;
 	and_or->cmd_type = SIMPLE_CMD;
 	return (EXIT_SUCCESS);

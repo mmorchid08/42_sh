@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_and_or.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 09:01:31 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 16:31:18 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:57:25 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ static void	push_cmd_token(t_parse_and_or *parser)
 		parser->cmd_type = PIPE_SEQ;
 }
 
+static void	*and_or_clean(t_parse_and_or *and_or)
+{
+	vector_free(and_or->cmd_tokens);
+	free(and_or);
+	return (NULL);
+}
+
 t_logic_sequence	*parse_and_or(t_vector *tokens_vec)
 {
 	t_parse_and_or		*and_or;
@@ -53,7 +60,7 @@ t_logic_sequence	*parse_and_or(t_vector *tokens_vec)
 		if (lexer_is_and_or(and_or->current_token.type))
 		{
 			if (and_or_push_command(and_or, FALSE) == EXIT_FAILURE)
-				return (NULL);
+				return (and_or_clean(and_or));
 			vector_push(and_or->logic_cmd->logic_ops,
 				&(and_or->current_token.type));
 		}
@@ -65,5 +72,6 @@ t_logic_sequence	*parse_and_or(t_vector *tokens_vec)
 		return (NULL);
 	logic_cmd = and_or->logic_cmd;
 	logic_cmd->job_name = get_job_name(tokens_vec);
+	(void)and_or_clean(and_or);
 	return (logic_cmd);
 }
