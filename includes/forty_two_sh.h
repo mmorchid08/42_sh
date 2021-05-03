@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 15:36:35 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:18:16 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "typedefs.h"
 # include "../src/errors/errors.h"
 # include "../src/parser/parser.h"
+# include "../src/expansion/expansion.h"
 # include "../src/env/env.h"
 # include "../src/builtins/builtins.h"
 # include "../readline/readline.h"
@@ -163,5 +164,8 @@ char		*read_cmd_multiline(void);
 */
 
 t_bool		is_quote(char c);
+t_bool		quote_type(char c);
+
+int			sh_system(char *line);
 
 #endif

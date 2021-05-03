@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_test2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 09:28:01 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 09:48:03 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/02 16:22:34 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_nbr(char *str, t_bool stat, int f)
 	}
 }
 
-int	do_op(char *fnum, char *op, char *snum)
+static int	do_op(char *fnum, char *op, char *snum)
 {
 	int	x;
 	int	y;

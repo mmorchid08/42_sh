@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_quote.c                                         :+:      :+:    :+:   */
+/*   ter_ui.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 12:00:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 16:08:03 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/04/13 15:38:21 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/05/01 14:35:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "forty_two_sh.h"
+#include "libft.h"
 
-t_bool	is_quote(char c)
+uint32_t	ter_ui(int bool, uint32_t val1, uint32_t val2)
 {
-	return (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH);
-}
-
-t_bool	quote_type(char c)
-{
-	if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH)
-		return (c);
-	return (0);
+	if (bool)
+		return (val1);
+	else
+		return (val2);
 }

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_quote.c                                         :+:      :+:    :+:   */
+/*   adapters.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 12:00:19 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 16:08:03 by ylagtab          ###   ########.fr       */
+/*   Created: 2021/05/02 13:43:20 by ylagtab           #+#    #+#             */
+/*   Updated: 2021/05/02 15:29:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "forty_two_sh.h"
+#ifndef ADAPTERS_H
+# define ADAPTERS_H
 
-t_bool	is_quote(char c)
-{
-	return (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH);
-}
+void	edit_add_var(char *key, char *value, int a, int b);
+t_var	*get_var(char *key);
+int		is_number(char *str);
 
-t_bool	quote_type(char c)
-{
-	if (c == SINGLE_QUOTE || c == DOUBLE_QUOTE || c == BACK_SLASH)
-		return (c);
-	return (0);
-}
+#endif
