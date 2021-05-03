@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 10:40:47 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:41:58 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
 t_vector	*g_red;
+t_vector	*g_temp_env;
 
 void	ft_execve(char *full_path, char **cmd, char **a_env)
 {
@@ -60,12 +61,13 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 {
 	char	**a_env;
 
-	a_env = env_to_envp(g_shell_env);
+	a_env = env_to_envp(g_temp_env);
 	g_red = red;
 	remove_quotes_from_args(*cmd);
 	if (do_pipes_and_red(0, 0, red) == 1)
 	{
 		ft_free_strings_array(a_env);
+		vector_free(g_temp_env);
 		return (-1);
 	}
 	if (check_builtins((*cmd)[0]) && is_background == FALSE)
@@ -73,19 +75,24 @@ int	exec_pt2(char ***cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 	else
 		ft_execve_scmd(*cmd, a_env, p_vec, is_background);
 	ft_free_strings_array(a_env);
+	vector_free(g_temp_env);
 	return (EXIT_SUCCESS);
 }
 
-void	do_value(t_vector *values)
+void	do_value(t_vector *values, size_t args_len)
 {
 	t_var	*vars;
 	int		i;
 
+	if (args_len > 0)
+		g_temp_env = env_dup(g_shell_env);
+	else
+		g_temp_env = g_shell_env;
 	vars = (t_var *)values->array;
 	i = 0;
 	while (i < (int)values->length)
 	{
-		env_set_value(g_shell_env, vars[i].key, vars[i].value);
+		env_set_value(g_temp_env, vars[i].key, vars[i].value);
 		i++;
 	}
 }
@@ -98,9 +105,9 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 
 	vec_pid = NULL;
 	expand_args(simple_cmd->args);
+	do_value(simple_cmd->assignments, simple_cmd->args->length);
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
-	do_value(simple_cmd->assignments);
 	if (cmd[0] && cmd)
 		if (exec_pt2(&cmd, simple_cmd->redirections, &vec_pid, is_background)
 			== -1)
