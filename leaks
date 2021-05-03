@@ -1,6 +1,0 @@
-1- Parsing Part. The vector we allocate to run the cmds doesn't get freed.
-2- Pid vectors that get sent to job control doesn't get freed.
-3- In add_complete_cmd, something doesn't get freed.
-4- In read_cmd_multiline, ft_strjoin_free seems not working.
-
-Vectors in general doesn't get freed.
