@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 11:38:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/03 12:48:02 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	shell_main(void)
 		if (commands && commands->length > 0)
 		{
 			execute_commands(commands);
-			vector_free(commands);
 		}
+		vector_free(commands);
 	}
 	return (EXIT_SUCCESS);
 }
