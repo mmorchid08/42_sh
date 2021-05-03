@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/03 11:18:40 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/05/03 16:15:38 by hmzah            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ INCLUDES =	-Iincludes
 	builtins/cd_helper2.o \
 	execution/builtins.o \
 	read_cmd_multiline/read_cmd_multiline.o \
-	utils/is_quote.o \
+	utils/is_quote.o utils/is_close_red.o \
 	builtins/set.o builtins/unset.o \
 	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o
 

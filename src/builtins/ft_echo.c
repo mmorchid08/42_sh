@@ -50,7 +50,7 @@ int	check_for_errors(t_vector *redi)
 	i = 0;
 	while (i < (int)redi->length)
 	{
-		if (red[i].type == LESSANDDASH || red[i].type == GREATANDDASH)
+		if (is_close_red(red))
 			return (1);
 		i++;
 	}

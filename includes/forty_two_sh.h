@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 13:43:53 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 16:13:55 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ char		*read_cmd_multiline(void);
 
 t_bool		is_quote(char c);
 t_bool		quote_type(char c);
+int			is_close_red(t_redirection *red);
 
 int			sh_system(char *line);
 

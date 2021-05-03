@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 09:39:53 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 15:38:46 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 16:14:58 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_is_word(t_redirection *red)
 			&& str_is_number(red->righ_fd, red->type))
 		|| (red->type == LESSAND
 			&& str_is_number(red->righ_fd, red->type))
-		|| red->type == GREATANDDASH || red->type == LESSANDDASH)
+		|| is_close_red(red))
 		return (1);
 	else
 		return (0);
@@ -80,7 +80,7 @@ int	if_not_word(t_redirection *red)
 	if (red->left_fd == -1
 		&& (red->type == GREATAND || red->type == GREATANDDASH))
 		red->left_fd = 1;
-	if (red->type == GREATANDDASH || red->type == LESSANDDASH)
+	if (is_close_red(red))
 		close(red->left_fd);
 	else if (red->righ_fd)
 	{
