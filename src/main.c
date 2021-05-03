@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 14:54:57 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:06:59 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				g_exit_status;
 int				g_term_fd;
 char			*g_path_env;
 
-void	push_line_to_history(char *line)
+static t_bool is_empty_line(char *line)
 {
 	size_t	i;
 
@@ -26,8 +26,8 @@ void	push_line_to_history(char *line)
 	while (ft_isspace(line[i]))
 		++i;
 	if (line[i] == '\0')
-		return ;
-	add_hist_entry(line);
+		return (TRUE);
+	return (FALSE);
 }
 
 int	shell_main(void)
@@ -38,15 +38,15 @@ int	shell_main(void)
 	update_all_jobs();
 	notify_job_state();
 	cmd_line = read_cmd_multiline();
-	if (cmd_line)
+	if (cmd_line && !is_empty_line(cmd_line))
 	{
+		add_hist_entry(cmd_line);
 		commands = parser(cmd_line);
-		push_line_to_history(cmd_line);
-		ft_strdel(&cmd_line);
 		if (commands && commands->length > 0)
 			execute_commands(commands);
 		vector_free(commands);
 	}
+	ft_strdel(&cmd_line);
 	return (EXIT_SUCCESS);
 }
 

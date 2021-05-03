@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 10:40:20 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:10:11 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_vector	*split(char *str)
 
 	i = 0;
 	splitted_words = vector_init(sizeof(char *), NULL);
-	while (str[i])
+	while (str && str[i])
 	{
 		while (ft_isspace(str[i]))
 			i++;

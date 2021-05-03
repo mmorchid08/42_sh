@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 14:53:47 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/03 15:37:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ char	*ft_get_cwd(char *path, char *ret, char *tmp, char *tmp2)
 	return (ter_p(ret && !*ret, ft_strcat(ret, "/"), ret));
 }
 
-char	*get_cd_path(char *path)
+char	*get_cd_path(char *ret)
 {
 	char	*pwd;
 	char	*tmp;
+	char	*path;
 
+	path = ft_strdup(ret);
 	if (!path)
 		path = env_get(g_shell_env, "HOME");
 	else if (ft_strequ(path, "-"))
@@ -101,25 +103,30 @@ char	*get_cd_path(char *path)
 
 int	ft_cd(char **cmd)
 {
-	char	*path;
+	char	*pth;
 	int		logicaly;
 	DIR		*dir;
+	char	*tmp;
 
 	if (assign_i(&logicaly, get_cd_flag(&cmd)) == -1 || (cmd[0] && cmd[1]))
 		return (ter_i(!!cmd[1], ft_printf(2, "cd: to many argument\n"), -1));
-	path = get_cd_path(ft_strdup(*cmd));
-	if (path)
+	pth = get_cd_path(*cmd);
+	if (pth)
 	{
 		if (logicaly)
-			path = ft_get_cwd(path, ft_strdup(path), NULL, NULL);
-		if (!chdir(path))
+		{
+			tmp = ft_strdup(pth);
+			pth = ft_get_cwd(pth, tmp, NULL, NULL);
+			free(tmp);
+		}
+		if (!chdir(pth))
 		{
 			if (!logicaly)
-				path = getcwd(NULL, 0);
-			ft_update_pwd(path);
+				pth = getcwd(NULL, 0);
+			ft_update_pwd(pth);
 			return (0);
 		}
-		dir = opendir(path);
+		dir = opendir(pth);
 		if (dir != NULL)
 			return (ft_printf(2, "cd: permission denied\n") * 0 + 15);
 		return (ft_printf(2, "cd: directory not found\n") * 0 + 15);
