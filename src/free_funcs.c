@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 14:58:07 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 11:49:41 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 13:05:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	free_command(void *elem)
 		free_pipe_seq(cmd->command);
 	else if (cmd->type == SIMPLE_CMD)
 		free_simple_cmd(cmd->command);
+	free(cmd->command);
 }

@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 19:01:18 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 12:38:38 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/03 12:56:53 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char	**env_to_envp(t_vector *env)
 	vars = env->array;
 	while (i < env->length)
 	{
-		envp[i] = ft_strglue(vars[i].key, '=', vars[i].value);
+		if (vars[i].is_exported == TRUE)
+			envp[i] = ft_strglue(vars[i].key, '=', vars[i].value);
 		++i;
 	}
 	envp[i] = NULL;
