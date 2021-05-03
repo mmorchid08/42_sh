@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/02 16:18:49 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/03 11:18:16 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,10 @@ char		*ft_skip_unitl_char(const char *str, const char *compare,
 void		del_token(void *element);
 void		del_redirection(void *element);
 void		del_var(void *element);
+void		free_simple_cmd(void *elem);
+void		free_pipe_seq(void *elem);
+void		free_logic_seq(void *elem);
+void		free_command(void *elem);
 
 /*
 ** Prompt

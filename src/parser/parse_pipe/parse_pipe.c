@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 19:01:08 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 14:47:17 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/02 16:31:58 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static t_parse_pipe	*parse_pipe_init(t_vector *tokens_vec)
 
 	ptr = (t_parse_pipe *)ft_malloc(sizeof(t_parse_pipe));
 	ptr->pipe_cmd = (t_pipe_sequence *)ft_malloc(sizeof(t_pipe_sequence));
-	ptr->pipe_cmd->commands = vector_init(sizeof(t_simple_command), NULL);
+	ptr->pipe_cmd->commands = vector_init(sizeof(t_simple_command), 
+		free_simple_cmd);
 	ptr->cmd_tokens = vector_init(sizeof(t_token), NULL);
 	ptr->tokens = (t_token *)tokens_vec->array;
 	ptr->tokens_len = tokens_vec->length;

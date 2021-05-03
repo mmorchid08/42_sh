@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
+#    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/02 16:19:25 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/05/03 11:18:40 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INCLUDES =	-Iincludes
 42sh_INC =	includes/forty_two_sh.h includes/typedefs.h includes/constants.h \
 			src/errors/errors.h
 
-42sh = 	delete_functions.o main.o errors/errors.o \
+42sh = 	delete_functions.o main.o errors/errors.o free_funcs.o \
 	execution/exec_tools.o \
 	execution/execute_commands.o \
 	execution/execute_logic_seq.o \
