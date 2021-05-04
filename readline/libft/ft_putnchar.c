@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 19:47:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/11/23 17:36:32 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:43:22 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_putnchar(char c, int n)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	while (n-- > 0)

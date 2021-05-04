@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 23:55:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/10/07 13:09:56 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:50:59 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	unsigned char ch;
+	unsigned char	ch;
 
 	ch = (unsigned char)c;
 	if (ch == '\t' || ch == '\v' || ch == '\f' || ch == '\n' || ch == '\r'
-			|| ch == ' ')
+		|| ch == ' ')
 		return (1);
 	else
 		return (0);

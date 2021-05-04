@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 23:41:28 by ylagtab           #+#    #+#             */
-/*   Updated: 2020/02/19 15:47:32 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:35:03 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strjoin_free(char const *s1, char const *s2, int a, int b)
+char	*ft_strjoin_free(char const *s1, char const *s2, int a, int b)
 {
 	char	*str;
 

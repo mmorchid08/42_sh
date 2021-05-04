@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 23:44:28 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/07/24 23:04:31 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:39:21 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char *s;
+	char	*s;
 
-	if ((s = (char *)safe_malloc(ft_strlen(s1) + 1)) == NULL)
+	s = (char *)safe_malloc(ft_strlen(s1) + 1);
+	if (s == NULL)
 		return (NULL);
 	return (ft_strcpy(s, s1));
 }

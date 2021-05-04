@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 05:40:49 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/11/23 17:36:32 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:43:16 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int	ft_putstr(char const *str)
 {
 	if (str == NULL)
 		return (0);
-	return (write(1, (char*)str, ft_strlen(str)));
+	return (write(1, (char *)str, ft_strlen(str)));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:12:29 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/04/12 15:02:27 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:48:16 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *lnk_ptr;
-	t_list *start;
+	t_list	*lnk_ptr;
+	t_list	*start;
 
 	if (lst == NULL || f == NULL)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putunbr_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:47:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/11/21 14:38:51 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:43:11 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,8 @@ void	ft_putunbr_base(unsigned long long n, int base, int is_upper)
 
 	if (n / base)
 		ft_putunbr_base(n / base, base, is_upper);
-	ft_putchar(is_upper ? g_upper_base[n % base] : g_lower_base[n % base]);
+	if (is_upper)
+		ft_putchar(g_upper_base[n % base]);
+	else
+		ft_putchar(g_lower_base[n % base]);
 }

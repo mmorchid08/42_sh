@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbrlen_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 00:05:39 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/11/21 14:36:22 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:44:44 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_nbrlen_base(unsigned long long n, int base)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	while ((n = n / base))
+	while (n)
+	{
+		n = n / base;
 		i++;
+	}
 	return (i);
 }

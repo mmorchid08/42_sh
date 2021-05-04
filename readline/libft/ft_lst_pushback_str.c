@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_pushback_str.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/03 21:56:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/05 16:26:17 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:48:25 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lst_pushback_str(t_list **alst, char *str)
+int	ft_lst_pushback_str(t_list **alst, char *str)
 {
 	t_list	*node;
 

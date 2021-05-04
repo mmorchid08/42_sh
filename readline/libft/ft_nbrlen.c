@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 00:05:39 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/11/18 14:55:46 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:45:26 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_nbrlen(__uint128_t n)
+int	ft_nbrlen(__uint128_t n)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	while ((n = n / 10))
+	while (n)
+	{
+		n = n / 10;
 		i++;
+	}
 	return (i);
 }

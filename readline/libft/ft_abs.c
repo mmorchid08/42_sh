@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:31:38 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/04 13:44:36 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:55:09 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@ unsigned int	ft_abs(int n)
 	long	m;
 
 	m = n;
-	return ((unsigned int)(m < 0 ? -m : m));
+	if (m < 0)
+		return ((unsigned int)(-m));
+	return ((unsigned int)m);
 }
