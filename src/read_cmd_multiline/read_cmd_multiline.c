@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd_multiline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:02:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/24 15:16:36 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:59:36 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	*read_cmd_multiline(void)
 			remove_ending_backslash(m->cmd_line);
 		else
 			m->cmd_line = ft_strjoin_free(m->cmd_line, "\n", 1, 0);
+		vector_free(m->lex_ret->tokens);
+		free(m->lex_ret);
 		is_first_read = FALSE;
 		m->prompt = "> ";
 	}
