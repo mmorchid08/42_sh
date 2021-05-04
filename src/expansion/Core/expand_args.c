@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 16:29:01 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 09:57:12 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	expand_args(t_vector *args_vec)
 		free(tmp);
 		vector_remove(args_vec, i);
 		vector_insert_all(args_vec, splitted_words, i);
+		i += splitted_words->length;
 		vector_free(splitted_words);
-		++i;
 	}
 }
