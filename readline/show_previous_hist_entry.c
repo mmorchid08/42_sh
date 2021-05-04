@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   show_previous_hist_entry.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 23:54:55 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:09:01 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	show_previous_hist_entry(void)
 		return ;
 	if (g_history.current_entry == -1 && g_history.entries->length > 0)
 		g_history.current_entry = g_history.entries->length - 1;
-	else if ((size_t)g_history.current_entry <= g_history.entries->length &&
-			g_history.current_entry > 0)
+	else if ((size_t)g_history.current_entry <= g_history.entries->length
+		&& g_history.current_entry > 0)
 		g_history.current_entry--;
 	print_current_hist_entry();
 }
