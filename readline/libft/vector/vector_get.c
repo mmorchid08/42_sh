@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_grow.c                                      :+:      :+:    :+:   */
+/*   vector_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/30 05:32:59 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/19 11:00:53 by mel-idri         ###   ########.fr       */
+/*   Created: 2021/04/06 15:22:52 by mel-idri          #+#    #+#             */
+/*   Updated: 2021/04/06 15:32:53 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector_internal.h"
+#include "internal/vector_internal.h"
 
-void	vector_grow(t_vector *vector)
+void	*vector_get(t_vector *vector, size_t index)
 {
-	void	*new_array;
-
-	new_array = ft_malloc(vector->capacity * vector->element_size * 2);
-	ft_memcpy(new_array, vector->array, vector->length * vector->element_size);
-	free(vector->array);
-	vector->array = new_array;
-	vector->capacity *= 2;
+	if (!vector || index >= vector->length)
+		return (NULL);
+	return (vector->array + index * vector->element_size);
 }

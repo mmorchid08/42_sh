@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_prev_char.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 14:23:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:32:03 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	delete_prev_char(void)
 {
-	int current_line;
+	int	current_line;
 
 	mark_hist_entry_as_dirty();
 	if (g_rl_state.current_line == 0 && g_rl_state.cursor_line_pos == 0)

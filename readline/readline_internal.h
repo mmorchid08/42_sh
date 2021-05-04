@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/04 17:34:00 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:45:20 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 # undef lines
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include "readline_typedefs.h"
 # define TERMCAP_SEQ_COUNT 11
 # define DONE 0
@@ -27,23 +27,14 @@
 # define STDERR_FD 2
 # define SIGINT_HANDLER 0
 # define SIGWINCH_HANDLER 1
-# ifdef __linux__
-#  define T_SIGHANDLER __sighandler_t
-# elif __MACH__
-#  define T_SIGHANDLER sig_t
-# endif
 # ifndef VDSUSP
 #  define VDSUSP -1
 # endif
 
-extern t_readline_state
-g_rl_state;
-extern t_history_state
-g_history;
-extern t_term_attrs
-g_orig_attrs;
-extern t_bool
-g_is_interrupted;
+extern t_readline_state	g_rl_state;
+extern t_history_state	g_history;
+extern t_term_attrs		g_orig_attrs;
+extern t_bool			g_is_interrupted;
 
 int				handle_termcap_sequences(char *c);
 void			exit_error(char *msg);
@@ -77,7 +68,7 @@ t_dynstr_vector	*clone_dynstr_vector(t_dynstr_vector *orig_dynstr_vector);
 int				dynstr_vector_equ(t_dynstr_vector *dynstr_vec1,
 					t_dynstr_vector *dynstr_vec2);
 void			mark_hist_entry_as_dirty(void);
-char			*submit_command();
+char			*submit_command(void);
 void			test_multiline(void);
 int				reprint_char(void);
 int				check_used_capabilities(void);
@@ -89,7 +80,7 @@ void			add_hist_entry(char *entry_str);
 void			append_to_last_hist_entry(char *partial_entry);
 char			*get_last_hist_entry(void);
 void			update_win_dimensions(void);
-void			set_signal_handlers(T_SIGHANDLER *signals);
-void			restore_signal_handlers(T_SIGHANDLER *signals);
+void			set_signal_handlers(sig_t *signals);
+void			restore_signal_handlers(sig_t *signals);
 
 #endif
