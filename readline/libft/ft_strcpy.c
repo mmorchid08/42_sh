@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 23:50:47 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/10/07 13:22:01 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:40:34 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 char	*ft_strcpy(char *dst, const char *src)
 {
-	char *ret;
+	char	*ret;
 
+	if (dst == NULL || src == NULL)
+		return (NULL);
 	ret = dst;
-	while ((*dst++ = *src++))
-		;
+	while (1)
+	{
+		*dst = *src;
+		if (*dst == '\0')
+			break ;
+		++dst;
+		++src;
+	}
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:08:22 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/07/24 23:04:31 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:46:03 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	*ft_memdup(void *src, size_t n)
 	void	*dst;
 	size_t	i;
 
-	if (src == NULL || (dst = safe_malloc(n)) == NULL)
+	dst = safe_malloc(n);
+	if (src == NULL || dst == NULL)
 		return (NULL);
 	i = 0;
 	while (i < n)

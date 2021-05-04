@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 22:19:36 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/07/24 23:04:31 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:34:40 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	if (s == NULL)
 		return (NULL);
 	i = 0;
-	if ((ns = (char*)safe_malloc(ft_strlen(s) + 1)) == NULL)
+	ns = (char *)safe_malloc(ft_strlen(s) + 1);
+	if (ns == NULL)
 		return (NULL);
 	while (s[i])
 	{

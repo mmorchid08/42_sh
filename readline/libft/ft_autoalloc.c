@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_autoalloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 20:41:59 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/12/12 15:46:05 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:52:52 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_alloc_list *g_allocs;
+t_alloc_list	*g_allocs;
 
 void	ft_autofree_all(void)
 {
@@ -34,8 +34,9 @@ void	*ft_autoalloc(size_t size)
 	t_alloc_list	*node;
 	t_alloc_list	*tmp;
 
-	if ((ptr = ft_memalloc(size)) == NULL ||
-			(node = (t_alloc_list*)ft_memalloc(sizeof(t_alloc_list))) == NULL)
+	ptr = ft_memalloc(size);
+	node = (t_alloc_list *)ft_memalloc(sizeof(t_alloc_list));
+	if (ptr == NULL || node == NULL)
 	{
 		free(ptr);
 		ft_autofree_all();

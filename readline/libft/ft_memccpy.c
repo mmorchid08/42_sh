@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 14:58:29 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/03/31 23:40:59 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:46:33 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	void	*c_ptr;
 	size_t	len;
 
-	if ((c_ptr = ft_memchr(src, c, n)) != NULL)
+	c_ptr = ft_memchr(src, c, n);
+	if (c_ptr != NULL)
 	{
 		len = (unsigned char *)c_ptr - (unsigned char *)src + 1;
 		ft_memcpy(dst, src, len);

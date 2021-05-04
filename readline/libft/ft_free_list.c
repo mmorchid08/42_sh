@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/04 00:48:34 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/05/09 22:41:11 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:51:29 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_list(t_list *head)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = head;
 	while (head)

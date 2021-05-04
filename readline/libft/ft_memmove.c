@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 18:36:45 by mel-idri          #+#    #+#             */
-/*   Updated: 2019/03/31 14:12:10 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:45:44 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	long i;
+	long	i;
 
 	if (dst < src)
 		return (ft_memcpy(dst, src, len));

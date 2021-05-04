@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 11:28:58 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/05/09 22:51:18 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:34:15 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 char	*ft_strndup(const char *s, size_t n)
 {
-	char *new_str;
+	char	*new_str;
 
-	if (s == NULL || (new_str = ft_strnew(n)) == NULL)
+	new_str = ft_strnew(n);
+	if (s == NULL || new_str == NULL)
 		return (NULL);
 	return (ft_strncpy(new_str, s, n));
 }
