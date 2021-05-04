@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:31:54 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:12:40 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/03/04 17:48:49 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 
-typedef enum e_readline_ret
+typedef enum		e_readline_ret
 {
 	ERROR = -1,
 	EXIT = 0,

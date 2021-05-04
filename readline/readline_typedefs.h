@@ -6,24 +6,30 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:08 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 13:43:13 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:32:32 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_TYPEDEFS_H
 # define READLINE_TYPEDEFS_H
 
-typedef struct s_term_attrs
+typedef struct termios	t_termios;
+typedef enum		e_bool
 {
-	struct termios	attrs;
+	FALSE = 0,
+	TRUE
+}					t_bool;
+typedef struct		s_term_attrs
+{
+	t_termios		attrs;
 	t_bool			is_initialized;
 }					t_term_attrs;
-typedef struct s_termcap_seq
+typedef struct		s_termcap_seq
 {
 	char			*seq;
 	void			(*action)(void);
 }					t_termcap_seq;
-typedef struct s_dynstr_vector
+typedef struct		s_dynstr_vector
 {
 	size_t			capacity;
 	size_t			length;
@@ -31,13 +37,13 @@ typedef struct s_dynstr_vector
 	void			(*free_element)(void *element);
 	t_dyn_str		*array;
 }					t_dynstr_vector;
-typedef struct s_hist_entry
+typedef struct		s_hist_entry
 {
 	t_dynstr_vector	*entry;
 	t_dynstr_vector	*temp;
 	t_bool			is_dirty;
 }					t_hist_entry;
-typedef struct s_hist_vector
+typedef struct		s_hist_vector
 {
 	size_t			capacity;
 	size_t			length;
@@ -45,13 +51,13 @@ typedef struct s_hist_vector
 	void			(*free_element)(void *element);
 	t_hist_entry	*array;
 }					t_hist_vector;
-typedef struct s_history_state
+typedef struct		s_history_state
 {
 	int				current_entry;
 	t_hist_vector	*entries;
 	t_dynstr_vector	*stage;
 }					t_history_state;
-typedef struct s_readline_state
+typedef struct		s_readline_state
 {
 	size_t			prompt_len;
 	int				win_cols;
@@ -61,13 +67,13 @@ typedef struct s_readline_state
 	t_dyn_str		*clipboard;
 	t_dynstr_vector	*lines;
 }					t_readline_state;
-typedef enum e_match_state
+typedef enum		e_match_state
 {
 	MATCH = 1,
 	PARTIAL_MATCH,
 	MISMATCH
 }					t_match_state;
-typedef enum e_readline_ret
+typedef enum		e_readline_ret
 {
 	ERROR = -1,
 	EXIT = 0,

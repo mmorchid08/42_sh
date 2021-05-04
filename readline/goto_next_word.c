@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   goto_next_word.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 20:14:44 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:30:08 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	goto_next_word(void)
 	j = rl->current_line;
 	while (j < rl->lines->length)
 	{
-		while (rl->lines->array[j].str[i]
-			&& !ft_isalnum(rl->lines->array[j].str[i]))
+		while (rl->lines->array[j].str[i] &&
+			!ft_isalnum(rl->lines->array[j].str[i]))
 			i++;
 		if (ft_isalnum(rl->lines->array[j].str[i]))
 			break ;

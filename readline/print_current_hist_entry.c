@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_current_hist_entry.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 16:31:54 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:20:46 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/03/05 16:32:17 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_dynstr_vector	*get_current_hist_entry(void)
 		return (g_history.entries->array[g_history.current_entry].entry);
 }
 
-void	print_current_hist_entry(void)
+void					print_current_hist_entry(void)
 {
 	t_readline_state *const	rl = &g_rl_state;
 	size_t					i;

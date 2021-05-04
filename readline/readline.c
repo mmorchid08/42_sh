@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:54:11 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 13:45:51 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:09:19 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_readline_state	g_rl_state;
 t_history_state		g_history;
 t_term_attrs		g_orig_attrs;
 
-void	init_term(void)
+void			init_term(void)
 {
-	struct termios	new_attrs;
+	t_termios			new_attrs;
 
 	new_attrs = g_orig_attrs.attrs;
 	new_attrs.c_lflag &= ~(ECHO | ICANON);
@@ -30,45 +30,44 @@ void	init_term(void)
 		exit_error("tcsetattr: cannot set terminal attribute");
 }
 
-void	restore_term(void)
+void			restore_term(void)
 {
 	if (tcsetattr(0, TCSANOW, &g_orig_attrs.attrs) == -1)
 		exit_error("tcsetattr: cannot set terminal attribute");
 }
 
-char	*readline_read_loop(void)
+char			*readline_read_loop(void)
 {
 	t_bool	is_in_seq;
 	char	c;
 	int		ret;
 
 	is_in_seq = FALSE;
-	while (assign_i(&ret, read(0, &c, 1)) > 0)
-	{
+	while ((ret = read(0, &c, 1)) > 0)
 		if (!is_in_seq && c == '\e')
 			is_in_seq = TRUE;
 		else if (is_in_seq)
 			is_in_seq = handle_termcap_sequences(&c);
 		else if (c == '\n')
 			return (submit_command());
-		else if ((c == '\0' && g_is_interrupted) || (c == 4
-				&& g_rl_state.lines->length == 1
-				&& g_rl_state.lines->array[0].len == 0))
+		else if (c == '\0' && g_is_interrupted)
 			return (NULL);
 		else if (ft_isprint(c))
 			write_char(c);
+		else if (c == 4 && g_rl_state.lines->length == 1 &&
+				g_rl_state.lines->array[0].len == 0)
+			return (NULL);
 		else if (ft_iscntrl(c))
 			handle_control_chars(c);
-	}
 	if (ret == -1)
 		exit_error("read: cannot read from stdin");
 	return (NULL);
 }
 
-char	*readline(char *prompt)
+char			*readline(char *prompt)
 {
 	char			*line;
-	sig_t			sig_handlers[2];
+	T_SIGHANDLER	sig_handlers[2];
 
 	line = NULL;
 	if (tcgetattr(0, &g_orig_attrs.attrs) == -1)

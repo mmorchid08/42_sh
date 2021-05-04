@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   submit_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 23:08:39 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:07:40 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline_internal.h"
 
-char	*submit_command(void)
+char		*submit_command(void)
 {
 	goto_end();
 	ft_putchar('\n');

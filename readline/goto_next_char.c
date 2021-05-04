@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   goto_next_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 02:22:36 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:30:49 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/03/04 17:30:12 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	goto_next_char(void)
 {
-	if (g_rl_state.current_line + 1 == g_rl_state.lines->length
-		&& g_rl_state.cursor_line_pos
-		== g_rl_state.lines->array[g_rl_state.current_line].len)
+	if (g_rl_state.current_line + 1 == g_rl_state.lines->length &&
+			g_rl_state.cursor_line_pos ==
+				g_rl_state.lines->array[g_rl_state.current_line].len)
 		return ;
-	else if (g_rl_state.cursor_line_pos
-		== g_rl_state.lines->array[g_rl_state.current_line].len)
+	else if (g_rl_state.cursor_line_pos ==
+				g_rl_state.lines->array[g_rl_state.current_line].len)
 	{
 		move_cursor_to(g_rl_state.current_line + 1, 0);
 	}
