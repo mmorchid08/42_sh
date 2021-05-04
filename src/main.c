@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 15:06:59 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:35:56 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				g_exit_status;
 int				g_term_fd;
 char			*g_path_env;
 
-static t_bool is_empty_line(char *line)
+static t_bool	is_empty_line(char *line)
 {
 	size_t	i;
 
