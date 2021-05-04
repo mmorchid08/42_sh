@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:20 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/04 11:32:19 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 11:41:50 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*if_logically(char *path)
 	return (ret);
 }
 
-static void	show_error_msg(char *path)
+void	show_error_msg(char *path)
 {
 	char	*error_prefix;
 
