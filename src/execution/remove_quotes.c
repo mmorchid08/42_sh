@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/04 12:23:51 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:39:29 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*remove_quotes_from_word(char *word)
 				fill_str(&word, &rq);
 	}
 	str = string_get_data(rq.str);
-	free(rq.str);
+	string_free(rq.str);
 	return (str);
 }
 
