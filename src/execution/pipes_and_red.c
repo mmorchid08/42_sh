@@ -6,12 +6,14 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/03 16:49:16 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:50:39 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 #include <dirent.h>
+
+void	get_word(char **word, char *r_fd, char **tmp);
 
 int	manage_pipes(int i)
 {
@@ -56,19 +58,16 @@ static int	expand_red(t_vector *red_vec)
 	char			*tmp;
 	size_t			i;
 
-	i = 0;
+	i = -1;
 	reds = red_vec->array;
-	while (i < red_vec->length)
+	while (++i < red_vec->length)
 	{
 		if (reds[i].type == GREATANDDASH && reds[i].type == LESSANDDASH)
 		{
 			++i;
 			continue ;
 		}
-		word = ft_strdup(reds[i].righ_fd);
-		word = expand(word, NULL);
-		tmp = ft_strtrim(word);
-		free(word);
+		get_word(&word, reds[i].righ_fd, &tmp);
 		splitted_words = split(tmp, del_arg);
 		if (splitted_words->length != 1)
 			return (free_all(splitted_words, tmp, reds[i].righ_fd, TRUE));
@@ -76,7 +75,6 @@ static int	expand_red(t_vector *red_vec)
 		reds[i].righ_fd = tmp;
 		free(word);
 		free_all(splitted_words, tmp, NULL, FALSE);
-		++i;
 	}
 	return (EXIT_SUCCESS);
 }

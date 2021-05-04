@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/01 10:36:20 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 12:13:55 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,20 @@ typedef struct s_tree
 	struct s_tree	*left;
 }					t_t;
 
+// dynamic string
+typedef struct s_string
+{
+	char	*data;
+	size_t	capacity;
+	size_t	length;
+}				t_string;
+
+// remove quotes
+typedef struct s_remove_quotes
+{
+	t_string	*str;
+	int			i;
+	char		quote;
+	t_bool		backslash;
+}				t_remove_quotes;
 #endif

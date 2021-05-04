@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 16:53:54 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/29 14:19:14 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:13:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ typedef struct s_lexer_ret
 	char		unmatched_char;
 
 }	t_lexer_ret;
-
-typedef struct s_string
-{
-	char	*data;
-	size_t	capacity;
-	size_t	length;
-}				t_string;
 
 t_lexer_ret	*lexer(char *line);
 void		lexer_print_tokens(t_vector *tokens_vec);

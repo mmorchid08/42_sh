@@ -3,56 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/29 16:52:39 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:39:29 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-void	handle_quotes(char c, int *balance)
+static int	is_single_or_double_quote(char c)
 {
-	if (c == '\"' && *balance == 0)
-		*balance = 2;
-	else if (c == '\'' && *balance == 0)
-		*balance = 1;
-	else if (c == '\"' && *balance == 2)
-		*balance = 0;
-	else if (c == '\'' && *balance == 1)
-		*balance = 0;
+	if (c == DOUBLE_QUOTE || c == SINGLE_QUOTE)
+		return (c);
+	return (0);
 }
 
-void	remove_quotes(char **str)
+void	fill_str(char **word, t_remove_quotes *rq)
 {
-	int		i;
-	int		len;
-	int		b;
-	int		j;
+	rq->backslash = !rq->backslash && **word == BACK_SLASH
+		&& rq->quote != SINGLE_QUOTE;
+	if (rq->backslash == FALSE)
+		string_push(rq->str, **word);
+	++(*word);
+}
 
-	i = 0;
-	len = ft_strlen((*str));
-	b = 0;
-	while (i < len)
+char	*remove_quotes_from_word(char *word)
+{
+	t_remove_quotes	rq;
+	char			*str;
+
+	ft_bzero(&rq, sizeof(t_remove_quotes));
+	rq.str = string_new();
+	while (*word)
 	{
-		if ((*str)[i] == '\'' || (*str)[i] == '"')
-			handle_quotes((*str)[i], &b);
-		if (((*str)[i] == '"' && (b == 0 || b == 2))
-			|| ((*str)[i] == '\'' && (b == 0 || b == 1)))
+		rq.quote = is_single_or_double_quote(*word);
+		if (rq.quote)
 		{
-			j = i - 1;
-			while (++j < len)
-				(*str)[j] = (*str)[1 + j];
-			len--;
-			i--;
+			++word;
+			while (*word != rq.quote || rq.backslash)
+				fill_str(&word, &rq);
+			++word;
 		}
-		i++;
+		else
+			while (*word && (!is_single_or_double_quote(*word) || rq.backslash))
+				fill_str(&word, &rq);
 	}
+	str = string_get_data(rq.str);
+	string_free(rq.str);
+	return (str);
 }
 
 void	remove_quotes_from_args(char **args)
 {
-	while (*args != NULL)
-		remove_quotes(args++);
+	size_t	i;
+	char	*tmp;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		tmp = remove_quotes_from_word(args[i]);
+		free(args[i]);
+		args[i] = tmp;
+		++i;
+	}
 }

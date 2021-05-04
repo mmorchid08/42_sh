@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 16:56:16 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 15:38:30 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:36:43 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ static t_bool	str_is_quoted(char *str)
 	return (FALSE);
 }
 
-// delim->str = remove_quotes_from_word(delim->str);
-
 static t_delimiter	*get_delimiter(char *str)
 {
 	t_delimiter	*delim;
 
 	delim = (t_delimiter *)ft_malloc(sizeof(t_delimiter));
-	delim->str = str;
-	delim->is_quoted = str_is_quoted(delim->str);
+	delim->is_quoted = str_is_quoted(str);
+	delim->str = remove_quotes_from_word(str);
 	return (delim);
 }
 
@@ -64,9 +62,6 @@ static int	read_buffer(char **buffer, char *delimiter)
 	return (ret);
 }
 
-// if (!delim->is_quoted)
-// 	buffer = expand_here_doc_buffer(buffer);
-
 int	parse_here_doc(char *delimter_str)
 {
 	t_delimiter	*delim;
@@ -81,6 +76,8 @@ int	parse_here_doc(char *delimter_str)
 	delim = get_delimiter(delimter_str);
 	if (read_buffer(&buffer, delim->str) == -1)
 		return (-1);
+	if (!delim->is_quoted)
+		buffer = expand(buffer, NULL);
 	free(delim);
 	ft_putstr_fd(buffer, pipe_fds[1]);
 	free(buffer);

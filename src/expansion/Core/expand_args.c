@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 09:57:12 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:00:18 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_vector	*split(char *str, void (*free_element)(void *element))
 	return (splitted_words);
 }
 
-void	expand_args(t_vector *args_vec)
+int	expand_args(t_vector *args_vec)
 {
 	t_vector	*splitted_words;
 	char		**av;
@@ -94,6 +94,8 @@ void	expand_args(t_vector *args_vec)
 	{
 		word = ft_strdup(av[i]);
 		word = expand(word, NULL);
+		if (word == NULL)
+			return (1);
 		tmp = ft_strtrim(word);
 		splitted_words = split(tmp, NULL);
 		free(word);
@@ -103,4 +105,5 @@ void	expand_args(t_vector *args_vec)
 		i += splitted_words->length;
 		vector_free(splitted_words);
 	}
+	return (0);
 }

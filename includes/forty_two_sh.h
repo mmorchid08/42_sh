@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 11:35:27 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 12:34:03 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ t_bool		is_quote(char c);
 t_bool		quote_type(char c);
 int			is_close_red(t_redirection *red);
 int			sh_system(char *line);
+char		*remove_quotes_from_word(char *word);
 
 /*
 ** Signals
@@ -176,7 +177,5 @@ int			sh_system(char *line);
 void		reset_signals(void);
 void		setup_disabled_job_signals(void);
 void		setup_enabled_job_signals(void);
-
-
 
 #endif
