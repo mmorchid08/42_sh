@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 00:11:22 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/01 09:14:49 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 14:12:17 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	unset(char **av)
 	{
 		if (!is_valid_identifier(av[i]))
 		{
-			ft_printf(1, "42sh: unset: `%s\': not a valid identifier", av[i]);
+			ft_printf(1, "42sh: unset: `%s\': not a valid identifier\n", av[i]);
 			ret_status = EXIT_FAILURE;
+			++i;
 			continue ;
 		}
 		env_unset(g_shell_env, av[i]);
