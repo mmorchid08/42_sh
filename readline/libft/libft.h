@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 19:28:52 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/03/05 16:31:36 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:17:01 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char			*ft_strrchr(const char *s, int c);
 char			*ft_strdup(const char *s1);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
 char			*ft_strnstr(const char *haystack, const char *needle,
-	size_t len);
+					size_t len);
 char			*ft_strstr(const char *haystack, const char *needle);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -77,7 +77,7 @@ void			ft_putnbr(int n);
 void			ft_putunbr(unsigned long long n);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	size_t			content_size;
@@ -96,7 +96,7 @@ int				ft_nbrlen(__uint128_t unbr);
 int				ft_nbrlen_base(unsigned long long n, int base);
 int				ft_max(int nbr1, int nbr2);
 void			ft_putunbr_base(unsigned long long n, int base, int is_upper);
-typedef struct	s_alloc_list
+typedef struct s_alloc_list
 {
 	void				*address;
 	struct s_alloc_list	*next;
@@ -108,7 +108,7 @@ int				ft_write_buff(char *str, size_t size);
 void			ft_flush_buff(void);
 int				ft_printf(char *format, ...);
 
-typedef	struct	s_queue
+typedef struct s_queue
 {
 	t_list		*head;
 	t_list		*tail;
@@ -119,12 +119,12 @@ t_queue			*ft_queue_new(void);
 void			ft_enqueue(t_queue *queue, void *content, size_t content_size);
 t_list			*ft_dequeue(t_queue *queue);
 
-typedef struct	s_bigint
+typedef struct s_bigint
 {
-	char		*digits;
-	unsigned	length;
+	char			*digits;
+	unsigned int	length;
 }				t_bigint;
-typedef enum	e_split_mode
+typedef enum e_split_mode
 {
 	ALLOW_EMPTY_WORD,
 	REJECT_EMPTY_WORD

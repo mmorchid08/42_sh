@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skip_until_chars.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 06:36:02 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/05/09 22:54:43 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:15:23 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*skip_until_chars(char *str, char *stop_chars)
 {
-	int i;
+	int	i;
 
 	if (!str || !stop_chars)
 		return (NULL);

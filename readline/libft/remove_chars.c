@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_chars.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/05 09:42:47 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/07/24 23:04:31 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:16:16 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	count_chars(char *str, char *counted_chars)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -31,7 +31,7 @@ static int	count_chars(char *str, char *counted_chars)
 	return (count);
 }
 
-char		*remove_chars(char *str, char *removed_chrs)
+char	*remove_chars(char *str, char *removed_chrs)
 {
 	int		count;
 	char	*result;
@@ -42,7 +42,8 @@ char		*remove_chars(char *str, char *removed_chrs)
 	j = 0;
 	k = 0;
 	count = count_chars(str, removed_chrs);
-	if ((result = safe_malloc(ft_strlen(str) - count + 1)) == NULL)
+	result = safe_malloc(ft_strlen(str) - count + 1);
+	if (result == NULL)
 		return (NULL);
 	while (str[k])
 	{

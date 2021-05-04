@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skip_chars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 06:50:05 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/05/10 15:48:24 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:15:27 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*skip_chars(char *str, char *skipped_chars)
 {
-	int i;
+	int	i;
 
 	if (!str || !skipped_chars)
 		return (NULL);

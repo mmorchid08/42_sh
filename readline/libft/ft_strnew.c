@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 16:41:05 by mel-idri          #+#    #+#             */
-/*   Updated: 2020/07/24 23:04:31 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:21:30 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 char	*ft_strnew(size_t size)
 {
-	char *ptr;
+	char	*ptr;
 
-	if ((ptr = (char*)safe_malloc(size + 1)) == NULL)
+	ptr = (char *)safe_malloc(size + 1);
+	if (ptr == NULL)
 		return (NULL);
 	ft_bzero(ptr, size + 1);
 	return (ptr);
