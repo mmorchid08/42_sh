@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:42:48 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 16:17:57 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 11:23:18 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static int	execute_logic_seq_background(t_logic_sequence *logic_seq)
 	set_process_group(ter_i(pid, getpid(), pid), &(int){0}, TRUE);
 	if (pid == 0)
 	{
-		reset_signals();
 		g_is_job_enabled = FALSE;
+		setup_disabled_job_signals();
 		exit(logic_seq_executor(logic_seq, TRUE));
 	}
 	if (g_is_job_enabled)

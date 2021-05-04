@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 11:35:56 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:40:21 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	sh_system(char *line)
 {
 	t_vector	*commands;
 
+	g_is_job_enabled = FALSE;
+	setup_disabled_job_signals();
 	if (line == NULL)
 		return (-1);
 	commands = parser(line);
@@ -69,9 +71,7 @@ int	main(int ac, char *av[], char *envp[])
 	(void)av;
 	g_hash = NULL;
 	g_shell_env = env_init(envp);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
+	setup_enabled_job_signals();
 	init_jobs();
 	if (ac == 1)
 	{
