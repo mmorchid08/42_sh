@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_to_dynstr_vec.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:54:02 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:07:52 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 13:46:55 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ t_dynstr_vector	*str_to_dynstr_vec(char *str)
 		vector_push((void *)dynstr_vec, &dynstr);
 		i++;
 	}
-	ft_free_strings_array(lines);
+	ft_free_2d_chr_array(lines);
 	return (dynstr_vec);
 }

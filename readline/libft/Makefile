@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/29 16:45:44 by mel-idri          #+#    #+#              #
-#    Updated: 2021/03/05 09:26:34 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/05/04 13:50:46 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,7 @@ LIBFT_SRC = ft_autoalloc.c ft_nbrlen.c ft_nbrlen_base.c ft_atoi.c \
 	ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strrev.c \
 	ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c \
 	ft_toupper.c ft_putunbr_base.c ft_write_buff.c \
-	ft_bigint_add.c ft_bigint_mult.c ft_bigint_power.c ft_bigint_init.c \
-	ft_bigint_util.c ft_queue_new.c ft_enqueue.c ft_dequeue.c \
+	ft_queue_new.c ft_enqueue.c ft_dequeue.c \
 	ft_strglue.c ft_strjoin_free.c ft_strdup_free.c ft_lst_pushback.c \
 	ft_lst_pushback_str.c safe_malloc.c ft_free_list.c ft_memdup.c \
 	ft_strndup.c remove_chars.c skip_chars.c skip_until_chars.c \

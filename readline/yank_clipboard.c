@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yank_clipboard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 02:09:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 10:05:19 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 13:46:58 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	yank_clipboard(void)
 	dyn_str_append(rl->lines->array + rl->current_line, lines[0]);
 	insert_lines(lines, line_remainder);
 	free(line_remainder);
-	ft_free_strings_array(lines);
+	ft_free_2d_chr_array(lines);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	ft_putstr(rl->clipboard->str);
 	update_lines();

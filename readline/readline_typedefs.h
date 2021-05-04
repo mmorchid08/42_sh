@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   readline_typedefs.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:08 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 13:43:13 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:52:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READLINE_TYPEDEFS_H
 # define READLINE_TYPEDEFS_H
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 typedef struct s_term_attrs
 {

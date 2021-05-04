@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 19:28:52 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/04 13:17:01 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:48:05 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,24 +119,12 @@ t_queue			*ft_queue_new(void);
 void			ft_enqueue(t_queue *queue, void *content, size_t content_size);
 t_list			*ft_dequeue(t_queue *queue);
 
-typedef struct s_bigint
-{
-	char			*digits;
-	unsigned int	length;
-}				t_bigint;
 typedef enum e_split_mode
 {
 	ALLOW_EMPTY_WORD,
 	REJECT_EMPTY_WORD
 }				t_split_mode;
-char			**ft_strsplit(char const *s, char c, t_split_mode split_mode);
-t_bigint		*ft_bigint_new(unsigned int size);
-t_bigint		*ft_bigint_add(t_bigint *a, t_bigint *b);
-t_bigint		*ft_bigint_mult(t_bigint *a, t_bigint *b);
-t_bigint		*ft_bigint_from_uint128(__uint128_t unbr);
-t_bigint		*ft_bigint_power(unsigned int b, unsigned int exp);
-int				ft_bigint_print(t_bigint *bg_int);
-int				ft_bigint_is_zero(t_bigint *bg_int);
+char			**ft_strsplit2(char const *s, char c, t_split_mode split_mode);
 char			*ft_strglue(char const *s1, char glue, char const *s2);
 char			*ft_strdup_free(const char **s);
 char			*ft_strjoin_free(char const *s1, char const *s2, int a, int b);
@@ -151,4 +139,15 @@ void			ft_free_2d_chr_array(char **arr);
 void			ft_free_ptr(void *ptr);
 int				ft_iscntrl(char c);
 
+typedef unsigned long	t_ul;
+
+t_ul			assign_ul(unsigned long *ret, unsigned long value);
+int				assign_i(int *ret, int value);
+void			*assign_p(void *ret, void *value);
+char			assign_c(char *ret, char value);
+long			ter_l(int bool, long val1, long val2);
+int				ter_i(int bool, int val1, int val2);
+uint64_t		ter_ul(int bool, unsigned long val1, unsigned long val2);
+void			*ter_p(int bool, void *val1, void *val2);
+uint32_t		ter_ui(int bool, uint32_t val1, uint32_t val2);
 #endif

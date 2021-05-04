@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 19:28:52 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/02 02:49:00 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:44:13 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char		**ft_strsplit(char const *s, char c);
 void		ft_strrev(char *s);
 void		ft_free_strings_array(char **array);
 int			ft_str_isnumeric(char *s);
-char		**ft_strsplit2(char const *s, char c, t_split_mode split_mode);
 char		*ft_strndup(const char *s, size_t n);
 
 /*

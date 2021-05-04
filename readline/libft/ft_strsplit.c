@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 23:56:23 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/04 13:20:30 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 13:49:18 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static char	**split_allow_empty(char const *str, char c)
 		while (*end && *end != c)
 			end++;
 		words[i++] = ft_strndup(start, end - start);
-		start = ter_i(*end, end + 1, end);
+		start = ter_p((int)*end, end + 1, end);
 		if (*start == '\0' && *end == '\0')
 			break ;
 	}
@@ -102,7 +102,7 @@ static char	**split_allow_empty(char const *str, char c)
 	return (words);
 }
 
-char	**ft_strsplit(char const *s, char c,
+char	**ft_strsplit2(char const *s, char c,
 	t_split_mode split_mode)
 {
 	if (s == NULL)

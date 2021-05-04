@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline_internal.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 20:12:04 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/01 13:45:20 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 13:52:47 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 # undef lines
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include "readline_typedefs.h"
 # define TERMCAP_SEQ_COUNT 11
 # define DONE 0
