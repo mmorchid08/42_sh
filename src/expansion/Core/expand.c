@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 20:27:30 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/04 10:56:50 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:58:25 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,8 @@ char	*expand(char *str, t_parser_expansion (*expand_fun)(char *))
 		{
 			expand_fun = ter_p(tmp[1] == '(', expand_sub_art, expand_parametre);
 			result = expand_fun(&tmp[1]);
-			if (!result.str)
-				return (NULL);
 			*tmp = 0;
-			if (!assign_p(&tmp, join_expan_result(result, &str)))
+			if (!result.str || !assign_p(&tmp, join_expan_result(result, &str)))
 				return (NULL);
 			continue ;
 		}

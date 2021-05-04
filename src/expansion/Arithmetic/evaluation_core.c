@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 05:17:28 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/04 10:57:21 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:41:50 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	convert_variable(t_d_list **token, long long *result)
 	int			prefix;
 	int			postfix;
 	char		*tmp[2];
-	t_var	*var;
+	t_var		*var;
 
 	prefix = 0;
 	postfix = 0;

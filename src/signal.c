@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:29:53 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/04 11:17:36 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 11:40:53 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	reset_signals(void)
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGHUP, SIG_DFL);
-
 }
 
 void	setup_disabled_job_signals(void)
@@ -59,5 +58,3 @@ void	setup_enabled_job_signals(void)
 	signal(SIGINT, sig_handler);
 	signal(SIGHUP, sig_handler);
 }
-
-

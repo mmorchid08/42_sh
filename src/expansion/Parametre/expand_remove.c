@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_remove.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 04:41:04 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 15:04:01 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 11:43:47 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*expand_rem_pre(char *var_name, char *expr, long val,
 	char		*ret;
 	char		*tmp;
 	long		cut_len;
-	t_var	*var;
+	t_var		*var;
 
 	ret = NULL;
 	if (!assign_p(&var, get_var(var_name)))
@@ -67,7 +67,7 @@ char	*expand_rem_suf(char *var_name, char *expr, long val,
 	char		*ret;
 	char		*tmp;
 	long		cut_len;
-	t_var	*var;
+	t_var		*var;
 
 	ret = NULL;
 	if (!assign_p(&var, get_var(var_name)))

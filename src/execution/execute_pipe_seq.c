@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 09:58:09 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 15:00:10 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:38:22 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_execve_pip(char **args, char *full_path, t_vector *red)
 	}
 	else if (args && args[0])
 	{
-
 		if (execve(full_path, args, a_env) == -1)
 		{
 			if (access(full_path, X_OK) == 0)
@@ -91,10 +90,9 @@ t_vector	*execute_pip(t_simple_command *cmd, int len, t_bool is_background)
 		if (do_pipes_and_red(i, len, cmd[i].redirections) == 1)
 			return (NULL);
 		pid = execute_pip_pt2(args, &pgid, is_background, cmd[i].redirections);
-		if (pid != -1)
-			vector_push(vec_pid, &pid);
-		else
+		if (pid == -1)
 			return (NULL);
+		vector_push(vec_pid, &pid);
 		i++;
 	}
 	return (vec_pid);
