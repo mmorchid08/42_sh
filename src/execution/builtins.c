@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/04/30 12:23:45 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:43:19 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	execute_builtins(char **cmd, t_vector *red)
 	else if (!ft_strcmp(cmd[0], "jobs"))
 		g_exit_status = ft_jobs(cmd);
 	else if (!ft_strcmp(cmd[0], "cd"))
-		ft_cd(cmd + 1);
+		g_exit_status = ft_cd(cmd + 1);
 	else if (!ft_strcmp(cmd[0], "hash"))
 		print_hash(g_hash);
 	else if (!ft_strcmp(cmd[0], "fg"))

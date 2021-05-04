@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/04 11:29:45 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 11:42:47 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*get_path(char *path);
 char	*if_logically(char *path);
 int		check_errors(char *path, char *origin_path);
+void	show_error_msg(char *path);
 
 void	ft_update_pwd(char *path)
 {
@@ -84,7 +85,10 @@ int	ft_cd(char **cmd)
 		return (ter_i(!!cmd[1], ft_printf(2, "cd: to many argument\n"), -1));
 	path = get_cd_path(*cmd);
 	if (path == NULL)
+	{
+		show_error_msg(*cmd);
 		return (1);
+	}
 	if (logicaly)
 		path = if_logically(path);
 	if (!chdir(path))
