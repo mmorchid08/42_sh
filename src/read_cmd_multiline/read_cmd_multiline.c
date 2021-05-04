@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_cmd_multiline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 18:02:00 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 12:59:36 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 14:00:07 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ static t_read_multiline	*read_multiline_init(void)
 	return (ptr);
 }
 
+static void	free_lex_ret(t_lexer_ret *lex_ret)
+{
+	vector_free(lex_ret->tokens);
+	free(lex_ret);
+}
+
 static char	*get_line(t_read_multiline *m)
 {
 	char			*cmd_line;
@@ -56,10 +62,7 @@ static char	*get_line(t_read_multiline *m)
 	else
 		cmd_line = m->cmd_line;
 	if (m->lex_ret)
-	{
-		vector_free(m->lex_ret->tokens);
-		free(m->lex_ret);
-	}
+		free_lex_ret(m->lex_ret);
 	free(m);
 	return (cmd_line);
 }
@@ -86,8 +89,7 @@ char	*read_cmd_multiline(void)
 			remove_ending_backslash(m->cmd_line);
 		else
 			m->cmd_line = ft_strjoin_free(m->cmd_line, "\n", 1, 0);
-		vector_free(m->lex_ret->tokens);
-		free(m->lex_ret);
+		free_lex_ret(m->lex_ret);
 		is_first_read = FALSE;
 		m->prompt = "> ";
 	}

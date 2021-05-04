@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/20 21:20:45 by mel-idri          #+#    #+#              #
-#    Updated: 2021/05/02 16:21:39 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/05/04 13:56:54 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ LIBFT = ft_autoalloc.o ft_nbrlen.o ft_nbrlen_base.o ft_atoi.o \
 	ft_strmap.o ft_strmapi.o ft_strncat.o ft_strncmp.o ft_strncpy.o \
 	ft_strnequ.o ft_strnew.o ft_strnstr.o ft_strrchr.o ft_strrev.o \
 	ft_strsplit.o ft_strstr.o ft_strsub.o ft_strtrim.o ft_tolower.o \
-	ft_toupper.o ft_strsplit2.o ft_iscntrl.o ter_ul.o \
+	ft_toupper.o ft_iscntrl.o ter_ul.o \
 	ft_bigint_add.o ft_bigint_mult.o ft_bigint_power.o ft_bigint_init.o \
 	ft_bigint_util.o ft_queue_new.o ft_enqueue.o ft_dequeue.o \
 	ft_strglue.o ft_strjoin_free.o ft_strdup_free.o ft_strndup.o \
