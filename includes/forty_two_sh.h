@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/03 16:30:56 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 10:09:10 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,10 @@ t_t			*insert_name(t_t *root, char *key, char *value);
 int			export(char **av);
 void		ft_exit(char **cmd);
 
-char		*ft_strnjoin(char **strings, int n);
-int			ft_isinstr(char c, const char *s);
-char		*ft_skip_unitl_char(const char *str, const char *compare,
-				int (*f)(int));
+// char		*ft_strnjoin(char **strings, int n);
+// int			ft_isinstr(char c, const char *s);
+// char		*ft_skip_unitl_char(const char *str, const char *compare,
+// 				int (*f)(int));
 
 /*
 **		free functions

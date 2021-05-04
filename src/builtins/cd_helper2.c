@@ -3,67 +3,118 @@
 /*                                                        :::      ::::::::   */
 /*   cd_helper2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:20 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 14:52:34 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 11:32:19 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
+#include <dirent.h>
 
-char	*ft_strnjoin(char **strings, int n)
+char	*ft_get_cwd(char *path, char *ret, char *tmp, char *tmp2)
 {
-	char		*concat;
-	size_t		size;
-	int			i;
-	int *const	lenghts = (int *)ft_memalloc(sizeof(int) * n);
+	int			df;
 
-	size = 0;
-	i = -1;
-	concat = NULL;
-	while (++i < n)
+	*ret = 0;
+	while (*path)
 	{
-		if (!strings[i])
-			break ;
-		lenghts[i] = ft_strlen(strings[i]);
-		size += lenghts[i];
+		if (assign_p(&tmp, ft_skip_unitl_char(path, "/", NULL)))
+		{
+			if (assign_i(&df, tmp - path) == 2 && ft_strnequ(path, "..", 2))
+			{
+				if (*ret && assign_p(&tmp2, ft_strrchr(ret, '/')))
+					*tmp2 = 0;
+			}
+			else if (df && (df != 1 || *path != '.'))
+			{
+				if (assign_p(&tmp2, ft_strchr(ret, 0))
+					&& (!*ret || tmp2[-1] != 47))
+					ft_strcat(tmp2, "/");
+				ft_strncat(tmp2 + 1, path, df);
+			}
+			path += df + !!*tmp;
+		}
 	}
-	if (i == n && assign_p(&concat, ft_strnew(size)))
-	{
-		i = -1;
-		size = 0;
-		while (++i < n)
-			ft_strcat(concat + assign_ul(&size, size + lenghts[i])
-				- lenghts[i], strings[i]);
-	}
-	free(lenghts);
-	return (ter_p(i != n, NULL, concat));
+	return (ter_p(ret && !*ret, ft_strcat(ret, "/"), ret));
 }
 
-int	ft_isinstr(char c, const char *s)
+char	*get_path(char *path)
 {
-	while (s && *s)
+	char	*ret;
+	char	*tmp;
+
+	ret = ft_strdup(path);
+	if (!ret)
 	{
-		if (c == *s)
-			return (1);
-		s++;
+		ret = ft_strdup(env_get(g_shell_env, "HOME"));
+		if (ret == NULL)
+			g_errno = ENOHOME;
 	}
-	return (0);
+	else if (ft_strequ(path, "-"))
+	{
+		tmp = ret;
+		ret = ft_strdup(env_get(g_shell_env, "OLDPWD"));
+		if (ret == NULL)
+			g_errno = ENOOLDPWD;
+		free(tmp);
+	}
+	return (ret);
 }
 
-static int	empty(int n)
+char	*if_logically(char *path)
 {
-	(void)n;
-	return (0);
+	char	*ret;
+
+	ret = ft_get_cwd(path, ft_strdup(path), NULL, NULL);
+	free(path);
+	return (ret);
 }
 
-char	*ft_skip_unitl_char(const char *str, const char *compare,
-																int (*f)(int))
+static void	show_error_msg(char *path)
 {
-	if (!f)
-		f = empty;
-	while (str && *str && !ft_isinstr(*str, compare) && !f(*str))
-		str++;
-	return ((char *)str);
+	char	*error_prefix;
+
+	error_prefix = ft_strdup("cd");
+	if (g_errno != ENOHOME && g_errno != ENOOLDPWD)
+	{
+		error_prefix = ft_strjoin_free(error_prefix, ": ", 1, 0);
+		error_prefix = ft_strjoin_free(error_prefix, path, 1, 0);
+	}
+	ft_perror(error_prefix, NULL, FALSE);
+	free(error_prefix);
+}
+
+	// DIR	*dir;
+
+	// dir = opendir(path);
+	// free(path);
+	// if (dir != NULL)
+	// 	ft_printf(2, "cd: permission denied\n");
+	// else
+	// 	ft_printf(2, "cd: directory not found\n");
+int	check_errors(char *path, char *origin_path)
+{
+	struct stat	st;
+	int			err;
+
+	err = 0;
+	ft_bzero(&st, sizeof(struct stat));
+	if (lstat(path, &st) == -1)
+		err = 1;
+	if (stat(path, &st) == -1)
+		err = 1;
+	if (S_ISLNK(st.st_mode) && err == 1)
+		g_errno = EUNK;
+	else if (access(path, F_OK) == -1)
+		g_errno = ENOENT;
+	else if (access(path, R_OK) == -1)
+		g_errno = EACCES;
+	else if (S_ISDIR(st.st_mode))
+		g_errno = EXIT_SUCCESS;
+	else
+		g_errno = ENOTDIR;
+	show_error_msg(origin_path);
+	return (15);
 }

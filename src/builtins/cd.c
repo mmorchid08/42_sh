@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/03 15:37:56 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 11:29:45 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
-#include <dirent.h>
+
+char	*get_path(char *path);
+char	*if_logically(char *path);
+int		check_errors(char *path, char *origin_path);
 
 void	ft_update_pwd(char *path)
 {
@@ -48,88 +51,52 @@ int	get_cd_flag(char ***cmd)
 	return (ret);
 }
 
-char	*ft_get_cwd(char *path, char *ret, char *tmp, char *tmp2)
-{
-	int			df;
-
-	if (ret && !assign_p(ret, 0))
-	{
-		while (*path)
-		{
-			if (assign_p(&tmp, ft_skip_unitl_char(path, "/", NULL)))
-			{
-				if (assign_i(&df, tmp - path) == 2 && ft_strnequ(path, "..", 2))
-				{
-					if (*ret && assign_p(&tmp2, ft_strrchr(ret, '/')))
-						*tmp2 = 0;
-				}
-				else if (df && (df != 1 || *path != '.'))
-				{
-					if (assign_p(&tmp2, ft_strchr(ret, 0))
-						&& (!*ret || tmp2[-1] != 47))
-						ft_strcat(tmp2, "/");
-					ft_strncat(tmp2 + 1, path, df);
-				}
-				path += df + !!*tmp;
-			}
-		}
-	}
-	return (ter_p(ret && !*ret, ft_strcat(ret, "/"), ret));
-}
-
 char	*get_cd_path(char *ret)
 {
 	char	*pwd;
 	char	*tmp;
 	char	*path;
 
-	path = ft_strdup(ret);
-	if (!path)
-		path = env_get(g_shell_env, "HOME");
-	else if (ft_strequ(path, "-"))
-	{
-		path = env_get(g_shell_env, "OLDPWD");
-	}
+	path = get_path(ret);
 	if (path && *path && !ft_isinstr(*path, "./"))
+	{
+		tmp = path;
 		path = concat_path_with_cdpath(path);
+		if (tmp != path)
+			free(tmp);
+	}
 	if (path && *path && *path != '/'
 		&& assign_p(&pwd, env_get(g_shell_env, "PWD")))
 	{
 		tmp = path;
 		path = ft_strnjoin((char *[]){pwd, "/", path}, 3);
+		free(tmp);
 	}
 	return (path);
 }
 
 int	ft_cd(char **cmd)
 {
-	char	*pth;
+	char	*path;
 	int		logicaly;
-	DIR		*dir;
-	char	*tmp;
 
 	if (assign_i(&logicaly, get_cd_flag(&cmd)) == -1 || (cmd[0] && cmd[1]))
 		return (ter_i(!!cmd[1], ft_printf(2, "cd: to many argument\n"), -1));
-	pth = get_cd_path(*cmd);
-	if (pth)
+	path = get_cd_path(*cmd);
+	if (path == NULL)
+		return (1);
+	if (logicaly)
+		path = if_logically(path);
+	if (!chdir(path))
 	{
-		if (logicaly)
+		if (!logicaly)
 		{
-			tmp = ft_strdup(pth);
-			pth = ft_get_cwd(pth, tmp, NULL, NULL);
-			free(tmp);
+			free(path);
+			path = getcwd(NULL, 0);
 		}
-		if (!chdir(pth))
-		{
-			if (!logicaly)
-				pth = getcwd(NULL, 0);
-			ft_update_pwd(pth);
-			return (0);
-		}
-		dir = opendir(pth);
-		if (dir != NULL)
-			return (ft_printf(2, "cd: permission denied\n") * 0 + 15);
-		return (ft_printf(2, "cd: directory not found\n") * 0 + 15);
+		ft_update_pwd(path);
+		free(path);
+		return (0);
 	}
-	return (1);
+	return (check_errors(path, *cmd));
 }
