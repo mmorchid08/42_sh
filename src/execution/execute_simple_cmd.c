@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/03 15:00:49 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 12:00:05 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 	int			exit_code;
 
 	vec_pid = NULL;
-	expand_args(simple_cmd->args);
+	if (expand_args(simple_cmd->args))
+		return (1);
 	do_value(simple_cmd->assignments, simple_cmd->args->length, &g_temp_env);
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
@@ -117,17 +118,14 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 		if (exec_pt2(cmd, simple_cmd->redirections, &vec_pid, is_background)
 			== -1)
 			return (-1);
-	if (vec_pid != NULL)
+	if (vec_pid == NULL)
+		return (g_exit_status);
+	if (g_is_job_enabled == FALSE)
 	{
-		if (g_is_job_enabled == FALSE)
-		{
-			exit_code = get_exit_code(wait_children((pid_t)vec_pid->array));
-			vector_free(vec_pid);
-			return (exit_code);
-		}
-		else
-			return (execute_job(vec_pid, simple_cmd->job_name, is_background));
+		exit_code = get_exit_code(wait_children((pid_t)vec_pid->array));
+		vector_free(vec_pid);
+		return (exit_code);
 	}
 	else
-		return (g_exit_status);
+		return (execute_job(vec_pid, simple_cmd->job_name, is_background));
 }
