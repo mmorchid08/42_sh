@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:28:27 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/01 09:50:45 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 10:31:48 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ int	export_args(char **av, int i, t_bool option_n)
 			env_set_exported(g_shell_env, var->key, !option_n);
 		else
 			env_set(g_shell_env, var->key, var->value, TRUE);
+		free(var->key);
+		free(var->value);
+		free(var);
 		++i;
 	}
 	return (ret_status);

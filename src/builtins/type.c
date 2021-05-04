@@ -6,7 +6,7 @@
 /*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 13:17:12 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/01 09:14:58 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/04 10:27:31 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	ft_type(char **cmd)
 		}
 		full_path = get_full_path(cmd[i]);
 		if (full_path && full_path[0] == '/')
+		{
 			ft_printf(1, "%s is %s\n", cmd[i], full_path);
+			ft_strdel(&full_path);
+		}
 		else
 			ft_printf(1, "%s not found\n", cmd[i]);
 		i++;

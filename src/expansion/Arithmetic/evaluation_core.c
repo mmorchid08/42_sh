@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   evaluation_core.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 05:17:28 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/02 15:31:26 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/04 10:57:21 by hmzah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,12 @@ char	*expand_ar_expr(char *expr)
 		if (status == 2)
 			ft_printf(1, "divised by zero\n");
 		else
-			ft_printf(1, "token error: %s\n",
-				ter_p((size_t)tokens, tokens->content, NULL));
+		{
+			if (!tokens)
+				ft_printf(1, "token error: (null)\n");
+			else
+				ft_printf(1, "token error: %s\n", tokens->content);
+		}
 		ft_dlstdel2(&tokens_tmp, free);
 		return (NULL);
 	}
