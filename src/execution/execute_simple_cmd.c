@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/04 12:00:05 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 16:27:26 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	exec_pt2(char **cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 		g_temp_env = NULL;
 		return (-1);
 	}
+	if (cmd[0] == NULL)
+		return (EXIT_SUCCESS);
 	if (check_builtins((cmd)[0]) && is_background == FALSE)
 		execute_builtins(cmd, red);
 	else
@@ -114,10 +116,9 @@ int	execute_simple_cmd(t_simple_command *simple_cmd, t_bool is_background)
 	do_value(simple_cmd->assignments, simple_cmd->args->length, &g_temp_env);
 	vector_push(simple_cmd->args, &(char *){NULL});
 	cmd = (char **)simple_cmd->args->array;
-	if (cmd[0] && cmd)
-		if (exec_pt2(cmd, simple_cmd->redirections, &vec_pid, is_background)
-			== -1)
-			return (-1);
+	if (exec_pt2(cmd, simple_cmd->redirections, &vec_pid, is_background)
+		== -1)
+		return (-1);
 	if (vec_pid == NULL)
 		return (g_exit_status);
 	if (g_is_job_enabled == FALSE)
