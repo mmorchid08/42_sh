@@ -6,7 +6,7 @@
 /*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:12:40 by mmorchid          #+#    #+#             */
-/*   Updated: 2021/05/06 12:31:41 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:24:17 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_binary(char *arg1, char *arg2, t_test_operation ope)
 		return (0);
 	if (num1 <= num2 && ope == OPERATER_AL_L_E)
 		return (0);
-	return (1);
+	return (2);
 }
 
 int	test_commande(char **cmd)

@@ -6,7 +6,7 @@
 /*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:17:41 by mmorchid          #+#    #+#             */
-/*   Updated: 2021/05/06 12:58:00 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:21:34 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_unary_op(t_tokens *tokens)
 	if (ret != -1)
 		return (ret);
 	ft_error_unary(tokens->data);
-	return (1);
+	return (2);
 }
 
 int	check_binary_op(t_tokens *tokens)
@@ -84,7 +84,7 @@ int	check_binary_op(t_tokens *tokens)
 	if (ope == OPERATER_AL_L_E)
 		return (ft_binary(tokens->data, tokens->next->next->data, ope));
 	ft_error_binary(tokens->data);
-	return (2);
+	return (1);
 }
 
 void	ft_error_binary(char *error)
