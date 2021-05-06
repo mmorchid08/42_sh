@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 10:06:19 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/29 10:40:00 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 12:07:40 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	free_job(void *job)
 	t_job	*j;
 
 	j = (t_job *)job;
+	ft_strdel(&j->job_name);
 	vector_free(j->processes);
 }
 
