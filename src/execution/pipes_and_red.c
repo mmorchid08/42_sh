@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_and_red.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/04 11:50:39 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 14:48:40 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	expand_red(t_vector *red_vec)
 	reds = red_vec->array;
 	while (++i < red_vec->length)
 	{
-		if (reds[i].type == GREATANDDASH && reds[i].type == LESSANDDASH)
+		if (reds[i].type == GREATANDDASH || reds[i].type == LESSANDDASH)
 		{
 			++i;
 			continue ;

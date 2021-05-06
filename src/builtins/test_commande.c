@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_commande.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:12:40 by mmorchid          #+#    #+#             */
-/*   Updated: 2021/05/06 13:31:27 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 14:59:14 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	test_commande(char **cmd)
 	if (arg_num == 0)
 		return (1 ^ dif);
 	if (arg_num == 1)
-		return (wrapper_free((!ft_strequ("", tokens->data)) ^ dif, &tmp));
+		return (wrapper_free(!(!ft_strequ("", tokens->data)) ^ dif, &tmp));
 	if (arg_num == 2)
 		return (wrapper_free(check_unary_op(tokens) ^ dif, &tmp));
 	if (arg_num == 3)

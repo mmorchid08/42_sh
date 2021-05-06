@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 12:00:18 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 14:58:03 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,10 @@ int	expand_args(t_vector *args_vec)
 		if (word == NULL)
 			return (1);
 		tmp = ft_strtrim(word);
-		splitted_words = split(tmp, NULL);
-		free(word);
+		word = remove_quotes_from_word(tmp);
 		free(tmp);
+		splitted_words = split(word, NULL);
+		free(word);
 		vector_remove(args_vec, i);
 		vector_insert_all(args_vec, splitted_words, i);
 		i += splitted_words->length;

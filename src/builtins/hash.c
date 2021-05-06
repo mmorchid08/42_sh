@@ -6,75 +6,96 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 09:55:21 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/06 13:48:07 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 14:41:01 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-void	free_hash_node(void *element)
+t_t	*get_new_node(char *key, char *value)
 {
-	t_hash_node	*node;
+	t_t		*root;
 
-	node = (t_hash_node *)element;
-	free(node->key);
-	free(node->value);
+	root = (t_t *)ft_memalloc(sizeof(t_t));
+	root->key = ft_strdup(key);
+	root->value = ft_strdup(value);
+	root->count = 1;
+	root->left = NULL;
+	root->right = NULL;
+	return (root);
 }
 
-void	hash_init(void)
+t_t	*insert_name(t_t *root, char *key, char *value)
 {
-	g_hash = vector_init(sizeof(t_hash_node), free_hash_node);
+	if (root == NULL)
+	{
+		root = get_new_node(key, value);
+		return (root);
+	}
+	if (ft_strcmp(key, root->key) < 0)
+		root->left = insert_name(root->left, key, value);
+	else if (!ft_strcmp(key, root->key))
+		root->count++;
+	else
+		root->right = insert_name(root->right, key, value);
+	return (root);
 }
 
-void	insert_name(t_vector *hashtable, char *key, char *value)
+void	print_hash(t_t *root)
 {
-	t_hash_node	hashnode;
+	static int	i = 0;
+	static int	f_time = 0;
+	int			len;
 
-	hashnode.key = ft_strdup(key);
-	hashnode.value = ft_strdup(value);
-	hashnode.count = 1;
-	vector_push(hashtable, &hashnode);
-}
-
-void	print_hash(t_vector *hashtable)
-{
-	t_hash_node	*hashnodes;
-	size_t		i;
-
-	if (hashtable == NULL)
-		return ;
-	if (hashtable->length == 0)
+	if (root == NULL && f_time == 0)
 	{
 		ft_printf(1, "hash: hash table empty\n");
 		return ;
 	}
-	i = 0;
-	hashnodes = hashtable->array;
-	ft_printf(1, "hits    command\n");
-	while (i < hashtable->length)
+	if (root != NULL)
 	{
-		ft_printf(1, "%d    %s\n", hashnodes[i].count, hashnodes[i].value);
-		++i;
+		if (root->left)
+			print_hash(root->left);
+		if (i++ == 0)
+			ft_printf(1, "hits    command\n");
+		len = ft_nbrlen(root->count);
+		while (len++ < 4)
+			ft_printf(1, " ");
+		ft_printf(1, "%d    %s\n", root->count, root->value);
+		if (root->right)
+			print_hash(root->right);
 	}
 }
 
-char	*find_key_in_hash(t_vector *hashtable, char *key)
+char	*find_key_in_hash(t_t *root, char *key)
 {
-	t_hash_node	*hashnodes;
-	size_t		i;
+	char	*value;
 
-	if (hashtable == NULL)
+	if (root == NULL)
 		return (NULL);
-	i = 0;
-	hashnodes = hashtable->array;
-	while (i < hashtable->length)
+	if (!ft_strcmp(root->key, key))
 	{
-		if (ft_strequ(hashnodes[i].key, key))
-		{
-			hashnodes[i].count++;
-			return (hashnodes[i].value);
-		}
-		++i;
+		root->count++;
+		return (root->value);
 	}
+	value = find_key_in_hash(root->left, key);
+	if (value)
+		return (value);
+	value = find_key_in_hash(root->right, key);
+	if (value)
+		return (value);
 	return (NULL);
+}
+
+void	free_hash(t_t **root)
+{
+	t_t	*tail;
+
+	if (*root == NULL)
+		return ;
+	tail = *root;
+	free_hash(&(tail->left));
+	free_hash(&(tail->right));
+	ft_strdel(&(tail->key));
+	ft_strdel(&(tail->value));
 }

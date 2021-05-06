@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 13:44:52 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 14:46:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,13 +175,6 @@ typedef struct s_tree
 	struct s_tree	*right;
 	struct s_tree	*left;
 }				t_t;
-
-typedef struct s_hash_node
-{
-	char	*key;
-	char	*value;
-	int		count;
-}	t_hash_node;
 
 // dynamic string
 typedef struct s_string

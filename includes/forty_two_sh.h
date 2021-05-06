@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 13:47:42 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 14:43:44 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ extern	t_vector
 *g_job_list;
 extern	t_vector
 *g_stopped_jobs;
-extern	t_vector
+extern	t_t
 *g_hash;
 extern	t_bool
 g_is_job_enabled;
@@ -125,10 +125,11 @@ int					jhin(char **cmd);
 int					check_is_not(int ret, int is_not);
 // int					ft_test(char **cmd);
 int					ft_echo(char **cmd, t_vector *red);
-void				print_hash(t_vector *hashtable);
-char				*find_key_in_hash(t_vector *hashtable, char *key);
+void				print_hash(t_t *root);
+char				*find_key_in_hash(t_t *root, char *key);
+void				free_hash(t_t **root);
 void				ft_type(char **cmd);
-void				insert_name(t_vector *hashtable, char *key, char *value);
+t_t					*insert_name(t_t *root, char *key, char *value);
 int					export(char **av);
 void				ft_exit(char **cmd);
 
