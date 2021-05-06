@@ -6,7 +6,7 @@
 /*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 11:28:11 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:01:03 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef enum e_token_type {
 	AMPERSAND,
 	NEWLINE,
 	NA
-}				t_token_type;
+}			t_token_type;
 
 typedef struct s_var
 {
@@ -174,7 +174,7 @@ typedef struct s_tree
 	int				count;
 	struct s_tree	*right;
 	struct s_tree	*left;
-}					t_t;
+}				t_t;
 
 // dynamic string
 typedef struct s_string
@@ -194,7 +194,23 @@ typedef struct s_remove_quotes
 }				t_remove_quotes;
 
 //test  amine
-typedef enum	s_test_flags
+//user/ group /other
+// b: clock_file
+// c: character-special
+// d: file is directory
+// e: file exist
+// f: file exist and regular
+// g: setgid stikibit
+// l: is symblonk link 
+// p: file like pipe 
+// r: clock_file
+// SS: soket file
+// S: exist and not empty
+// U: setuid
+// W: writing permission
+// X: file is executable 
+// Z: empty line 
+typedef enum e_test_flags
 {
 	FlAG_B=1,
 	FlAG_C,
@@ -211,23 +227,31 @@ typedef enum	s_test_flags
 	FlAG_W,
 	FlAG_X,
 	FlAG_Z
-}				t_test_flags;
+}	t_test_flags;
 
-typedef enum
+// =
+// != :Returns true if string1 and string2 are not equal
+//-eq :True if argument arg1 equals arg2.
+//-ne :True if argument arg1 is not equal to arg2.
+//-ge :True if numeric value arg1 is greater than or equal to arg2.
+//-lt :True if numeric value arg1 is less than arg2.
+//-le :True if numeric value arg1 is less than or equal to arg2.
+
+typedef enum e_test_operation
 {
-	OPERATER_E=1,// =
-	OPERATER_RE,// !=
-	OPERATER_AL_E,//-eq
-	OPERATER_NO_AL_R,//-ne
-	OPERATER_AL_G,//-ge
-	OPERATER_AL_L,//-lt
-	OPERATER_AL_L_E,//-le
-} test_operation;
+	OPERATER_E=1,
+	OPERATER_RE,
+	OPERATER_AL_E,
+	OPERATER_NO_AL_R,
+	OPERATER_AL_G,
+	OPERATER_AL_L,
+	OPERATER_AL_L_E,
+}	t_test_operation;
 
 typedef struct s_tokens
 {
-	char *data;
-	struct s_tokens *next;
-}				t_tokens;
+	char			*data;
+	struct s_tokens	*next;
+}	t_tokens;
 
 #endif

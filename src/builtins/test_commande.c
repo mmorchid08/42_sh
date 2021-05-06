@@ -6,7 +6,7 @@
 /*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 17:12:40 by mmorchid          #+#    #+#             */
-/*   Updated: 2021/05/06 11:22:25 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 12:31:41 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_is_number(char *number)
 	return (1);
 }
 
-int	ft_binary(char *arg1, char *arg2, test_operation ope)
+int	ft_binary(char *arg1, char *arg2, t_test_operation ope)
 {
 	int	num1;
 	int	num2;

@@ -6,15 +6,15 @@
 /*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:17:35 by mmorchid          #+#    #+#             */
-/*   Updated: 2021/05/05 14:29:34 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 12:32:50 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-test_flags	check_flags_test2(t_tokens *tokens)
+t_test_flags	check_flags_test2(t_tokens *tokens)
 {
-	test_flags	flags;
+	t_test_flags	flags;
 
 	if (ft_strcmp(tokens->data, "-r") == 0)
 		flags = FlAG_R;
@@ -33,9 +33,9 @@ test_flags	check_flags_test2(t_tokens *tokens)
 	return (flags);
 }
 
-test_flags	check_flags_test(t_tokens *tokens)
+t_test_flags	check_flags_test(t_tokens *tokens)
 {
-	test_flags	flags;
+	t_test_flags	flags;
 
 	flags = 0;
 	if (ft_strcmp(tokens->data, "-b") == 0)
@@ -58,9 +58,9 @@ test_flags	check_flags_test(t_tokens *tokens)
 	return (flags);
 }
 
-test_operation	ft_check_operateur(t_tokens *tokens)
+t_test_operation	ft_check_operateur(t_tokens *tokens)
 {
-	test_operation	operater;
+	t_test_operation	operater;
 
 	if (ft_strcmp(tokens->data, "=") == 0)
 		operater = OPERATER_E;

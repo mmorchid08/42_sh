@@ -6,13 +6,13 @@
 /*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:17:41 by mmorchid          #+#    #+#             */
-/*   Updated: 2021/05/05 14:29:39 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 12:58:00 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-int	check_unary_op2(t_tokens *tokens, test_flags flags, struct stat	buf)
+int	check_unary_op2(t_tokens *tokens, t_test_flags flags, struct stat	buf)
 {
 	if (flags == FlAG_G)
 		return (!(buf.st_mode & S_IXGRP));
@@ -39,9 +39,9 @@ int	check_unary_op2(t_tokens *tokens, test_flags flags, struct stat	buf)
 
 int	check_unary_op(t_tokens *tokens)
 {
-	int			ret;
-	test_flags	flags;
-	struct stat	buf;
+	int				ret;
+	t_test_flags	flags;
+	struct stat		buf;
 
 	ft_bzero(&buf, sizeof(stat));
 	lstat(tokens->next->data, &buf);
@@ -66,7 +66,7 @@ int	check_unary_op(t_tokens *tokens)
 
 int	check_binary_op(t_tokens *tokens)
 {
-	test_operation	ope;
+	t_test_operation	ope;
 
 	ope = ft_check_operateur(tokens->next);
 	if (ope == OPERATER_E)
