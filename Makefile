@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
+#    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/04 11:51:09 by hmzah            ###   ########.fr        #
+#    Updated: 2021/05/06 16:51:57 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ INCLUDES =	-Iincludes
 	read_cmd_multiline/read_cmd_multiline.o \
 	utils/is_quote.o utils/is_close_red.o \
 	builtins/set.o builtins/unset.o \
-	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o
+	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o \
+	print_signal.o
 
 
 42sh_OBJS = $(addprefix $(OBJS_DIR)/, ${42sh})

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 12:34:03 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 16:51:13 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int			ft_bg(char **args);
 int			ft_jobs(char **args);
 void		set_process_group(pid_t pid, pid_t *pgid, t_bool is_background);
 t_vector	*pid2vec(pid_t pid);
+void		print_signal(int ret_status);
 
 /*
 ** ============================= end jobs ======================================

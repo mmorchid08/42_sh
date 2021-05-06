@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 11:22:47 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:31 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/06 16:50:48 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int	wait_job(t_job *job)
 		}
 	}
 	tcsetpgrp(g_term_fd, getpgrp());
+	if (WIFSIGNALED(job->wait_status))
+		print_signal(job->wait_status);
 	return (job->wait_status);
 }
