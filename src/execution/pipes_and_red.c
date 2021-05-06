@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/06 14:48:40 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:21:28 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	ft_error(char *str)
 	}
 	else
 		ft_printf(2, "42sh: %s: No such file or directory\n", str);
-	closedir(dir);
+	if (dir)
+		closedir(dir);
 	return (-1);
 }
 

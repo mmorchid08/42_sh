@@ -6,16 +6,11 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 15:11:18 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:20:09 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-
-static int	is_space(char c, int quote)
-{
-	return (ft_isspace(c) && !quote);
-}
 
 static char	set_quote(char c, char old_quote, char last_char)
 {
@@ -80,9 +75,20 @@ t_vector	*split(char *str, void (*free_element)(void *element))
 	return (splitted_words);
 }
 
-int	expand_args(t_vector *args_vec)
+void	insert_expanded(t_vector *args_vec, char *word, size_t *i)
 {
 	t_vector	*splitted_words;
+
+	splitted_words = split(word, NULL);
+	free(word);
+	vector_remove(args_vec, *i);
+	vector_insert_all(args_vec, splitted_words, *i);
+	*i += splitted_words->length;
+	vector_free(splitted_words);
+}
+
+int	expand_args(t_vector *args_vec)
+{
 	char		**av;
 	char		*word;
 	char		*tmp;
@@ -105,12 +111,7 @@ int	expand_args(t_vector *args_vec)
 		free(word);
 		word = remove_quotes_from_word(tmp);
 		free(tmp);
-		splitted_words = split(word, NULL);
-		free(word);
-		vector_remove(args_vec, i);
-		vector_insert_all(args_vec, splitted_words, i);
-		i += splitted_words->length;
-		vector_free(splitted_words);
+		insert_expanded(args_vec, word, &i);
 	}
 	return (0);
 }

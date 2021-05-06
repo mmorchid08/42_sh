@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 14:43:44 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:17:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_bool				quote_type(char c);
 int					is_close_red(t_redirection *red);
 int					sh_system(char *line);
 char				*remove_quotes_from_word(char *word);
+int					is_space(char c, int quote);
 
 /*
 ** Signals

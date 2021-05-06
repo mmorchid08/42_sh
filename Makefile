@@ -6,7 +6,7 @@
 #    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/06 14:20:52 by ylagtab          ###   ########.fr        #
+#    Updated: 2021/05/06 15:20:29 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ INCLUDES =	-Iincludes
 	builtins/cd_helper2.o \
 	execution/builtins.o \
 	read_cmd_multiline/read_cmd_multiline.o \
-	utils/is_quote.o utils/is_close_red.o \
+	utils/is_quote.o utils/is_close_red.o utils/is_space.o \
 	builtins/set.o builtins/unset.o \
 	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o
 
