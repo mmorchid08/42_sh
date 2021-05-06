@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/04 11:43:19 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/05 15:42:47 by mmorchid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_builtins(char *cmd)
 void	execute_builtins(char **cmd, t_vector *red)
 {
 	if (!ft_strcmp(cmd[0], "test"))
-		g_exit_status = ft_test(cmd);
+		g_exit_status = test_commande(cmd);
 	else if (!ft_strcmp(cmd[0], "echo"))
 		g_exit_status = ft_echo(cmd, red);
 	else if (!ft_strcmp(cmd[0], "jobs"))

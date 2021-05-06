@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+         #
+#    By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/04 11:51:09 by hmzah            ###   ########.fr        #
+#    Updated: 2021/05/05 16:54:39 by mmorchid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,10 @@ INCLUDES =	-Iincludes
 	builtins/job_builtins.o \
 	builtins/ft_echo.o \
 	builtins/ft_exit.o \
-	builtins/ft_test.o \
-	builtins/ft_test2.o \
-	builtins/ft_test3.o \
+	builtins/test_commande.o \
+	builtins/test_commande2.o \
+	builtins/test_commande3.o \
+	builtins/test_con_tab_list.o \
 	builtins/hash.o \
 	builtins/type.o \
 	builtins/cd.o \
