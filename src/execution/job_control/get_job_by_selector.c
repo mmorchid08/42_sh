@@ -6,7 +6,7 @@
 /*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:18:03 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:14 by mel-idri         ###   ########.fr       */
+/*   Updated: 2021/05/04 17:56:46 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_job	*get_job_by_selector(char *job_selector)
 	{
 		if (ft_atoi(job_selector) > 0
 			&& (size_t)ft_atoi(job_selector) <= g_job_list->length)
-			get_job_by_id(ft_atoi(job_selector));
+			return (get_job_by_id(ft_atoi(job_selector)));
 	}
 	else if (job_selector[0] == '?')
 	{
