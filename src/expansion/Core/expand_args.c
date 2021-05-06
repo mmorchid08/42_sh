@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 14:58:03 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:11:18 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,17 @@ int	expand_args(t_vector *args_vec)
 	av = args_vec->array;
 	while (i < args_vec->length)
 	{
-		word = ft_strdup(av[i]);
-		word = expand(word, NULL);
+		word = expand(ft_strdup(av[i]), NULL);
 		if (word == NULL)
 			return (1);
+		if (ft_strequ(word, av[i]))
+		{
+			++i;
+			free(word);
+			continue ;
+		}
 		tmp = ft_strtrim(word);
+		free(word);
 		word = remove_quotes_from_word(tmp);
 		free(tmp);
 		splitted_words = split(word, NULL);

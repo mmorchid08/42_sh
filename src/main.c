@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 14:59:22 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:01:57 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	sh_system(char *line)
 	commands = parser(line);
 	if (commands && commands->length > 0)
 		execute_commands(commands);
+	if (g_hash)
+		free_hash(&g_hash);
 	return (g_exit_status);
 }
 
