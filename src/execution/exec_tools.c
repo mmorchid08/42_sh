@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:11:49 by hmzah             #+#    #+#             */
-/*   Updated: 2021/05/06 12:21:57 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:46:07 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*get_full_path(char *cmd)
 			full_path = try_every_possibility(cmd,
 					env_get(g_shell_env, "PATH"));
 			if (ft_strchr(full_path, '/'))
-				g_hash = insert_name(g_hash, cmd, full_path);
+				insert_name(g_hash, cmd, full_path);
 		}
 		else
 			full_path = ft_strdup(cmd);

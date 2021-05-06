@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:18:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 13:11:38 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:44:52 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,13 @@ typedef struct s_tree
 	struct s_tree	*left;
 }				t_t;
 
+typedef struct s_hash_node
+{
+	char	*key;
+	char	*value;
+	int		count;
+}	t_hash_node;
+
 // dynamic string
 typedef struct s_string
 {
@@ -201,15 +208,15 @@ typedef struct s_remove_quotes
 // e: file exist
 // f: file exist and regular
 // g: setgid stikibit
-// l: is symblonk link 
-// p: file like pipe 
+// l: is symblonk link
+// p: file like pipe
 // r: clock_file
 // SS: soket file
 // S: exist and not empty
 // U: setuid
 // W: writing permission
-// X: file is executable 
-// Z: empty line 
+// X: file is executable
+// Z: empty line
 typedef enum e_test_flags
 {
 	FlAG_B=1,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forty_two_sh.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:17:07 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/06 13:11:27 by mmorchid         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:47:42 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ extern	t_vector
 *g_job_list;
 extern	t_vector
 *g_stopped_jobs;
-extern	t_t
+extern	t_vector
 *g_hash;
 extern	t_bool
 g_is_job_enabled;
@@ -125,11 +125,10 @@ int					jhin(char **cmd);
 int					check_is_not(int ret, int is_not);
 // int					ft_test(char **cmd);
 int					ft_echo(char **cmd, t_vector *red);
-void				print_hash(t_t *root);
-char				*find_key_in_hash(t_t *root, char *key);
-void				free_hash(t_t **root);
+void				print_hash(t_vector *hashtable);
+char				*find_key_in_hash(t_vector *hashtable, char *key);
 void				ft_type(char **cmd);
-t_t					*insert_name(t_t *root, char *key, char *value);
+void				insert_name(t_vector *hashtable, char *key, char *value);
 int					export(char **av);
 void				ft_exit(char **cmd);
 
@@ -181,7 +180,7 @@ void				setup_disabled_job_signals(void);
 void				setup_enabled_job_signals(void);
 
 /*
-** test amine 
+** test amine
 */
 int					check_for_exclamation_mark(t_tokens *tokens);
 int					count_tokens(t_tokens *tokens);

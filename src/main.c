@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:15:48 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 11:40:21 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 13:43:53 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "forty_two_sh.h"
 
-t_t				*g_hash;
+t_vector		*g_hash;
 t_vector		*g_stopped_jobs;
 int				g_exit_status;
 int				g_term_fd;
@@ -61,8 +61,6 @@ int	sh_system(char *line)
 	commands = parser(line);
 	if (commands && commands->length > 0)
 		execute_commands(commands);
-	if (g_hash)
-		free_hash(&g_hash);
 	return (g_exit_status);
 }
 
@@ -80,10 +78,10 @@ int	main(int ac, char *av[], char *envp[])
 			ft_strerror(EOPENFILE, "open", NULL, TRUE);
 		while (1)
 			(void)shell_main();
-		if (g_hash)
-			free_hash(&g_hash);
-		if (g_shell_env)
-			vector_free(g_shell_env);
+		// if (g_hash)
+		// 	free_hash(&g_hash);
+		// if (g_shell_env)
+		// 	vector_free(g_shell_env);
 	}
 	else if (ac == 2)
 		return (sh_system(av[1]));

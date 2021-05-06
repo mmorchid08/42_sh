@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmorchid <mmorchid@student.42.fr>          +#+  +:+       +#+         #
+#    By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/05 16:54:39 by mmorchid         ###   ########.fr        #
+#    Updated: 2021/05/06 14:20:52 by ylagtab          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ clean:
 fclean: clean
 	make fclean -C libft/
 	make fclean -C src/parser/
+	make fclean -C src/expansion/
 	make fclean -C src/execution/job_control
 	make fclean -C readline
 	rm -f $(NAME)
