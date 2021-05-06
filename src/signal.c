@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 10:29:53 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/04 11:40:53 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 16:38:07 by mel-idri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static void	sig_handler(int signum)
 {
 	t_job	*job;
 
-	if (signum == SIGINT)
-		ft_putchar('\n');
-	else if (signum == SIGHUP)
+	if (signum == SIGHUP)
 	{
 		while (g_job_list->length > 0)
 		{
@@ -46,6 +44,7 @@ void	setup_disabled_job_signals(void)
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 }
 
 void	setup_enabled_job_signals(void)
@@ -55,6 +54,6 @@ void	setup_enabled_job_signals(void)
 	signal(SIGTTOU, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, SIG_IGN);
 	signal(SIGHUP, sig_handler);
 }
