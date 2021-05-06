@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:41:55 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/05/04 12:00:18 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 15:20:09 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-
-static int	is_space(char c, int quote)
-{
-	return (ft_isspace(c) && !quote);
-}
 
 static char	set_quote(char c, char old_quote, char last_char)
 {
@@ -80,9 +75,20 @@ t_vector	*split(char *str, void (*free_element)(void *element))
 	return (splitted_words);
 }
 
-int	expand_args(t_vector *args_vec)
+void	insert_expanded(t_vector *args_vec, char *word, size_t *i)
 {
 	t_vector	*splitted_words;
+
+	splitted_words = split(word, NULL);
+	free(word);
+	vector_remove(args_vec, *i);
+	vector_insert_all(args_vec, splitted_words, *i);
+	*i += splitted_words->length;
+	vector_free(splitted_words);
+}
+
+int	expand_args(t_vector *args_vec)
+{
 	char		**av;
 	char		*word;
 	char		*tmp;
@@ -92,18 +98,20 @@ int	expand_args(t_vector *args_vec)
 	av = args_vec->array;
 	while (i < args_vec->length)
 	{
-		word = ft_strdup(av[i]);
-		word = expand(word, NULL);
+		word = expand(ft_strdup(av[i]), NULL);
 		if (word == NULL)
 			return (1);
+		if (ft_strequ(word, av[i]))
+		{
+			++i;
+			free(word);
+			continue ;
+		}
 		tmp = ft_strtrim(word);
-		splitted_words = split(tmp, NULL);
 		free(word);
+		word = remove_quotes_from_word(tmp);
 		free(tmp);
-		vector_remove(args_vec, i);
-		vector_insert_all(args_vec, splitted_words, i);
-		i += splitted_words->length;
-		vector_free(splitted_words);
+		insert_expanded(args_vec, word, &i);
 	}
 	return (0);
 }

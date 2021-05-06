@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmzah <hmzah@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 20:27:30 by aait-ihi          #+#    #+#             */
-/*   Updated: 2021/05/04 11:58:25 by hmzah            ###   ########.fr       */
+/*   Updated: 2021/05/06 14:20:04 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static char	*expand_tilde(char *str)
 		if (str[1] == '/' || str[1] == '\0')
 		{
 			var = get_var("HOME");
-			tmp = ft_strjoin(ter_p(var != NULL, var->value, ""), str + 1);
+			if (var != NULL)
+				tmp = ft_strjoin(var->value, str + 1);
+			else
+				tmp = ft_strdup(str + 1);
 			free(str);
 			str = tmp;
 		}

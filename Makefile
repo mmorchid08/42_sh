@@ -6,7 +6,7 @@
 #    By: mel-idri <mel-idri@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/08 10:36:53 by ylagtab           #+#    #+#              #
-#    Updated: 2021/05/06 16:51:57 by mel-idri         ###   ########.fr        #
+#    Updated: 2021/05/06 17:19:22 by mel-idri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,10 @@ INCLUDES =	-Iincludes
 	builtins/job_builtins.o \
 	builtins/ft_echo.o \
 	builtins/ft_exit.o \
-	builtins/ft_test.o \
-	builtins/ft_test2.o \
-	builtins/ft_test3.o \
+	builtins/test_commande.o \
+	builtins/test_commande2.o \
+	builtins/test_commande3.o \
+	builtins/test_con_tab_list.o \
 	builtins/hash.o \
 	builtins/type.o \
 	builtins/cd.o \
@@ -60,7 +61,7 @@ INCLUDES =	-Iincludes
 	builtins/cd_helper2.o \
 	execution/builtins.o \
 	read_cmd_multiline/read_cmd_multiline.o \
-	utils/is_quote.o utils/is_close_red.o \
+	utils/is_quote.o utils/is_close_red.o utils/is_space.o \
 	builtins/set.o builtins/unset.o \
 	env/env.o env/env_dup.o env/env_get.o env/env_operations.o env/utils.o \
 	print_signal.o
@@ -113,6 +114,7 @@ clean:
 fclean: clean
 	make fclean -C libft/
 	make fclean -C src/parser/
+	make fclean -C src/expansion/
 	make fclean -C src/execution/job_control
 	make fclean -C readline
 	rm -f $(NAME)
