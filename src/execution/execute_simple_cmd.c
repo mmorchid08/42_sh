@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:57:00 by mel-idri          #+#    #+#             */
-/*   Updated: 2021/05/06 16:27:26 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/07 11:35:33 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	exec_pt2(char **cmd, t_vector *red, t_vector **p_vec, t_bool is_background)
 	if (g_shell_env != g_temp_env)
 		vector_free(g_temp_env);
 	g_temp_env = NULL;
+	backups(3);
 	return (EXIT_SUCCESS);
 }
 

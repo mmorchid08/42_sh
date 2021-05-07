@@ -6,7 +6,7 @@
 /*   By: ylagtab <ylagtab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 19:00:44 by ylagtab           #+#    #+#             */
-/*   Updated: 2021/04/22 10:21:54 by ylagtab          ###   ########.fr       */
+/*   Updated: 2021/05/07 11:22:06 by ylagtab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,13 @@ static void	handle_braces_parenthese(t_lexer *lex)
 		poped_el = stack_pop(lex->quotes_stack);
 	else if (el && *el == '(' && lex->c == ')')
 		poped_el = stack_pop(lex->quotes_stack);
-	if (poped_el == NULL)
+	if (poped_el == NULL && lex->c == '$')
 	{
-		if (lex->c == '(')
-			stack_push(lex->quotes_stack, &(lex->c));
-		else if (lex->c == '$')
+		if (lex->line[lex->i + 1] == '(' || lex->line[lex->i + 1] == '{')
 		{
-			if (lex->line[lex->i + 1] == '(' || lex->line[lex->i + 1] == '{')
-			{
-				stack_push(lex->quotes_stack, &(lex->line[lex->i + 1]));
-				string_push(lex->word, lex->line[lex->i + 1]);
-				lexer_advance(lex, 1);
-			}
+			stack_push(lex->quotes_stack, &(lex->line[lex->i + 1]));
+			string_push(lex->word, lex->line[lex->i + 1]);
+			lexer_advance(lex, 1);
 		}
 	}
 	free(poped_el);
